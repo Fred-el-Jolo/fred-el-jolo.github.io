@@ -2,7 +2,9 @@
 layout: default
 ---
 
-# POSTS
+# Youhou !!!
+
+## POSTS
 <ul>
   {% for post in site.posts %}
     <li>
