@@ -1,0 +1,19 @@
+/* TEAM */
+    Fred GUILLAUME
+    https://aesthetecoding.io/contact.html
+    From: Nice, France
+
+/* THANKS */
+    UX Specialist Anne-Sophie MULLER
+    From Amsterdam, Netherlands
+
+/* SITE */
+    Last update: 2018/01/05
+    HTML5, CSS3
+    Sass
+    Sass boilerplate    (https://github.com/HugoGiraudel/sass-boilerplate)
+    Include media       (https://include-media.com/)
+    Font Awesome        (http://fontawesome.io/)
+    iconscout           (https://iconscout.com/)
+
+    Edited with Sublime Text

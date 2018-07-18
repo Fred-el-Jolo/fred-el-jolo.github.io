@@ -1,0 +1,52 @@
+// -----------------------------------------------------------------------------
+// When having several themes, this file contains everything related to the
+// default one.
+// -----------------------------------------------------------------------------
+
+body {
+    background-color: $secondary-color;
+}
+
+a {
+  color: $primary-color;
+
+  @include on-event {
+    color: $text-color;
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: $title-color;
+}
+
+header {
+  background-color: $primary-color;
+  color: $dark-brown;
+}
+
+header .title-primary {
+  color: $dark-brown;
+}
+
+header .title-dark {
+  color: $white;
+}
+
+header a {
+  color: $dark-brown;
+  @include on-event {
+    color: $dark-brown;
+  }
+}
+
+footer {
+  background-color: $dark-brown;  // 2
+}
+
+footer a {
+  color: $light-grey;
+
+  @include on-event {
+    color: $light-grey;
+  }
+}

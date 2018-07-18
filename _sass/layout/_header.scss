@@ -1,0 +1,69 @@
+// -----------------------------------------------------------------------------
+// This file contains all styles related to the header of the site/application.
+// -----------------------------------------------------------------------------
+
+header {
+  min-width: 320px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+  #title-container {
+    @include flexbox-container(row, nowrap, center, flex-start);
+    @include media("<tablet") {
+      justify-content: center;
+    }
+  }
+
+  #nav-container {
+    @include flexbox-container(row, nowrap, center, space-around);
+  }
+
+  h1 {
+    @include media("<phone") {
+      font-size: 1.25em;
+    }
+    @include media(">=phone", "<=tablet") {
+      font-size: 1.60em;
+    }
+  }
+
+  p {
+    @include media("<tablet") {
+      display: none;
+    }
+  }
+
+  img#logo {
+    @include media("<=phone") {
+      width: 60px;
+      height: 60px;
+    }
+    @include media(">tablet") {
+      width: 150px;
+      height: 150px;
+    }
+    @include media(">phone", "<=tablet") {
+      width: 90px;
+      height: 90px;
+    }
+  }
+
+  nav {
+    @include media("<tablet") {
+      margin-top: 1em;
+    }
+
+    ul {
+      @include flexbox-container(row, nowrap, center, center);
+      margin: 0;
+      padding: 0;
+
+      li {
+        font-size: 1.2em;
+        &:not(:last-child) {
+          margin-right: 1em;
+        }
+      }
+    }
+  }
+}
