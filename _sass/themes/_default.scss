@@ -3,50 +3,45 @@
 // default one.
 // -----------------------------------------------------------------------------
 
-body {
-    background-color: $secondary-color;
-}
+// body {
+//     background-color: $secondary-color;
+// }
 
-a {
-  color: $primary-color;
+.user {
+  @include fa-icon;
+  @extend .fas;
 
-  @include on-event {
-    color: $text-color;
+  &:before {
+    content: fa-content($fa-var-user);
   }
 }
 
-h1, h2, h3, h4, h5, h6 {
-  color: $title-color;
-}
-
-header {
-  background-color: $primary-color;
-  color: $dark-brown;
-}
-
-header .title-primary {
-  color: $dark-brown;
-}
-
-header .title-dark {
-  color: $white;
-}
-
-header a {
-  color: $dark-brown;
-  @include on-event {
-    color: $dark-brown;
-  }
-}
-
-footer {
-  background-color: $dark-brown;  // 2
-}
-
-footer a {
-  color: $light-grey;
-
-  @include on-event {
+section#menu{
+  a {
     color: $light-grey;
+
+    @include on-event {
+      color: white;
+    }
+  }
+  header .title-primary {
+    color: $primary-color;
+  }
+
+  header .title-dark {
+    color: white;
   }
 }
+
+// h1, h2, h3, h4, h5, h6 {
+//   color: $title-color;
+// }
+
+section#menu {
+  background-color: $secondary-color;
+  color: $light-grey;
+}
+
+// footer {
+//   background-color: $dark-brown;  // 2
+// }

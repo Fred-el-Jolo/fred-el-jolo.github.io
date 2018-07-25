@@ -5,38 +5,40 @@
 
 // 1. Configuration and helpers
 @import
-  'abstracts/variables',
   'abstracts/functions',
   'abstracts/mixins',
-  'abstracts/placeholders';
+  'abstracts/placeholders',
+  'abstracts/variables';
 
 // 2. Vendors
 @import
-  'vendors/normalize',
-  'vendors/include-media';
+  "vendors/fontawesome-free-5.2.0-web/fontawesome",
+  "vendors/fontawesome-free-5.2.0-web/brands",
+  "vendors/fontawesome-free-5.2.0-web/solid",
+  'vendors/include-media',
+  'vendors/normalize';
 
-// 3. Base stuff
+// 2. Base stuff
 @import
-  'base/base',
-  'base/fonts',
-  'base/typography',
-  'base/helpers';
+    'base/base',
+    'base/fonts',
+    'base/helpers',
+    'base/typography';
+    
+// 3. Components
+// @import
+//   'components/button';
 
 // 4. Layout-related sections
 @import
-  'layout/header',
   'layout/footer',
-  'layout/main';
+  'layout/main',
+  'layout/nav';
 
-// 5. Components
-@import
-  'components/button';
+// 5. Page-specific styles
+// @import
+//   'pages/index';
 
-// 6. Page-specific styles
-@import
-  'pages/contact',
-  'pages/index';
-
-// 7. Themes
+// 6. Themes
 @import
   'themes/default';

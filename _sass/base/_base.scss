@@ -21,6 +21,10 @@ html {
   box-sizing: inherit;
 }
 
+body {
+  font-family: $font-family-base;
+}
+
 /**
  * Basic styles for links
  */

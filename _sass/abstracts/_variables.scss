@@ -2,16 +2,50 @@
 // This file contains all application-wide Sass variables.
 // -----------------------------------------------------------------------------
 
+// Font families
+$open-sans:            'Open Sans';
+$open-sans-sans-serif: 'Open Sans', sans-serif;
+$merriweather-serif:   'Merriweather', serif;
+$monospace:             Menlo, Consolas, monospace;
 
-/// Regular font family
-/// @type List
-$text-font-stack: 'Open Sans', 'Helvetica Neue Light', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif !default;
+$font-family-base: $open-sans-sans-serif;
 
-/// Code (monospace) font family
-/// @type List
-$code-font-stack: 'Courier New', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Monaco', monospace !default;
+$font-families: (
+   // base
+   'headings':          $open-sans-sans-serif,
+   // components
+   'code':              $monospace,
+   'caption':           $merriweather-serif,
+   'image-gallery':     $open-sans,
+   'post-header-cover': $merriweather-serif,
+   'post-meta':         $open-sans-sans-serif,
+   'post-content':      $merriweather-serif,
+   'post-excerpt-link': $open-sans-sans-serif,
+   'highlight':         $monospace,
+   // layout
+   'sidebar':           $open-sans-sans-serif
+);
 
 
+// // equal to 15px
+// $font-size-base:      1.6rem;
+// $font-color-base:     #5d686f;
+// $line-height-base:    1.9em;
+// $letter-spacing-base: 0.01em;
+
+// // Reduction of font size base on small screen and down
+// $font-size-base-sm-screen-reduction-factor: 0.1rem;
+
+// // Font size : (X.Xrem = XXpx, 1.0rem = 10px)
+// $font-size: (
+//     'xxlarge': 2rem,
+//     'xlarge': 1.8rem,
+//     'large':  1.7rem,
+//     'base':   $font-size-base,
+//     'medium': 1.5rem,
+//     'small':  1.3rem,
+//     'xsmall': 1rem
+// );
 
 /// Primary color
 /// @type Color
@@ -25,53 +59,36 @@ $secondary-color: hsl(36, 100%, 10%) !default;
 /// @type Color
 $complementary-color: hsl(205, 100%, 55%) !default;
 
+/// Light grey
+/// @type Color
+$light-grey: hsl(0, 0, 92) !default;
+
 /// Dark brown
 /// @type Color
 $dark-brown: hsl(36, 100%, 7%) !default;
 
-/// Light grey
-/// @type Color
-$light-grey: hsl(0, 0, 90) !default;
+// $light-grey: hsl(0, 0, 90) !default;
 
-/// Cream
-/// @type Color
-$cream-color: hsl(36, 100%, 90%) !default;
+// /// Cream
+// /// @type Color
+// $cream-color: hsl(36, 100%, 90%) !default;
 
-/// White
-/// @type Color
-$white: hsl(0, 0, 100) !default;
+// /// White
+// /// @type Color
+// $white: hsl(0, 0, 100) !default;
 
 
 
-/// Text color
-/// @type Color
-$text-color: $light-grey !default;
+// /// Text color
+// /// @type Color
+// $text-color: $light-grey !default;
 
-/// Title color
-/// @type Color
-$title-color: $white !default;
+// /// Title color
+// /// @type Color
+// $title-color: $white !default;
 
 
 
 /// Container's maximum width
 /// @type Length
 $max-width: 1180px !default;
-
-
-
-/// Breakpoints map
-/// @prop {String} keys - Keys are identifiers mapped to a given length
-/// @prop {Map} values - Values are actual breakpoints expressed in pixels
-$breakpoints: (
-  'phone': 405px,
-  'tablet': 768px,
-  'desktop': 900px,
-) !default;
-
-
-
-/// Relative or absolute URL where all assets are served from
-/// @type String
-/// @example scss - When using a CDN
-///   $base-url: 'http://cdn.example.com/assets/';
-$base-url: '/assets/' !default;

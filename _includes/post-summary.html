@@ -1,0 +1,19 @@
+<article>
+  <a href="{{ include.post.url }}">
+    <div class="post-container">
+      <img class="post-illustration"
+        src="{{ include.post.image }}"
+        alt="{{ include.post.image-alt }}">
+      </img>
+      <div class="post-summary">
+        <h1>{{ include.post.title }}</h1>
+        <div class="post-metadata">
+          <span class="post-date">{{ include.post.date }}</span>
+          <span class="post-categories">{{ include.post.categories }}</span>
+        </div>
+        <p id="excerpt">{{ include.post.excerpt }}</p>
+        <p>Click to continue reading</p>
+      </div>
+    </div>
+  </a>
+</article>
