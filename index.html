@@ -52,26 +52,28 @@
 
 <body>
   <section id="menu">
+  	<div id="menuWrapper">
 		<header>
-			<img id="logo" src="assets/images/logo.png" width="150" height="150" alt="Logo"/>
-			<h1><span class="title-primary">{</span><span class="title-dark">aesthete</span><span class="title-primary">coding</span><span class="title-dark">.io</span><span class="title-primary">}</span></h1>
-    </header>
-		<nav>
-		<i class="fa fa-camera-retro" ></i>
-      <ul>
-        <li><a class="user" href="#">About me</a></li>
-        <li><a href="#">Twitter</a></li>
-        <li><a href="#">Linkedin</a></li>
-        <li><a href="#">Stack Overflow</a></li>
-        <li><a href="#">Github</a></li>
-      </ul>
-      <ul>
-        <li><a href="#">Blog</a></li>
-        <li><a href="#">Tags</a></li>
-        <li><a href="#">Categories</a></li>
-        <li><a href="#">RSS</a></li>
-      </ul>
-    </nav>
+				<img id="logo" src="assets/images/logo.png" width="150" height="150" alt="Logo"/>
+				<h1><span class="title-primary">{</span><span class="title-dark">aesthete</span><span class="title-primary">coding</span><span class="title-dark">.io</span><span class="title-primary">}</span></h1>
+	    </header>
+			<nav>
+			<i class="fa fa-camera-retro" ></i>
+	      <ul>
+	        <li><a class="user" href="#">About me</a></li>
+	        <li><a href="#">Twitter</a></li>
+	        <li><a href="#">Linkedin</a></li>
+	        <li><a href="#">Stack Overflow</a></li>
+	        <li><a href="#">Github</a></li>
+	      </ul>
+	      <ul>
+	        <li><a href="#">Blog</a></li>
+	        <li><a href="#">Tags</a></li>
+	        <li><a href="#">Categories</a></li>
+	        <li><a href="#">RSS</a></li>
+	      </ul>
+	    </nav>
+	   </div>
   </section>
   <section id="content">
     {% for post in site.posts %}
