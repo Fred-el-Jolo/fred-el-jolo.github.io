@@ -3,13 +3,6 @@
 
 @charset 'UTF-8';
 
-// 1. Configuration and helpers
-@import
-  'abstracts/functions',
-  'abstracts/mixins',
-  'abstracts/placeholders',
-  'abstracts/variables';
-
 // 2. Vendors
 @import
   "vendors/fontawesome-free-5.2.0-web/fontawesome",
@@ -17,6 +10,13 @@
   "vendors/fontawesome-free-5.2.0-web/solid",
   'vendors/include-media',
   'vendors/normalize';
+
+// 1. Configuration and helpers
+@import
+  'abstracts/functions',
+  'abstracts/mixins',
+  'abstracts/placeholders',
+  'abstracts/variables';
 
 // 2. Base stuff
 @import

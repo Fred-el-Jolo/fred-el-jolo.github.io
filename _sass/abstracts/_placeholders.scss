@@ -2,3 +2,14 @@
 // This file contains all application-wide Sass placeholders.
 // -----------------------------------------------------------------------------
 
+%custom-fas {
+  @include fa-icon;
+  @extend .fa-lg;
+  @extend .fas;
+}
+
+%custom-fab {
+  @include fa-icon;
+  @extend .fa-lg;
+  @extend .fab;
+}

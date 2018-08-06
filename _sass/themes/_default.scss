@@ -7,16 +7,85 @@
 //     background-color: $secondary-color;
 // }
 
+
+
 .user {
-  @include fa-icon;
-  @extend .fas;
+@extend %custom-fas;
 
   &:before {
     content: fa-content($fa-var-user);
   }
 }
 
+.twitter {
+@extend %custom-fab;
+
+  &:before {
+    content: fa-content($fa-var-twitter);
+  }
+}
+
+.github {
+@extend %custom-fab;
+
+  &:before {
+    content: fa-content($fa-var-github);
+  }
+}
+
+.stackoverflow {
+@extend %custom-fab;
+
+  &:before {
+    content: fa-content($fa-var-stack-overflow);
+  }
+}
+
+.bookmark {
+@extend %custom-fas;
+
+  &:before {
+    content: fa-content($fa-var-bookmark);
+  }
+}
+
+.tags {
+@extend %custom-fas;
+
+  &:before {
+    content: fa-content($fa-var-tags);
+  }
+}
+
+.archive {
+@extend %custom-fas;
+
+  &:before {
+    content: fa-content($fa-var-archive);
+  }
+}
+
+.rss {
+@extend %custom-fas;
+
+  &:before {
+    content: fa-content($fa-var-rss);
+  }
+}
+
+.linkedin {
+@extend %custom-fab;
+
+  &:before {
+    content: fa-content($fa-var-linkedin);
+  }
+}
+
 section#menu{
+  font-family: map-get($font-families, 'sidebar');
+  background-color: $secondary-color;
+  color: $light-grey;
+
   a {
     color: $light-grey;
 
@@ -24,6 +93,7 @@ section#menu{
       color: white;
     }
   }
+
   header .title-primary {
     color: $primary-color;
   }
@@ -31,16 +101,41 @@ section#menu{
   header .title-dark {
     color: white;
   }
+
+  li {
+    display: block;
+    width: 100%;
+    height: 45px;
+    line-height: 45px;
+
+    .menu-button-icon {
+      //font-size: 2rem;
+      line-height: 35px;
+      width: 30px;
+      height: 35px;
+      margin-right: 15px;
+      vertical-align: middle;
+    }
+
+    .menu-button-text {
+      width: auto;
+      height: 35px;
+      line-height: 35px;
+      //font-size: 1.5rem;
+      //letter-spacing: .3px;
+      vertical-align: middle;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+  }
+
+
 }
 
 // h1, h2, h3, h4, h5, h6 {
 //   color: $title-color;
 // }
-
-section#menu {
-  background-color: $secondary-color;
-  color: $light-grey;
-}
 
 // footer {
 //   background-color: $dark-brown;  // 2
