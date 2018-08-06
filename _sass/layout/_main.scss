@@ -139,14 +139,14 @@ body {
   "menu content"
   "menu content"
   "menu footer";
-  align-content: stretch;
 }
 
 section#menu {
   grid-area: menu;
-  height: 100%;
+}
+
+section#menu #menuWrapper {
   position: fixed;
-  overflow-y: scroll;
 }
 
 section#menu header {
