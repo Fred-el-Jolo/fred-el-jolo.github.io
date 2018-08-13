@@ -73,6 +73,14 @@
   }
 }
 
+.home {
+@extend %custom-fas;
+
+  &:before {
+    content: fa-content($fa-var-home);
+  }
+}
+
 .linkedin {
 @extend %custom-fab;
 

@@ -133,7 +133,7 @@
 
 body {
   display: grid;
-  grid-template-columns: 1fr 2.4fr;
+  grid-template-columns: 400px 2fr;
   grid-template-rows: auto;
   grid-template-areas:
   "menu content"
@@ -143,20 +143,37 @@ body {
 
 section#menu {
   grid-area: menu;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 400px;
+    height: 100%;
+    position: fixed;
+
+  header {
+    text-align: center;
+    width: 100%;
+  }
 }
 
-// section#menu #menuWrapper {
-//   position: fixed;
+.horizontal-flex-wrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+// .about-me-link {
+//   text-align: center;
+//   padding: 0;
 // }
-
-section#menu header {
-  text-align: center;
-}
 
 section#content {
   grid-area: content;
+  max-width: 750px;
+  margin: auto;
 }
 
 footer {
   grid-area: footer;
+  text-align: center;
+  color: $medium-grey;
 }
