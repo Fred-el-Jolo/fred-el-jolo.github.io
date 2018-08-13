@@ -76,11 +76,11 @@
 			</ul>
 		</nav>
   </section>
-  <section id="content">
+  <main>
     {% for post in site.posts %}
       {% include post-summary.html post=post %}
     {% endfor %}
-  </section>
+  </main>
   <footer>Copyrights &copy; {{ 'now' | date: "%Y" }} Fr&eacute;d&eacute;ric Guillaume. All Rights Reserved.</footer>
 </body>
 </html>
