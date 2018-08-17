@@ -46,14 +46,14 @@
 	<link rel="apple-touch-icon" sizes="152x152" href="https://aesthetecoding.io/assets/images/favicon/iPad-Retina.png">
 	<link rel="apple-touch-icon" sizes="167x167" href="https://aesthetecoding.io/assets/images/favicon/iPad-Pro.png">
 
-	<link rel="stylesheet" href="assets/css/main.css">
+	<link rel="stylesheet" href="/assets/css/main.css">
 </head>
 
 
 <body>
   <section id="menu">
 		<header>
-			<img id="logo" src="assets/images/logo.png" width="150" height="150" alt="Logo"/>
+			<img id="logo" src="/assets/images/logo.png" width="150" height="150" alt="Logo"/>
 			<h1><span class="title-primary">{</span><span class="title-dark">aesthete</span><span class="title-primary">coding</span><span class="title-dark">.io</span><span class="title-primary">}</span></h1>
 		</header>
 		<nav>
@@ -77,9 +77,46 @@
 		</nav>
   </section>
   <main>
+{% comment %}
     {% for post in site.posts %}
       {% include post-summary.html post=post %}
     {% endfor %}
+{% endcomment %}
+
+		<!-- This loops through the paginated posts -->
+		{% for post in paginator.posts %}
+			{% include post-summary.html post=post %}
+		{% endfor %}
+
+		<!-- Pagination links -->
+		{% if paginator.total_pages > 1 %}
+		<div class="pagination">
+			<a href="{{ site.url }}">&laquo; First page</a>
+			{% if paginator.previous_page %}
+				<a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&lt; Prev</a>
+			{% else %}
+				<span>&lt; Prev</span>
+			{% endif %}
+
+			{% for page in (1..paginator.total_pages) %}
+				{% if page == paginator.page %}
+					<em>{{ page }}</em>
+				{% elsif page == 1 %}
+					<a href="{{ site.url }}">{{ page }}</a>
+				{% else %}
+					<a href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', page }}">{{ page }}</a>
+				{% endif %}
+			{% endfor %}
+
+			{% if paginator.next_page %}
+				<a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Next &gt;</a>
+			{% else %}
+				<span>Next &gt;</span>
+			{% endif %}
+			<a href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', paginator.total_pages }}">&raquo; Last page</a>
+		</div>
+		{% endif %}
+
   </main>
   <footer>Copyrights &copy; {{ 'now' | date: "%Y" }} Fr&eacute;d&eacute;ric Guillaume. All Rights Reserved.</footer>
 </body>

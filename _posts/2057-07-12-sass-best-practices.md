@@ -137,3 +137,4 @@ $value: str-slice($length + unquote(''), 1, 2);
 > [Aesthetic Sass 2: Colors and Palettes](https://scotch.io/tutorials/aesthetic-sass-2-colors)
 > [Aesthetic Sass 3: Typography and Vertical Rhythm](https://scotch.io/tutorials/aesthetic-sass-3-typography-and-vertical-rhythm)
 > (http://thesassway.com/beginner)
+sassway.com/beginner)

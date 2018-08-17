@@ -174,6 +174,51 @@ main {
 
 footer {
   grid-area: footer;
+  margin-top: 30px;
   text-align: center;
   color: $medium-grey;
+}
+
+article.post-summary {
+  margin-top: 15px;
+  border-bottom: 1px solid $dark-brown;
+
+  &:hover {
+    background-color: $super-light-grey;
+  }
+  
+  a {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  figure {
+    margin-left: 0;
+  }
+
+  summary{
+    h1 {
+      margin: 0;
+    }
+
+    div.post-metadata {
+      font-size: map-get($font-size, small);
+      color: $medium-grey;
+    }
+
+    div.excerpt {
+      color: $dark-grey;
+    }
+
+    div.continue-link {
+      font-size: map-get($font-size, small);
+      color: $complementary-color;
+    }
+  }
+  
 }

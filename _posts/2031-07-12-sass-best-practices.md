@@ -2,8 +2,10 @@
 layout:         post
 title:          Sass best practices
 date:           2018-07-12 20:00:00 +1
+image:          https://via.placeholder.com/140x140
+image-alt:      placeholder
 tags: [sass, css, scss, design]
-categories: [link]
+categories: [link1, link2, link3, link4]
 ---
 
 Reference & summary of Sass best practices
