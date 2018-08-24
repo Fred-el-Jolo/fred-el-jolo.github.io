@@ -77,46 +77,53 @@
 		</nav>
   </section>
   <main>
-{% comment %}
-    {% for post in site.posts %}
-      {% include post-summary.html post=post %}
-    {% endfor %}
-{% endcomment %}
+{%- comment -%}
+    {%- for post in site.posts -%}
+      {%- include post-summary.html post=post -%}
+    {%- endfor -%}
+{%- endcomment -%}
 
 		<!-- This loops through the paginated posts -->
-		{% for post in paginator.posts %}
-			{% include post-summary.html post=post %}
-		{% endfor %}
-
+		{%- for post in paginator.posts -%}
+			{%- include post-summary.html post=post -%}
+		{%- endfor -%}
 		<!-- Pagination links -->
-		{% if paginator.total_pages > 1 %}
+		{%- if paginator.total_pages > 1 -%}
 		<div class="pagination">
-			<a href="{{ site.url }}">&laquo; First page</a>
-			{% if paginator.previous_page %}
-				<a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&lt; Prev</a>
-			{% else %}
-				<span>&lt; Prev</span>
-			{% endif %}
-
-			{% for page in (1..paginator.total_pages) %}
-				{% if page == paginator.page %}
-					<em>{{ page }}</em>
-				{% elsif page == 1 %}
-					<a href="{{ site.url }}">{{ page }}</a>
-				{% else %}
-					<a href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', page }}">{{ page }}</a>
-				{% endif %}
-			{% endfor %}
-
-			{% if paginator.next_page %}
-				<a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Next &gt;</a>
-			{% else %}
-				<span>Next &gt;</span>
-			{% endif %}
-			<a href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', paginator.total_pages }}">&raquo; Last page</a>
+			{%- if paginator.previous_page -%}
+				<a href="{{ site.url }}">&laquo;</a>
+				<a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&lt;</a>
+			{%- else -%}
+				<span>&laquo;</span>
+				<span>&lt;</span>
+			{%- endif -%}
+			{%- for page in (1..site.paginate_max_buttons) -%}
+				{%- assign computedIndex = 0 | minus: site.paginate_max_buttons | divided_by: 2.0 | floor | plus: paginator.page | plus: page  -%}
+				{%- assign atBeginning = computedIndex | minus: page -%}
+				{%- assign atEnd = 0 | minus: site.paginate_max_buttons | divided_by: 2.0 | floor | plus: paginator.total_pages -%}
+				{%- if atBeginning < 0 -%}
+					{%- assign computedIndex = page  -%}
+				{%- endif -%}
+				{%- if paginator.page > atEnd -%}
+					{%- assign computedIndex = paginator.total_pages | minus: site.paginate_max_buttons | plus: page  -%}
+				{%- endif -%}
+				{%- if computedIndex == paginator.page -%}
+					<span class="current">{{ computedIndex }}</span>
+				{%- elsif computedIndex == 1 -%}
+					<a href="{{ site.url }}">{{ computedIndex }}</a>
+				{%- else -%}
+					<a href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', computedIndex }}">{{ computedIndex }}</a>
+				{%- endif -%}
+			{%- endfor -%}
+			{%- if paginator.next_page -%}
+				<a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">&gt;</a>
+				<a href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', paginator.total_pages }}">&raquo;</a>
+			{%- else -%}
+				<span>&gt;</span>
+				<span>&raquo;</span>
+			{%- endif -%}
 		</div>
-		{% endif %}
-
+		{%- endif -%}
   </main>
   <footer>Copyrights &copy; {{ 'now' | date: "%Y" }} Fr&eacute;d&eacute;ric Guillaume. All Rights Reserved.</footer>
 </body>
