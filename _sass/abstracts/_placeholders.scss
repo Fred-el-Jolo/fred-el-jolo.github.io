@@ -13,3 +13,9 @@
   @extend .fa-lg;
   @extend .fab;
 }
+
+%noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+    /* Safari, Konqueror HTML, Firefox, Internet Explorer/Edge */
+    @include prefix(user-select, none, webkit khtml moz ms);
+}

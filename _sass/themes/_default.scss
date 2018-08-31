@@ -89,6 +89,38 @@
   }
 }
 
+.left-angle {
+@extend %custom-fas;
+
+  &:before {
+    content: fa-content($fa-var-angle-left);
+  }
+}
+
+.left-angle-double {
+@extend %custom-fas;
+
+  &:before {
+    content: fa-content($fa-var-angle-double-left);
+  }
+}
+
+.right-angle {
+@extend %custom-fas;
+
+  &:before {
+    content: fa-content($fa-var-angle-right);
+  }
+}
+
+.right-angle-double {
+@extend %custom-fas;
+
+  &:before {
+    content: fa-content($fa-var-angle-double-right);
+  }
+}
+
 section#menu{
   font-family: map-get($font-families, 'sidebar');
   background-color: $secondary-color;

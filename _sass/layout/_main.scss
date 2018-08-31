@@ -182,10 +182,17 @@ footer {
 
 article.post-summary {
   margin-top: 15px;
+  padding: 10px;
   border-bottom: 1px solid $dark-brown;
 
   &:hover {
     background-color: $super-light-grey;
+    @include transition(background-color, .5s, ease-out);
+  }
+
+    &:not(:hover) {
+    background-color: inherit;
+    @include transition(background-color, .5s, ease-out);
   }
   
   a {
@@ -227,12 +234,41 @@ article.post-summary {
 .pagination {
   text-align: center;
 
-  > a, > span {
+  a:link, a:visited, a:hover, a:active {
+    text-decoration: none;
+  }
+
+  span {
+    @extend %noselect;
+  }
+
+  .current {
+    background-color: $complementary-color;
+    color: white;
+  }
+
+  a, span, > i {
     display: inline-block;
     margin: 10px 5px;
     width: 25px;
     height: 25px;
     line-height: 23px;
-    border: 1px solid black;
+    font-weight: bold;
+    border: 1px solid $light-grey;
+    @include border-radius(5px);
+    background-color: $light-grey;
+    color: $very-dark-grey;
+  }
+
+  a:hover {
+    background-color: $very-dark-grey;
+    color: $light-grey;
+    @include transition(all, .5s, ease-out);
+  }
+
+  a:not(:hover) {
+    background-color: $light-grey;
+    color: $very-dark-grey;
+    @include transition(all, .5s, ease-out);
   }
 }
