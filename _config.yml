@@ -1,5 +1,5 @@
 theme: jekyll-theme-dinky
-plugins: [jekyll-paginate]
+plugins: [jekyll-paginate, jekyll-feed]
 paginate: 2
 paginate_path: /page:num/index.html
 paginate_max_buttons: 11

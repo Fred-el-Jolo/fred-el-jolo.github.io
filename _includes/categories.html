@@ -1,0 +1,15 @@
+{%- comment -%}
+<span class="tag">{{ site.categories | jsonify}}</span>
+{%- endcomment -%}
+
+<ul>
+{% for category in site.categories %}
+  <li><span class="category">{{ category[0] }}</span>
+    <ul>
+      {% for p in category[1] %}
+      <li><a href="{{ p.url }}">{{ p.title }}</a></li>
+      {% endfor %}
+    </ul>
+  </li>
+{% endfor %}
+</ul>

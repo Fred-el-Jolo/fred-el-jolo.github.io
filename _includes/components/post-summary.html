@@ -1,0 +1,26 @@
+<article class="post-summary">
+  <a href="{{ include.post.url }}">
+    <figure class="post-illustration">
+      <img width="140" height="140" src="{{ '/assets/images/posts/' | append: include.post.image | absolute_url }}"
+        alt="{{ include.post.image-alt }}" alt="{{ include.post.image-alt }}">
+    </figure>
+    <summary>
+      <h1>{{ include.post.title }}</h1>
+      <div class="post-metadata">
+        <span class="post-date">
+          {% assign day = include.post.date | date: "%-d"  %}
+          {% case day %}
+            {% when '1' or '21' or '31' %}{{ day }}st
+            {% when '2' or '22' %}{{ day }}nd
+            {% when '3' or '23' %}{{ day }}rd
+            {% else %}{{ day }}th
+          {% endcase %}
+          {{ include.post.date | date: "of %B, %Y" }}
+        </span>
+        <span class="post-categories"> in {{ include.post.categories | join: ', ' }}</span>
+      </div>
+      <div class="excerpt">{{ include.post.excerpt }}</div>
+      <div class="continue-link">Click to continue reading</div>
+    </summary>
+  </a>
+</article>

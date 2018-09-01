@@ -1,0 +1,32 @@
+{%- if paginator.total_pages > 1 -%}
+<div class="pagination">
+	{%- if paginator.previous_page -%}
+		<a href="{{ site.url }}"><i class="left-angle-double"></i></a><a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}"><i class="left-angle"></i></a>
+	{%- else -%}
+		<i class="left-angle-double"></i><i class="left-angle"></i>
+	{%- endif -%}
+	{%- for page in (1..site.paginate_max_buttons) -%}
+		{%- assign computedIndex = 0 | minus: site.paginate_max_buttons | divided_by: 2.0 | floor | plus: paginator.page | plus: page  -%}
+		{%- assign atBeginning = computedIndex | minus: page -%}
+		{%- assign atEnd = 0 | minus: site.paginate_max_buttons | divided_by: 2.0 | floor | plus: paginator.total_pages -%}
+		{%- if atBeginning < 0 -%}
+			{%- assign computedIndex = page  -%}
+		{%- endif -%}
+		{%- if paginator.page > atEnd -%}
+			{%- assign computedIndex = paginator.total_pages | minus: site.paginate_max_buttons | plus: page  -%}
+		{%- endif -%}
+		{%- if computedIndex == paginator.page -%}
+			<span class="current">{{ computedIndex }}</span>
+		{%- elsif computedIndex == 1 -%}
+			<a href="{{ site.url }}">{{ computedIndex }}</a>
+		{%- else -%}
+			<a href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', computedIndex }}">{{ computedIndex }}</a>
+		{%- endif -%}
+	{%- endfor -%}
+	{%- if paginator.next_page -%}
+		<a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}"><i class="right-angle"></i></a><a href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', paginator.total_pages }}"><i class="right-angle-double"></i></a>
+	{%- else -%}
+		<i class="right-angle"></i><i class="right-angle-double"></i>
+	{%- endif -%}
+</div>
+{%- endif -%}
