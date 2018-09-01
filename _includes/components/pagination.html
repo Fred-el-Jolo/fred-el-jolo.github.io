@@ -19,7 +19,7 @@
 			<span class="current">{{ computedIndex }}</span>
 		{%- elsif computedIndex == 1 -%}
 			<a href="{{ site.url }}">{{ computedIndex }}</a>
-		{%- else -%}
+		{%- elsif computedIndex > 1 and computedIndex <= paginator.total_pages -%}
 			<a href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', computedIndex }}">{{ computedIndex }}</a>
 		{%- endif -%}
 	{%- endfor -%}
