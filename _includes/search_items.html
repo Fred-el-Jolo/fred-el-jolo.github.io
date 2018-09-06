@@ -1,0 +1,18 @@
+<div class="search-list">
+  {%- for item in include.items -%}
+    <div class="search-items"><a href="#{{ item[0] }}-{{ include.type }}">{{ item[0] }}</a></div>
+  {%- endfor -%}
+</div>
+
+{%- for item in include.items -%}
+  <h4><a class="search-item-anchor" name="{{ item[0] }}-{{ include.type }}">{{ item[0] }} ({{ item[1] | size }})</a></h4>
+    <ul>
+      {%- for p in item[1] -%}
+      <li class="caret-right">
+        <a href="{{ p.url }}">{{ p.title }}</a>
+        <span class="post-date">{{ p.date | date: "%b %d, %Y" }}</span>
+      </li>
+      {%- endfor -%}
+    </ul>
+  </li>
+{%- endfor -%}

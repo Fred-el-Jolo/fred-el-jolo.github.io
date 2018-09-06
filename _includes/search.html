@@ -1,0 +1,15 @@
+<div id="search">
+  <input id="tags" type="radio" name="tabs" checked>
+  <label for="tags">Tags</label>
+    
+  <input id="categories" type="radio" name="tabs">
+  <label for="categories">Categories</label>
+
+  <section id="tagsContent">
+    {%- include search_items.html items=site.tags type="tag" -%}
+  </section>
+    
+  <section id="categoriesContent">
+    {%- include search_items.html items=site.categories type="category" -%}
+  </section>
+</div>

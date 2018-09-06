@@ -121,6 +121,23 @@
   }
 }
 
+.search {
+@extend %custom-fas;
+
+  &:before {
+    content: fa-content($fa-var-search);
+  }
+}
+
+.caret-right {
+  &:before {
+    @extend %custom-fas;
+    content: fa-content($fa-var-caret-right);
+    margin-right: 15px;
+    font-size: large;
+  }
+}
+
 section#menu{
   font-family: map-get($font-families, 'sidebar');
   background-color: $secondary-color;

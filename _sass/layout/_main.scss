@@ -171,6 +171,7 @@ main {
   display: block;
   width: 750px;
   margin: auto;
+  margin-top: 15px;
 }
 
 footer {
@@ -183,7 +184,6 @@ footer {
 }
 
 article.post-summary {
-  margin-top: 15px;
   padding: 10px;
   border-bottom: 1px solid $dark-brown;
 
@@ -273,12 +273,103 @@ article.post-summary {
   a:hover {
     background-color: $very-dark-grey;
     color: $light-grey;
-    @include transition(all, .5s, ease-out);
+    @include transition(all, .2s, ease-out);
   }
 
   a:not(:hover) {
     background-color: $light-grey;
     color: $very-dark-grey;
-    @include transition(all, .5s, ease-out);
+    @include transition(all, .2s, ease-out);
   }
+}
+
+div#search {
+  
+  section {
+    display: none;
+    padding: 20px 0 0;
+    border-top: 1px solid $medium-grey;
+  }
+
+  input {
+    display: none;
+  }
+
+  label {
+    display: inline-block;
+    margin: 0 0 -1px;
+    padding: 15px 25px;
+    font-weight: 600;
+    text-align: center;
+    color: $medium-grey;
+    border: 1px solid transparent;
+  }
+
+  label:before {
+    font-family: fontawesome;
+    font-weight: normal;
+    margin-right: 10px;
+  }
+
+  label:hover {
+    color: $dark-grey;
+    cursor: pointer;
+  }
+
+  input:checked + label {
+    color: $very-dark-grey;
+    border: 1px solid $medium-grey;
+    border-top: 3px solid $primary-color;
+    // border-bottom: 1px solid #fff;
+  }
+
+  #tags:checked ~ #tagsContent,
+  #categories:checked ~ #categoriesContent {
+    display: block;
+  }
+
+  .search-list {
+    .search-items {
+      display: inline-block;
+      border: 1px solid $complementary-color;
+      border-radius: 5px;
+      margin: 3px;
+      padding: 0px 10px;
+      cursor: pointer;
+
+      a {
+        text-decoration: none;
+        color: $complementary-color;
+      }
+    }
+
+    .search-items:hover {
+      background-color: $complementary-color;
+      @include transition(all, .2s, ease-out);
+
+      a {
+        color: white;
+      }
+    }
+
+    .search-items:not(:hover) {
+      background-color: white;
+      @include transition(all, .2s, ease-out);
+    }
+  }
+
+  .search-item-anchor {
+    text-decoration: none;
+    cursor: default;
+  }
+
+  ul {
+    list-style: none;
+
+    .post-date {
+      font-size: map-get($font-size, small);
+      color: $medium-grey;
+    }
+  }
+  
 }
