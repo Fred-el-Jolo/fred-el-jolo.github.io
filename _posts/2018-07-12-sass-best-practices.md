@@ -17,6 +17,17 @@ Reference & summary of Sass best practices
 
 ## Syntax & formatting
 Follow the [Sass Guidelines - Syntax formatting](https://sass-guidelin.es/#syntax--formatting) chapter.
+
+```js
+var a = [1,2,3];
+var b = [1,2,3];
+var c = "1,2,3";
+
+a == c;     // true, coercion applied on the arrayaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbbb
+b == c;     // true, coercion applied on the array
+a == b;     // false
+```
+
 A few reminders :
 - Force UTF-8 encoding with `@charset 'utf-8';` in main file
 - 0 value should never have a unit
