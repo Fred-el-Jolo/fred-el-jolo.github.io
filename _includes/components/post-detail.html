@@ -1,10 +1,10 @@
-<article class="post-summary">
-  <a href="{{ page.url }}">
+<article class="post">
+  <header>
     <figure class="post-illustration">
       <img width="140" height="140" src="{{ '/assets/images/posts/' | append: page.image | absolute_url }}"
         alt="{{ page.image-alt }}" alt="{{ page.image-alt }}">
     </figure>
-    <summary>
+    <div>
       <h1>{{ page.title }}</h1>
       <div class="post-metadata">
         <span class="post-date">
@@ -19,7 +19,7 @@
         </span>
         <span class="post-categories"> in {{ page.categories | join: ', ' }}</span>
       </div>
-    </summary>
-    {{ page.content }}
-  </a>
+    </div>
+  </header>
+  {{ page.content }}
 </article>

@@ -183,6 +183,36 @@ footer {
   color: $medium-grey;
 }
 
+article.post {
+  header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: start;
+
+    figure {
+      margin: 0 40px 1em 0;
+
+      img {
+        display: block;
+        width: 140px;
+        height: 140px;
+        object-fit: scale-down;
+        overflow: hidden;
+      }
+    }
+
+    div.post-metadata {
+      font-size: map-get($font-size, small);
+      color: $medium-grey;
+    }
+  }
+
+  h1 {
+    font-size: 3.7rem;
+    margin: 0;
+  }
+}
+
 article.post-summary {
   padding: 10px;
   border-bottom: 1px solid $dark-brown;

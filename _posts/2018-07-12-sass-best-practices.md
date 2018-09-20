@@ -12,6 +12,9 @@ Reference & summary of Sass best practices
 
 <!-- more -->
 
+1. TOC
+{:toc}
+
 ## Syntax & formatting
 Follow the [Sass Guidelines - Syntax formatting](https://sass-guidelin.es/#syntax--formatting) chapter.
 A few reminders :
