@@ -2,7 +2,6 @@
 // This file contains all styles related to the main layout of the site/application.
 // ---------------------------------------------------------------------------------
 
-
 // hr {
 //   margin-top: 4em;
 //   margin-bottom: 4em;
@@ -118,7 +117,6 @@
 //   }
 // }
 
-
 // #fred-photo {
 //   @include media("<tablet") {
 //       display: none;
@@ -131,24 +129,25 @@
 //   }
 // }
 
+a {
+  color: $complementary-color;
+}
+
 body {
   display: grid;
   grid-template-columns: 400px 2fr;
   grid-template-rows: auto;
-  grid-template-areas:
-  "menu content"
-  "menu content"
-  "menu footer";
+  grid-template-areas: "menu content" "menu content" "menu footer";
 }
 
 section#menu {
   grid-area: menu;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 400px;
-    height: 100%;
-    position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 400px;
+  height: 100%;
+  position: fixed;
 
   header {
     text-align: center;
@@ -176,7 +175,7 @@ main {
 
 footer {
   @extend %noselect;
-  
+
   grid-area: footer;
   margin-top: 30px;
   text-align: center;
@@ -184,6 +183,12 @@ footer {
 }
 
 article.post {
+  text-rendering: optimizelegibility;
+  font-family: map-get($font-families, "post-content");
+  font-size: 1.7rem;
+  color: $font-color-base;
+  font-weight: 400;
+
   header {
     display: flex;
     justify-content: flex-start;
@@ -202,6 +207,7 @@ article.post {
     }
 
     div.post-metadata {
+      font-family: map-get($font-families, "post-meta");
       font-size: map-get($font-size, small);
       color: $medium-grey;
     }
@@ -219,14 +225,16 @@ article.post-summary {
 
   &:hover {
     background-color: $super-light-grey;
-    @include transition(background-color, .5s, ease-out);
+
+    @include transition(background-color, 0.5s, ease-out);
   }
 
-    &:not(:hover) {
+  &:not(:hover) {
     background-color: inherit;
-    @include transition(background-color, .5s, ease-out);
+
+    @include transition(background-color, 0.5s, ease-out);
   }
-  
+
   a {
     display: flex;
     justify-content: flex-start;
@@ -249,7 +257,7 @@ article.post-summary {
     }
   }
 
-  summary{
+  summary {
     h1 {
       margin: 0;
     }
@@ -268,7 +276,6 @@ article.post-summary {
       color: $complementary-color;
     }
   }
-  
 }
 
 .pagination {
@@ -295,7 +302,9 @@ article.post-summary {
     line-height: 23px;
     font-weight: bold;
     border: 1px solid $light-grey;
+
     @include border-radius(5px);
+
     background-color: $light-grey;
     color: $very-dark-grey;
   }
@@ -303,18 +312,19 @@ article.post-summary {
   a:hover {
     background-color: $very-dark-grey;
     color: $light-grey;
-    @include transition(all, .2s, ease-out);
+
+    @include transition(all, 0.2s, ease-out);
   }
 
   a:not(:hover) {
     background-color: $light-grey;
     color: $very-dark-grey;
-    @include transition(all, .2s, ease-out);
+
+    @include transition(all, 0.2s, ease-out);
   }
 }
 
 div#search {
-  
   section {
     display: none;
     padding: 20px 0 0;
@@ -350,7 +360,9 @@ div#search {
     color: $very-dark-grey;
     border: 1px solid $medium-grey;
     border-top: 3px solid $primary-color;
+
     // border-bottom: 1px solid #fff;
+ 
   }
 
   #tags:checked ~ #tagsContent,
@@ -375,7 +387,8 @@ div#search {
 
     .search-items:hover {
       background-color: $complementary-color;
-      @include transition(all, .2s, ease-out);
+
+      @include transition(all, 0.2s, ease-out);
 
       a {
         color: white;
@@ -384,7 +397,8 @@ div#search {
 
     .search-items:not(:hover) {
       background-color: white;
-      @include transition(all, .2s, ease-out);
+
+      @include transition(all, 0.2s, ease-out);
     }
   }
 
@@ -401,5 +415,4 @@ div#search {
       color: $medium-grey;
     }
   }
-  
 }

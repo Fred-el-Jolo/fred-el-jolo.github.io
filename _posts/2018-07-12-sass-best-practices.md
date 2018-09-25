@@ -143,11 +143,10 @@ $value: str-slice($length + unquote(''), 1, 2);
 
 ## Sources
 
-> ## [Hugo Giraudel](http://hugogiraudel.com/)
-> [Sass Guidelines](https://sass-guidelin.es/)
+> [Sass Guidelines](https://sass-guidelin.es/)  
+> **Hugo Giraudel -** [hugogiraudel.com](http://hugogiraudel.com/)
 
-> ## [David Khourshid](https://twitter.com/DavidKPiano)
-> [Aesthetic Sass 1: Architecture and Style Organization](https://scotch.io/tutorials/aesthetic-sass-1-architecture-and-style-organization)
-> [Aesthetic Sass 2: Colors and Palettes](https://scotch.io/tutorials/aesthetic-sass-2-colors)
-> [Aesthetic Sass 3: Typography and Vertical Rhythm](https://scotch.io/tutorials/aesthetic-sass-3-typography-and-vertical-rhythm)
-> (http://thesassway.com/beginner)
+> [Aesthetic Sass 1: Architecture and Style Organization](https://scotch.io/tutorials/aesthetic-sass-1-architecture-and-style-organization)  
+> [Aesthetic Sass 2: Colors and Palettes](https://scotch.io/tutorials/aesthetic-sass-2-colors)  
+> [Aesthetic Sass 3: Typography and Vertical Rhythm](https://scotch.io/tutorials/aesthetic-sass-3-typography-and-vertical-rhythm)  
+> **David Khourshid -** [twitter.com/DavidKPiano](https://twitter.com/DavidKPiano)
