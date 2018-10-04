@@ -1,7 +1,7 @@
 <article class="post-summary">
   <a href="{{ include.post.url }}">
     <figure class="post-illustration">
-      <img width="140" height="140" src="{{ '/assets/images/posts/' | append: include.post.image | absolute_url }}"
+      <img width="140" height="140" src="{{ '/assets/images/posts/' | append: include.post.image | relative_url }}"
         alt="{{ include.post.image-alt }}" alt="{{ include.post.image-alt }}">
     </figure>
     <summary>
