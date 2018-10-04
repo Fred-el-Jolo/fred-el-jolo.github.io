@@ -13,7 +13,6 @@
 
 // 1. Configuration and helpers
 @import
-  'abstracts/functions',
   'abstracts/mixins',
   'abstracts/placeholders',
   'abstracts/variables';
@@ -21,9 +20,7 @@
 // 2. Base stuff
 @import
     'base/base',
-    'base/fonts',
-    'base/helpers',
-    'base/typography';
+    'base/fonts';
     
 // 3. Components
 @import
@@ -31,13 +28,7 @@
 
 // 4. Layout-related sections
 @import
-  'layout/footer',
-  'layout/main',
-  'layout/nav';
-
-// 5. Page-specific styles
-// @import
-//   'pages/index';
+  'layout/main';
 
 // 6. Themes
 @import

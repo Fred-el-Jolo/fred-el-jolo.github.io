@@ -2,20 +2,27 @@
 // This file contains all application-wide Sass placeholders.
 // -----------------------------------------------------------------------------
 
+/// Font awesome solid
 %custom-fas {
   @include fa-icon;
+
   @extend .fa-lg;
+
   @extend .fas;
 }
 
+/// Font awesome brand
 %custom-fab {
   @include fa-icon;
+
   @extend .fa-lg;
+
   @extend .fab;
 }
 
+/// No select helper
 %noselect {
-    -webkit-touch-callout: none; /* iOS Safari */
-    /* Safari, Konqueror HTML, Firefox, Internet Explorer/Edge */
-    @include prefix(user-select, none, webkit khtml moz ms);
+  -webkit-touch-callout: none; /* iOS Safari */
+  /* Safari, Konqueror HTML, Firefox, Internet Explorer/Edge */
+  @include prefix(user-select, none, webkit khtml moz ms);
 }

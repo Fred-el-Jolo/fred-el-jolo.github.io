@@ -14,7 +14,8 @@
     &:focus {
       @content;
     }
-  } @else {
+  }
+  @else {
     &:hover,
     &:active,
     &:focus {
@@ -22,15 +23,6 @@
     }
   }
 }
-
-// /// Make a context based selector a little more friendly
-// /// @author Hugo Giraudel
-// /// @param {String} $context
-// @mixin when-inside($context) {
-//   #{$context} & {
-//     @content;
-//   }
-// }
 
 /// Mixin to prefix a property
 /// @author Hugo Giraudel
@@ -40,40 +32,12 @@
 /// Usage example: @include prefix(column-count, 3, moz webkit);
 @mixin prefix($property, $value, $prefixes: ()) {
   @each $prefix in $prefixes {
-    #{'-' + $prefix + '-' + $property}: $value;
+    #{"-" + $prefix + "-" + $property}: $value;
   }
+
   // Output standard non-prefixed declaration
   #{$property}: $value;
 }
-
-// /// Mixin to integrate a flex box container
-// /// @author Frederic GUILLAUME
-// /// @param {String} $flex-direction
-// /// @param {String} $flex-wrap
-// /// @param {String} $align-items
-// /// @param {String} $justify-content
-// /// Usage example: @include prefix(column-count, 3, moz webkit);
-// // @mixin flexbox-container($flex-direction: row, $flex-wrap: no-wrap, $align-items: flex-start, $justify-content: flex-start) {
-// //   display: flex;
-// //   flex-direction: $flex-direction;
-// //   flex-wrap: $flex-wrap;
-// //   align-items: $align-items;
-// //   justify-content: $justify-content;
-// // }
-
-// /// Mixin to handle responsive layout of grid named area (content)
-// /// @author Frederic GUILLAUME
-// /// @param {String} $grid-area - the area name
-// // @mixin grid-column-content($grid-area){
-// //   @include media(">=desktop") {
-// //     grid-area: $grid-area;
-// //   }
-// //   @include media("<desktop") {
-// //     display: flex;
-// //     justify-content: center;
-// //     margin-bottom: 3em;
-// //   }
-// // }
 
 /// Mixin to handle transitions
 @mixin transition($property, $time, $effect) {
