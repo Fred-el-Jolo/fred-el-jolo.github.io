@@ -1,0 +1,139 @@
+/**
+ * Set up a decent box model on the root element
+ */
+html {
+  box-sizing: border-box;
+  font-family: $font-family-base;
+
+  // equal to 10px, useful to use em and rem
+  font-size: 10px;
+
+  // Gives you better control of the font size when the first selected font is not available.
+  @include prefix(text-size-adjust, 100%, "ms" "webkit");
+
+  // Overrides the highlight color shown when the user taps
+  //a link or a JavaScript clickable element in Safari on iPhone
+  @include prefix(tap-highlight-color, rgba(0, 0, 0, 0), "webkit");
+}
+
+/**
+ * Make all elements from the DOM inherit from the parent box-sizing
+ * Since `*` has a specificity of 0, it does not override the `html` value
+ * making all elements inheriting from the root box-sizing value
+ * See: https://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/
+ */
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: white;
+  font-family: $font-family-base;
+  font-size: map-get($font-size, base);
+  line-height: $line-height-base;
+  letter-spacing: $letter-spacing-base;
+
+  // Improve smoothing of the font by adding subpixel in Safari
+  @include prefix(font-smoothing, subpixel-antialiased, "webkit");
+}
+
+/**
+ * Basic styles for links
+ */
+a {
+  color: $blue;
+  text-decoration: none;
+
+  @include on-event {
+    text-decoration: underline;
+  }
+}
+
+/**
+ * Justify alignment for paragraphs
+ */
+p {
+  text-align: justify;
+  text-justify: inter-word;
+  margin: 0 0 1.5em 0;
+}
+
+/**
+ * No bullets on header or footer
+ */
+header ul, footer ul {
+  list-style-type: none;
+}
+
+ul,
+ol,
+dl {
+  margin: 0 0 0.5em 0;
+}
+
+summary, details {
+  display: block;
+}
+
+blockquote {
+  border-left: 3px solid $darker-grey;
+  padding: 0 15px;
+  font-style: italic;
+  margin: 1.5em 0 0;
+
+  > p:first-child {
+    margin: 0;
+  }
+}
+
+h1 {
+  font-size: 2.8rem;
+}
+h2 {
+  font-size: 2.4rem;
+}
+h3 {
+  font-size: 2rem;
+}
+h4 {
+  font-size: 1.8rem;
+}
+h5 {
+  font-size: 1.7rem;
+}
+h6 {
+  font-size: 1.6rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @extend %noselect;
+
+  letter-spacing: -0.04em;
+  font-family: $open-sans-sans-serif;
+  font-weight: 700;
+  line-height: 1.45em;
+  color: $darker-grey;
+}
+
+h1,
+h2,
+h3 {
+  margin: 1em 0 1em 0;
+}
+
+h4,
+h5,
+h6 {
+  margin: 1em 0 0.5em 0;
+}

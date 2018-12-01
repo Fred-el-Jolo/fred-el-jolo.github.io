@@ -1,0 +1,25 @@
+.postDetail {
+  text-rendering: optimizelegibility;
+  font-family: $merriweather-serif;
+  font-size: 1.7rem;
+  color: $font-color-base;
+  font-weight: 400;
+
+  &__header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: start;
+  }
+
+  &__title {
+    margin: 0;
+    font-size: 3.7rem;
+  }
+
+  &__date, &__categories {
+    font-family: $open-sans-sans-serif;
+    font-size: map-get($font-size, small);
+    color: $grey;
+  }
+}
+

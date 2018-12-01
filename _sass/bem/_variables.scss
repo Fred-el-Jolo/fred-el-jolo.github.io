@@ -1,0 +1,50 @@
+/// Font families
+$open-sans-sans-serif: "Open Sans", sans-serif;
+$merriweather-serif: "Merriweather", serif;
+$monospace: Menlo, Consolas, monospace;
+
+$font-family-base: $open-sans-sans-serif;
+
+$orange: hsl(36, 100%, 55%) !default;
+$brown: hsl(36, 100%, 10%) !default;
+$blue: hsl(205, 100%, 55%) !default;
+
+$dark-brown: hsl(36, 100%, 7%) !default;
+
+$darker-grey: hsl(0, 0%, 29%) !default;
+$dark-grey: hsl(203, 9%, 40%) !default;
+$grey: hsl(203, 12%, 66%) !default;
+$light-grey: hsl(0, 0, 92) !default;
+$cream: hsl(0, 0, 96) !default;
+$white: hsl(0, 0, 100%) !default;
+
+$font-color-base: $dark-grey;
+
+// equal to 15px
+$font-size-base: 1.6rem;
+$line-height-base: 1.9em;
+$letter-spacing-base: 0.01em;
+
+/// Font size : (X.Xrem = XXpx, 1.0rem = 10px)
+$font-size: (
+  "xxlarge": 2rem,
+  "xlarge": 1.8rem,
+  "large": 1.7rem,
+  "base": $font-size-base,
+  "medium": 1.5rem,
+  "small": 1.3rem,
+  "xsmall": 1rem
+);
+
+$headings-font-size: (
+  "h1": 2.8rem,
+  "h2": 2.4rem,
+  "h3": 2rem,
+  "h4": 1.8rem,
+  "h5": 1.7rem,
+  "h6": 1.6rem
+);
+
+/// Container's maximum width
+/// @type Length
+$max-width: 1180px !default;

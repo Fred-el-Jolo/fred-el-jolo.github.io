@@ -1,0 +1,57 @@
+.searchItem {
+
+  &__label {
+    display: inline-block;
+    border: 1px solid $blue;
+    border-radius: 5px;
+    margin: 3px;
+    padding: 0px 10px;
+    cursor: pointer;
+
+    &_link {
+      text-decoration: none;
+      color: $blue;
+    }
+  }
+
+  &__label:hover {
+    background-color: $blue;
+    @include transition(all, 0.2s, ease-out);
+
+    .searchItem__list_link {
+      color: $white;
+    }
+  }
+
+  &__label:not(:hover) {
+    background-color: $white;
+    @include transition(all, 0.2s, ease-out);
+  }
+
+  &__detail {
+    text-decoration: none;
+    cursor: default;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  &__list {
+    list-style: none;
+
+    &_caret {
+      &:before {
+        @extend %custom-fas;
+        content: fa-content($fa-var-caret-right);
+        margin-right: 15px;
+        font-size: large;
+      }
+    }
+
+    &_date {
+      font-size: map-get($font-size, small);
+      color: $grey;
+    }
+  }
+}

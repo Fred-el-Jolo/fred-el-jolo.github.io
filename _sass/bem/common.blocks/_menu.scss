@@ -1,0 +1,13 @@
+.menu {
+  position: fixed;
+  grid-area: menu;
+  width: 400px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  font-family: $open-sans-sans-serif;
+  background-color: $brown;
+  color: $light-grey;
+}

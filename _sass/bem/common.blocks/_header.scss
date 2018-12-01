@@ -1,0 +1,13 @@
+.header {
+  width: 100%;
+  text-align: center;
+
+  &__title {
+    &_orange {
+      color: $orange;
+    }
+    &_white {
+      color: $white;
+    }
+  }
+}

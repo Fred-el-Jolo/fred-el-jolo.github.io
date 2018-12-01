@@ -1,0 +1,71 @@
+// -----------------------------------------------------------------------------
+// This file contains all application-wide Sass mixins.
+// -----------------------------------------------------------------------------
+
+/// Event wrapper
+/// @author Harry Roberts
+/// @param {Bool} $self [false] - Whether or not to include current selector
+/// @link https://twitter.com/csswizardry/status/478938530342006784 Original tweet from Harry Roberts
+@mixin on-event($self: false) {
+  @if $self {
+    &,
+    &:hover,
+    &:active,
+    &:focus {
+      @content;
+    }
+  }
+  @else {
+    &:hover,
+    &:active,
+    &:focus {
+      @content;
+    }
+  }
+}
+
+/// Mixin to prefix a property
+/// @author Hugo Giraudel
+/// @param {String} $property - Property name
+/// @param {*} $value - Property value
+/// @param {List} $prefixes (()) - List of prefixes to print
+/// Usage example: @include prefix(column-count, 3, moz webkit);
+@mixin prefix($property, $value, $prefixes: ()) {
+  @each $prefix in $prefixes {
+    #{"-" + $prefix + "-" + $property}: $value;
+  }
+
+  // Output standard non-prefixed declaration
+  #{$property}: $value;
+}
+
+/// Mixin to handle transitions
+@mixin transition($property, $time, $effect) {
+  @include prefix(transition, $property $time $effect, webkit moz o);
+}
+
+/// Mixin to handle border radius
+@mixin border-radius($radius) {
+  @include prefix(border-radius, $radius, webkit moz);
+}
+
+/// Font awesome solid
+@mixin custom-fas($fa-var) {
+  @include fa-icon;
+  @extend .fa-lg;
+  @extend .fas;
+  &:before {
+    content: fa-content($fa-var);
+  }
+}
+
+/// Font awesome brand
+@mixin custom-fab($fa-var) {
+  @include fa-icon;
+  @extend .fa-lg;
+  @extend .fab;
+  &:before {
+    content: fa-content($fa-var);
+  }
+}
+

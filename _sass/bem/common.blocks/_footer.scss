@@ -1,0 +1,8 @@
+.footer {
+  @extend %noselect;
+
+  grid-area: footer;
+  margin-top: 30px;
+  text-align: center;
+  color: $grey;
+}

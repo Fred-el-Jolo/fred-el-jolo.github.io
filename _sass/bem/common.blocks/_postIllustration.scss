@@ -1,0 +1,12 @@
+.postIllustration {
+  margin-left: 0;
+  margin-top: 0;
+
+  &__image {
+    display: block;
+    width: 140px;
+    height: 140px;
+    object-fit: scale-down;
+    overflow: hidden;
+  }
+}

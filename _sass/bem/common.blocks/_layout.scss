@@ -1,0 +1,6 @@
+.layout {
+  display: grid;
+  grid-template-columns: 400px 2fr;
+  grid-template-rows: auto;
+  grid-template-areas: "menu content" "menu content" "menu footer";
+}

@@ -1,0 +1,42 @@
+.postSummary {
+  border-bottom: 1px solid $dark-brown;
+    
+  &__link {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 10px;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: none;
+      background-color: $cream;
+
+      @include transition(background-color, 0.5s, ease-out);
+    }
+
+    &:not(:hover) {
+      background-color: inherit;
+
+      @include transition(background-color, 0.5s, ease-out);
+    }
+  }
+
+  &__title {
+    margin: 0;
+  }
+
+  &__date, &__categories {
+    font-size: map-get($font-size, small);
+    color: $grey;
+  }
+
+  &__excerpt {
+    color: $dark-grey;
+  }
+
+  &__continue {
+    font-size: map-get($font-size, small);
+    color: $blue;
+  }
+}

@@ -50,35 +50,35 @@
 </head>
 
 
-<body>
-  <section id="menu">
-    <header>
-      <img id="logo" src="/assets/images/logo.png" width="150" height="150" alt="Logo" />
-      <h1><span class="title-primary">{</span><span class="title-dark">aesthete</span><span class="title-primary">coding</span><span
-          class="title-dark">.io</span><span class="title-primary">}</span></h1>
+<body class="layout">
+  <section class="menu">
+    <header class="header">
+      <img class="header__logo" src="/assets/images/logo.png" width="150" height="150" alt="Logo" />
+      <h1 class="header__title"><span class="header__title_orange">{</span><span class="header__title_white">aesthete</span><span class="header__title_orange">coding</span><span
+          class="header__title_white">.io</span><span class="header__title_orange">}</span></h1>
     </header>
-    <nav>
+    <nav class="navigation">
       <div>
-        <ul style="left: 25%; position: relative;">
-          <li><a href={{ "/index.html" | relative_url }}><i class="menu-button-icon home"></i><span class="menu-button-text">Home</span></a></li>
-          <li><a href={{ "/search.html" | relative_url }}><i class="menu-button-icon search"></i><span class="menu-button-text">Search</span></a></li>
-          <li><a href={{ "/feed.xml" | relative_url }}><i class="menu-button-icon rss"></i><span class="menu-button-text">RSS</span></a></li>
-          <!--li><a href={{ "/about.html" | relative_url }}><i class="menu-button-icon user"></i><span class="menu-button-text">About
+        <ul class="navigation__links">
+          <li class="navigationItem"><a class="navigationItem__link" href={{ "/index.html" | relative_url }}><i class="navigationItem__icon navigationItem__icon_home"></i><span class="menu-button-text">Home</span></a></li>
+          <li class="navigationItem"><a class="navigationItem__link" href={{ "/search.html" | relative_url }}><i class="navigationItem__icon navigationItem__icon_search"></i><span class="menu-button-text">Search</span></a></li>
+          <li class="navigationItem"><a class="navigationItem__link" href={{ "/feed.xml" | relative_url }}><i class="navigationItem__icon navigationItem__icon_rss"></i><span class="menu-button-text">RSS</span></a></li>
+          <!--li><a href={{ "/about.html" | relative_url }}><i class="navigation__icon user"></i><span class="menu-button-text">About
                 me</span></a></li-->
         </ul>
-        <ul class="horizontal-flex-wrapper" style="font-size: 1.3rem; width: 80%; margin: auto; margin-top: 2rem;">
-          <li><a href="https://github.com/Fred-el-Jolo"><i class="menu-button-icon github"></i></a></li>
-          <li><a href="https://stackoverflow.com/users/7510546/fredg"><i class="menu-button-icon stackoverflow"></i></a></li>
-          <li><a href="https://twitter.com/fredguillaume?lang=en"><i class="menu-button-icon twitter"></i></a></li>
-          <li><a href="https://www.linkedin.com/in/fredericguillaume/"><i class="menu-button-icon linkedin"></i></a></li>
+        <ul class="navigation__social">
+          <li class="navigationItem"><a class="navigationItem__link" href="https://github.com/Fred-el-Jolo"><i class="navigationItem__icon navigationItem__icon_github"></i></a></li>
+          <li class="navigationItem"><a class="navigationItem__link" href="https://stackoverflow.com/users/7510546/fredg"><i class="navigationItem__icon navigationItem__icon_stackoverflow"></i></a></li>
+          <li class="navigationItem"><a class="navigationItem__link" href="https://twitter.com/fredguillaume?lang=en"><i class="navigationItem__icon navigationItem__icon_twitter"></i></a></li>
+          <li class="navigationItem"><a class="navigationItem__link" href="https://www.linkedin.com/in/fredericguillaume/"><i class="navigationItem__icon navigationItem__icon_linkedin"></i></a></li>
         </ul>
       </div>
     </nav>
   </section>
-  <main>
+  <main class="main">
     {%- include {{include.content}} -%}
   </main>
-  <footer>Copyrights &copy; {{ 'now' | date: "%Y" }} Fr&eacute;d&eacute;ric Guillaume. All Rights Reserved.</footer>
+  <footer class="footer">Copyrights &copy; {{ 'now' | date: "%Y" }} Fr&eacute;d&eacute;ric Guillaume. All Rights Reserved.</footer>
 </body>
 
 </html>

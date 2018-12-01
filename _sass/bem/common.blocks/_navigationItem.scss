@@ -1,0 +1,55 @@
+.navigationItem {
+  display: block;
+  width: 100%;
+  height: 45px;
+  line-height: 45px;
+
+  &__link {
+    color: $light-grey;
+
+    @include on-event {
+      color: white;
+    }
+  }
+
+  &__icon {
+    width: 30px;
+    height: 35px;
+    line-height: 35px;
+    margin-right: 15px;
+    vertical-align: middle;
+    text-align: center;
+
+    &_home {
+      @include custom-fas($fa-var-home);
+    }
+
+    &_search {
+      @include custom-fas($fa-var-search);
+    }
+
+    &_rss {
+      @include custom-fas($fa-var-rss);
+    }
+
+    &_user {
+      @include custom-fas($fa-var-user);
+    }
+
+    &_twitter {
+      @include custom-fab($fa-var-twitter);
+    }
+
+    &_github {
+      @include custom-fab($fa-var-github);
+    }
+
+    &_stackoverflow {
+      @include custom-fab($fa-var-stack-overflow);
+    }
+
+    &_linkedin {
+      @include custom-fab($fa-var-linkedin);
+    }
+  }
+}
