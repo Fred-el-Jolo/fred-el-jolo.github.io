@@ -1,9 +1,15 @@
 <article class="postDetail">
   <header class="postDetail__header">
-    <figure class="postIllustration">
-      <img class="postIllustration__image" width="140" height="140" src="{{ '/assets/images/posts/' | append: page.image | relative_url }}"
-        alt="{{ page.image-alt }}" alt="{{ page.image-alt }}">
-    </figure>
+    {% if page.image %}
+      <figure class="postIllustration">
+        <img class="postIllustration__image" width="140" height="140" src="{{ '/assets/images/posts/' | append: page.image | relative_url }}"
+          alt="{{ page.image-alt }}">
+      </figure>
+    {% else %}
+      <figure class="postIllustration">
+        <div class="postIllustration__placeHolder">&nbsp;</div>
+      </figure>
+    {% endif %}
     <div>
       <h1 class="postDetail__title">{{ page.title }}</h1>
       <div>

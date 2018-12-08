@@ -3,10 +3,18 @@
   margin-top: 0;
 
   &__image {
+    object-fit: scale-down;
+    overflow: hidden;
+  }
+
+  &__image, &__placeHolder {
     display: block;
     width: 140px;
     height: 140px;
-    object-fit: scale-down;
-    overflow: hidden;
+  }
+
+  &__placeHolder {
+    min-width: 140px;
+    min-height: 140px; 
   }
 }
