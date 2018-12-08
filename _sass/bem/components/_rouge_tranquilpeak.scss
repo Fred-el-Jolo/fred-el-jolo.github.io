@@ -1,4 +1,13 @@
-pre.highlight {
+code.highlighter-rouge {
+  padding: 2px 5px;
+  line-height: 23px;
+  margin-bottom: 30px;
+  white-space: pre;
+  word-break: inherit;
+  word-wrap: inherit;
+}
+
+pre.highlight, code.highlighter-rouge {
   overflow-x: auto;
 }
 
@@ -14,7 +23,9 @@ pre.highlight {
   margin: 0;
 }
 
-.highlight {
+.highlight, .highlighter-rouge {
+  font-feature-settings: "calt" 1;
+  font-family: $fira-code;
   color: #f8f8f2;
   background: map-get($highlight-colors, "background");
 }
