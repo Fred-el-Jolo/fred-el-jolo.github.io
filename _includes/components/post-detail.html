@@ -1,3 +1,7 @@
+{% if page.use_math %}
+  {% include components/mathjax_support.html %}
+{% endif %}
+
 <article class="postDetail">
   <header class="postDetail__header">
     {% if page.image %}
