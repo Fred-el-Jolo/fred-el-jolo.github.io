@@ -1,7 +1,20 @@
 .main {
   grid-area: content;
   display: block;
-  width: 750px;
+  width: 900px;
   margin: auto;
   margin-top: 15px;
+  padding: 0 25px;
+
+  @include media(">=wide") {
+    width: 900px;
+  }
+
+  @include media(">=tablet", "<wide") {
+    width: 700px;
+  }
+
+  @include media("<=phone") {
+    width: 320px;
+  }
 }

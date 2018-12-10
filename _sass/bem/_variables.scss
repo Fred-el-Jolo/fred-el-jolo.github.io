@@ -49,3 +49,15 @@ $headings-font-size: (
 /// Container's maximum width
 /// @type Length
 $max-width: 1180px !default;
+
+$breakpoints: (phone: 320px, tablet: 768px, desktop: 1024px,  wide: 1300px);
+
+// 1300+ : 400 / 900
+// 1024  : 300 / 700
+// 768   :  50 / 700
+// 320   : 50 top / 100 width
+
+
+
+
+
