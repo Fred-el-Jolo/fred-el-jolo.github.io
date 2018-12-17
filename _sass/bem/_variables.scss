@@ -50,12 +50,26 @@ $headings-font-size: (
 /// @type Length
 $max-width: 1180px !default;
 
-$breakpoints: (phone: 320px, tablet: 768px, desktop: 1024px,  wide: 1300px);
+$breakpoints: (phone: 320px, tablet: 768px, desktop: 940px,  wide: 1300px);
 
 // 1300+ : 400 / 900
 // 1024  : 300 / 700
 // 768   :  50 / 700
 // 320   : 50 top / 100 width
+
+
+// Reduction of font size base on small screen and down
+$font-size-base-sm-screen-reduction-factor: 0.2rem;
+// Reduction of headings font size on small screen and down
+$headings-font-size-sm-screen-reduction-factor: 0.2rem;
+// Reduction of headings font size on medium screen only
+$headings-font-size-md-screen-reduction-factor: 0.15rem;
+
+// Reduction of markdwon headings on small screen and down
+$markdown-headings-font-size-sm-screen-reduction-factor: 0.35rem;
+// Reduction of markdwon headings on medium screen only
+$markdown-headings-font-size-md-screen-reduction-factor: 0.2rem;
+
 
 
 
