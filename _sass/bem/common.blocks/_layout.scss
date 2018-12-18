@@ -1,6 +1,14 @@
 .layout {
-  display: grid;
-  grid-template-columns: 25% 1fr;
-  grid-template-rows: auto;
-  grid-template-areas: "menu content" "menu content" "menu footer";
+  
+  @include media(">=tablet") {
+    display: grid;
+    grid-template-columns: 25vw 75vw;
+    grid-template-rows: auto;
+    grid-template-areas: "menu content" "menu content" "menu footer";
+  }
+
+  @include media("<tablet") {
+    display: flex;
+    flex-direction: column;
+  }
 }

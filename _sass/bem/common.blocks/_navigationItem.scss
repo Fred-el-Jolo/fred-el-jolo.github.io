@@ -54,5 +54,9 @@
     &_linkedin {
       @include custom-fab($fa-var-linkedin);
     }
+
+    &_cross {
+      @include custom-fas($fa-var-times);
+    }
   }
 }

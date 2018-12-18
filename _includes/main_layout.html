@@ -52,15 +52,20 @@
 <body class="layout">
   <section class="menu">
     <header class="header">
+      <div class="header__menu_icon">
+        <div class="header__menu_icon__bars">&nbsp;</div>
+      </div>
       <img class="header__logo" src="/assets/images/logo.png" width="150" height="150" alt="Logo" />
       <h1 class="header__title"><span class="header__title_orange">{</span><span class="header__title_white">aesthete</span><span class="header__title_orange">coding</span><span
           class="header__title_white">.io</span><span class="header__title_orange">}</span></h1>
 
     </header>
     <nav class="navigation">
-      <div class="center">
+        <div class="navigation__menu_icon">
+          <div class="navigation__menu_icon__bars">&nbsp;</div>
+        </div>
         <ul class="navigation__links">
-          <li class="navigationItem"><a class="navigationItem__link" href={{ "/index.html" | relative_url }}><i class="navigationItem__icon navigationItem__icon_home navigationItem__icon_margin"></i><span class="menu-button-text">About me</span></a></li>
+          <li class="navigationItem"><a class="navigationItem__link" href={{ "/index.html" | relative_url }}><i class="navigationItem__icon navigationItem__icon_home navigationItem__icon_margin"></i><span class="menu-button-text">Home</span></a></li>
           <li class="navigationItem"><a class="navigationItem__link" href={{ "/search.html" | relative_url }}><i class="navigationItem__icon navigationItem__icon_search navigationItem__icon_margin"></i><span class="menu-button-text">Search</span></a></li>
           <li class="navigationItem"><a class="navigationItem__link" href={{ "/about.html" | relative_url }}><i class="navigationItem__icon navigationItem__icon_user navigationItem__icon_margin"></i><span class="menu-button-text">About me</span></a></li>
         </ul>
@@ -70,7 +75,6 @@
           <li class="navigationItem"><a class="navigationItem__link" href="https://twitter.com/fredguillaume?lang=en"><i class="navigationItem__icon navigationItem__icon_twitter"></i></a></li>
           <li class="navigationItem"><a class="navigationItem__link" href="https://www.linkedin.com/in/fredericguillaume/"><i class="navigationItem__icon navigationItem__icon_linkedin"></i></a></li>
         </ul>
-      </div>
     </nav>
   </section>
   <main class="main">

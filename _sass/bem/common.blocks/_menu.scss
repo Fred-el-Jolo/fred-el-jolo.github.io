@@ -1,22 +1,21 @@
 .menu {
   position: fixed;
-  grid-area: menu;
-  width: 25%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
   font-family: $open-sans-sans-serif;
   background-color: $brown;
   color: $light-grey;
 
-  // @include media(">=tablet", "<desktop") {
-  //   font-size: map-get($font-size, medium);
-  // }
+  @include media(">=tablet") {
+    grid-area: menu;
+    width: 25vw;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    // justify-content: center;
+  }
 
-  // @include media("<=phone") {
-  //   font-size: map-get($font-size, small);
-  // }
+  @include media("<tablet") {
+    width: 100vw;
+    height: 50px;
+  }
 }
 
