@@ -1,5 +1,5 @@
 plugins: [jekyll-paginate, jekyll-feed]
-paginate: 2
+paginate: 10
 paginate_path: /page:num/index.html
 paginate_max_buttons: 11
 markdown: kramdown
