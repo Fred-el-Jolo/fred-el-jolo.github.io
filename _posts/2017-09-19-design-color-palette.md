@@ -54,6 +54,6 @@ How to design & use a color palette
 > [Color Theory For Designers, Part 2: Understanding Concepts And Color Terminology](https://www.smashingmagazine.com/2010/02/color-theory-for-designers-part-2-understanding-concepts-and-terminology/)
 > [Color Theory for Designers: How To Create Your Own Color Schemes](https://www.smashingmagazine.com/2010/02/color-theory-for-designer-part-3-creating-your-own-color-palettes/)
 > **Cameron Chapman -** [twitter](http://www.twitter.com/cameron_chapman)
-  
-  
+
+&nbsp;  
 Icon made by [Freepik](http://www.freepik.com) from [www.flaticon.com](www.flaticon.com) and licensed by [Creative Commons BY 3.0](http://creativecommons.org/licenses/by/3.0/)
