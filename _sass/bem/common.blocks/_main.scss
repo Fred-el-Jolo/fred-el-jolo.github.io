@@ -12,5 +12,6 @@
   @include media("<tablet") {
     max-width: 95vw;
     margin-top: 50px;
+    padding: 0;
   }
 }

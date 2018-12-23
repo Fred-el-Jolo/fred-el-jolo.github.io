@@ -1,6 +1,6 @@
 .postSummary {
   border-bottom: 1px solid $dark-brown;
-    
+
   &__link {
     display: flex;
     justify-content: flex-start;
@@ -19,6 +19,12 @@
       background-color: inherit;
 
       @include transition(background-color, 0.5s, ease-out);
+    }
+
+    @include media("<tablet") {
+      display: flex;
+      text-align: center;
+      flex-direction: column;
     }
   }
 

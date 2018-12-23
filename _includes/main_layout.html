@@ -46,13 +46,15 @@
   <link rel="apple-touch-icon" sizes="167x167" href="https://aesthetecoding.io/assets/images/favicon/iPad-Pro.png">
   
   <link rel="stylesheet" href="/assets/css/main.css">
+
+
 </head>
 
 
 <body class="layout">
   <section class="menu">
     <header class="header">
-      <div class="header__menu_icon">
+      <div class="js-menu-icon header__menu_icon">
         <div class="header__menu_icon__bars">&nbsp;</div>
       </div>
       <img class="header__logo" src="/assets/images/logo.png" width="150" height="150" alt="Logo" />
@@ -60,8 +62,8 @@
           class="header__title_white">.io</span><span class="header__title_orange">}</span></h1>
 
     </header>
-    <nav class="navigation">
-        <div class="navigation__menu_icon">
+    <nav class="js-navigation navigation" data-expanded="false">
+        <div class="js-menu-icon navigation__menu_icon">
           <div class="navigation__menu_icon__bars">&nbsp;</div>
         </div>
         <ul class="navigation__links">
@@ -76,6 +78,24 @@
           <li class="navigationItem"><a class="navigationItem__link" href="https://www.linkedin.com/in/fredericguillaume/"><i class="navigationItem__icon navigationItem__icon_linkedin"></i></a></li>
         </ul>
     </nav>
+    <script>
+      const menuNodes = document.getElementsByClassName('js-menu-icon');
+      for (let menu of menuNodes) {
+        menu.onclick = menuClickHandler;
+      }
+
+      function menuClickHandler() {
+        console.log('Toggling expanded state');
+        const navigationNodes = document.getElementsByClassName('js-navigation');
+        const navigationNode = navigationNodes[0];
+
+        if (navigationNode && navigationNode.dataset) {
+          const currentSetting = navigationNode.dataset.expanded;
+          navigationNode.dataset.expanded = currentSetting == "true" ? false : true;
+          console.log(`Previous setting ${currentSetting}, new one : ${navigationNode.dataset.expanded}`);
+        }
+      }
+    </script>
   </section>
   <main class="main">
     {%- include {{include.content}} -%}

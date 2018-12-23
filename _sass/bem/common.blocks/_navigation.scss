@@ -3,9 +3,16 @@
     position: fixed;
     left: 0px;
     top: 0px;
-    background-color: $brown;
+    width: 185px;
+    background-color: $dark-brown;
     display: flex;
     flex-direction: column;
+    @include prefix(transition, all .3s, webkit ms);
+
+    &[data-expanded="false"] {
+      transform: translate(-270px);
+      @include prefix(transform, translate(-270px), webkit ms);
+    }
   }
 
   text-align: center;
@@ -15,9 +22,11 @@
 
     @include media("<tablet") {
       position: absolute;
-      left: 15px;
+      left: 0;
       display: block;
       line-height: 50px;
+      cursor: pointer;
+      padding: 0 10px 0 15px;
     }
   }
 
@@ -47,9 +56,10 @@
       align-items: center;
       margin: 0;
       padding: 0 15px 0 50px;
-      height: 50px;
+      height: 51px;
       line-height: 50px;
       order: 1;
+      border-bottom: 1px solid $white;
     }
   }
 }

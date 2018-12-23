@@ -15,9 +15,13 @@
 
     @include media("<tablet") {
       position: absolute;
-      left: 15px;
+      left: 0;
       display: block;
       line-height: 50px;
+      padding-left: 15px;
+      background-color: $dark-brown;
+      padding-right: 10px;
+      cursor: pointer;
     }
   }
 
@@ -49,7 +53,5 @@
       margin: 0;
       line-height: 50px;
     }
-
-
   }
 }

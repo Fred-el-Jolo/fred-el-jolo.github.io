@@ -2,6 +2,10 @@
   margin-left: 0;
   margin-top: 0;
 
+  @include media("<tablet") {
+    margin-right: 0;
+  }
+
   &__image {
     object-fit: scale-down;
     overflow: hidden;
