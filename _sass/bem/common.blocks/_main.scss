@@ -6,11 +6,11 @@
 
   @include media(">=tablet") {
     grid-area: content;
-    max-width: 65vw;
+    width: 65vw;
   }
 
   @include media("<tablet") {
-    max-width: 95vw;
+    width: 95vw;
     margin-top: 50px;
     padding: 0;
   }
