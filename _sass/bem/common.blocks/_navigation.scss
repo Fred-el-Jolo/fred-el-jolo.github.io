@@ -40,8 +40,6 @@
     text-align: left;
 
     @include media("<tablet") {
-      // border-bottom: 1px solid $white; 
-      padding: 0 15px;
       margin-bottom: 0;
       order: 2;
     }

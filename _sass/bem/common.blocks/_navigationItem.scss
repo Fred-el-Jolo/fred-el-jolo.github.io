@@ -4,11 +4,21 @@
   height: 45px;
   line-height: 45px;
 
+  @include media("<tablet") {
+    @include on-event {
+      background-color: $dark-grey;
+    }
+  }
+
   &__link {
     color: $light-grey;
 
     @include on-event {
       color: white;
+
+      @include media("<tablet") {
+        text-decoration: none;
+      }
     }
   }
 
@@ -58,5 +68,11 @@
     &_cross {
       @include custom-fas($fa-var-times);
     }
+  }
+}
+
+.navigation__links .navigationItem {
+  @include media("<tablet") {
+    padding: 0 15px;
   }
 }
