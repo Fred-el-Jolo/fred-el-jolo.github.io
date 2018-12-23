@@ -8,12 +8,11 @@
     From Amsterdam, Netherlands
 
 /* SITE */
-    Last update: 2018/01/05
+    Last update: 2018/12/23
     HTML5, CSS3
     Sass
-    Sass boilerplate    (https://github.com/HugoGiraudel/sass-boilerplate)
     Include media       (https://include-media.com/)
     Font Awesome        (http://fontawesome.io/)
-    iconscout           (https://iconscout.com/)
-
-    Edited with Sublime Text
+    Jekyll & Github pages
+    
+    Edited with Visual Studio Code
