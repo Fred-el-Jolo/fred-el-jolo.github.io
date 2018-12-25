@@ -46,8 +46,11 @@ Develop counter-examples hunting skill:
 
 Correctness: induction & recursion
 - Induction: 
-  + Prove a formula, for example $$\sum_{i=1}^n = n(n+1)/2$$ work for basis cases (like 1 or 2)
-
+  + Prove a formula, for example $$\sum_{i=1}^n = \frac{ n(n+1) }{2}$$ work for basis cases (like 1 or 2)
+  + Assume it was true up to $$n-1$$
+  + Prove is was true to general $$n$$ using the assumption
+  
+  
 
 
 
