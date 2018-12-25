@@ -49,8 +49,16 @@ Correctness: induction & recursion
   + Prove a formula, for example $$\sum_{i=1}^n = \frac{ n(n+1) }{2}$$ work for basis cases (like 1 or 2)
   + Assume it was true up to $$n-1$$
   + Prove is was true to general $$n$$ using the assumption
-  
-  
+- Recursion is induction
+  + General & boundary conditions, with the general condition breaking the problem into smaller and smaller pieces
+
+Have to be suspicious about induction.
+- Boundary errors
+- Wrong extension claims (for example, adding an item that completely changes the solution of a problem)
+
+e.g. Prove that $$\sum_{i=1}^n i * i! = (n=1)!-1$$ by induction
+
+
 
 
 
