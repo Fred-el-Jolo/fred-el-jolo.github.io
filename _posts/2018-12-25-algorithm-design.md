@@ -16,7 +16,7 @@ Reading notes from "The Algorithm Design manual" book written by Steven S. Skien
 1. TOC
 {:toc}
 
-## Proof
+## Definitions
 
 Proper mathematical proof:
 1. Clear & precise statement of what you are trying to prove
@@ -44,7 +44,9 @@ Develop counter-examples hunting skill:
 - Go for a tie
 - Seek extremes
 
-
+Correctness: induction & recursion
+- Induction: 
+  + Prove a formula, for example $$\sum_{i=1}^n = n(n+1)/2$$ work for basis cases (like 1 or 2)
 
 
 
