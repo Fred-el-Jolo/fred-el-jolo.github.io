@@ -56,8 +56,17 @@ Have to be suspicious about induction.
 - Boundary errors
 - Wrong extension claims (for example, adding an item that completely changes the solution of a problem)
 
-e.g. Prove that $$\sum_{i=1}^n i * i! = (n=1)!-1$$ by induction
+e.g. Prove that $$\sum_{i=1}^n i \times i! = (n+1)!-1$$ by induction
 
+1. $$n=1$$
+\begin{align}
+    \sum_{i=1}^n i \times i! &= 1 \times 1 \\\
+    &= 1
+\end{align}
+\begin{align}
+    (n+1)!-1 &= 2! - 1 \\\
+    &= 1
+\end{align}
 
 
 
