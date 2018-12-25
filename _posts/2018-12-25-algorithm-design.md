@@ -59,14 +59,17 @@ Have to be suspicious about induction.
 e.g. Prove that $$\sum_{i=1}^n i \times i! = (n+1)!-1$$ by induction
 
 1. $$n=1$$
-\begin{align}
+\begin{align\*}
     \sum_{i=1}^n i \times i! &= 1 \times 1 \\\
     &= 1
-\end{align}
-\begin{align}
+\end{align\*}
+&nbsp;  
+\begin{align\*}
     (n+1)!-1 &= 2! - 1 \\\
     &= 1
-\end{align}
+\end{align\*}
+
+2. Assume the statement is true up to $$n$$. Prove that it is also true for $$n+1$$
 
 
 
