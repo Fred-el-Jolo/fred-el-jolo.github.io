@@ -70,7 +70,14 @@ e.g. Prove that $$\sum_{i=1}^n i \times i! = (n+1)!-1$$ by induction
 \end{align\*}
 
 2. Assume the statement is true up to $$n$$. Prove that it is also true for $$n+1$$
-
+\begin{align\*}
+    \sum_{i=1}^{n+1} i \times i! &= (n+1) \times (n+1)! + \sum_{i=1}^n i \times i! \\\
+    &= (n+1) \times (n+1)! + (n+1)!-1 \\\
+    &= (n+1)! \times ( (n+1) + 1 ) -1 \\\
+    &= (n+1)! \times ( n+2 ) -1 \\\
+    &= (n+2)! -1
+    &\qedsymbol
+\end{align\*}
 
 
 
