@@ -76,7 +76,7 @@ e.g. Prove that $$\sum_{i=1}^n i \times i! = (n+1)!-1$$ by induction
     &= (n+1)! \times ( (n+1) + 1 ) -1 \\\
     &= (n+1)! \times ( n+2 ) -1 \\\
     &= (n+2)! -1
-    &\qedsymbol
+    &\square
 \end{align\*}
 
 
