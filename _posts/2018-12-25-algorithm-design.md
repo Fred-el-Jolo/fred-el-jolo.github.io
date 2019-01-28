@@ -85,3 +85,4 @@ Try to describe the problem abstractly, in terms of procedures on fundamental st
 #### Combinatorial objects
 ##### Permutations
 Arrangements, ordering of items. $${1,4,3,2}$$ and $${4,3,2,1}$$ are two distinct permutations of the same set of four integers.
+Likely to be used when talking about "*arrangement*", "*tour*", "*ordering*" or "*sequence*"
