@@ -118,3 +118,14 @@ Likely to be used when talking about "*shapes*", "*regions*", "*configurations*"
 ##### Strings
 Represent sequences of characters or patterns.
 Likely to be used when talking about "*text*", "*characters*", "*patterns*", or "*labels*".
+
+**Modeling your application in terms of well-defined structures and algorithms is the most important single step toward a solution.**
+Be aware that the act of modeling reduces your application to one of a small number of existing problems and structures.
+
+#### Recursive objects
+Big things made from smaller things of exactly the same type as the big thing.
+
+Combinatorial objects are also recursive.
+
+Recursive descriptions of objects require both decomposition rules and basis cases.
+
