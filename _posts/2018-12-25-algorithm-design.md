@@ -93,7 +93,7 @@ Likely to be used when talking about "*cluster*", "*collection*", "*committee*",
 
 ##### Trees
 Represent hierarchical relationships between items.
-![Tree structure](/2018-12-25-algorithm-design/tree.png "Tree structure")
+![Tree structure]({{ site.url }}/assets/images/posts/2018-12-25-algorithm-design/tree.png "Tree structure")
 Likely to be used when talking about "*hierarchy*", "*dominance*", "*relationship*", "*ancestor/descendant relationship*" or "*taxonomy*".
 
 ##### Graphs
