@@ -94,17 +94,27 @@ Likely to be used when talking about "*cluster*", "*collection*", "*committee*",
 ##### Trees
 Represent hierarchical relationships between items.
 
-![Tree structure]({{ site.url }}/assets/images/posts/2018-12-25-algorithm-design/tree.png "Tree structure")
+![Tree structure example]({{ site.url }}/assets/images/posts/2018-12-25-algorithm-design/tree.png "Tree structure")
 
 Likely to be used when talking about "*hierarchy*", "*dominance*", "*relationship*", "*ancestor/descendant relationship*" or "*taxonomy*".
 
 ##### Graphs
 Represent relationships between arbitrary pair of objects.
 
+![Graph structure example]({{ site.url }}/assets/images/posts/2018-12-25-algorithm-design/graph.gif "Graph structure")
+
+Points are called *vertices* and links *edges*.
+
+Likely to be used when talking about "*network*", "*circuit*", "*web*", or "*relationship*".
+
 ##### Points
+Represent location in some geometric space.
+Likely to be used when talking about "*sites*", "*positions*", "*data records*", or "*locations*".
 
-
-##### Polygons
-
+##### Polygons / polyhedron
+Represent regions in some geometric space.
+Likely to be used when talking about "*shapes*", "*regions*", "*configurations*", or "*boundaries*".
 
 ##### Strings
+Represent sequences of characters or patterns.
+Likely to be used when talking about "*text*", "*characters*", "*patterns*", or "*labels*".
