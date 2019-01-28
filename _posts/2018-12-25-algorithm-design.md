@@ -85,4 +85,23 @@ Try to describe the problem abstractly, in terms of procedures on fundamental st
 #### Combinatorial objects
 ##### Permutations
 Arrangements, ordering of items. $$\left\{1,4,3,2\right\}$$ and $$\left\{4,3,2,1\right\}$$ are two distinct permutations of the same set of four integers.
-Likely to be used when talking about "*arrangement*", "*tour*", "*ordering*" or "*sequence*"
+Likely to be used when talking about "*arrangement*", "*tour*", "*ordering*" or "*sequence*".
+
+##### Subsets
+Selection from a set of items. $$\left\{1,4,3\right\}$$ and $$\left\{2\right\}$$ are two subsets of the first four integers. Order does not matter in subsets, so the subsets $$\left\{1,4,3\right\}$$ and $$\left\{4,3,1\right\}$$ would be considered identical.
+Likely to be used when talking about "*cluster*", "*collection*", "*committee*", "*group*", "*packaging*" or "*selection*".
+
+##### Trees
+Represent hierarchical relationships between items.
+Likely to be used when talking about "*hierarchy*", "*dominance*", "*relationship*", "*ancestor/descendant relationship*" or "*taxonomy*".
+
+##### Graphs
+Represent relationships between arbitrary pair of objects.
+
+##### Points
+
+
+##### Polygons
+
+
+##### Strings
