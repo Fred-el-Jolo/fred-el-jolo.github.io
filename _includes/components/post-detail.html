@@ -1,33 +1,38 @@
-{% if page.use_math %}
-  {% include components/mathjax_support.html %}
-{% endif %}
+{%- if page.use_math -%}
+  {%- include components/mathjax_support.html -%}
+{%- endif -%}
 
 <article class="postDetail">
   <header class="postDetail__header">
-    {% if page.image %}
-      <figure class="postIllustration">
-        <img class="postIllustration__image" width="140" height="140" src="{{ '/assets/images/posts/' | append: page.image | relative_url }}"
-          alt="{{ page.image-alt }}">
-      </figure>
-    {% else %}
-      <figure class="postIllustration">
-        <div class="postIllustration__placeHolder">&nbsp;</div>
-      </figure>
-    {% endif %}
+    {%- if page.image -%}
+    <figure class="postIllustration">
+      <img
+        class="postIllustration__image"
+        width="140"
+        height="140"
+        src="{{
+          '/assets/images/posts/thumbnails/' | append: page.image | relative_url
+        }}"
+        alt="{{ page.image - alt }}"
+      />
+    </figure>
+    {%- else -%}
+    <figure class="postIllustration">
+      <div class="postIllustration__placeHolder">&nbsp;</div>
+    </figure>
+    {%- endif -%}
     <div>
       <h1 class="postDetail__title">{{ page.title }}</h1>
       <div>
         <span class="postDetail__date">
-          {% assign day = page.date | date: "%-d"  %}
-          {% case day %}
-            {% when '1' or '21' or '31' %}{{ day }}st
-            {% when '2' or '22' %}{{ day }}nd
-            {% when '3' or '23' %}{{ day }}rd
-            {% else %}{{ day }}th
-          {% endcase %}
+          {%- assign day = page.date | date: "%-d" -%} {%- case day -%} {%-when
+          '1' or '21' or '31'-%}{{ day }}st {%-when '2' or '22'-%}{{ day }}nd
+          {%-when '3' or '23'-%}{{ day }}rd {%-else-%}{{ day }}th {%-endcase-%}
           {{ page.date | date: "of %B, %Y" }}
         </span>
-        <span class="postDetail__categories"> in {{ page.categories | join: ', ' }}</span>
+        <span class="postDetail__categories">
+          in {{ page.categories | join: ", " }}</span
+        >
       </div>
     </div>
   </header>

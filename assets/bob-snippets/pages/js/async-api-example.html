@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="x-ua-compatible" content="ie=edge" />
+        <title>JavaScript Runner: Async/await API example</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link href="../../css/codemirror-5-31-0.css" rel="stylesheet" />
+        <link href="../../css/editor-js.css" rel="stylesheet" />
+        
+    </head>
+    <body>
+        <section id="static">
+            <pre>
+<code id="static-js">const asyncExec = (callback, data) => {
+  setTimeout(() => callback(null, data), 0);
+};
+const api = {
+  getUser: (login, callback) => asyncExec(callback, `Hi ${login}, you are logged in.`),
+  getGeoLocation: (user, callback) => asyncExec(callback, `${user} You live in Nice.`),
+  getWeather: (location, callback) => asyncExec(callback, `${location} It is sunny.`),
+  notifyWeather: (data, callback) => asyncExec(callback, `Notified: ${data}`),
+}
+
+const promisify = (fn) => {return (data) => {return new Promise(function(resolve, reject) {setTimeout(() => {fn(data, function(err, data) {if (err) {reject(err)}resolve(data);})}, 0);});};};
+
+async function asyncFlow() {
+  const user = await promisify(api.getUser)('fred');
+  const location = await promisify(api.getGeoLocation)(user);
+  const weather = await promisify(api.getWeather)(location);
+  const notifiedData = await promisify(api.notifyWeather)(weather);
+  
+  console.log(user);
+  console.log(location);
+  console.log(weather);
+  console.log(notifiedData);
+}
+
+asyncFlow();</code>
+</pre>
+
+        </section>
+
+        <section id="live" class="live hidden">
+            <header><h4>JavaScript Runner: Async/await API example</h4></header>
+            <div id="editor" class="editor"></div>
+
+            <div class="output-container">
+                <div class="buttons-container">
+                    <button id="execute" class="button run" type="button">
+                        Run &rsaquo;
+                    </button>
+                    <button id="reset" type="button" class="button">
+                        Reset
+                    </button>
+                </div>
+                <div id="console" class="output"><code></code></div>
+            </div>
+        </section>
+
+        
+
+        <script src="../../js/codemirror-5-31-0.js"></script>
+        <script src="../../js/editor-js.js"></script>
+    </body>
+</html>
