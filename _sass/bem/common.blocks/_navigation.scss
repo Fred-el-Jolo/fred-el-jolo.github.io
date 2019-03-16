@@ -1,12 +1,15 @@
 .navigation {
+  flex-grow: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
   @include media("<tablet") {
     position: fixed;
     left: 0px;
     top: 0px;
     width: 185px;
     background-color: $dark-brown;
-    display: flex;
-    flex-direction: column;
     @include prefix(transition, all .3s, webkit ms);
 
     &[data-expanded="false"] {
@@ -14,8 +17,6 @@
       @include prefix(transform, translate(-270px), webkit ms);
     }
   }
-
-  text-align: center;
 
   &__menu_icon {
     display: none;
@@ -49,6 +50,9 @@
     display: flex;
     padding-left: 0;
     font-size: 1.3rem;
+    width: 25vw;
+    justify-content: space-evenly;
+    margin-top: auto;
 
     @include media("<tablet") {
       align-items: center;
