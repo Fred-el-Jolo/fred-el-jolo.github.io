@@ -1,6 +1,6 @@
 .About {
   display: flex;
-  @include media("<tablet") {
+  @include media("<desktop") {
     flex-direction: column-reverse;
     align-items: center;
   }
@@ -11,24 +11,24 @@
 
   &-photo {
     margin: 1rem;
-    @include media("<desktop") {
-      background: url("/assets/images/fred-03.jpg") no-repeat top/contain;
+    @include media("<tablet") {
+      background: url("/assets/images/fred-07.jpg") no-repeat top/contain;
     }
 
-    @include media(">=desktop") {
-      background: url("/assets/images/fred-05.jpg") no-repeat top/contain;
+    @include media(">=tablet") {
+      background: url("/assets/images/fred-06.jpg") no-repeat top/contain;
     }
   }
 
   &-placeholder {
-    @include media("<desktop") {
+    @include media("<tablet") {
       width: 125px;
-      height: 187px;
+      height: 163px;
     }
 
-    @include media(">=desktop") {
+    @include media(">=tablet") {
       width: 250px;
-      height: 374px;
+      height: 284px;
     }
   }
 }
