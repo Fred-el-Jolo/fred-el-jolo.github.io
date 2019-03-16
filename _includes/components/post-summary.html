@@ -28,7 +28,7 @@
             day
           }}nd {%- when '3' or '23'-%}{{ day }}rd {%- else-%}{{ day }}th {%-
           endcase-%}
-          {{ include.post.date | date: "of %B, %Y" }}
+          {{ include.post.date | date: " of %B, %Y" }}
         </span>
         <span class="postSummary__categories">
           in {{ include.post.categories | join: ", " }}</span
