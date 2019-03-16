@@ -1,0 +1,34 @@
+.About {
+  display: flex;
+  @include media("<tablet") {
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+
+  &-text {
+    margin: 1rem;
+  }
+
+  &-photo {
+    margin: 1rem;
+    @include media("<desktop") {
+      background: url("/assets/images/fred-03.jpg") no-repeat top/contain;
+    }
+
+    @include media(">=desktop") {
+      background: url("/assets/images/fred-05.jpg") no-repeat top/contain;
+    }
+  }
+
+  &-placeholder {
+    @include media("<desktop") {
+      width: 125px;
+      height: 187px;
+    }
+
+    @include media(">=desktop") {
+      width: 250px;
+      height: 374px;
+    }
+  }
+}
