@@ -40,7 +40,10 @@ body {
   font-size: map-get($font-size, base);
   line-height: $line-height-base;
   letter-spacing: $letter-spacing-base;
-
+  
+  overflow-wrap: break-word;
+  word-wrap:break-word;
+  
   // Improve smoothing of the font by adding subpixel in Safari
   @include prefix(font-smoothing, subpixel-antialiased, "webkit");
 }
