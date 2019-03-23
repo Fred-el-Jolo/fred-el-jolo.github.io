@@ -32,15 +32,7 @@
     <link rel="stylesheet" href="/assets/revealjs/lib/css/zenburn.css" />
 
     <!-- Printing and PDF exports -->
-    <script>
-      var link = document.createElement("link");
-      link.rel = "stylesheet";
-      link.type = "text/css";
-      link.href = window.location.search.match(/print-pdf/gi)
-        ? "/assets/revealjs/css/print/pdf.css"
-        : "/assets/revealjs/css/print/paper.css";
-      document.getElementsByTagName("head")[0].appendChild(link);
-    </script>
+    <script src="/assets/revealjs/js/pdf-printing.js"></script>
   </head>
 
   <body>
@@ -49,34 +41,6 @@
 
     <script src="/assets/revealjs/lib/js/head.min.js"></script>
     <script src="/assets/revealjs/js/reveal.js"></script>
-
-      <script>
-        // More info about config & dependencies:
-        // - https://github.com/hakimel/reveal.js#configuration
-        // - https://github.com/hakimel/reveal.js#dependencies
-
-        // Shows the slide number using default formatting
-        Reveal.configure({ slideNumber: true });
-
-        Reveal.initialize({
-          dependencies: [
-            {
-              src: "/assets/revealjs/plugin/highlight/highlight.js",
-              async: true,
-              callback: function () {
-                hljs.initHighlightingOnLoad();
-              }
-            },
-            { src: "/assets/revealjs/plugin/notes/notes.js", async: true },
-            {
-              src: "/assets/revealjs/plugin/highlight/highlight.js",
-              async: true,
-              callback: function () {
-                hljs.initHighlightingOnLoad();
-              }
-            }
-          ]
-        });
-      </script>
+    <script src="/assets/revealjs/js/reveal-configuration.js"></script>
   </body>
 </html>
