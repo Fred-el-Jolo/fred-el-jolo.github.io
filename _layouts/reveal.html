@@ -6,7 +6,9 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
-
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self'">
+    <meta name="referrer" content="no-referrer">
+    
     {% assign joinedTags = page.tags | join: ", " %}
 
     {%- include components/html-header-meta.html
