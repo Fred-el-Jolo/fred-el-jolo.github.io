@@ -47,22 +47,7 @@
           <li class="navigationItem"><a class="navigationItem__link" href="https://www.linkedin.com/in/fredericguillaume/"><i class="navigationItem__icon navigationItem__icon_linkedin"></i></a></li>
         </ul>
     </nav>
-    <script>
-      const menuNodes = document.getElementsByClassName('js-menu-icon');
-      for (let menu of menuNodes) {
-        menu.onclick = menuClickHandler;
-      }
-
-      function menuClickHandler() {
-        const navigationNodes = document.getElementsByClassName('js-navigation');
-        const navigationNode = navigationNodes[0];
-
-        if (navigationNode && navigationNode.dataset) {
-          const currentSetting = navigationNode.dataset.expanded;
-          navigationNode.dataset.expanded = currentSetting == "true" ? false : true;
-        }
-      }
-    </script>
+    <script src="/assets/js/navigation.js"></script>
   </section>
   <main class="main">
     {%- include {{include.content}} -%}
