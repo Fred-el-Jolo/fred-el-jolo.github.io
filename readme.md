@@ -1,3 +1,3 @@
 # aesthetecoding.io
 
-Css design for the https://aesthetecoding.io/ website.
+Static blogging website : https://aesthetecoding.io/ website.
