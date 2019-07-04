@@ -16,11 +16,11 @@
 			{%- assign computedIndex = paginator.total_pages | minus: site.paginate_max_buttons | plus: page  -%}
 		{%- endif -%}
 		{%- if computedIndex == paginator.page -%}
-			<span class="pagination__block pagination__block_current" aria-label="Current and last Page, page {{ computedIndex }}">{{ computedIndex }}</span>
+			<span class="pagination__block pagination__block_current" aria-label="Current page, page {{ computedIndex }}">{{ computedIndex }}</span>
 		{%- elsif computedIndex == 1 -%}
-			<a class="pagination__block pagination__link" aria-label="Current and first page" href="{{ site.url }}">{{ computedIndex }}</a>
+			<a class="pagination__block pagination__link" aria-label="First page" href="{{ site.url }}">{{ computedIndex }}</a>
 		{%- elsif computedIndex > 1 and computedIndex <= paginator.total_pages -%}
-			<a class="pagination__block pagination__link" aria-label="Current page {{ computedIndex }}" href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', computedIndex }}">{{ computedIndex }}</a>
+			<a class="pagination__block pagination__link" aria-label="Page {{ computedIndex }}" href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', computedIndex }}">{{ computedIndex }}</a>
 		{%- endif -%}
 	{%- endfor -%}
 	{%- if paginator.next_page -%}
