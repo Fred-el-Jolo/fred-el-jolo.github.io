@@ -28,7 +28,7 @@
       @include transition(all, 0.2s, ease-out);
     }
     
-    &:not(:hover), &:not(:focus) {
+    &:not(:hover, :focus) {
       background-color: inherit;
 
       @include transition(all, 0.2s, ease-out);
