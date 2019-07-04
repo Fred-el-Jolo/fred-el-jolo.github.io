@@ -4,11 +4,20 @@
   line-height: 45px;
 
   &:hover, &:focus {
-    text-decoration: none;
     background-color: $orange;
-    color: $brown;
     
     @include transition(all, 0.2s, ease-out);
+  }
+  
+  &:not(:hover, :focus) {
+    background-color: inherit;
+
+    @include transition(all, 0.2s, ease-out);
+  }
+  
+  &:hover *, &:focus * {
+    text-decoration: none;
+    color: $brown;
   }
   
   @include media("<tablet") {
