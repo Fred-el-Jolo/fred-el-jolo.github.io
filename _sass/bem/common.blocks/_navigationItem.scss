@@ -2,6 +2,7 @@
   display: block;
   height: 45px;
   line-height: 45px;
+  padding: 0 15px;
 
   &:hover, &:focus {
     background-color: $orange;
@@ -20,15 +21,18 @@
     color: $brown;
   }
   
+  /*
   @include media("<tablet") {
     @include on-event {
       background-color: $dark-grey;
     }
   }
+  */
 
   &__link {
     color: $light-grey;
 
+    /*
     @include on-event {
       color: white;
 
@@ -36,6 +40,7 @@
         text-decoration: none;
       }
     }
+    */
   }
 
   &__icon {
@@ -87,8 +92,10 @@
   }
 }
 
+/*
 .navigation__links .navigationItem {
   @include media("<tablet") {
     padding: 0 15px;
   }
 }
+*/
