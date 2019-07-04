@@ -1,5 +1,5 @@
 {%- if paginator.total_pages > 1 -%}
-<nav class="pagination" role="navigation" aria-label="Pagination navigation">
+<nav class="pagination" aria-label="Pagination navigation">
 	{%- if paginator.previous_page -%}
 		<a class="pagination__block pagination__link" aria-label="First page" href="{{ site.url }}"><i aria-hidden="true" class="pagination__first"></i></a><a class="pagination__block pagination__link" aria-label="Previous page" href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}"><i aria-hidden="true" class="pagination__previous"></i></a>
 	{%- else -%}
@@ -28,5 +28,5 @@
 	{%- else -%}
 		<i aria-hidden="true" class="pagination__block pagination__next"></i><i aria-hidden="true" class="pagination__block pagination__last"></i>
 	{%- endif -%}
-</div>
+</nav>
 {%- endif -%}
