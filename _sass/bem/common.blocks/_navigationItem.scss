@@ -2,7 +2,6 @@
   display: block;
   height: 45px;
   line-height: 45px;
-  padding: 0 15px;
 
   &:hover, &:focus {
     background-color: $orange;
@@ -92,10 +91,7 @@
   }
 }
 
-/*
 .navigation__links .navigationItem {
-  @include media("<tablet") {
-    padding: 0 15px;
-  }
+  padding: 0 15px;
 }
-*/
+
