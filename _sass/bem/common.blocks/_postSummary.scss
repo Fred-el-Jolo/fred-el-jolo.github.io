@@ -15,10 +15,6 @@
 
       @include transition(all, 0.2s, ease-out);
     }
-    
-    &:hover * {
-      color: $white;
-    }
 
     &:focus {
       text-decoration: none;
@@ -26,6 +22,10 @@
       color: $white;
 
       @include transition(all, 0.2s, ease-out);
+    }
+        
+    &:hover *, &:focus * {
+      color: $white;
     }
     
     &:not(:hover, :focus) {
@@ -41,7 +41,7 @@
     }
   }
 
-  &__link:hover &__continue, &__link:focus &__continue {
+  &__link:hover &__continue {
     color: $orange;
   }
   
