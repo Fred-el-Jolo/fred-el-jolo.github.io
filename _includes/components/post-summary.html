@@ -1,7 +1,7 @@
-<article class="postSummary" tabindex="-1">
-  <a class="postSummary__link" href="{{ include.post.url }}" tabindex="0">
+<article class="postSummary">
+  <a class="postSummary__link" href="{{ include.post.url }}">
     {%- if include.post.image-%}
-    <figure class="postIllustration" tabindex="-1">
+    <figure class="postIllustration">
       <img
         class="postIllustration__image"
         width="140"
@@ -12,18 +12,17 @@
             | relative_url
         }}"
         alt=""
-        tabindex="-1"
       />
     </figure>
     {%- else-%}
-    <figure class="postIllustration" tabindex="-1">
+    <figure class="postIllustration">
       <div class="postIllustration__placeHolder">&nbsp;</div>
     </figure>
     {%- endif-%}
     <div>
-      <h2 class="postSummary__title" tabindex="-1">{{ include.post.title }}</h2>
+      <h2 class="postSummary__title">{{ include.post.title }}</h2>
       <div>
-        <span class="postSummary__date" tabindex="-1">
+        <span class="postSummary__date">
           {%- assign day = include.post.date | date: "%-d" -%} {%- case day-%}
           {%- when '1' or '21' or '31'-%}{{ day }}st {%- when '2' or '22'-%}{{
             day
@@ -31,11 +30,11 @@
           endcase-%}
           {{ include.post.date | date: " of %B, %Y" }}
         </span>
-        <span class="postSummary__categories" tabindex="-1">
+        <span class="postSummary__categories">
           in {{ include.post.categories | join: ", " }}</span
         >
       </div>
-      <div class="postSummary__excerpt" tabindex="-1">{{ include.post.excerpt }}</div>
+      <div class="postSummary__excerpt">{{ include.post.excerpt }}</div>
     </div>
   </a>
 </article>
