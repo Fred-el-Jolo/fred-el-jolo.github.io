@@ -1,9 +1,9 @@
 {%- if paginator.total_pages > 1 -%}
-<div class="pagination">
+<nav class="pagination" role="navigation" aria-label="Pagination navigation">
 	{%- if paginator.previous_page -%}
-		<a class="pagination__block pagination__link" href="{{ site.url }}"><i class="pagination__first"></i></a><a class="pagination__block pagination__link" href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}"><i class="pagination__previous"></i></a>
+		<a class="pagination__block pagination__link" aria-label="First page" href="{{ site.url }}"><i aria-hidden="true" class="pagination__first"></i></a><a class="pagination__block pagination__link" aria-label="Previous page" href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}"><i aria-hidden="true" class="pagination__previous"></i></a>
 	{%- else -%}
-		<i class="pagination__block pagination__first"></i><i class="pagination__block pagination__previous"></i>
+		<i aria-hidden="true" class="pagination__block pagination__first"></i><i aria-hidden="true" class="pagination__block pagination__previous"></i>
 	{%- endif -%}
 	{%- for page in (1..site.paginate_max_buttons) -%}
 		{%- assign computedIndex = 0 | minus: site.paginate_max_buttons | divided_by: 2.0 | floor | plus: paginator.page | plus: page  -%}
@@ -16,17 +16,17 @@
 			{%- assign computedIndex = paginator.total_pages | minus: site.paginate_max_buttons | plus: page  -%}
 		{%- endif -%}
 		{%- if computedIndex == paginator.page -%}
-			<span class="pagination__block pagination__block_current ">{{ computedIndex }}</span>
+			<span class="pagination__block pagination__block_current" aria-label="Current and last Page, page {{ computedIndex }}">{{ computedIndex }}</span>
 		{%- elsif computedIndex == 1 -%}
-			<a class="pagination__block pagination__link" href="{{ site.url }}">{{ computedIndex }}</a>
+			<a class="pagination__block pagination__link" aria-label="Current and first page" href="{{ site.url }}">{{ computedIndex }}</a>
 		{%- elsif computedIndex > 1 and computedIndex <= paginator.total_pages -%}
-			<a class="pagination__block pagination__link" href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', computedIndex }}">{{ computedIndex }}</a>
+			<a class="pagination__block pagination__link" aria-label="Current page {{ computedIndex }}" href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', computedIndex }}">{{ computedIndex }}</a>
 		{%- endif -%}
 	{%- endfor -%}
 	{%- if paginator.next_page -%}
-		<a class="pagination__block pagination__link" href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}"><i class="pagination__next"></i></a><a class="pagination__block pagination__link" href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', paginator.total_pages }}"><i class="pagination__last"></i></a>
+		<a class="pagination__block pagination__link" aria-label="Next page" href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}"><i aria-hidden="true" class="pagination__next"></i></a><a class="pagination__block pagination__link" aria-label="Last page" href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', paginator.total_pages }}"><i aria-hidden="true" class="pagination__last"></i></a>
 	{%- else -%}
-		<i class="pagination__block pagination__next"></i><i class="pagination__block pagination__last"></i>
+		<i aria-hidden="true" class="pagination__block pagination__next"></i><i aria-hidden="true" class="pagination__block pagination__last"></i>
 	{%- endif -%}
 </div>
 {%- endif -%}
