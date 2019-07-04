@@ -10,9 +10,14 @@
 
     &:hover {
       text-decoration: none;
-      background-color: $cream;
+      background-color: $brown;
+      color: $white;
 
       @include transition(background-color, 0.5s, ease-out);
+    }
+    
+    &:hover > &__continue {
+      color: $orange;
     }
 
     &:not(:hover) {
