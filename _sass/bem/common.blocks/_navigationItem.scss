@@ -3,6 +3,14 @@
   height: 45px;
   line-height: 45px;
 
+  &:hover, &:focus {
+    text-decoration: none;
+    background-color: $orange;
+    color: $brown;
+    
+    @include transition(all, 0.2s, ease-out);
+  }
+  
   @include media("<tablet") {
     @include on-event {
       background-color: $dark-grey;
