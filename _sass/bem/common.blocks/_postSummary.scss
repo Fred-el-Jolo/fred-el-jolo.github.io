@@ -13,7 +13,7 @@
       background-color: $brown;
       color: $white;
 
-      @include transition(background-color, 0.5s, ease-out);
+      @include transition(all, 0.5s, ease-out);
     }
     
     &:hover * {
@@ -23,7 +23,7 @@
     &:not(:hover) {
       background-color: inherit;
 
-      @include transition(background-color, 0.5s, ease-out);
+      @include transition(all, 0.5s, ease-out);
     }
 
     @include media("<tablet") {
