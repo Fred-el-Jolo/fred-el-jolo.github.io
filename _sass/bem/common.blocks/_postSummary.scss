@@ -16,8 +16,12 @@
       @include transition(background-color, 0.5s, ease-out);
     }
     
-    &:hover > * {
+    &:hover * {
       color: $white;
+    }
+    
+    &:hover &__continue {
+      color: $orange;
     }
 
     &:not(:hover) {
