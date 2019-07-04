@@ -1,7 +1,7 @@
-<article class="postSummary">
-  <a class="postSummary__link" href="{{ include.post.url }}">
+<article class="postSummary" tabindex="-1">
+  <a class="postSummary__link" href="{{ include.post.url }}" tabindex="0">
     {%- if include.post.image-%}
-    <figure class="postIllustration">
+    <figure class="postIllustration" tabindex="-1">
       <img
         class="postIllustration__image"
         width="140"
@@ -15,12 +15,12 @@
       />
     </figure>
     {%- else-%}
-    <figure class="postIllustration">
+    <figure class="postIllustration" tabindex="-1">
       <div class="postIllustration__placeHolder">&nbsp;</div>
     </figure>
     {%- endif-%}
     <div>
-      <h2 class="postSummary__title">{{ include.post.title }}</h2>
+      <h2 class="postSummary__title" tabindex="-1">{{ include.post.title }}</h2>
       <div>
         <span class="postSummary__date">
           {%- assign day = include.post.date | date: "%-d" -%} {%- case day-%}
