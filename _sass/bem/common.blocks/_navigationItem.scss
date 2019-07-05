@@ -75,8 +75,14 @@
 }
 
 .navigation__social .navigationItem {
-  padding: 0 15px;
+  padding: 0;
+  width: 25%;
+  display: flex;
+  justify-content: center;
+  
+  /*
   @include media("<tablet") {
     padding: 0;
   }
+  */
 }
