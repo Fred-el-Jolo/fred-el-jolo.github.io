@@ -9,7 +9,6 @@ categories:     [guide]
 ---
 
 Visual Studio Code setup guide
-
 <!-- more -->
 
 1. TOC
