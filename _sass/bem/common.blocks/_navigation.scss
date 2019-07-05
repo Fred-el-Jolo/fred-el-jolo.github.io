@@ -37,11 +37,11 @@
 
   &__links {
     display: inline-block;
+    width: 100%;
     padding-left: 0;
     text-align: left;
 
     @include media("<tablet") {
-      width: 100%;
       margin-bottom: 0;
       order: 2;
     }
