@@ -7,8 +7,8 @@ image-alt:      Visual Studio Code logo
 tags:           [visual studio code, vscode, ide]
 categories:     [guide]
 ---
-
 Visual Studio Code setup guide
+
 <!-- more -->
 
 1. TOC
