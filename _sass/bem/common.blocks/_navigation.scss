@@ -41,6 +41,7 @@
     text-align: left;
 
     @include media("<tablet") {
+      width: 100%;
       margin-bottom: 0;
       order: 2;
     }
