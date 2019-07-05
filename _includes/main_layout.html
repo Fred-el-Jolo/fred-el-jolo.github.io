@@ -12,7 +12,19 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  {%- include components/html-header-meta.html -%}
+  {% assign joinedTags = page.tags | join: ", " %}
+
+  {%- include components/html-header-meta.html
+      author=page.author
+      title=page.title
+      description=page.description
+      keywords=joinedTags
+      image_small=page.image_small
+      image_type=page.image_type
+      image_width=page.image_width
+      image_height=page.image_height
+      image_alt=page.image_alt
+  -%}
 
   <link rel="stylesheet" href="/assets/css/main.css">
 
