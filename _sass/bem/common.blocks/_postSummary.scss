@@ -33,6 +33,10 @@
 
       @include transition(all, 0.2s, ease-out);
     }
+    
+    &>.postIllustration {
+      margin-bottom: 0;
+    }
 
     @include media("<tablet") {
       display: flex;
