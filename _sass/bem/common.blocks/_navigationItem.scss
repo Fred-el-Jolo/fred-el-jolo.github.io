@@ -3,13 +3,13 @@
   height: 45px;
   line-height: 45px;
 
-  &:hover, &:focus {
+  &:hover, &:focus-within {
     background-color: $orange;
     
     @include transition(all, 0.2s, ease-out);
   }
   
-  &:not(:hover, :focus) {
+  &:not(:hover, :focus-within) {
     background-color: inherit;
 
     @include transition(all, 0.2s, ease-out);
