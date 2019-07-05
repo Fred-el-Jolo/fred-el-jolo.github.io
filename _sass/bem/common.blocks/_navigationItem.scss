@@ -2,6 +2,7 @@
   display: block;
   height: 45px;
   line-height: 45px;
+  padding: 0 15px;
 
   &:hover, &:focus-within {
     background-color: $orange;
@@ -19,27 +20,9 @@
     text-decoration: none;
     color: $brown;
   }
-  
-  /*
-  @include media("<tablet") {
-    @include on-event {
-      background-color: $dark-grey;
-    }
-  }
-  */
 
   &__link {
     color: $light-grey;
-
-    /*
-    @include on-event {
-      color: white;
-
-      @include media("<tablet") {
-        text-decoration: none;
-      }
-    }
-    */
   }
 
   &__icon {
@@ -91,17 +74,7 @@
   }
 }
 
-.navigation__links .navigationItem {
-  padding: 0 15px;
-  
-  @include media("<tablet") {
-    padding: 0 40px;
-  }
-}
-
 .navigation__social .navigationItem {
-  padding: 0 15px;
-  
   @include media("<tablet") {
     padding: 0;
   }
