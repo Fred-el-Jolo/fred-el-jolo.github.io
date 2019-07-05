@@ -21,19 +21,18 @@
     {%- endif-%}
     <div>
       <h2 class="postSummary__title">{{ include.post.title }}</h2>
-      <div>
-        <span class="postSummary__date">
-          {%- assign day = include.post.date | date: "%-d" -%} {%- case day-%}
-          {%- when '1' or '21' or '31'-%}{{ day }}st {%- when '2' or '22'-%}{{
-            day
-          }}nd {%- when '3' or '23'-%}{{ day }}rd {%- else-%}{{ day }}th {%-
-          endcase-%}
-          {{ include.post.date | date: " of %B, %Y" }}
-        </span>
-        <span class="postSummary__categories">
-          in {{ include.post.categories | join: ", " }}</span
-        >
-      </div>
+      <span class="postSummary__date">
+        {%- assign day = include.post.date | date: "%-d" -%} {%- case day-%}
+        {%- when '1' or '21' or '31'-%}{{ day }}st {%- when '2' or '22'-%}{{
+          day
+        }}nd {%- when '3' or '23'-%}{{ day }}rd {%- else-%}{{ day }}th {%-
+        endcase-%}
+        {{ include.post.date | date: " of %B, %Y" }}
+      </span>
+      <span class="postSummary__categories">
+        in {{ include.post.categories | join: ", " }}</span
+      >
+      <br />
       <div class="postSummary__excerpt">{{ include.post.excerpt }}</div>
     </div>
   </a>
