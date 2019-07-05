@@ -28,14 +28,14 @@
       text-decoration: none;
     }
 
-    &:hover {
+    &:hover, &:focus {
       background-color: $darker-grey;
       color: $light-grey;
 
       @include transition(all, 0.2s, ease-out);
     }
 
-    &:not(:hover) {
+    &:not(:hover, :focus) {
       background-color: $light-grey;
       color: $darker-grey;
 
