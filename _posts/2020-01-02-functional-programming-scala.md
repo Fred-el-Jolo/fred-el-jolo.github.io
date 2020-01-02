@@ -15,7 +15,19 @@ Functionnal programming in Scala
 1. TOC
 {:toc}
 
-## 
+## What is functional programming
+### Referentiel transparency
+An expression e is referentially transparent if, for all programs p, all occurrences of e in p can be replaced by the result of evaluating e without affecting the meaning of p.
+
+A function f is pure if the expression f(x) is referentially transparent for all referentially transparent x.
+
+### Substitution model
+Consists in replacing all variables with their referents and reduce the function to its simplest form.
+
+### Benefits
+- Better modularity:
+   - Local reasoning: Simply look at the function's definition and substitute arguments into its body.
+   - composable
 
 
 ## Sources
