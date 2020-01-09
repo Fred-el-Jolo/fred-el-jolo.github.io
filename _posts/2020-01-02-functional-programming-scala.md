@@ -29,6 +29,13 @@ Consists in replacing all variables with their referents and reduce the function
    - Local reasoning: Simply look at the function's definition and substitute arguments into its body.
    - composable
 
+## Scala
+### Functional loop (without mutated variable)
+Recursive loop.
+
+#### Tail call elimination
+A call is said to be in tail position if the caller does nothing other than return the value of the recursive ca
+
 
 ## Sources
 
