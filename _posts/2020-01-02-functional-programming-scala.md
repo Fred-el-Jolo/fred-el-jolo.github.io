@@ -34,7 +34,10 @@ Consists in replacing all variables with their referents and reduce the function
 Recursive loop.
 
 #### Tail call elimination
-A call is said to be in tail position if the caller does nothing other than return the value of the recursive ca
+A call is said to be in tail position if the caller does nothing other than return the value of the recursive call.
+
+#### Polymorphic functions
+Abtsracting over types
 
 
 ## Sources
