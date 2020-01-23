@@ -40,6 +40,17 @@ A call is said to be in tail position if the caller does nothing other than retu
 Abtsracting over types
 
 
+## Functionnal data structures
+### Functional structure
+Operated on using only pure functions.
+Immutable.
+End up with extra copies of data => no !
+
+### LinkedList
+
+### PatternMatching
+
+
 ## Sources
 
 
