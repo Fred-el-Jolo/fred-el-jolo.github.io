@@ -1,0 +1,293 @@
+:root {
+  --open-sans-sans-serif: "Open Sans", sans-serif;
+  --merriweather-serif: "Merriweather", serif;
+  --monospace: Menlo, Consolas, monospace;
+  --fira-code: "Fira Code", monospace;
+  --font-family-base: var(--open-sans-sans-serif);
+
+  --orange: hsl(36, 100%, 55%);
+  --brown: hsl(36, 100%, 10%);
+  --blue: hsl(206, 100%, 31%);
+
+  --dark-brown: hsl(36, 100%, 7%);
+
+  --darker-grey: hsl(0, 0%, 29%);
+  --dark-grey: var(--darker-grey);
+  --grey: var(--darker-grey);
+  --light-grey: hsl(0, 0, 92);
+  --cream: hsl(0, 0%, 96%);
+  --white: hsl(0, 0%, 100%);
+
+  --font-color-base: var(--dark-grey);
+
+  --font-size-base: 1.6rem;
+  --line-height-base: 1.9em;
+  --letter-spacing-base: 0.01em;
+
+  --font-size-xxlarge: 2rem,
+  --font-size-xlarge: 1.8rem,
+  --font-size-large: 1.7rem,
+  --font-size-base: var(--font-size-base),
+  --font-size-medium: 1.5rem,
+  --font-size-small: 1.3rem,
+  --font-size-xsmall: 1rem
+
+  --font-size-h1: 2.8rem,
+  --font-size-h2: 2.4rem,
+  --font-size-h3: 2rem,
+  --font-size-h4: 1.8rem,
+  --font-size-h5: 1.7rem,
+  --font-size-h6: 1.6rem
+
+
+  /*// Container's maximum width
+  /// @type Length
+$max-width: 1180px;
+
+$breakpoints: (phone: 320px, tablet: 768px, desktop: 1024px,  wide: 1300px);
+
+// 1300+ : 400 / 900
+// 1024  : 300 / 700
+// 768   :  50 / 700
+// 320   : 50 top / 100 width
+
+
+// Reduction of font size base on small screen and down
+$font-size-base-sm-screen-reduction-factor: 0.2rem;
+// Reduction of headings font size on small screen and down
+$headings-font-size-sm-screen-reduction-factor: 0.2rem;
+// Reduction of headings font size on medium screen only
+$headings-font-size-md-screen-reduction-factor: 0.15rem;
+
+// Reduction of markdwon headings on small screen and down
+$markdown-headings-font-size-sm-screen-reduction-factor: 0.35rem;
+// Reduction of markdwon headings on medium screen only
+$markdown-headings-font-size-md-screen-reduction-factor: 0.2rem; */
+
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    font-style:  normal;
+    font-weight: 400;
+    src:         local('Open Sans'), local('OpenSans'), url(https://fonts.gstatic.com/s/opensans/v10/cJZKeOuBrn4kERxqtaUH3SZ2oysoEQEeKwjgmXLRnTc.ttf) format('truetype');
+}
+
+@font-face {
+  
+    font-family: 'Open Sans';
+    font-style:  normal;
+    font-weight: 700;
+    src:         local('Open Sans Bold'), local('OpenSans-Bold'), url(https://fonts.gstatic.com/s/opensans/v10/k3k702ZOKiLJc3WVjuplzJS3E-kSBmtLoNJPDtbj2Pk.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: 'Merriweather';
+    font-style:  normal;
+    font-weight: 300;
+    src:         local('Merriweather Light'), local('Merriweather-Light'), url(https://fonts.gstatic.com/s/merriweather/v8/ZvcMqxEwPfh2qDWBPxn6nk7nEl83IKQRaQwpv_tz1Eg.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: 'Merriweather';
+    font-style:  normal;
+    font-weight: 400;
+    src:         local('Merriweather'), url(https://fonts.gstatic.com/s/merriweather/v8/RFda8w1V0eDZheqfcyQ4EJS3E-kSBmtLoNJPDtbj2Pk.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: 'Merriweather';
+    font-style:  normal;
+    font-weight: 700;
+  src:         local('Merriweather Bold'), local('Merriweather-Bold'), url(https://fonts.gstatic.com/s/merriweather/v8/ZvcMqxEwPfh2qDWBPxn6nv83cGrqhiQgWmjXfohD0fc.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: 'Merriweather';
+    font-style:  italic;
+    font-weight: 300;
+    src:         local('Merriweather Light Italic'), local('Merriweather-LightItalic'), url(https://fonts.gstatic.com/s/merriweather/v8/EYh7Vl4ywhowqULgRdYwIGrKw6K5wsYdxr6rUL2ZGaM.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: 'Merriweather';
+    font-style:  italic;
+    font-weight: 700;
+    src:         local('Merriweather Bold Italic'), local('Merriweather-BoldItalic'), url(https://fonts.gstatic.com/s/merriweather/v8/EYh7Vl4ywhowqULgRdYwII1kRdeHIFWYEsp6A2f99b0.ttf) format('truetype');
+}
+
+
+a {
+  color: var(--dark-brown);
+
+  img {
+    display: block;
+  }
+}
+
+/*
+a:visited {
+  color: var(--blue);
+}
+*/
+
+/**
+ * No bullets on header or footer
+ */
+header ul, footer ul {
+  list-style-type: none;
+}
+
+ul,
+ol,
+dl {
+  padding: 0 0 0 0;
+  margin: 0 0 0 0;
+}
+
+/**
+ * Remove the margin in all browsers (opinionated).
+ */
+
+body {
+  margin: 0;
+}
+
+button {
+	background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+}
+
+body.dark-theme header .config {
+  img#dark-theme {
+    display: none;
+  }
+  
+  img#light-theme {
+    display: block;
+  }
+
+  img.icon {
+    filter: none;
+  }
+}
+
+body:not(.dark-theme) header .config {
+  img#dark-theme {
+    display: block;
+  }
+  
+  img#light-theme {
+    display: none;
+  }
+
+  img.icon {
+    filter: invert();
+  }
+}
+
+header {
+  text-align: center;
+  padding: 5px 0 5px 0;
+  background-color: var(--brown);
+  color: var(--white);
+
+  .header__title {
+    margin: 0;
+    .header__title_orange {
+      color: var(--orange);
+    }
+    .header__title_white {
+      color: var(--white);
+    }
+  }
+  
+  a {
+    color: var(--white);
+  }
+
+  .config {
+    display: flex;
+    justify-content: space-between;
+
+    ul {
+      display: flex;
+      justify-content: space-around;
+
+      li {
+        margin: 0 5px 0 5px;
+      }
+    }
+  }
+
+  img.main-logo {
+    margin-top: -10px;
+  }
+
+  h3 {
+    margin: 0;
+  }
+
+}
+
+
+/*header > nav ul {
+  width: fit-content;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 0 auto 0 auto;
+
+  li:first-child {
+    justify-self: end;
+    margin-right: 5px;
+  }
+
+  li:last-child {
+    justify-self: start;
+    margin-left: 5px;
+  }
+}*/
+
+header > nav ul {
+  width: fit-content;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto 0 auto;
+  gap: 10px;
+
+
+  /*li {
+    margin: 0 5px 0 5px;
+  }*/
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+
+  article {
+    width: 100%;
+    max-height: 500px;
+    /*border: 1px solid var(--dark-brown);*/
+    border-radius: 7px;
+    margin-bottom: 20px;
+
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  }
+}
+
+.footer {
+  width: 100%;
+  position: relative;
+  bottom: 0;
+  background-color: var(--brown);
+  text-align: center;
+  color: var(--white);
+}
+
