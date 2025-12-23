@@ -117,19 +117,70 @@ $markdown-headings-font-size-md-screen-reduction-factor: 0.2rem; */
 }
 
 
-a {
-  color: var(--dark-brown);
 
-  img {
-    display: block;
+/*
+  Josh's Custom CSS Reset
+  https://www.joshwcomeau.com/css/custom-css-reset/
+*/
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+*:not(dialog) {
+  margin: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    interpolate-size: allow-keywords;
   }
 }
 
-/*
-a:visited {
-  color: var(--blue);
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+input, button, textarea, select {
+  font: inherit;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+
+p {
+  text-wrap: pretty;
+}
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+}
+
+#root, #__next {
+  isolation: isolate;
 }
 */
+
+
+
+
+
+
+
+
+
+
+
+
+a {
+  color: var(--dark-brown);
+}
 
 /**
  * No bullets on header or footer
@@ -141,16 +192,8 @@ header ul, footer ul {
 ul,
 ol,
 dl {
-  padding: 0 0 0 0;
-  margin: 0 0 0 0;
-}
-
-/**
- * Remove the margin in all browsers (opinionated).
- */
-
-body {
   margin: 0;
+  padding: 0 0 0 0;
 }
 
 button {
@@ -218,6 +261,7 @@ header {
     ul {
       display: flex;
       justify-content: space-around;
+      height: 20px;
 
       li {
         margin: 0 5px 0 5px;
@@ -226,7 +270,7 @@ header {
   }
 
   img.main-logo {
-    margin-top: -10px;
+    margin: -10px auto 0 auto;
   }
 
   h3 {
