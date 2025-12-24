@@ -14,3 +14,5 @@ https://codepen.io/sdthornton/pen/wBZdXq
 css-reset
 https://www.joshwcomeau.com/css/custom-css-reset/
 
+pre tags
+https://css-tricks.com/considerations-styling-pre-tag/

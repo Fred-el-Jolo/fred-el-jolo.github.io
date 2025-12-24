@@ -5,9 +5,11 @@
 <head>
   <meta charset="utf-8">
 
-  <meta http-equiv="Content-Security-Policy" content="default-src 'none' api.cdnjs.com; script-src 'self' cdnjs.cloudflare.com api.cdnjs.com; style-src 'self' https://cdn.jsdelivr.net/gh/tonsky/FiraCode@1.206/distr/fira_code.css; img-src 'self'; font-src 'self' https://fonts.gstatic.com/ https://cdn.jsdelivr.net/gh/tonsky/FiraCode@1.206/; base-uri 'self'; form-action 'none'; object-src 'none'">
+  <meta http-equiv="Content-Security-Policy" content="">
   <meta name="referrer" content="no-referrer">
-  
+ 
+  <link rel="icon" href="favicon/logo-triangle.png" />
+
   <title>Aesthete coding, Easy to code, hard to master</title>
   
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -28,7 +30,7 @@
 <body class="dark-theme">
     <header>
       <div class="config">
-        <ul>
+        <menu>
           <li>
             <button id="switch-theme">
               <img id="light-theme" class="icon" src="/images/icons/clear-day-svgrepo-com.svg" alt="Home" title="Home" width="20" height="20" >
@@ -45,9 +47,9 @@
             <img class="icon" src="/images/icons/leaf-svgrepo-com.svg" alt="Home" title="Home" width="20" height="20" >
             </button>
           </li>
-        </ul>
+        </menu>
         <nav aria-label="External links">
-         <ul>
+         <menu>
             <li>
               <a href="https://github.com/Fred-el-Jolo">
                 <img class="icon" src="/images/icons/github.svg" alt="Home" title="Home" width="20" height="20" >
@@ -58,15 +60,16 @@
                 <img class="icon" src="/images/icons/linkedin.svg" alt="Home" title="Home" width="20" height="20" >
               </a>
             </li>
-         </ul> 
+         </menu> 
         </nav>
       </div>
-      <img class="main-logo" src="/images/logo-couleur-contourblanc.png" height="150" alt="Logo: old man medidating" />
+      <img id="main-logo-dark" class="main-logo" src="/images/logo-couleur-contourblanc.png" height="125" alt="Logo: old man medidating" />
+      <img id="main-logo-light" class="main-logo" src="/images/logo-couleur.png" height="125" alt="Logo: old man medidating" />
       <h1 class="header__title"><span class="header__title_orange">{</span><span class="header__title_white">aesthete</span><span class="header__title_orange">coding</span><span
           class="header__title_white">.io</span><span class="header__title_orange">}</span></h1>
 
       <nav>
-        <ul>
+        <menu>
           <li>
             <h3>
               <a href="/index.html">
@@ -88,7 +91,7 @@
               </a>
             </h3>
           </li>
-        </ul>
+        </menu>
         <!--<a href="/index.html">
           Home
         </a>
@@ -103,13 +106,35 @@
       </nav>
     </header>
   <main>
+    <!--article class="postSummary">
+      <pre><code>
+for (let i=0; i &lt; 10; i++) {
+  let test = 'fred-' + i;
+  console.log('this is only a test', test);
+}
+      </code></pre>
+      <pre><code>
+for (let i=0; i &lt; 10; i++) {
+  let test = 'fred-' + i;
+  console.log('this is only a test', test);
+}
+      </code></pre>
+    </article>
+    <article class="postSummary">
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam pulvinar pharetra porttitor. Integer sit amet justo nec massa imperdiet ullamcorper eget eu lectus. Aenean pulvinar enim in enim rhoncus, vel bibendum dui maximus. Duis ac sem pharetra, volutpat felis eget, bibendum eros. Nulla mollis nec eros et suscipit. Sed posuere rutrum dignissim. Vivamus non lectus in lacus vulputate porttitor. Vestibulum scelerisque arcu mi, nec interdum nunc commodo quis. Nulla volutpat mauris lacinia dui dignissim pretium. Integer eu neque viverra, porttitor ante eu, egestas metus.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam pulvinar pharetra porttitor. Integer sit amet justo nec massa imperdiet ullamcorper eget eu lectus. Aenean pulvinar enim in enim rhoncus, vel bibendum dui maximus. Duis ac sem pharetra, volutpat felis eget, bibendum eros. Nulla mollis nec eros et suscipit. Sed posuere rutrum dignissim. Vivamus non lectus in lacus vulputate porttitor. Vestibulum scelerisque arcu mi, nec interdum nunc commodo quis. Nulla volutpat mauris lacinia dui dignissim pretium. Integer eu neque viverra, porttitor ante eu, egestas metus.
+      </p>
+    </article-->
     <article class="postSummary">
       <a href="/posts/2020/04/26/dev-setup.html">
         <figure>
           <img width="140" height="140" src="/posts/2020/04/26/dev-setup/software-developer-icon-28.jpg">
         </figure>
         <div>
-          <h2>Dev setup guide</h2>
+          <h2>😁 Dev setup guide</h2>
           <div class="post-date">26th of April, 2020</div>
           <ul class="post-categories"><li>guide</li></ul>
           <br>
@@ -118,35 +143,6 @@
           </div>
         </div>
       </a>
-    </article>
-    <article class="postSummary">
-      <a href="/posts/2020/04/26/dev-setup.html">
-        <figure>
-          <img width="140" height="140" src="/posts/2020/04/26/dev-setup/software-developer-icon-28.jpg">
-        </figure>
-        <div>
-          <h2>Dev setup guide</h2>
-          <div class="post-date">26th of April, 2020</div>
-          <ul class="post-categories"><li>guide</li></ul>
-          <br>
-          <div class="post-abstract">
-            <p>Dev setup guide</p>
-          </div>
-        </div>
-      </a>
-    </article>
-    <article class="postSummary">
-      
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam pulvinar pharetra porttitor. Integer sit amet justo nec massa imperdiet ullamcorper eget eu lectus. Aenean pulvinar enim in enim rhoncus, vel bibendum dui maximus. Duis ac sem pharetra, volutpat felis eget, bibendum eros. Nulla mollis nec eros et suscipit. Sed posuere rutrum dignissim. Vivamus non lectus in lacus vulputate porttitor. Vestibulum scelerisque arcu mi, nec interdum nunc commodo quis. Nulla volutpat mauris lacinia dui dignissim pretium. Integer eu neque viverra, porttitor ante eu, egestas metus.
-
-Phasellus ullamcorper dapibus neque, vel faucibus dui convallis in. Suspendisse potenti. In luctus dapibus neque non eleifend. Pellentesque rhoncus scelerisque vehicula. Suspendisse congue elit sed tempor tempus. Aenean venenatis aliquam dui, at sagittis arcu pulvinar tincidunt. Suspendisse lacus leo, dictum in ligula non, tincidunt aliquet odio. Phasellus feugiat vehicula massa commodo tincidunt. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
-
-Morbi efficitur ultricies arcu tincidunt eleifend. Integer nunc dui, euismod vel pretium sit amet, viverra a arcu. Quisque diam arcu, blandit ac neque in, facilisis congue arcu. Pellentesque dapibus quam vel urna egestas elementum. Proin ullamcorper at arcu sed sollicitudin. Sed auctor sit amet tellus a iaculis. Integer a ligula gravida, ultrices est vel, imperdiet ante. Ut velit nisl, consequat eget felis sed, vulputate gravida dolor. Nunc ac tortor felis. Duis ut purus lobortis eros vulputate venenatis eu eget dolor. Etiam bibendum ipsum eu ullamcorper ultricies.
-
-Quisque ac sollicitudin nisi. Donec scelerisque, nunc cursus venenatis tincidunt, dui eros tempor risus, quis ultrices tellus eros nec dui. Fusce accumsan porttitor ante nec fermentum. Aliquam pellentesque nunc a pretium auctor. Curabitur porta faucibus neque, et efficitur velit auctor et. Proin feugiat ante ut aliquam imperdiet. Nam vitae diam facilisis velit porta elementum efficitur at lacus. Vestibulum sollicitudin risus leo, sit amet sollicitudin diam accumsan at. Curabitur maximus, risus sit amet finibus pretium, mi augue viverra ex, non semper arcu augue at nisl. In lacinia lectus ac sagittis pellentesque. Suspendisse bibendum diam vitae pharetra dictum. Suspendisse auctor nulla in hendrerit ullamcorper. Nullam arcu nisl, eleifend et arcu et, lacinia auctor ante. Sed sit amet sem euismod, cursus orci lobortis, tempor purus. Vivamus porttitor condimentum varius.
-
-Quisque id consequat orci. Donec gravida eget augue eget aliquam. Morbi fermentum, augue eu varius dignissim, lectus risus vehicula eros, at feugiat orci nulla iaculis neque. Vestibulum aliquam gravida laoreet. Vivamus eget libero fringilla, maximus arcu a, luctus metus. Etiam tincidunt, magna at tincidunt mattis, arcu tellus hendrerit augue, scelerisque semper velit mi vitae metus. Donec vitae nulla eu ligula mattis commodo eget quis arcu. Cras eros tortor, eleifend eget scelerisque vitae, hendrerit id lacus. Aliquam id justo magna. Proin auctor felis tortor, in sagittis quam gravida id. Donec ut ante magna. 
     </article>
     <article class="postSummary">
       <a href="/posts/2020/04/26/dev-setup.html">
@@ -213,7 +209,7 @@ Quisque id consequat orci. Donec gravida eget augue eget aliquam. Morbi fermentu
       </a>
     </article>
   </main>
-  <footer class="footer">Copyrights &copy; 2026 Fr&eacute;d&eacute;ric Guillaume. All Rights Reserved.</footer>
+  <footer class="footer">Copyrights &copy; 2026 aesthetecoding - All Rights Reserved.</footer>
 </body>
 
 </html>

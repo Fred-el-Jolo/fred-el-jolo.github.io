@@ -1,7 +1,6 @@
 // Register button handlers
 
 const themeButton = document.getElementById('switch-theme');
-console.log('fred', themeButton);
 themeButton?.addEventListener('click', () => {
   document.body?.classList?.toggle('dark-theme');
 })
