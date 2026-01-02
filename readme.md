@@ -16,3 +16,7 @@ https://www.joshwcomeau.com/css/custom-css-reset/
 
 pre tags
 https://css-tricks.com/considerations-styling-pre-tag/
+
+
+
+https://bowwe.com/blog/typography-rules#

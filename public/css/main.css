@@ -9,33 +9,33 @@
   --brown: #331f00;
   --blue: #005a9e;
 
-  --dark-brown: #241500;
+  /*--dark-brown: #241500;*/
+  --dark-brown: #352c1f;
 
   --grey: #4a4a4a;
   --light-grey: #ebebeb;
   --cream: #f5f5f5;
   --white: #fff;
 
-  --font-color-base: var(--grey);
+  --font-color-base: var(--dark-brown);
 
   --font-size-base: 1.6rem;
-  --line-height-base: 1.9em;
+  --line-height-base: 1.5em;
   --letter-spacing-base: 0.01em;
 
-  --font-size-xxlarge: 2rem,
-  --font-size-xlarge: 1.8rem,
-  --font-size-large: 1.7rem,
-  --font-size-base: var(--font-size-base),
-  --font-size-medium: 1.5rem,
-  --font-size-small: 1.3rem,
-  --font-size-xsmall: 1rem
+  --font-size-xxlarge: 1.8rem;
+  --font-size-xlarge: 1.7rem;
+  --font-size-large: 1.5rem;
+  --font-size-medium: 1rem;
+  --font-size-small: .875rem;
+  --font-size-xsmall: .75rem;
 
-  --font-size-h1: 2.8rem,
-  --font-size-h2: 2.4rem,
-  --font-size-h3: 2rem,
-  --font-size-h4: 1.8rem,
-  --font-size-h5: 1.7rem,
-  --font-size-h6: 1.6rem
+  --font-size-h1: 2.8rem;
+  --font-size-h2: 2.4rem;
+  --font-size-h3: 2rem;
+  --font-size-h4: 1.8rem;
+  --font-size-h5: 1.7rem;
+  --font-size-h6: 1.6rem;
 
 
   /*// Container's maximum width
@@ -319,15 +319,43 @@ h1, h2, h3, h4, h5, h6 {
 
 
 
-/* Fred's fonts */
+/* Fred's */
 
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Ubuntu', sans-serif;
 }
 
+
+@media (min-width: 768px) {
+  h1 {
+    font-size: var(--font-size-h1);
+  }
+
+  h2 {
+    font-size: var(--font-size-h2);
+  }
+
+  h3 {
+    font-size: var(--font-size-h3);
+  }
+
+  h4 {
+    font-size: var(--font-size-h4);
+  }
+
+  h5 {
+    font-size: var(--font-size-h5);
+  }
+
+  h6 {
+    font-size: var(--font-size-h6);
+  }
+}
+
 h3, h4, h5, h6 {
   font-weight: 500;
 }
+
 
 body {
   font-family: 'Source Sans 3';
@@ -539,6 +567,25 @@ main {
     a > div {
       margin: 0 5px 5px 5px;
     }
+
+    .subtitle {
+      display: flex;
+      font-size: var(--font-size-small);
+
+      ul.tags {
+        display: inline-flex;
+        li {
+          list-style: none;
+          background-color: var(--brown);
+          color: white;
+          margin: 0 2px 0 2px;
+          padding: 0 5px 0 5px;
+          border-radius: 10px;
+        }
+      }
+    }
+
+
   }
 
   article:hover {
@@ -549,9 +596,6 @@ main {
   }
 }
 
-.subtitle {
-  color: lightgray;
-}
 
 .footer {
   width: 100%;
