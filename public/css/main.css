@@ -572,13 +572,21 @@ main {
       display: flex;
       font-size: var(--font-size-small);
 
+      .article-date {
+        width: 50%;
+      }
+
       ul.tags {
+        width: 50%;
         display: inline-flex;
+        flex-wrap: wrap;
+        justify-content: end;
+
         li {
           list-style: none;
           background-color: var(--brown);
           color: white;
-          margin: 0 2px 0 2px;
+          margin: 0 2px 2px 2px;
           padding: 0 5px 0 5px;
           border-radius: 10px;
         }
