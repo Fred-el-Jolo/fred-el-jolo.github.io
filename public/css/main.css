@@ -540,53 +540,53 @@ main {
   margin: 20px;
 
   article {
+    position: relative;
     width: 100%;
     border-radius: 7px;
     margin-bottom: 20px;
+    padding: 5px;
     overflow: hidden;
 
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 
     transition: box-shadow 0.3s cubic-bezier(.25,.8,.25,1);
 
+    ul.tags {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      display: inline-flex;
+      flex-wrap: wrap;
+      justify-content: end;
+      background-color: rgb(from var(--brown) r g b / 70%);
+
+      li {
+        list-style: none;
+        color: white;
+        margin: 4px 4px 2px 2px;
+        padding: 0 5px 0 5px;
+        /*background-color: var(--brown);
+        border-radius: 6px;*/
+      }
+
+      /*li:not(:first-child)::before {
+        content: '|'
+      }*/
+
+    }
+
     a {
       display: flex;
       flex-direction: column;
 
-      .article-illustration {
-        position: relative;
-    
-        img {
-          object-fit: cover;
-          width: 100%;
-        }
-
-        ul.tags {
-          position: absolute;
-          top: 0;
-          right: 0;
-          display: inline-flex;
-          flex-wrap: wrap;
-          justify-content: end;
-
-          li {
-            list-style: none;
-            background-color: var(--brown);
-            color: white;
-            margin: 4px 4px 2px 2px;
-            padding: 0 5px 0 5px;
-            border-radius: 6px;
-          }
-        }
+      .article-illustration img {
+        object-fit: cover;
+        width: 100%;
       }
     }
 
     a:hover {
       text-decoration: none;
-    }
-
-    a > div {
-      margin: 0 5px 5px 5px;
     }
 
     .subtitle-bar {
