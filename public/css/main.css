@@ -563,19 +563,25 @@ main {
       li {
         list-style: none;
         color: white;
-        margin: 4px 4px 2px 2px;
+        /*margin: 4px 4px 2px 2px;
         padding: 0 5px 0 5px;
-        /*background-color: var(--brown);
+        background-color: var(--brown);
         border-radius: 6px;*/
+
+        a {
+          color: var(--white);
+          padding: 0px 5px;
+          border-left: 1px solid var(--white);
+          display: inline-block;
+        }
       }
 
-      /*li:not(:first-child)::before {
-        content: '|'
-      }*/
-
+      li:first-child a {
+        border-left: none;
+      }
     }
 
-    a {
+    > a {
       display: flex;
       flex-direction: column;
 
