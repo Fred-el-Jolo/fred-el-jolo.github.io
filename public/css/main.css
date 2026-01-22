@@ -603,6 +603,12 @@ main {
 
       .article-date, .reading-duration {
         color: var(--light-brown);
+
+        img {
+          width: 16px;
+          display: inline-block;
+          vertical-align: text-top;
+        }
       }
 
       ul.tags {
