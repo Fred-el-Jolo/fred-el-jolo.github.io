@@ -714,6 +714,31 @@ main {
   }
 }
 
+.tag-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 16px;
+  padding: 0 4px;
+}
+
+.tag-filter [data-filter] {
+  font-size: 1.2rem;
+  background-color: var(--light-grey);
+  color: var(--dark-brown);
+  padding: 3px 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.15s;
+}
+
+.tag-filter [data-filter].active,
+.tag-filter [data-filter]:hover {
+  background-color: var(--orange);
+  color: var(--brown);
+}
+
 main article a img {
   max-height: 150px;
 }
