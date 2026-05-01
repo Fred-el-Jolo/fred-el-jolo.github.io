@@ -604,7 +604,9 @@ header > nav menu {
 main {
   display: flex;
   flex-direction: column;
-  margin: 20px;
+  margin: 20px auto;
+  max-width: 1200px;
+  width: calc(100% - 40px);
 
   article {
     position: relative;
@@ -723,5 +725,28 @@ main article a img {
   background-color: var(--brown);
   text-align: center;
   color: var(--white);
+}
+
+@media (min-width: 768px) {
+  main article > a {
+    flex-direction: row;
+  }
+
+  main article .article-illustration {
+    flex-shrink: 0;
+    width: 160px;
+  }
+
+  main article .article-illustration img {
+    width: 160px;
+    height: 120px;
+    max-height: 120px;
+    object-fit: cover;
+  }
+
+  main article > a > div:last-child {
+    flex: 1;
+    min-width: 0;
+  }
 }
 
