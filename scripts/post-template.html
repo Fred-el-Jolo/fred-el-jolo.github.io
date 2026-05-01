@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <link rel="icon" href="/images/favicon/logo-triangle.png">
+  <title>{{TITLE}} — aesthetecoding.io</title>
+  <meta name="author" content="Frédéric GUILLAUME">
+  <meta name="description" content="{{ABSTRACT}}">
+  <link rel="stylesheet" href="/css/main.css">
+  <script defer src="/js/main.js"></script>
+</head>
+<body class="dark-theme">
+  <header class="postDetail">
+    <div class="config">
+      <menu>
+        <li>
+          <button id="switch-theme">
+            <img id="light-theme" class="icon" src="/images/icons/clear-day-svgrepo-com.svg" alt="Light theme" width="20" height="20">
+            <img id="dark-theme" class="icon" src="/images/icons/moon-svgrepo-com.svg" alt="Dark theme" width="18" height="18">
+          </button>
+        </li>
+        <li>
+          <button id="switch-font">
+            <img class="icon" src="/images/icons/font-svgrepo-com.svg" alt="Dyslexia font" width="20" height="20">
+          </button>
+        </li>
+        <li>
+          <button id="switch-eco-mode">
+            <img class="icon" src="/images/icons/leaf-svgrepo-com.svg" alt="Eco mode" width="20" height="20">
+          </button>
+        </li>
+      </menu>
+    </div>
+    <a href="/" class="post-header-home">
+      <img id="main-logo-dark" class="main-logo post-logo" src="/images/logo-couleur-contourblanc.png" height="56" alt="aesthetecoding logo">
+      <img id="main-logo-light" class="main-logo post-logo" src="/images/logo-couleur.png" height="56" alt="aesthetecoding logo">
+      <span class="header__title"><span class="header__title_orange">{</span><span class="header__title_white">aesthete</span><span class="header__title_orange">coding</span><span class="header__title_white">.io</span><span class="header__title_orange">}</span></span>
+    </a>
+    <a href="/" class="post-back-link">← All articles</a>
+  </header>
+
+  <article class="postDetail">
+    {{COVER_HTML}}
+    <div class="post-hero">
+      <h1>{{TITLE}}</h1>
+      <div class="post-meta">
+        <div class="post-meta-left">
+          <span class="article-date">
+            <img src="/images/icons/calendar-alt-svgrepo-com.svg" width="14" height="14" alt="">
+            {{DATE}}
+          </span>
+          <span class="reading-duration">
+            <img src="/images/icons/hourglass-svgrepo-com.svg" width="14" height="14" alt="">
+            <span class="reading-time">{{READING_TIME}} min</span>
+          </span>
+        </div>
+        <ul class="post-tags">
+          {{TAGS}}
+        </ul>
+      </div>
+    </div>
+
+    <div class="post-body">
+      {{CONTENT}}
+    </div>
+  </article>
+
+  <footer class="footer">Copyrights &copy; 2026 aesthetecoding — All Rights Reserved.</footer>
+</body>
+</html>
