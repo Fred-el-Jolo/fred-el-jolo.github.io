@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <link rel="icon" href="/images/favicon/logo-triangle.png">
+  <title>Dev setup guide — aesthetecoding.io</title>
+  <meta name="author" content="Frédéric GUILLAUME">
+  <meta name="description" content="Terminal tools, editors, and environment configuration — tmux, zsh, nvim and a complete Linux dev environment from scratch.">
+  <link rel="stylesheet" href="/css/main.css">
+  <script defer src="/js/main.js"></script>
+</head>
+<body class="dark-theme">
+  <header class="postDetail">
+    <div class="config">
+      <menu>
+        <li>
+          <button id="switch-theme">
+            <img id="light-theme" class="icon" src="/images/icons/clear-day-svgrepo-com.svg" alt="Light theme" width="20" height="20">
+            <img id="dark-theme" class="icon" src="/images/icons/moon-svgrepo-com.svg" alt="Dark theme" width="18" height="18">
+          </button>
+        </li>
+        <li>
+          <button id="switch-font">
+            <img class="icon" src="/images/icons/font-svgrepo-com.svg" alt="Dyslexia font" width="20" height="20">
+          </button>
+        </li>
+        <li>
+          <button id="switch-eco-mode">
+            <img class="icon" src="/images/icons/leaf-svgrepo-com.svg" alt="Eco mode" width="20" height="20">
+          </button>
+        </li>
+      </menu>
+    </div>
+    <a href="/" class="post-header-home">
+      <img id="main-logo-dark" class="main-logo post-logo" src="/images/logo-couleur-contourblanc.png" height="56" alt="aesthetecoding logo">
+      <img id="main-logo-light" class="main-logo post-logo" src="/images/logo-couleur.png" height="56" alt="aesthetecoding logo">
+      <span class="header__title"><span class="header__title_orange">{</span><span class="header__title_white">aesthete</span><span class="header__title_orange">coding</span><span class="header__title_white">.io</span><span class="header__title_orange">}</span></span>
+    </a>
+    <a href="/" class="post-back-link">← All articles</a>
+  </header>
+
+  <article class="postDetail">
+    <div class="post-cover"><img src="cover.jpg" alt="Software developer working on desktop" width="1200" height="240"></div>
+    <div class="post-hero">
+      <h1>Dev setup guide</h1>
+      <div class="post-meta">
+        <div class="post-meta-left">
+          <span class="article-date">
+            <img src="/images/icons/calendar-alt-svgrepo-com.svg" width="14" height="14" alt="">
+            26 Apr 2020
+          </span>
+          <span class="reading-duration">
+            <img src="/images/icons/hourglass-svgrepo-com.svg" width="14" height="14" alt="">
+            <span class="reading-time">15 min</span>
+          </span>
+        </div>
+        <ul class="post-tags">
+          <li>dev env</li><li>linux</li><li>tmux</li><li>zsh</li><li>nvim</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="post-body">
+      <h2>Sublime text <a href="https://www.sublimetext.com/">&#x1f517;</a></h2>
+      <h3>Installation</h3>
+      <pre><code>wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
+sudo apt-get install apt-transport-https
+echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
+sudo apt-get update
+sudo apt-get install sublime-text</code></pre>
+      <h3>Plugins</h3>
+      <ul>
+        <li>Text pastry</li>
+        <li>TodoTxt Syntax</li>
+        <li>All Autocomplete</li>
+        <li>A File Icon</li>
+        <li>SideBarEnhancements</li>
+        <li>FileDiffs</li>
+        <li>Markdown Preview</li>
+        <li>MarkdownEditing</li>
+        <li>VimL</li>
+      </ul>
+
+      <h2>Settings</h2>
+      <pre><code>{
+	"ignored_packages":
+	[
+		"Markdown",
+		"Vintage"
+	],
+
+	// The number of spaces a tab is considered equal to
+	"tab_size": 2,
+
+	// Set to true to insert spaces when tab is pressed
+	"translate_tabs_to_spaces": false,
+
+	// Columns in which to display vertical rulers
+	"rulers": [120],
+
+	// Disables horizontal scrolling if enabled.
+	// May be set to true, false, or "auto", where it will be disabled for
+	// source code, and otherwise enabled.
+	"word_wrap": "auto",
+}</code></pre>
+
+      <h2>Key bindings</h2>
+      <pre><code>[
+	{ "keys": ["alt+up"], "command": "select_lines", "args": {"forward": false} },
+	{ "keys": ["alt+down"], "command": "select_lines", "args": {"forward": true} },
+	{ "keys": ["ctrl+:"], "command": "toggle_comment", "args": { "block": false } },
+	{ "keys": ["ctrl+shift+:"], "command": "toggle_comment", "args": { "block": true } },
+	{ "keys": ["ctrl+è"], "command": "show_panel", "args": {"panel": "console", "toggle": true} },
+]</code></pre>
+
+      <h3>Tip &amp; tricks</h3>
+      <h3>Get cursor scope</h3>
+      <p><code>ctrl + è</code> to enter the console and type <code>print (view.scope_name(view.sel()[0].b))</code></p>
+
+      <h2>Oh my zsh <a href="https://github.com/ohmyzsh/ohmyzsh">&#x1f517;</a></h2>
+      <h3>Installation</h3>
+      <ul>
+        <li>Install curl</li>
+      </ul>
+      <pre><code>sudo apt install curl</code></pre>
+      <ul>
+        <li>Install zsh</li>
+      </ul>
+      <pre><code>sudo apt install zsh</code></pre>
+      <ul>
+        <li>Install git</li>
+      </ul>
+      <pre><code>sudo apt install git</code></pre>
+      <ul>
+        <li>Install Oh my zsh</li>
+      </ul>
+      <pre><code>sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"</code></pre>
+
+      <h3>Config</h3>
+      <ul>
+        <li>Edit <code>~/.zshrc</code></li>
+      </ul>
+      <pre><code>ZSH_THEME="agnoster"
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
+# dir colors
+eval `dircolors ~/.dir_colors/dircolors`
+[ -f ~/.fzf.zsh ] &amp;&amp; source ~/.fzf.zsh</code></pre>
+      <ul>
+        <li>Edit <code>~/.oh-my-zsh/themes/agnoster.zsh-theme</code> if needed</li>
+      </ul>
+      <pre><code>prompt_git() {
+...
+    # Truncate branch name if too long
+    if [ ${#ref} -gt 43 ]; then
+      ref="$(echo $ref | cut -c -40)..."
+    fi
+...
+prompt_dir() {
+# Freds, truncate dir if too long
+  prompt_segment blue $CURRENT_FG '%(4~|.../%3~|%~)'
+}
+...
+build_prompt() {
+  RETVAL=$?
+  prompt_status
+  prompt_virtualenv
+  prompt_dir
+  prompt_git
+  prompt_end
+}</code></pre>
+
+      <h3>Plugins</h3>
+      <h4>zsh-autosuggestions <a href="https://github.com/zsh-users/zsh-autosuggestions/">&#x1f517;</a></h4>
+      <pre><code>git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions</code></pre>
+
+      <h4>zsh-syntax-highlighting <a href="https://github.com/zsh-users/zsh-syntax-highlighting">&#x1f517;</a></h4>
+      <pre><code>git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting</code></pre>
+
+      <h2>Terminal tools</h2>
+      <h3>Firacode Nerd Font Regular <a href="https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/FiraCode/Regular">&#x1f517;</a></h3>
+      <ul>
+        <li>Download <a href="https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/FiraCode/Regular/complete/Fira%20Code%20Regular%20Nerd%20Font%20Complete.otf">Fira Code Regular Nerd Font Complete</a> (for nvim NerdTree compatibility purpose)
+Double clic it to install it</li>
+        <li>Setup terminal font (Firacode Nerd Font Regular - 13pt)</li>
+      </ul>
+
+      <h3>Solarized &amp; dircolors (Check <a href="https://maxim-danilov.github.io/make-linux-terminal-great-again/">Make Linux terminal great again</a>)</h3>
+      <pre><code>git clone git://github.com/sigurdga/gnome-terminal-colors-solarized.git ~/.solarized
+cd ~/.solarized
+/install.sh	# Chose option 1 twice</code></pre>
+      <p>Open .zshrc and add the line</p>
+      <pre><code>eval `dircolors ~/.dir_colors/dircolors`</code></pre>
+
+      <h3>fzf <a href="https://github.com/junegunn/fzf">&#x1f517;</a></h3>
+      <p>Install with <a href="https://codeyarns.com/2017/10/24/how-to-install-and-use-fzf/">how-to-install-and-use-fzf</a></p>
+      <pre><code>git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install</code></pre>
+
+      <h3>rg <a href="https://github.com/BurntSushi/ripgrep">&#x1f517;</a></h3>
+      <pre><code>sudo apt-get install ripgrep</code></pre>
+
+      <h2>Nvm <a href="https://github.com/nvm-sh/nvm">&#x1f517;</a></h2>
+
+      <h2>Neovim <a href="https://github.com/neovim/neovim">&#x1f517;</a></h2>
+      <h3>Installation</h3>
+      <ul>
+        <li>Download <code>Download nvim.appimage</code> from <a href="https://github.com/neovim/neovim/releases/">neovim releases page</a></li>
+        <li>Run</li>
+      </ul>
+      <pre><code>chmod u+x nvim.appimage
+sudo ln -s nvim.appimage /usr/local/bin/nvim</code></pre>
+
+      <h3>Install vim-plug (Plugins manager) <a href="https://github.com/junegunn/vim-plug">&#x1f517;</a></h3>
+      <pre><code>curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim</code></pre>
+
+      <h3>Config file</h3>
+      <pre><code>" Plugins will be downloaded under the specified directory.
+" call plug#begin('~/.vim/plugged')
+call plug#begin(stdpath('data') . '/plugged')
+
+" Declare the list of plugins.
+
+" themes
+Plug 'tomasr/molokai' "Molokai theme
+Plug 'mhartington/oceanic-next'
+Plug 'ryanoasis/vim-devicons' "Icons for filetypes
+Plug 'vim-airline/vim-airline' "Status bar
+Plug 'vim-airline/vim-airline-themes' "Applicable themes
+"Plug 'junegunn/vim-emoji'
+
+" code
+Plug 'neoclide/coc.nvim', {'branch': 'release'}	"autocompletion
+Plug 'tpope/vim-fugitive' "git tools
+Plug 'jiangmiao/auto-pairs' "autocomplete brackets
+Plug 'mitermayer/vim-prettier'
+Plug 'scrooloose/nerdcommenter' "Comment toggle
+"Plug 'dense-analysis/ale' "ES linter -- replaced with coc-tsserver
+
+" Language Syntax Support
+Plug 'pangloss/vim-javascript' "JS highlighting
+"Plug 'mxw/vim-jsx' "JSX syntax highlighting
+"Plug 'leafgarland/typescript-vim' "TS syntax highlighting
+
+" tools
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'jremmen/vim-ripgrep'
+Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'} "Nerdtree
+Plug 'freitass/todo.txt-vim'
+"Plug 'terryma/vim-multiple-cursors'
+
+" List ends here. Plugins become visible to Vim after this call.
+call plug#end()
+
+filetype plugin indent on
+
+let mapleader="\&lt;space&gt;"
+let maplocalleader="\&lt;space&gt;"
+
+" Theme settings
+syntax enable
+colors molokai
+
+let g:airline_powerline_fonts = 1
+let airline#extensions#coc#error_symbol = 'Error:'
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Core Functionality
+ """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" deal with swps and backups here
+" create backups
+set backup
+" tell vim where to put its backup files
+set backupdir=/tmp
+" tell vim where to put swap files
+set dir=/tmp
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" =&gt; NERDTree
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"Changes NerdTree Toggle to Ctrl + n
+"map àn :NERDTreeToggle&lt;CR&gt;
+map &lt;C-n&gt; :NERDTreeToggle&lt;CR&gt;
+"autocmd VimEnter * NERDTree "Toggles Nerdtree on vim open
+
+" Use NERDTree when opening a directory
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 1 &amp;&amp; isdirectory(argv()[0]) &amp;&amp; !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" =&gt; ALE (ESlinter)
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"let g:ale_sign_error = '❌'
+"let g:ale_sign_warning = '⚠️'
+"let g:airline#extensions#ale#enabled = 1
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" =&gt; Conquer of Completion
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" jsonc (commented json) syntax highlighting
+autocmd FileType json syntax match Comment +\/\/.\+$+
+
+" use &lt;tab&gt; for trigger completion and navigate to the next complete item
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+
+inoremap &lt;silent&gt;&lt;expr&gt; &lt;Tab&gt;
+      \ pumvisible() ? "\&lt;C-n&gt;" :
+      \ &lt;SID&gt;check_back_space() ? "\&lt;Tab&gt;" :
+      \ coc#refresh()
+
+" use &lt;tab&gt; and &lt;shift-tab&gt; for navigating forward &amp; backward within
+" completion items
+inoremap &lt;expr&gt; &lt;Tab&gt; pumvisible() ? "\&lt;C-n&gt;" : "\&lt;Tab&gt;"
+inoremap &lt;expr&gt; &lt;S-Tab&gt; pumvisible() ? "\&lt;C-p&gt;" : "\&lt;S-Tab&gt;"
+
+" use &lt;cr&gt; for validating the selected completion
+inoremap &lt;expr&gt; &lt;cr&gt; pumvisible() ? "\&lt;C-y&gt;" : "\&lt;C-g&gt;u\&lt;CR&gt;"
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" =&gt; Text, tab and indent related
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 1 tab == 2 spaces
+set shiftwidth=2
+set tabstop=2     " tab spacing
+
+set ai            " Auto indent
+" set si            " Smart indent
+set wrap          " Wrap lines
+set nowrap        " Don't wrap text
+
+" Show line numbers
+" turn absolute line numbers on
+:set number
+:set nu
+
+:set colorcolumn=120
+
+" Code fold bliss
+" https://www.linux.com/learn/vim-tips-folding-fun
+" set foldmethod=indent
+
+" Blink cursor on error instead of beeping (grr)
+set visualbell
+set t_vb=
+
+" set clipboard to easily copy from vim and paste into the os
+set clipboard=unnamed
+
+" adds blue highlight to vim in visual mode selections
+highlight Visual cterm=bold ctermbg=Blue ctermfg=NONE
+" Change cursor shape between insert and normal mode in iTerm2.app
+if $TERM_PROGRAM =~ "iTerm"
+    let &amp;t_SI = "\&lt;Esc&gt;]50;CursorShape=1\x7" " Vertical bar in insert mode
+    let &amp;t_EI = "\&lt;Esc&gt;]50;CursorShape=0\x7" " Block in normal mode
+endif
+
+" Shows the title within the window
+set title titlestring=
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" =&gt; Prettier
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Autosave
+" disables autosave feature
+let g:prettier#autoformat = 0
+
+" print spaces between brackets
+" Prettier default: true
+let g:prettier#config#bracket_spacing = 'true'
+
+" runs prettier on file formats
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
+
+" NERDTress File highlighting
+function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
+ exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
+ exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
+endfunction
+
+call NERDTreeHighlightFile('jade', 'green', 'none', 'green', '#151515')
+call NERDTreeHighlightFile('ini', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('md', 'blue', 'none', '#3366FF', '#151515')
+call NERDTreeHighlightFile('yml', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('config', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('conf', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('json', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('html', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('styl', 'cyan', 'none', 'cyan', '#151515')
+call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', '#151515')
+call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', '#151515')
+call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', '#151515')
+call NERDTreeHighlightFile('ts', 'Red', 'none', '#ffa500', '#151515')
+call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
+
+" Custom mappings
+map &lt;C-j&gt; &lt;C-W&gt;j
+map &lt;C-k&gt; &lt;C-W&gt;k
+map &lt;C-h&gt; &lt;C-W&gt;h
+map &lt;C-l&gt; &lt;C-W&gt;l</code></pre>
+
+      <ul>
+        <li>Launch nvim and type <code>:PlugInstall</code> to proceed to plugins installation</li>
+      </ul>
+
+      <h3>Nvim-coc <a href="https://github.com/neoclide/coc.nvim">&#x1f517;</a></h3>
+      <ul>
+        <li>Installed previously from Plug</li>
+        <li>Install the following plugins
+          <ul>
+            <li>coc-eslint : Eslint plugin. Do not forget to install eslint globally <code>npm install eslint -g</code></li>
+            <li>coc-tsserver : javascript/typescript server - completion, refactor etc</li>
+            <li>coc-tslint-plugin : javascript/tyescript linting</li>
+            <li>coc-highlight : provides basic highlight of words selected</li>
+            <li>coc-emmet : emmet! works as in vscode</li>
+            <li>coc-marketplace : marketplace to simplify search and installation of coc extensions</li>
+            <li>coc-html : html - completion, refactor etc</li>
+            <li>coc-json : json - completion, refactor etc</li>
+            <li>coc-vetur : famous vscode plugin - completion,refactor,linting and much more for vuejs</li>
+            <li>coc-css : css</li>
+            <li>coc-prettier : formatting stuff</li>
+          </ul>
+        </li>
+      </ul>
+
+      <p>Some refs:</p>
+      <blockquote><p><a href="https://www.bha.ee/neovim-config-for-frontend-development/">Neovim config for frontend development</a></p></blockquote>
+      <blockquote><p><a href="https://www.freecodecamp.org/news/a-guide-to-modern-web-development-with-neo-vim-333f7efbf8e2/">A guide to modern web development with neo-vim</a></p></blockquote>
+      <blockquote><p><a href="https://benfrain.com/vim-again/">Vim for front-end development in 2019</a></p></blockquote>
+
+      <h2>Sources</h2>
+      <blockquote><p><a href="https://icon-library.net/icon/software-developer-icon-28.html">Graphic logo from Free Icon Library</a></p></blockquote>
+    </div>
+  </article>
+
+  <footer class="footer">Copyrights &copy; 2026 aesthetecoding — All Rights Reserved.</footer>
+</body>
+</html>
