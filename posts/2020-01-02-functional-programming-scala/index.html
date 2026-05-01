@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <link rel="icon" href="/images/favicon/logo-triangle.png">
+  <title>Functional programming in Scala — aesthetecoding.io</title>
+  <meta name="author" content="Frédéric GUILLAUME">
+  <meta name="description" content="Functional programming in Scala — reading notes.">
+  <link rel="stylesheet" href="/css/main.css">
+  <script defer src="/js/main.js"></script>
+</head>
+<body class="dark-theme">
+  <header class="postDetail">
+    <div class="config">
+      <menu>
+        <li>
+          <button id="switch-theme">
+            <img id="light-theme" class="icon" src="/images/icons/clear-day-svgrepo-com.svg" alt="Light theme" width="20" height="20">
+            <img id="dark-theme" class="icon" src="/images/icons/moon-svgrepo-com.svg" alt="Dark theme" width="18" height="18">
+          </button>
+        </li>
+        <li>
+          <button id="switch-font">
+            <img class="icon" src="/images/icons/font-svgrepo-com.svg" alt="Dyslexia font" width="20" height="20">
+          </button>
+        </li>
+        <li>
+          <button id="switch-eco-mode">
+            <img class="icon" src="/images/icons/leaf-svgrepo-com.svg" alt="Eco mode" width="20" height="20">
+          </button>
+        </li>
+      </menu>
+    </div>
+    <a href="/" class="post-header-home">
+      <img id="main-logo-dark" class="main-logo post-logo" src="/images/logo-couleur-contourblanc.png" height="56" alt="aesthetecoding logo">
+      <img id="main-logo-light" class="main-logo post-logo" src="/images/logo-couleur.png" height="56" alt="aesthetecoding logo">
+      <span class="header__title"><span class="header__title_orange">{</span><span class="header__title_white">aesthete</span><span class="header__title_orange">coding</span><span class="header__title_white">.io</span><span class="header__title_orange">}</span></span>
+    </a>
+    <a href="/" class="post-back-link">← All articles</a>
+  </header>
+
+  <article class="postDetail">
+    <div class="post-cover"><img src="cover.png" alt="Functional programming in Scala" width="1200" height="240"></div>
+    <div class="post-hero">
+      <h1>Functional programming in Scala</h1>
+      <div class="post-meta">
+        <div class="post-meta-left">
+          <span class="article-date">
+            <img src="/images/icons/calendar-alt-svgrepo-com.svg" width="14" height="14" alt="">
+            2 Jan 2020
+          </span>
+          <span class="reading-duration">
+            <img src="/images/icons/hourglass-svgrepo-com.svg" width="14" height="14" alt="">
+            <span class="reading-time">5 min</span>
+          </span>
+        </div>
+        <ul class="post-tags">
+          <li>functional programming</li><li>scala</li><li>notes</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="post-body">
+      <h2>What is functional programming</h2>
+<h3>Referentiel transparency</h3>
+<p>An expression e is referentially transparent if, for all programs p, all occurrences of e in p can be replaced by the result of evaluating e without affecting the meaning of p.</p>
+<p>A function f is pure if the expression f(x) is referentially transparent for all referentially transparent x.</p>
+<h3>Substitution model</h3>
+<p>Consists in replacing all variables with their referents and reduce the function to its simplest form.</p>
+<h3>Benefits</h3>
+<ul>
+<li>Better modularity:</li>
+<li>Local reasoning: Simply look at the function's definition and substitute arguments into its body.</li>
+<li>composable</li>
+</ul>
+<h2>Scala</h2>
+<h3>Functional loop (without mutated variable)</h3>
+<p>Recursive loop.</p>
+<h4>Tail call elimination</h4>
+<p>A call is said to be in tail position if the caller does nothing other than return the value of the recursive call.</p>
+<h4>Polymorphic functions</h4>
+<p>Abtsracting over types</p>
+<h2>Functionnal data structures</h2>
+<h3>Functional structure</h3>
+<p>Operated on using only pure functions.
+Immutable.
+End up with extra copies of data =&gt; no !</p>
+<h3>LinkedList</h3>
+<h3>PatternMatching</h3>
+<h2>Sources</h2>
+<p>Graphic logo for Visual Studio Code software from <a href="https://en.wikipedia.org/wiki/Visual_Studio_Code#/media/File:Visual_Studio_Code_1.18_icon.svg">en.wikipedia.org/wiki/Visual_Studio_Code#/media/File:Visual_Studio_Code_1.18_icon.svg</a></p>
+    </div>
+  </article>
+
+  <footer class="footer">Copyrights &copy; 2026 aesthetecoding — All Rights Reserved.</footer>
+</body>
+</html>
