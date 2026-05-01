@@ -322,6 +322,10 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Fred's */
 
+html {
+  font-size: 62.5%;
+}
+
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Ubuntu', sans-serif;
 }
@@ -360,6 +364,7 @@ h3, h4, h5, h6 {
 
 body {
   font-family: 'Source Sans 3';
+  font-size: var(--font-size-base);
   color: var(--font-color-base);
 }
 
@@ -439,7 +444,7 @@ body:not(.dark-theme) header {
     img#dark-theme {
       display: block;
     }
-    
+
     img#light-theme {
       display: none;
     }
@@ -448,14 +453,76 @@ body:not(.dark-theme) header {
       filter: invert();
     }
   }
-  
+
   img#main-logo-dark {
     display: none;
   }
-  
+
   img#main-logo-light {
     display: block;
   }
+}
+
+/* System dark mode — body content */
+@media (prefers-color-scheme: dark) {
+  body:not(.light-theme) {
+    background-color: #1a1207;
+    color: #e8d5b0;
+  }
+  body:not(.light-theme) main article {
+    background-color: #2a1f10;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.4), 0 3px 6px rgba(0,0,0,0.5);
+  }
+  body:not(.light-theme) main article .subtitle-bar .article-date,
+  body:not(.light-theme) main article .subtitle-bar .reading-duration {
+    color: #b09070;
+  }
+}
+
+/* Explicit dark theme */
+body.dark-theme {
+  background-color: #1a1207;
+  color: #e8d5b0;
+}
+body.dark-theme main article {
+  background-color: #2a1f10;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.4), 0 3px 6px rgba(0,0,0,0.5);
+}
+body.dark-theme main article .subtitle-bar .article-date,
+body.dark-theme main article .subtitle-bar .reading-duration {
+  color: #b09070;
+}
+
+/* Explicit light theme (system-dark users wanting light) */
+body.light-theme {
+  background-color: #f5f5f5;
+  color: #352c1f;
+}
+body.light-theme main article {
+  background-color: #ffffff;
+}
+
+/* Dyslexia-friendly font */
+body.dys-font {
+  font-family: 'Ubuntu', sans-serif;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+}
+body.dys-font h1, body.dys-font h2, body.dys-font h3,
+body.dys-font h4, body.dys-font h5, body.dys-font h6 {
+  font-family: 'Ubuntu', sans-serif;
+}
+
+/* Eco mode */
+body.eco-mode main article .article-illustration {
+  display: none;
+}
+body.eco-mode main article {
+  box-shadow: none;
+  border: 1px solid var(--light-brown);
+}
+body.eco-mode main article:hover {
+  box-shadow: none;
 }
 
 header {
