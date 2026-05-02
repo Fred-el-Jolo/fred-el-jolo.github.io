@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <link rel="icon" href="/images/favicon/logo-triangle.png">
+  <title>Sass best practices — aesthetecoding.io</title>
+  <meta name="author" content="Frédéric GUILLAUME">
+  <meta name="description" content="Reference &amp; summary of Sass best practices.">
+  <link rel="stylesheet" href="/css/main.css">
+  <script defer src="/js/main.js"></script>
+</head>
+<body class="dark-theme">
+  <header class="postDetail">
+    <div class="config">
+      <menu>
+        <li>
+          <button id="switch-theme">
+            <img id="light-theme" class="icon" src="/images/icons/clear-day-svgrepo-com.svg" alt="Light theme" width="20" height="20">
+            <img id="dark-theme" class="icon" src="/images/icons/moon-svgrepo-com.svg" alt="Dark theme" width="18" height="18">
+          </button>
+        </li>
+        <li>
+          <button id="switch-font">
+            <img class="icon" src="/images/icons/font-svgrepo-com.svg" alt="Dyslexia font" width="20" height="20">
+          </button>
+        </li>
+        <li>
+          <button id="switch-eco-mode">
+            <img class="icon" src="/images/icons/leaf-svgrepo-com.svg" alt="Eco mode" width="20" height="20">
+          </button>
+        </li>
+      </menu>
+    </div>
+    <a href="/" class="post-header-home">
+      <img id="main-logo-dark" class="main-logo post-logo" src="/images/logo-couleur-contourblanc.png" height="56" alt="aesthetecoding logo">
+      <img id="main-logo-light" class="main-logo post-logo" src="/images/logo-couleur.png" height="56" alt="aesthetecoding logo">
+      <span class="header__title"><span class="header__title_orange">{</span><span class="header__title_white">aesthete</span><span class="header__title_orange">coding</span><span class="header__title_white">.io</span><span class="header__title_orange">}</span></span>
+    </a>
+    <a href="/" class="post-back-link">← All articles</a>
+  </header>
+
+  <article class="postDetail">
+    <div class="post-cover"><img src="cover.png" alt="Sass logo" width="1200" height="240"></div>
+    <div class="post-hero">
+      <h1>Sass best practices</h1>
+      <div class="post-meta">
+        <div class="post-meta-left">
+          <span class="article-date">
+            <img src="/images/icons/calendar-alt-svgrepo-com.svg" width="14" height="14" alt="">
+            12 Jul 2018
+          </span>
+          <span class="reading-duration">
+            <img src="/images/icons/hourglass-svgrepo-com.svg" width="14" height="14" alt="">
+            <span class="reading-time">8 min</span>
+          </span>
+        </div>
+        <ul class="post-tags">
+          <li>sass</li><li>css</li><li>scss</li><li>design</li><li>ui</li><li>ux</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="post-body">
+      <h2>Syntax &amp; formatting</h2>
+<p>Follow the <a href="https://sass-guidelin.es/#syntax--formatting">Sass Guidelines - Syntax formatting</a> chapter.</p>
+
+<pre><code>var a = [1,2,3];
+var b = [1,2,3];
+var c = "1,2,3";
+
+a == c;     // true, coercion applied on the arrayaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbbb
+b == c;     // true, coercion applied on the array
+a == b;     // false</code></pre>
+
+<p>A few reminders :</p>
+<ul>
+<li>Force UTF-8 encoding with <code>@charset 'utf-8';</code> in main file</li>
+<li><code>0</code> value should never have a unit</li>
+<li>To add a unit to a number, you have to multiply this number by 1 unit.</li>
+</ul>
+
+<pre><code>$value: 42;
+
+// Yep
+$length: $value * 1px;
+
+// Nope
+$length: $value + px;</code></pre>
+
+<ul>
+<li>To remove the unit of a value, you have to divide it by one unit of its kind.</li>
+</ul>
+
+<pre><code>$length: 42px;
+
+// Yep
+$value: $length / 1px;
+
+// Nope
+$value: str-slice($length + unquote(''), 1, 2);</code></pre>
+
+<ul>
+<li>Prefer HSL, RGB over Hexadecimal notations (in that order)</li>
+</ul>
+
+<pre><code>// Yep
+.foo {
+  color: hsl(0, 100%, 50%);
+}
+
+// Also yep
+.foo {
+  color: rgb(255, 0, 0);
+}
+
+// Meh
+.foo {
+  color: #f00;
+}
+
+// Nope
+.foo {
+  color: #FF0000;
+}
+
+// Nope
+.foo {
+  color: red;
+}</code></pre>
+
+<h2>Architecture</h2>
+<h3>Use the bem methodology</h3>
+<ul>
+<li>Use <a href="http://getbem.com/">Block Element Modifier methodology</a></li>
+<li>and <a href="https://www.smashingmagazine.com/2016/06/battling-bem-extended-edition-common-problems-and-how-to-avoid-them/">10 common problems and how to avoid them</a></li>
+</ul>
+
+<h2>Mixins vs Placeholders</h2>
+<ul>
+<li>Same properties that won't change : <code>%placeholder + @extend</code></li>
+<li>Properties with different values : <code>@mixin</code></li>
+</ul>
+
+<h2>Media queries</h2>
+<ul>
+<li>Use <a href="http://include-media.com/">include-media</a></li>
+</ul>
+
+<h2>Tools &amp; frameworks</h2>
+<ul>
+<li>Autoprefixer</li>
+<li><a href="https://css-tricks.com/snippets/css/complete-guide-grid/">Css Grid guide</a></li>
+</ul>
+
+<h2>Sources</h2>
+
+<blockquote><p><a href="http://getbem.com/">Block Element Modifier methodology</a></p></blockquote>
+
+<blockquote><p><a href="https://sass-guidelin.es/">Sass Guidelines</a><br>
+<strong>Hugo Giraudel -</strong> <a href="http://hugogiraudel.com/">hugogiraudel.com</a></p></blockquote>
+
+<blockquote><p><a href="https://scotch.io/tutorials/aesthetic-sass-1-architecture-and-style-organization">Aesthetic Sass 1: Architecture and Style Organization</a><br>
+<a href="https://scotch.io/tutorials/aesthetic-sass-2-colors">Aesthetic Sass 2: Colors and Palettes</a><br>
+<a href="https://scotch.io/tutorials/aesthetic-sass-3-typography-and-vertical-rhythm">Aesthetic Sass 3: Typography and Vertical Rhythm</a><br>
+<strong>David Khourshid -</strong> <a href="https://twitter.com/DavidKPiano">twitter.com/DavidKPiano</a></p></blockquote>
+    </div>
+  </article>
+
+  <footer class="footer">Copyrights &copy; 2026 aesthetecoding — All Rights Reserved.</footer>
+</body>
+</html>
