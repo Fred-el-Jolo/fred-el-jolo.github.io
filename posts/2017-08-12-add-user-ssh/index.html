@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="referrer" content="no-referrer">
   <link rel="icon" href="/images/favicon/logo-triangle.png">
-  <title>{{TITLE}} — aesthetecoding.io</title>
+  <title>Create users &amp; configure SSH on Debian — aesthetecoding.io</title>
   <meta name="author" content="Frédéric GUILLAUME">
-  <meta name="description" content="{{ABSTRACT}}">
+  <meta name="description" content="Quick guide to create new users on Debian and configure SSH keys for remote access.">
   <link rel="stylesheet" href="/css/main.css">
   <link rel="stylesheet" href="/css/prism.css">
   <script defer src="/js/prism.js"></script>
@@ -44,28 +44,74 @@
   </header>
 
   <article class="postDetail">
-    {{COVER_HTML}}
+        <div class="post-cover"><img src="cover.png" alt="Create users &amp; configure SSH on Debian" width="1200" height="240"></div>
     <div class="post-hero">
-      <h1>{{TITLE}}</h1>
+      <h1>Create users &amp; configure SSH on Debian</h1>
       <div class="post-meta">
         <div class="post-meta-left">
           <span class="article-date">
             <img src="/images/icons/calendar-alt-svgrepo-com.svg" width="14" height="14" alt="">
-            {{DATE}}
+            12 Aug 2017
           </span>
           <span class="reading-duration">
             <img src="/images/icons/hourglass-svgrepo-com.svg" width="14" height="14" alt="">
-            <span class="reading-time">{{READING_TIME}} min</span>
+            <span class="reading-time">3 min</span>
           </span>
         </div>
         <ul class="post-tags">
-          {{TAGS}}
+          <li>unix</li>
+          <li>ssh</li>
+          <li>user</li>
         </ul>
       </div>
     </div>
 
     <div class="post-body">
-      {{CONTENT}}
+      <p>Quick guide to create new users on Debian and to create and configure SSH keys for remote access.</p>
+
+
+
+
+
+      <h2>Create new user</h2>
+
+      <pre><code class="language-bash">adduser &lt;USER_NAME&gt;</code></pre>
+
+      <p>Fill in the user data.</p>
+      <pre><code class="language-bash">Enter new UNIX password:
+Retype new UNIX password:
+passwd: password updated successfully
+Changing the user information for &lt;USER_NAME&gt;
+Enter the new value, or press ENTER for the default
+        Full Name []:
+        Room Number []:
+        Work Phone []:
+        Home Phone []:
+        Other []:
+Is the information correct? [Y/n]</code></pre>
+
+      <h2>Add user to group</h2>
+
+      <pre><code class="language-bash">adduser &lt;USER_NAME&gt; &lt;GROUP_NAME&gt;</code></pre>
+
+      <hr>
+
+      <h2>Create SSH key on Windows</h2>
+
+      <ul>
+        <li>Download the <a href="https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html">puttygen.exe</a> tool.</li>
+        <li>Click on "Generate"</li>
+        <li>Save public &amp; private keys</li>
+      </ul>
+
+      <h2>Configure unix account with the private SSH key</h2>
+      <ul>
+        <li>Log on to the server</li>
+        <li>Create .ssh folder and the file .ssh/authorized_keys in the corresponding user home</li>
+        <li>Paste the key from the Puttygen field "Public key for pasting into OpenSSH authorized_keys file"</li>
+        <li>The key must begin by <code>ssh-rsa</code></li>
+        <li>You can now log on with SSH to the remote server.</li>
+      </ul>
     </div>
   </article>
 

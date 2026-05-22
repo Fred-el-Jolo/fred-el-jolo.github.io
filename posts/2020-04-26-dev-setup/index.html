@@ -9,6 +9,8 @@
   <meta name="author" content="Frédéric GUILLAUME">
   <meta name="description" content="Terminal tools, editors, and environment configuration — tmux, zsh, nvim and a complete Linux dev environment from scratch.">
   <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/prism.css">
+  <script defer src="/js/prism.js"></script>
   <script defer src="/js/main.js"></script>
 </head>
 <body class="dark-theme">
@@ -16,18 +18,19 @@
     <div class="config">
       <menu>
         <li>
-          <button id="switch-theme">
+          <button id="switch-theme" aria-label="Toggle theme">
+            
             <img id="light-theme" class="icon" src="/images/icons/clear-day-svgrepo-com.svg" alt="Light theme" width="20" height="20">
             <img id="dark-theme" class="icon" src="/images/icons/moon-svgrepo-com.svg" alt="Dark theme" width="18" height="18">
           </button>
         </li>
         <li>
-          <button id="switch-font">
+          <button id="switch-font" aria-label="Toggle dyslexia-friendly font">
             <img class="icon" src="/images/icons/font-svgrepo-com.svg" alt="Dyslexia font" width="20" height="20">
           </button>
         </li>
         <li>
-          <button id="switch-eco-mode">
+          <button id="switch-eco-mode" aria-label="Toggle eco mode">
             <img class="icon" src="/images/icons/leaf-svgrepo-com.svg" alt="Eco mode" width="20" height="20">
           </button>
         </li>
@@ -65,7 +68,7 @@
     <div class="post-body">
       <h2>Sublime text <a href="https://www.sublimetext.com/">&#x1f517;</a></h2>
       <h3>Installation</h3>
-      <pre><code>wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
+      <pre><code class="language-bash">wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
 sudo apt-get install apt-transport-https
 echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
 sudo apt-get update
@@ -84,7 +87,7 @@ sudo apt-get install sublime-text</code></pre>
       </ul>
 
       <h2>Settings</h2>
-      <pre><code>{
+      <pre><code class="language-json">{
 	"ignored_packages":
 	[
 		"Markdown",
@@ -107,7 +110,7 @@ sudo apt-get install sublime-text</code></pre>
 }</code></pre>
 
       <h2>Key bindings</h2>
-      <pre><code>[
+      <pre><code class="language-json">[
 	{ "keys": ["alt+up"], "command": "select_lines", "args": {"forward": false} },
 	{ "keys": ["alt+down"], "command": "select_lines", "args": {"forward": true} },
 	{ "keys": ["ctrl+:"], "command": "toggle_comment", "args": { "block": false } },
@@ -124,25 +127,25 @@ sudo apt-get install sublime-text</code></pre>
       <ul>
         <li>Install curl</li>
       </ul>
-      <pre><code>sudo apt install curl</code></pre>
+      <pre><code class="language-bash">sudo apt install curl</code></pre>
       <ul>
         <li>Install zsh</li>
       </ul>
-      <pre><code>sudo apt install zsh</code></pre>
+      <pre><code class="language-bash">sudo apt install zsh</code></pre>
       <ul>
         <li>Install git</li>
       </ul>
-      <pre><code>sudo apt install git</code></pre>
+      <pre><code class="language-bash">sudo apt install git</code></pre>
       <ul>
         <li>Install Oh my zsh</li>
       </ul>
-      <pre><code>sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"</code></pre>
+      <pre><code class="language-bash">sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"</code></pre>
 
       <h3>Config</h3>
       <ul>
         <li>Edit <code>~/.zshrc</code></li>
       </ul>
-      <pre><code>ZSH_THEME="agnoster"
+      <pre><code class="language-bash">ZSH_THEME="agnoster"
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 # dir colors
 eval `dircolors ~/.dir_colors/dircolors`
@@ -150,7 +153,7 @@ eval `dircolors ~/.dir_colors/dircolors`
       <ul>
         <li>Edit <code>~/.oh-my-zsh/themes/agnoster.zsh-theme</code> if needed</li>
       </ul>
-      <pre><code>prompt_git() {
+      <pre><code class="language-bash">prompt_git() {
 ...
     # Truncate branch name if too long
     if [ ${#ref} -gt 43 ]; then
@@ -173,10 +176,10 @@ build_prompt() {
 
       <h3>Plugins</h3>
       <h4>zsh-autosuggestions <a href="https://github.com/zsh-users/zsh-autosuggestions/">&#x1f517;</a></h4>
-      <pre><code>git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions</code></pre>
+      <pre><code class="language-bash">git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions</code></pre>
 
       <h4>zsh-syntax-highlighting <a href="https://github.com/zsh-users/zsh-syntax-highlighting">&#x1f517;</a></h4>
-      <pre><code>git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting</code></pre>
+      <pre><code class="language-bash">git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting</code></pre>
 
       <h2>Terminal tools</h2>
       <h3>Firacode Nerd Font Regular <a href="https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/FiraCode/Regular">&#x1f517;</a></h3>
@@ -187,19 +190,19 @@ Double clic it to install it</li>
       </ul>
 
       <h3>Solarized &amp; dircolors (Check <a href="https://maxim-danilov.github.io/make-linux-terminal-great-again/">Make Linux terminal great again</a>)</h3>
-      <pre><code>git clone git://github.com/sigurdga/gnome-terminal-colors-solarized.git ~/.solarized
+      <pre><code class="language-bash">git clone git://github.com/sigurdga/gnome-terminal-colors-solarized.git ~/.solarized
 cd ~/.solarized
 /install.sh	# Chose option 1 twice</code></pre>
       <p>Open .zshrc and add the line</p>
-      <pre><code>eval `dircolors ~/.dir_colors/dircolors`</code></pre>
+      <pre><code class="language-bash">eval `dircolors ~/.dir_colors/dircolors`</code></pre>
 
       <h3>fzf <a href="https://github.com/junegunn/fzf">&#x1f517;</a></h3>
       <p>Install with <a href="https://codeyarns.com/2017/10/24/how-to-install-and-use-fzf/">how-to-install-and-use-fzf</a></p>
-      <pre><code>git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+      <pre><code class="language-bash">git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install</code></pre>
 
       <h3>rg <a href="https://github.com/BurntSushi/ripgrep">&#x1f517;</a></h3>
-      <pre><code>sudo apt-get install ripgrep</code></pre>
+      <pre><code class="language-bash">sudo apt-get install ripgrep</code></pre>
 
       <h2>Nvm <a href="https://github.com/nvm-sh/nvm">&#x1f517;</a></h2>
 
@@ -209,15 +212,15 @@ cd ~/.solarized
         <li>Download <code>Download nvim.appimage</code> from <a href="https://github.com/neovim/neovim/releases/">neovim releases page</a></li>
         <li>Run</li>
       </ul>
-      <pre><code>chmod u+x nvim.appimage
+      <pre><code class="language-bash">chmod u+x nvim.appimage
 sudo ln -s nvim.appimage /usr/local/bin/nvim</code></pre>
 
       <h3>Install vim-plug (Plugins manager) <a href="https://github.com/junegunn/vim-plug">&#x1f517;</a></h3>
-      <pre><code>curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+      <pre><code class="language-bash">curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim</code></pre>
 
       <h3>Config file</h3>
-      <pre><code>" Plugins will be downloaded under the specified directory.
+      <pre><code class="language-vim">" Plugins will be downloaded under the specified directory.
 " call plug#begin('~/.vim/plugged')
 call plug#begin(stdpath('data') . '/plugged')
 

@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="referrer" content="no-referrer">
   <link rel="icon" href="/images/favicon/logo-triangle.png">
-  <title>{{TITLE}} — aesthetecoding.io</title>
+  <title>Python setup — aesthetecoding.io</title>
   <meta name="author" content="Frédéric GUILLAUME">
-  <meta name="description" content="{{ABSTRACT}}">
+  <meta name="description" content="Quick guide to install Python and pip on Debian.">
   <link rel="stylesheet" href="/css/main.css">
   <link rel="stylesheet" href="/css/prism.css">
   <script defer src="/js/prism.js"></script>
@@ -44,28 +44,46 @@
   </header>
 
   <article class="postDetail">
-    {{COVER_HTML}}
+        <div class="post-cover"><img src="cover.png" alt="Python setup" width="1200" height="240"></div>
     <div class="post-hero">
-      <h1>{{TITLE}}</h1>
+      <h1>Python setup</h1>
       <div class="post-meta">
         <div class="post-meta-left">
           <span class="article-date">
             <img src="/images/icons/calendar-alt-svgrepo-com.svg" width="14" height="14" alt="">
-            {{DATE}}
+            6 Oct 2017
           </span>
           <span class="reading-duration">
             <img src="/images/icons/hourglass-svgrepo-com.svg" width="14" height="14" alt="">
-            <span class="reading-time">{{READING_TIME}} min</span>
+            <span class="reading-time">2 min</span>
           </span>
         </div>
         <ul class="post-tags">
-          {{TAGS}}
+          <li>python</li>
         </ul>
       </div>
     </div>
 
     <div class="post-body">
-      {{CONTENT}}
+      <p>Quick guide to install Python &amp; common libs.</p>
+
+
+
+
+
+      <h2>Pip installation</h2>
+      <h3>Debian systems</h3>
+      <pre><code class="language-bash">sudo apt-get install python-pip
+sudo apt-get install -y python3-pip  # pip for python V3+</code></pre>
+
+      <h2>Sources</h2>
+
+      <blockquote>
+        <p><a href="https://packaging.python.org/guides/installing-using-linux-tools/#installing-pip-setuptools-wheel-with-linux-package-managers">Installing pip/setuptools/wheel with Linux Package Managers</a></p>
+      </blockquote>
+
+
+      <p>Python logo from <a href="https://www.python.org/community/logos/">www.python.org/community/logos/</a></p>
     </div>
   </article>
 

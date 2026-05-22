@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <link rel="icon" href="/images/favicon/logo-triangle.png">
+  <title>Algorithm design — aesthetecoding.io</title>
+  <meta name="author" content="Frédéric GUILLAUME">
+  <meta name="description" content="Reading notes from &quot;The Algorithm Design Manual&quot; by Steven S. Skiena.">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/prism.css">
+  <script defer src="/js/prism.js"></script>
+  <script defer src="/js/main.js"></script>
+  <script>
+    MathJax = { tex: { inlineMath: [['$','$']] } };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body class="dark-theme">
+  <header class="postDetail">
+    <div class="config">
+      <menu>
+        <li>
+          <button id="switch-theme" aria-label="Toggle theme">
+            <img id="light-theme" class="icon" src="/images/icons/clear-day-svgrepo-com.svg" alt="Switch to dark theme" width="20" height="20">
+            <img id="dark-theme" class="icon" src="/images/icons/moon-svgrepo-com.svg" alt="Switch to light theme" width="18" height="18">
+          </button>
+        </li>
+        <li>
+          <button id="switch-font" aria-label="Toggle dyslexia-friendly font">
+            <img class="icon" src="/images/icons/font-svgrepo-com.svg" alt="" width="20" height="20">
+          </button>
+        </li>
+        <li>
+          <button id="switch-eco-mode" aria-label="Toggle eco mode">
+            <img class="icon" src="/images/icons/leaf-svgrepo-com.svg" alt="" width="20" height="20">
+          </button>
+        </li>
+      </menu>
+    </div>
+    <a href="/" class="post-header-home">
+      <img id="main-logo-dark" class="main-logo post-logo" src="/images/logo-couleur-contourblanc.png" height="56" alt="aesthetecoding logo">
+      <img id="main-logo-light" class="main-logo post-logo" src="/images/logo-couleur.png" height="56" alt="aesthetecoding logo">
+      <span class="header__title"><span class="header__title_orange">{</span><span class="header__title_white">aesthete</span><span class="header__title_orange">coding</span><span class="header__title_white">.io</span><span class="header__title_orange">}</span></span>
+    </a>
+    <a href="/" class="post-back-link">← All articles</a>
+  </header>
+
+  <article class="postDetail">
+        <div class="post-cover"><img src="cover.png" alt="Algorithm design" width="1200" height="240"></div>
+    <div class="post-hero">
+      <h1>Algorithm design</h1>
+      <div class="post-meta">
+        <div class="post-meta-left">
+          <span class="article-date">
+            <img src="/images/icons/calendar-alt-svgrepo-com.svg" width="14" height="14" alt="">
+            28 Jan 2019
+          </span>
+          <span class="reading-duration">
+            <img src="/images/icons/hourglass-svgrepo-com.svg" width="14" height="14" alt="">
+            <span class="reading-time">8 min</span>
+          </span>
+        </div>
+        <ul class="post-tags">
+          <li>algorithm</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="post-body">
+      <p>Reading notes from "The Algorithm Design manual" book written by Steven S. Skiena.</p>
+
+
+
+
+
+      <h2>Definitions</h2>
+
+      <h3>Proper mathematical proof:</h3>
+      <ol>
+        <li>Clear &amp; precise statement of what you are trying to prove</li>
+        <li>Set of assumptions which are taken to be true</li>
+        <li>Chain of reasonning takes you from the assumptions to the statement you are trying to prove</li>
+        <li>QED</li>
+      </ol>
+
+      <h3>Algorithmic notations:</h3>
+      <ul>
+        <li>English</li>
+        <li>Pseudo code</li>
+        <li>Real programming language</li>
+      </ul>
+
+      <p>Heart of an algorithm is an idea. This idea must be clearly revealed when the algorithm is expressed.</p>
+
+      <h3>Problem specification:</h3>
+      <ul>
+        <li>Set of allowed  input instances</li>
+        <li>Required properties of the algorithm's output</li>
+      </ul>
+
+      <p>Counter-examples to demonstrate incorrectness</p>
+
+      <p>Develop counter-examples hunting skill:</p>
+      <ul>
+        <li>Think small</li>
+        <li>Think exhaustively</li>
+        <li>Hunt for the weakness</li>
+        <li>Go for a tie</li>
+        <li>Seek extremes</li>
+      </ul>
+
+      <h3>Correctness: induction &amp; recursion</h3>
+      <ul>
+        <li>Induction:</li>
+      </ul>
+      <p>+ Prove a formula, for example $$\sum_{i=1}^n = \frac{ n(n+1) }{2}$$ work for basis cases (like 1 or 2)</p>
+      <p>+ Assume it was true up to $$n-1$$</p>
+      <p>+ Prove is was true to general $$n$$ using the assumption</p>
+      <ul>
+        <li>Recursion is induction</li>
+      </ul>
+      <p>+ General &amp; boundary conditions, with the general condition breaking the problem into smaller and smaller pieces</p>
+
+      <p>Have to be suspicious about induction.</p>
+      <ul>
+        <li>Boundary errors</li>
+        <li>Wrong extension claims (for example, adding an item that completely changes the solution of a problem)</li>
+      </ul>
+
+      <p>e.g. Prove that $$\sum_{i=1}^n i \times i! = (n+1)!-1$$ by induction</p>
+
+      <ol>
+        <li>$$n=1$$</li>
+      </ol>
+      <p>\begin{align\*}</p>
+      <p>\sum_{i=1}^n i \times i! &amp;= 1 \times 1 \\\</p>
+      <p>&amp;= 1</p>
+      <p>\end{align\*}</p>
+
+      <p>\begin{align\*}</p>
+      <p>(n+1)!-1 &amp;= 2! - 1 \\\</p>
+      <p>&amp;= 1</p>
+      <p>\end{align\*}</p>
+
+      <ol>
+        <li>Assume the statement is true up to $$n$$. Prove that it is also true for $$n+1$$</li>
+      </ol>
+      <p>\begin{align\*}</p>
+      <p>\sum_{i=1}^{n+1} i \times i! &amp;= (n+1) \times (n+1)! + \sum_{i=1}^n i \times i! \\\</p>
+      <p>&amp;= (n+1) \times (n+1)! + (n+1)!-1 \\\</p>
+      <p>&amp;= (n+1)! \times ( (n+1) + 1 ) -1 \\\</p>
+      <p>&amp;= (n+1)! \times ( n+2 ) -1 \\\</p>
+      <p>&amp;= (n+2)! -1 \\\</p>
+      <p>&amp;\blacksquare</p>
+      <p>\end{align\*}</p>
+
+      <h3>Modeling the problem</h3>
+      <p>Try to describe the problem abstractly, in terms of procedures on fundamental structures (e.g. permutatons, graphs, sets ...)</p>
+
+      <h4>Combinatorial objects</h4>
+      <h5>Permutations</h5>
+      <p>Arrangements, ordering of items. $$\left\{1,4,3,2\right\}$$ and $$\left\{4,3,2,1\right\}$$ are two distinct permutations of the same set of four integers.</p>
+      <p>Likely to be used when talking about "<em>arrangement</em>", "<em>tour</em>", "<em>ordering</em>" or "<em>sequence</em>".</p>
+
+      <h5>Subsets</h5>
+      <p>Selection from a set of items. $$\left\{1,4,3\right\}$$ and $$\left\{2\right\}$$ are two subsets of the first four integers. Order does not matter in subsets, so the subsets $$\left\{1,4,3\right\}$$ and $$\left\{4,3,1\right\}$$ would be considered identical.</p>
+      <p>Likely to be used when talking about "<em>cluster</em>", "<em>collection</em>", "<em>committee</em>", "<em>group</em>", "<em>packaging</em>" or "<em>selection</em>".</p>
+
+      <h5>Trees</h5>
+      <p>Represent hierarchical relationships between items.</p>
+
+
+
+      <p>Likely to be used when talking about "<em>hierarchy</em>", "<em>dominance</em>", "<em>relationship</em>", "<em>ancestor/descendant relationship</em>" or "<em>taxonomy</em>".</p>
+
+      <h5>Graphs</h5>
+      <p>Represent relationships between arbitrary pair of objects.</p>
+
+
+
+      <p>Points are called <em>vertices</em> and links <em>edges</em>.</p>
+
+      <p>Likely to be used when talking about "<em>network</em>", "<em>circuit</em>", "<em>web</em>", or "<em>relationship</em>".</p>
+
+      <h5>Points</h5>
+      <p>Represent location in some geometric space.</p>
+      <p>Likely to be used when talking about "<em>sites</em>", "<em>positions</em>", "<em>data records</em>", or "<em>locations</em>".</p>
+
+      <h5>Polygons / polyhedron</h5>
+      <p>Represent regions in some geometric space.</p>
+      <p>Likely to be used when talking about "<em>shapes</em>", "<em>regions</em>", "<em>configurations</em>", or "<em>boundaries</em>".</p>
+
+      <h5>Strings</h5>
+      <p>Represent sequences of characters or patterns.</p>
+      <p>Likely to be used when talking about "<em>text</em>", "<em>characters</em>", "<em>patterns</em>", or "<em>labels</em>".</p>
+
+      <p><strong>Modeling your application in terms of well-defined structures and algorithms is the most important single step toward a solution.</strong></p>
+      <p>Be aware that the act of modeling reduces your application to one of a small number of existing problems and structures.</p>
+
+      <h4>Recursive objects</h4>
+      <p>Big things made from smaller things of exactly the same type as the big thing.</p>
+
+      <p>Combinatorial objects are also recursive.</p>
+
+      <p>Recursive descriptions of objects require both decomposition rules and basis cases.</p>
+    </div>
+  </article>
+
+  <footer class="footer">Copyrights &copy; 2026 aesthetecoding — All Rights Reserved.</footer>
+</body>
+</html>

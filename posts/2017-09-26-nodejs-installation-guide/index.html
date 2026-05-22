@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <link rel="icon" href="/images/favicon/logo-triangle.png">
+  <title>Node.js installation guide — aesthetecoding.io</title>
+  <meta name="author" content="Frédéric GUILLAUME">
+  <meta name="description" content="Node.js, npm, nvm and yarn installation and usage guide.">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/prism.css">
+  <script defer src="/js/prism.js"></script>
+  <script defer src="/js/main.js"></script>
+</head>
+<body class="dark-theme">
+  <header class="postDetail">
+    <div class="config">
+      <menu>
+        <li>
+          <button id="switch-theme" aria-label="Toggle theme">
+            <img id="light-theme" class="icon" src="/images/icons/clear-day-svgrepo-com.svg" alt="Switch to dark theme" width="20" height="20">
+            <img id="dark-theme" class="icon" src="/images/icons/moon-svgrepo-com.svg" alt="Switch to light theme" width="18" height="18">
+          </button>
+        </li>
+        <li>
+          <button id="switch-font" aria-label="Toggle dyslexia-friendly font">
+            <img class="icon" src="/images/icons/font-svgrepo-com.svg" alt="" width="20" height="20">
+          </button>
+        </li>
+        <li>
+          <button id="switch-eco-mode" aria-label="Toggle eco mode">
+            <img class="icon" src="/images/icons/leaf-svgrepo-com.svg" alt="" width="20" height="20">
+          </button>
+        </li>
+      </menu>
+    </div>
+    <a href="/" class="post-header-home">
+      <img id="main-logo-dark" class="main-logo post-logo" src="/images/logo-couleur-contourblanc.png" height="56" alt="aesthetecoding logo">
+      <img id="main-logo-light" class="main-logo post-logo" src="/images/logo-couleur.png" height="56" alt="aesthetecoding logo">
+      <span class="header__title"><span class="header__title_orange">{</span><span class="header__title_white">aesthete</span><span class="header__title_orange">coding</span><span class="header__title_white">.io</span><span class="header__title_orange">}</span></span>
+    </a>
+    <a href="/" class="post-back-link">← All articles</a>
+  </header>
+
+  <article class="postDetail">
+        <div class="post-cover"><img src="cover.png" alt="Node.js installation guide" width="1200" height="240"></div>
+    <div class="post-hero">
+      <h1>Node.js installation guide</h1>
+      <div class="post-meta">
+        <div class="post-meta-left">
+          <span class="article-date">
+            <img src="/images/icons/calendar-alt-svgrepo-com.svg" width="14" height="14" alt="">
+            26 Sep 2017
+          </span>
+          <span class="reading-duration">
+            <img src="/images/icons/hourglass-svgrepo-com.svg" width="14" height="14" alt="">
+            <span class="reading-time">5 min</span>
+          </span>
+        </div>
+        <ul class="post-tags">
+          <li>nodejs</li>
+          <li>npm</li>
+          <li>nvm</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="post-body">
+      <p>NodeJS Installation guide</p>
+
+
+
+
+
+      <h2><a href="https://github.com/creationix/nvm">NVM</a></h2>
+      <h3>Installation</h3>
+      <pre><code class="language-bash">curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.4/install.sh | bash</code></pre>
+      <p>Restart the terminal.</p>
+
+      <h3>Usagee</h3>
+      <pre><code class="language-bash">nvm install node              # Install the latest version of node
+ 
+nvm install 4.2.2             # Install v4.2.2 of node
+ 
+nvm use node                  # Use latest version of node
+ 
+nvm exec 4.2 node --version   # Subshell command</code></pre>
+
+      <h2><a href="https://www.npmjs.com/">NPM</a></h2>
+      <h3>Installation</h3>
+      <pre><code class="language-bash">which node                        # Get node's path.
+cd .nvm/versions/node/v8.5.0/lib/ # Navigate to the above path 
+npm install npm                   # Install NPM</code></pre>
+
+      <h3>Proxy setup</h3>
+      <pre><code class="language-bash">npm config set proxy http://user:pwd@host:port
+npm config set https-proxy http://user:pwd@host:port</code></pre>
+
+      <h2><a href="https://yarnpkg.com/en/">YARN</a></h2>
+      <h3>Installation</h3>
+      <h4>Add repository</h4>
+      <pre><code class="language-bash">curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+&gt; OK
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+&gt; deb https://dl.yarnpkg.com/debian/ stable main</code></pre>
+
+      <h4>Install with apt-get</h4>
+      <pre><code class="language-bash">apt-get update
+apt-get install yarn</code></pre>
+
+      <h3>Usage</h3>
+      <h4>Starting a new project</h4>
+      <pre><code class="language-bash">yarn init</code></pre>
+
+      <h4>Adding a dependency</h4>
+      <pre><code class="language-bash">yarn add [package]
+yarn add [package]@[version]
+yarn add [package]@[tag]</code></pre>
+
+      <h4>Adding a dependency to a specific category</h4>
+      <pre><code class="language-bash">yarn add [package] --dev
+yarn add [package] --peer 
+yarn add [package] --optional</code></pre>
+
+      <h4>Upgrading a dependency</h4>
+      <pre><code class="language-bash">yarn upgrade [package]
+yarn upgrade [package]@[version]
+yarn upgrade [package]@[tag]</code></pre>
+
+      <h4>Removing a dependency</h4>
+      <pre><code class="language-bash">yarn remove [package]</code></pre>
+
+      <h4>Installing all the dependencies of a project</h4>
+      <pre><code class="language-bash">yarn</code></pre>
+
+      <h4>Global action on a package</h4>
+      <pre><code class="language-bash">yarn global &lt;ACTION&gt; [package]</code></pre>
+      <p>Global packages are installed in <code>yarn global bin</code> location.</p>
+      <p>That location may be added to the PATH environment variable.</p>
+
+      <h4>Force Yarn to use https on github repositories</h4>
+      <pre><code class="language-bash"># Fails
+yarn add @angular/cli
+
+# Works
+yarn add git+https://github.com/angular/angular-cli</code></pre>
+
+
+      <p>Graphic logo for Node.js software from <a href="https://nodejs.org/en/about/resources/">nodejs.org/en/about/resources/</a></p>
+    </div>
+  </article>
+
+  <footer class="footer">Copyrights &copy; 2026 aesthetecoding — All Rights Reserved.</footer>
+</body>
+</html>

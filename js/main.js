@@ -1,6 +1,7 @@
 // Restore persisted preferences
 ['dark-theme', 'light-theme', 'dys-font', 'eco-mode'].forEach(cls => {
   if (localStorage.getItem(cls) === '1') document.body.classList.add(cls);
+  if (localStorage.getItem(cls) === '0') document.body.classList.remove(cls);
 });
 
 // Theme toggle: system → dark → light → system
@@ -38,11 +39,8 @@ if (filterBar) {
   const articles = Array.from(document.querySelectorAll('main article[data-tags]'));
   let activeTag = null;
 
-  filterBar.addEventListener('click', e => {
-    const btn = e.target.closest('[data-filter]');
-    if (!btn) return;
-    const tag = btn.dataset.filter;
-    activeTag = (tag === 'all' || tag === activeTag) ? null : tag;
+  function applyFilter(tag) {
+    activeTag = (tag === 'all' || !tag) ? null : tag;
     filterBar.querySelectorAll('[data-filter]').forEach(b => {
       b.classList.toggle('active', b.dataset.filter === (activeTag ?? 'all'));
     });
@@ -50,8 +48,37 @@ if (filterBar) {
       const tags = article.dataset.tags.split(' ');
       article.hidden = activeTag !== null && !tags.includes(activeTag);
     });
+  }
+
+  // Activate tag from URL param on load
+  const urlTag = new URLSearchParams(location.search).get('tag');
+  if (urlTag) applyFilter(urlTag);
+
+  filterBar.addEventListener('click', e => {
+    const btn = e.target.closest('[data-filter]');
+    if (!btn) return;
+    applyFilter(btn.dataset.filter === activeTag ? null : btn.dataset.filter);
   });
 }
+
+// Copy buttons for code blocks
+document.querySelectorAll('pre > code').forEach(block => {
+  const btn = document.createElement('button');
+  btn.className = 'copy-btn';
+  btn.textContent = 'Copy';
+  btn.setAttribute('aria-label', 'Copy code to clipboard');
+  btn.addEventListener('click', () => {
+    navigator.clipboard.writeText(block.innerText).then(() => {
+      btn.textContent = 'Copied!';
+      btn.classList.add('copied');
+      setTimeout(() => {
+        btn.textContent = 'Copy';
+        btn.classList.remove('copied');
+      }, 2000);
+    });
+  });
+  block.parentElement.appendChild(btn);
+});
 
 // Reading time — post pages only
 const postBody = document.querySelector('.post-body');

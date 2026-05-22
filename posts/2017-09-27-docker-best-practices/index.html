@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <link rel="icon" href="/images/favicon/logo-triangle.png">
+  <title>Docker best practices — aesthetecoding.io</title>
+  <meta name="author" content="Frédéric GUILLAUME">
+  <meta name="description" content="Docker and Docker Compose installation and best practices reference.">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/prism.css">
+  <script defer src="/js/prism.js"></script>
+  <script defer src="/js/main.js"></script>
+</head>
+<body class="dark-theme">
+  <header class="postDetail">
+    <div class="config">
+      <menu>
+        <li>
+          <button id="switch-theme" aria-label="Toggle theme">
+            <img id="light-theme" class="icon" src="/images/icons/clear-day-svgrepo-com.svg" alt="Switch to dark theme" width="20" height="20">
+            <img id="dark-theme" class="icon" src="/images/icons/moon-svgrepo-com.svg" alt="Switch to light theme" width="18" height="18">
+          </button>
+        </li>
+        <li>
+          <button id="switch-font" aria-label="Toggle dyslexia-friendly font">
+            <img class="icon" src="/images/icons/font-svgrepo-com.svg" alt="" width="20" height="20">
+          </button>
+        </li>
+        <li>
+          <button id="switch-eco-mode" aria-label="Toggle eco mode">
+            <img class="icon" src="/images/icons/leaf-svgrepo-com.svg" alt="" width="20" height="20">
+          </button>
+        </li>
+      </menu>
+    </div>
+    <a href="/" class="post-header-home">
+      <img id="main-logo-dark" class="main-logo post-logo" src="/images/logo-couleur-contourblanc.png" height="56" alt="aesthetecoding logo">
+      <img id="main-logo-light" class="main-logo post-logo" src="/images/logo-couleur.png" height="56" alt="aesthetecoding logo">
+      <span class="header__title"><span class="header__title_orange">{</span><span class="header__title_white">aesthete</span><span class="header__title_orange">coding</span><span class="header__title_white">.io</span><span class="header__title_orange">}</span></span>
+    </a>
+    <a href="/" class="post-back-link">← All articles</a>
+  </header>
+
+  <article class="postDetail">
+        <div class="post-cover"><img src="cover.png" alt="Docker best practices" width="1200" height="240"></div>
+    <div class="post-hero">
+      <h1>Docker best practices</h1>
+      <div class="post-meta">
+        <div class="post-meta-left">
+          <span class="article-date">
+            <img src="/images/icons/calendar-alt-svgrepo-com.svg" width="14" height="14" alt="">
+            9 Sep 2017
+          </span>
+          <span class="reading-duration">
+            <img src="/images/icons/hourglass-svgrepo-com.svg" width="14" height="14" alt="">
+            <span class="reading-time">5 min</span>
+          </span>
+        </div>
+        <ul class="post-tags">
+          <li>docker</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="post-body">
+      <p>Reference &amp; summary of docker best practices</p>
+
+
+
+
+
+      <h2>Docker</h2>
+      <h3>Installation</h3>
+      <h4>Debian</h4>
+      <h5>Update the apt-get package index</h5>
+      <pre><code class="language-bash">sudo apt-get update</code></pre>
+
+      <h5>Install packages to use a repository over HTTPS</h5>
+      <pre><code class="language-bash">sudo apt-get install \
+     apt-transport-https \
+     ca-certificates \
+     curl \
+     gnupg2 \
+     software-properties-common</code></pre>
+
+      <h5>Add Docker’s official GPG key</h5>
+      <pre><code class="language-bash">curl -fsSL https://download.docker.com/linux/$(. /etc/os-release; echo "$ID")/gpg | sudo apt-key add -</code></pre>
+
+      <h5>Verify the fingerprint (last 8 characters)</h5>
+      <pre><code class="language-bash">sudo apt-key fingerprint 0EBFCD88</code></pre>
+
+      <h5>Setup the stable docker repository</h5>
+      <pre><code class="language-bash">sudo add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/$(. /etc/os-release; echo "$ID") \
+   $(lsb_release -cs) \
+   stable"</code></pre>
+
+      <h5>Update the apt-get package index</h5>
+      <pre><code class="language-bash">sudo apt-get update</code></pre>
+
+      <h5>Install docker</h5>
+      <pre><code class="language-bash">sudo apt-get install docker-ce                  # Latest version
+apt-cache madison docker-ce                     # List available versions
+                                                # (use 2nd column as VERSION_STRING)
+sudo apt-get install docker-ce=&lt;VERSION_STRING&gt; # Install specific version.</code></pre>
+      <p>The Docker daemon starts automatically.</p>
+
+      <h5>Setup proxy</h5>
+      <h6>Edit the file <code>/etc/default/docker</code> and modify the proxy settings</h6>
+      <h6>Restart the docker service</h6>
+      <pre><code class="language-bash">service docker restart</code></pre>
+
+      <h5>Run the hello-world image</h5>
+      <pre><code class="language-bash">sudo docker run hello-world</code></pre>
+
+      <h5>If not working</h5>
+      <pre><code class="language-bash">/etc/systemd/system/docker.service.d/http-proxy.conf
+/etc/systemd/system/docker.service.d/https-proxy.conf
+sudo systemctl daemon-reload       # Flush changes
+sudo systemctl restart docker      # Restart docker service</code></pre>
+
+      <h3>Usage</h3>
+      <h4>Build image with a custom name</h4>
+      <pre><code class="language-bash">docker build -t customName .</code></pre>
+
+
+      <h2>Docker compose</h2>
+      <h3>Installation</h3>
+      <h4>Debian</h4>
+      <h5>Download latest package</h5>
+      <pre><code class="language-bash">sudo curl -L https://github.com/docker/compose/releases/download/1.16.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose</code></pre>
+
+      <h5>Apply executable permissions</h5>
+      <pre><code class="language-bash">sudo chmod +x /usr/local/bin/docker-compose</code></pre>
+
+      <h5>Test the installation</h5>
+      <pre><code class="language-bash">$ docker-compose --version
+docker-compose version 1.16.1, build 1719ceb</code></pre>
+
+      <h3>Usage</h3>
+      <p>todo</p>
+
+      <h2>Sources</h2>
+      <blockquote>
+        <p><a href="https://docs.docker.com/engine/installation/linux/docker-ce/debian/#install-using-the-repository">Get Docker CE for Debian</a></p>
+      </blockquote>
+
+      <blockquote>
+        <p><a href="https://developers.redhat.com/blog/2016/02/24/10-things-to-avoid-in-docker-containers/">RHD Blog - 10 things to avoid in docker containers</a><br>
+        <strong>@rafabene -</strong> <a href="https://www.twitter.com/rafabene">twitter</a></p>
+      </blockquote>
+    </div>
+  </article>
+
+  <footer class="footer">Copyrights &copy; 2026 aesthetecoding — All Rights Reserved.</footer>
+</body>
+</html>

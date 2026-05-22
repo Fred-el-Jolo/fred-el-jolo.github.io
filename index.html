@@ -32,35 +32,35 @@
       <div class="config">
         <menu>
           <li>
-            <button id="switch-theme">
-              <img id="light-theme" class="icon" src="/images/icons/clear-day-svgrepo-com.svg" alt="Home" title="Home" width="20" height="20" >
-              <img id="dark-theme" class="icon" src="/images/icons/moon-svgrepo-com.svg" alt="Home" title="Home" width="18" height="18" >
+            <button id="switch-theme" aria-label="Toggle theme">
+              <img id="light-theme" class="icon" src="/images/icons/clear-day-svgrepo-com.svg" alt="Switch to dark theme" width="20" height="20">
+              <img id="dark-theme" class="icon" src="/images/icons/moon-svgrepo-com.svg" alt="Switch to light theme" width="18" height="18">
             </button>
           </li>
           <li>
-            <button id="switch-font">
-              <img class="icon" src="/images/icons/font-svgrepo-com.svg" alt="Home" title="Home" width="20" height="20" >
+            <button id="switch-font" aria-label="Toggle dyslexia-friendly font">
+              <img class="icon" src="/images/icons/font-svgrepo-com.svg" alt="" width="20" height="20">
             </button>
           </li>
           <li>
-            <button id="switch-eco-mode">
-            <img class="icon" src="/images/icons/leaf-svgrepo-com.svg" alt="Home" title="Home" width="20" height="20" >
+            <button id="switch-eco-mode" aria-label="Toggle eco mode">
+              <img class="icon" src="/images/icons/leaf-svgrepo-com.svg" alt="" width="20" height="20">
             </button>
           </li>
         </menu>
         <nav aria-label="External links">
-         <menu>
+          <menu>
             <li>
               <a href="https://github.com/Fred-el-Jolo">
-                <img class="icon" src="/images/icons/github.svg" alt="Home" title="Home" width="20" height="20" >
+                <img class="icon" src="/images/icons/github.svg" alt="GitHub profile" width="20" height="20">
               </a>
             </li>
             <li>
               <a href="https://www.linkedin.com/in/fredericguillaume/">
-                <img class="icon" src="/images/icons/linkedin.svg" alt="Home" title="Home" width="20" height="20" >
+                <img class="icon" src="/images/icons/linkedin.svg" alt="LinkedIn profile" width="20" height="20">
               </a>
             </li>
-         </menu> 
+          </menu>
         </nav>
       </div>
       <img id="main-logo-dark" class="main-logo" src="/images/logo-couleur-contourblanc.png" height="125" alt="Logo: old man medidating" />
@@ -108,20 +108,207 @@
 
 <main>
   <div id="tag-filter" class="tag-filter">
-    <a data-filter="all" class="active">All</a>
-    <a data-filter="dev-env">dev env</a>
-    <a data-filter="guide">guide</a>
-    <a data-filter="linux">linux</a>
-    <a data-filter="sass">sass</a>
-    <a data-filter="css">css</a>
-    <a data-filter="scss">scss</a>
-    <a data-filter="design">design</a>
-    <a data-filter="javascript">javascript</a>
-    <a data-filter="kubernetes">kubernetes</a>
-    <a data-filter="docker">docker</a>
-    <a data-filter="raspberry-pi">raspberry-pi</a>
+    <button data-filter="all" class="active">All</button>
+    <button data-filter="dev-env">dev env</button>
+    <button data-filter="guide">guide</button>
+    <button data-filter="linux">linux</button>
+    <button data-filter="sass">sass</button>
+    <button data-filter="css">css</button>
+    <button data-filter="scss">scss</button>
+    <button data-filter="design">design</button>
+    <button data-filter="javascript">javascript</button>
+    <button data-filter="kubernetes">kubernetes</button>
+    <button data-filter="docker">docker</button>
+    <button data-filter="raspberry-pi">raspberry-pi</button>
+    <button data-filter="git">git</button>
+    <button data-filter="nodejs">nodejs</button>
+    <button data-filter="python">python</button>
+    <button data-filter="algorithm">algorithm</button>
+    <button data-filter="ssh">ssh</button>
+    <button data-filter="talk">talk</button>
   </div>
   <!-- POSTS_START -->
+
+  <article data-tags="javascript asynchronous promise async-await talk">
+    <ul class="tags">
+      <li><a href="#" data-tag="javascript">javascript</a></li>
+      <li><a href="#" data-tag="talk">talk</a></li>
+      <li><a href="#" data-tag="asynchronous">asynchronous</a></li>
+    </ul>
+    <a href="/posts/2019-03-14-asynchronous-js/">
+      <div class="article-illustration">
+        <img src="/posts/2019-03-14-asynchronous-js/cover.png" width="300" height="200" alt="Asynchronous JS talk">
+      </div>
+      <div>
+        <h2>Asynchronous JS, from hell to exquisiteness</h2>
+        <div class="subtitle-bar">
+          <span class="article-date"><img src="/images/icons/calendar-alt-svgrepo-com.svg" alt="">&#160;14 Mar 2019</span>
+          <span class="reading-duration"><img src="/images/icons/hourglass-svgrepo-com.svg" alt="">&#160;20 min</span>
+        </div>
+        <p>JSSophia talk — callbacks, promises, generators and async/await from first principles.</p>
+      </div>
+    </a>
+  </article>
+
+  <article data-tags="algorithm notes">
+    <ul class="tags">
+      <li><a href="#" data-tag="algorithm">algorithm</a></li>
+      <li><a href="#" data-tag="notes">notes</a></li>
+    </ul>
+    <a href="/posts/2018-12-25-algorithm-design/">
+      <div class="article-illustration">
+        <img src="/posts/2018-12-25-algorithm-design/cover.png" width="300" height="200" alt="Algorithm design">
+      </div>
+      <div>
+        <h2>Algorithm design</h2>
+        <div class="subtitle-bar">
+          <span class="article-date"><img src="/images/icons/calendar-alt-svgrepo-com.svg" alt="">&#160;25 Dec 2018</span>
+          <span class="reading-duration"><img src="/images/icons/hourglass-svgrepo-com.svg" alt="">&#160;8 min</span>
+        </div>
+        <p>Reading notes from "The Algorithm Design Manual" — problem modeling, correctness, and combinatorial objects.</p>
+      </div>
+    </a>
+  </article>
+
+  <article data-tags="git vcs guide">
+    <ul class="tags">
+      <li><a href="#" data-tag="git">git</a></li>
+      <li><a href="#" data-tag="guide">guide</a></li>
+    </ul>
+    <a href="/posts/2017-10-05-git-best-practices/">
+      <div class="article-illustration">
+        <img src="/posts/2017-10-05-git-best-practices/cover.png" width="300" height="200" alt="Git logo">
+      </div>
+      <div>
+        <h2>Git best practices</h2>
+        <div class="subtitle-bar">
+          <span class="article-date"><img src="/images/icons/calendar-alt-svgrepo-com.svg" alt="">&#160;5 Oct 2017</span>
+          <span class="reading-duration"><img src="/images/icons/hourglass-svgrepo-com.svg" alt="">&#160;3 min</span>
+        </div>
+        <p>Git configuration, branching and workflow best practices.</p>
+      </div>
+    </a>
+  </article>
+
+  <article data-tags="docker guide">
+    <ul class="tags">
+      <li><a href="#" data-tag="docker">docker</a></li>
+      <li><a href="#" data-tag="guide">guide</a></li>
+    </ul>
+    <a href="/posts/2017-09-27-docker-best-practices/">
+      <div class="article-illustration">
+        <img src="/posts/2017-09-27-docker-best-practices/cover.png" width="300" height="200" alt="Docker logo">
+      </div>
+      <div>
+        <h2>Docker best practices</h2>
+        <div class="subtitle-bar">
+          <span class="article-date"><img src="/images/icons/calendar-alt-svgrepo-com.svg" alt="">&#160;27 Sep 2017</span>
+          <span class="reading-duration"><img src="/images/icons/hourglass-svgrepo-com.svg" alt="">&#160;5 min</span>
+        </div>
+        <p>Docker and Docker Compose installation and best practices reference.</p>
+      </div>
+    </a>
+  </article>
+
+  <article data-tags="nodejs npm nvm guide">
+    <ul class="tags">
+      <li><a href="#" data-tag="nodejs">nodejs</a></li>
+      <li><a href="#" data-tag="guide">guide</a></li>
+    </ul>
+    <a href="/posts/2017-09-26-nodejs-installation-guide/">
+      <div class="article-illustration">
+        <img src="/posts/2017-09-26-nodejs-installation-guide/cover.png" width="300" height="200" alt="Node.js logo">
+      </div>
+      <div>
+        <h2>Node.js installation guide</h2>
+        <div class="subtitle-bar">
+          <span class="article-date"><img src="/images/icons/calendar-alt-svgrepo-com.svg" alt="">&#160;26 Sep 2017</span>
+          <span class="reading-duration"><img src="/images/icons/hourglass-svgrepo-com.svg" alt="">&#160;5 min</span>
+        </div>
+        <p>Node.js, npm, nvm and yarn installation and usage guide.</p>
+      </div>
+    </a>
+  </article>
+
+  <article data-tags="sass css scss color design guide">
+    <ul class="tags">
+      <li><a href="#" data-tag="design">design</a></li>
+      <li><a href="#" data-tag="css">css</a></li>
+    </ul>
+    <a href="/posts/2017-09-19-design-color-palette/">
+      <div class="article-illustration">
+        <img src="/posts/2017-09-19-design-color-palette/cover.png" width="300" height="200" alt="Color palette">
+      </div>
+      <div>
+        <h2>Design a color palette</h2>
+        <div class="subtitle-bar">
+          <span class="article-date"><img src="/images/icons/calendar-alt-svgrepo-com.svg" alt="">&#160;19 Sep 2017</span>
+          <span class="reading-duration"><img src="/images/icons/hourglass-svgrepo-com.svg" alt="">&#160;3 min</span>
+        </div>
+        <p>Color terminology, meaning, and resources for designing a cohesive color palette.</p>
+      </div>
+    </a>
+  </article>
+
+  <article data-tags="unix ssh user guide">
+    <ul class="tags">
+      <li><a href="#" data-tag="ssh">ssh</a></li>
+      <li><a href="#" data-tag="guide">guide</a></li>
+    </ul>
+    <a href="/posts/2017-08-12-add-user-ssh/">
+      <div class="article-illustration">
+        <img src="/posts/2017-08-12-add-user-ssh/cover.png" width="300" height="200" alt="SSH icon">
+      </div>
+      <div>
+        <h2>Create users &amp; configure SSH on Debian</h2>
+        <div class="subtitle-bar">
+          <span class="article-date"><img src="/images/icons/calendar-alt-svgrepo-com.svg" alt="">&#160;12 Aug 2017</span>
+          <span class="reading-duration"><img src="/images/icons/hourglass-svgrepo-com.svg" alt="">&#160;3 min</span>
+        </div>
+        <p>Quick guide to create new users on Debian and configure SSH keys for remote access.</p>
+      </div>
+    </a>
+  </article>
+
+  <article data-tags="python data-science jupyter guide">
+    <ul class="tags">
+      <li><a href="#" data-tag="python">python</a></li>
+      <li><a href="#" data-tag="guide">guide</a></li>
+    </ul>
+    <a href="/posts/2017-10-06-jupyter-suite/">
+      <div class="article-illustration">
+        <img src="/posts/2017-10-06-jupyter-suite/cover.png" width="300" height="200" alt="Jupyter logo">
+      </div>
+      <div>
+        <h2>Jupyter suite</h2>
+        <div class="subtitle-bar">
+          <span class="article-date"><img src="/images/icons/calendar-alt-svgrepo-com.svg" alt="">&#160;6 Oct 2017</span>
+          <span class="reading-duration"><img src="/images/icons/hourglass-svgrepo-com.svg" alt="">&#160;2 min</span>
+        </div>
+        <p>Jupyter notebook and JupyterLab installation notes.</p>
+      </div>
+    </a>
+  </article>
+
+  <article data-tags="python guide">
+    <ul class="tags">
+      <li><a href="#" data-tag="python">python</a></li>
+      <li><a href="#" data-tag="guide">guide</a></li>
+    </ul>
+    <a href="/posts/2017-10-06-python-setup/">
+      <div class="article-illustration">
+        <img src="/posts/2017-10-06-python-setup/cover.png" width="300" height="200" alt="Python logo">
+      </div>
+      <div>
+        <h2>Python setup</h2>
+        <div class="subtitle-bar">
+          <span class="article-date"><img src="/images/icons/calendar-alt-svgrepo-com.svg" alt="">&#160;6 Oct 2017</span>
+          <span class="reading-duration"><img src="/images/icons/hourglass-svgrepo-com.svg" alt="">&#160;2 min</span>
+        </div>
+        <p>Quick guide to install Python and pip on Debian.</p>
+      </div>
+    </a>
+  </article>
 
   <article data-tags="dev-env linux tmux zsh nvim guide">
     <ul class="tags">
