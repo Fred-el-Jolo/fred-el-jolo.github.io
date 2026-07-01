@@ -1,474 +1,186 @@
-<!doctype html>
-
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="utf-8">
-
-  <meta http-equiv="Content-Security-Policy" content="">
-  <meta name="referrer" content="no-referrer">
- 
-  <link rel="icon" href="/images/favicon/logo-triangle.png" />
-
-  <title>Aesthete coding, Easy to code, hard to master</title>
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <meta name="author" content="Frédéric GUILLAUME" />
-  <meta name="description" content="Web developer" />
-  <meta name="keywords" content="web,developer,javascript,fullstack" />
-
-  <link type="text/plain" rel="author" href="/humans.txt" />
-
-  <link rel="stylesheet" href="/css/main.css">
-
-  <script defer src="/js/main.js"></script>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{aesthetecoding.io} — field notes on Linux, dev environments &amp; the craft of the terminal</title>
+<meta name="description" content="An aesthete's field notes on Linux, dev environments and the craft of the terminal.">
+<!-- fonts are self-hosted via @font-face in css/atelier.css — no third-party requests -->
+<link rel="stylesheet" href="css/atelier.css">
 </head>
+<body class="acx" data-theme="dark" data-eco="off" data-font="m">
+<script>
+/* anti-flash: apply saved preferences before the page paints */
+(function () {
+  try {
+    var b = document.currentScript.parentElement, s = localStorage;
+    var t = s.getItem('acx-theme'); if (t) b.setAttribute('data-theme', t);
+    var f = s.getItem('acx-font');  if (f) b.setAttribute('data-font', f);
+    var e = s.getItem('acx-eco');   if (e) b.setAttribute('data-eco', e);
+  } catch (x) {}
+})();
+</script>
 
-
-<body class="dark-theme">
-    <header>
-      <div class="config">
-        <menu>
-          <li>
-            <button id="switch-theme" aria-label="Toggle theme">
-              <img id="light-theme" class="icon" src="/images/icons/clear-day-svgrepo-com.svg" alt="Switch to dark theme" width="20" height="20">
-              <img id="dark-theme" class="icon" src="/images/icons/moon-svgrepo-com.svg" alt="Switch to light theme" width="18" height="18">
-            </button>
-          </li>
-          <li>
-            <button id="switch-font" aria-label="Toggle dyslexia-friendly font">
-              <img class="icon" src="/images/icons/font-svgrepo-com.svg" alt="" width="20" height="20">
-            </button>
-          </li>
-          <li>
-            <button id="switch-eco-mode" aria-label="Toggle eco mode">
-              <img class="icon" src="/images/icons/leaf-svgrepo-com.svg" alt="" width="20" height="20">
-            </button>
-          </li>
-        </menu>
-        <nav aria-label="External links">
-          <menu>
-            <li>
-              <a href="https://github.com/Fred-el-Jolo">
-                <img class="icon" src="/images/icons/github.svg" alt="GitHub profile" width="20" height="20">
-              </a>
-            </li>
-            <li>
-              <a href="https://www.linkedin.com/in/fredericguillaume/">
-                <img class="icon" src="/images/icons/linkedin.svg" alt="LinkedIn profile" width="20" height="20">
-              </a>
-            </li>
-          </menu>
-        </nav>
-      </div>
-      <img id="main-logo-dark" class="main-logo" src="/images/logo-couleur-contourblanc.png" height="125" alt="Logo: old man medidating" />
-      <img id="main-logo-light" class="main-logo" src="/images/logo-couleur.png" height="125" alt="Logo: old man medidating" />
-      <h1 class="header__title"><span class="header__title_orange">{</span><span class="header__title_white">aesthete</span><span class="header__title_orange">coding</span><span
-          class="header__title_white">.io</span><span class="header__title_orange">}</span></h1>
-
-      <nav>
-        <menu>
-          <li>
-            <h3>
-              <a href="/index.html">
-                Home
-              </a>
-            </h3>
-          </li>
-          <li>
-            <h3>
-              <a href="/search.html">
-                Search
-              </a>
-            </h3>
-          </li>
-          <li>
-            <h3>
-              <a href="/about.html">
-                About me
-              </a>
-            </h3>
-          </li>
-        </menu>
-        <!--<a href="/index.html">
-          Home
-        </a>
-        <span>&bull;</span>
-        <a href="/search.html">
-          &bull; Search &bull;
-        </a>
-        <span>&bull;</span>
-        <a href="/about.html">
-          About me
-        </a-->
-      </nav>
-    </header>
-
-<main>
-  <div id="tag-filter" class="tag-filter">
-    <button data-filter="all" class="active">All</button>
-    <button data-filter="dev-env">dev env</button>
-    <button data-filter="guide">guide</button>
-    <button data-filter="linux">linux</button>
-    <button data-filter="sass">sass</button>
-    <button data-filter="css">css</button>
-    <button data-filter="scss">scss</button>
-    <button data-filter="design">design</button>
-    <button data-filter="javascript">javascript</button>
-    <button data-filter="kubernetes">kubernetes</button>
-    <button data-filter="docker">docker</button>
-    <button data-filter="raspberry-pi">raspberry-pi</button>
-    <button data-filter="git">git</button>
-    <button data-filter="nodejs">nodejs</button>
-    <button data-filter="python">python</button>
-    <button data-filter="algorithm">algorithm</button>
-    <button data-filter="ssh">ssh</button>
-    <button data-filter="talk">talk</button>
+<!-- ===================== MASTHEAD ===================== -->
+<header class="mast">
+  <div class="mast-tools">
+    <div class="seg theme" role="group" aria-label="Colour theme">
+      <button data-v="light" aria-label="Light theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg></button>
+      <button data-v="dark" aria-label="Dark theme"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 1 0 9.8 9.8Z"></path></svg></button>
+    </div>
+    <div class="seg font" role="group" aria-label="Text size">
+      <button data-v="s" aria-label="Small text">A</button>
+      <button data-v="m" aria-label="Medium text">A</button>
+      <button data-v="l" aria-label="Large text">A</button>
+    </div>
+    <button class="leaf" aria-label="Eco / performance mode" title="Eco / performance mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20c0-8 6-14 16-15 0 10-6 16-16 15Z"></path><path d="M4 20c3-7 7-10 12-12"></path></svg></button>
   </div>
-  <!-- POSTS_START -->
 
-  <article data-tags="javascript asynchronous promise async-await talk">
-    <ul class="tags">
-      <li><a href="#" data-tag="javascript">javascript</a></li>
-      <li><a href="#" data-tag="talk">talk</a></li>
-      <li><a href="#" data-tag="asynchronous">asynchronous</a></li>
-    </ul>
-    <a href="/posts/2019-03-14-asynchronous-js/">
-      <div class="article-illustration">
-        <img src="/posts/2019-03-14-asynchronous-js/cover.png" width="300" height="200" alt="Asynchronous JS talk">
-      </div>
-      <div>
-        <h2>Asynchronous JS, from hell to exquisiteness</h2>
-        <div class="subtitle-bar">
-          <span class="article-date"><img src="/images/icons/calendar-alt-svgrepo-com.svg" alt="">&#160;14 Mar 2019</span>
-          <span class="reading-duration"><img src="/images/icons/hourglass-svgrepo-com.svg" alt="">&#160;20 min</span>
-        </div>
-        <p>JSSophia talk — callbacks, promises, generators and async/await from first principles.</p>
-      </div>
-    </a>
-  </article>
+  <div class="wrap"><div class="mast-in">
+    <img class="monk for-dark" src="assets/logo-dark-bg.png" alt="aesthetecoding meditating monk logo" width="84">
+    <img class="monk for-light" src="assets/logo-light-bg.png" alt="aesthetecoding meditating monk logo" width="84">
+    <h1 class="wordmark"><span class="b" aria-hidden="true">{</span>&nbsp;aesthetecoding.io&nbsp;<span class="b" aria-hidden="true">}</span></h1>
+    <p class="punch" data-mode="slide">Easy to <span class="rot" data-words="learn,|code,|prompt,|pronounce,"><span class="w">learn,</span></span> hard to <span class="rot" data-words="master.|master.|master.|write."><span class="w">master.</span></span></p>
+    <nav class="mast-topics" aria-label="Filter by topic">
+      <a href="#" data-tag="linux">linux</a><span class="sep">·</span>
+      <a href="#" data-tag="dev env">dev-env</a><span class="sep">·</span>
+      <a href="#" data-tag="javascript">javascript</a><span class="sep">·</span>
+      <a href="#" data-tag="css / sass">css</a><span class="sep">·</span>
+      <a href="#" data-tag="raspberry pi">raspberry pi</a><span class="sep">·</span>
+      <a href="#" data-tag="kubernetes">kubernetes</a>
+    </nav>
+  </div></div>
+</header>
 
-  <article data-tags="algorithm notes">
-    <ul class="tags">
-      <li><a href="#" data-tag="algorithm">algorithm</a></li>
-      <li><a href="#" data-tag="notes">notes</a></li>
-    </ul>
-    <a href="/posts/2018-12-25-algorithm-design/">
-      <div class="article-illustration">
-        <img src="/posts/2018-12-25-algorithm-design/cover.png" width="300" height="200" alt="Algorithm design">
-      </div>
-      <div>
-        <h2>Algorithm design</h2>
-        <div class="subtitle-bar">
-          <span class="article-date"><img src="/images/icons/calendar-alt-svgrepo-com.svg" alt="">&#160;25 Dec 2018</span>
-          <span class="reading-duration"><img src="/images/icons/hourglass-svgrepo-com.svg" alt="">&#160;8 min</span>
-        </div>
-        <p>Reading notes from "The Algorithm Design Manual" — problem modeling, correctness, and combinatorial objects.</p>
-      </div>
-    </a>
-  </article>
+<main class="wrap">
 
-  <article data-tags="git vcs guide">
-    <ul class="tags">
-      <li><a href="#" data-tag="git">git</a></li>
-      <li><a href="#" data-tag="guide">guide</a></li>
-    </ul>
-    <a href="/posts/2017-10-05-git-best-practices/">
-      <div class="article-illustration">
-        <img src="/posts/2017-10-05-git-best-practices/cover.png" width="300" height="200" alt="Git logo">
+  <!-- ===================== FEATURED ===================== -->
+  <section class="feat-wrap"><div class="feat">
+    <div>
+      <p class="eyebrow">À la une</p>
+      <h2>The quiet machine: building a distraction-free Linux workstation</h2>
+      <p>Window manager, font rendering and a colour scheme tuned for long focus — the full build of the desk I actually work at.</p>
+      <div class="meta">
+        <span class="cat">Linux</span><span>Jun 10, 2026</span><span>·</span><span>16 min read</span>
+        <span class="prov prov-none" title="Generated without AI"><span class="pg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19l1.2-4L16 5.2a1.8 1.8 0 0 1 2.6 2.6L8.8 17.6 5 19z"></path><path d="M14.5 6.8l2.7 2.7"></path></svg></span>without AI</span>
       </div>
-      <div>
-        <h2>Git best practices</h2>
-        <div class="subtitle-bar">
-          <span class="article-date"><img src="/images/icons/calendar-alt-svgrepo-com.svg" alt="">&#160;5 Oct 2017</span>
-          <span class="reading-duration"><img src="/images/icons/hourglass-svgrepo-com.svg" alt="">&#160;3 min</span>
-        </div>
-        <p>Git configuration, branching and workflow best practices.</p>
-      </div>
-    </a>
-  </article>
+      <a class="cta" href="article-components.html">Read the build <span class="ar">→</span></a>
+    </div>
+    <div style="--cat:var(--blue)"><div class="ph">
+      <div class="cover"><span class="lbl">cover · 1500×1200</span></div>
+      <img class="cover-img" src="assets/samples/sample-featured.png" data-fallback="assets/samples/sample-cover.png" alt="The quiet machine workstation build">
+      <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="M7 9l3 3-3 3M13 15h4"></path></svg><span class="gl">Linux</span></div>
+    </div></div>
+  </div></section>
 
-  <article data-tags="docker guide">
-    <ul class="tags">
-      <li><a href="#" data-tag="docker">docker</a></li>
-      <li><a href="#" data-tag="guide">guide</a></li>
-    </ul>
-    <a href="/posts/2017-09-27-docker-best-practices/">
-      <div class="article-illustration">
-        <img src="/posts/2017-09-27-docker-best-practices/cover.png" width="300" height="200" alt="Docker logo">
-      </div>
-      <div>
-        <h2>Docker best practices</h2>
-        <div class="subtitle-bar">
-          <span class="article-date"><img src="/images/icons/calendar-alt-svgrepo-com.svg" alt="">&#160;27 Sep 2017</span>
-          <span class="reading-duration"><img src="/images/icons/hourglass-svgrepo-com.svg" alt="">&#160;5 min</span>
-        </div>
-        <p>Docker and Docker Compose installation and best practices reference.</p>
-      </div>
-    </a>
-  </article>
+  <!-- ===================== SECTION ===================== -->
+  <div class="sec"><h2>All writing</h2><span class="ct">48 posts</span><span class="rule"></span></div>
 
-  <article data-tags="nodejs npm nvm guide">
-    <ul class="tags">
-      <li><a href="#" data-tag="nodejs">nodejs</a></li>
-      <li><a href="#" data-tag="guide">guide</a></li>
-    </ul>
-    <a href="/posts/2017-09-26-nodejs-installation-guide/">
-      <div class="article-illustration">
-        <img src="/posts/2017-09-26-nodejs-installation-guide/cover.png" width="300" height="200" alt="Node.js logo">
-      </div>
-      <div>
-        <h2>Node.js installation guide</h2>
-        <div class="subtitle-bar">
-          <span class="article-date"><img src="/images/icons/calendar-alt-svgrepo-com.svg" alt="">&#160;26 Sep 2017</span>
-          <span class="reading-duration"><img src="/images/icons/hourglass-svgrepo-com.svg" alt="">&#160;5 min</span>
-        </div>
-        <p>Node.js, npm, nvm and yarn installation and usage guide.</p>
-      </div>
-    </a>
-  </article>
+  <!-- ===================== POST LIST ===================== -->
+  <div class="list">
 
-  <article data-tags="sass css scss color design guide">
-    <ul class="tags">
-      <li><a href="#" data-tag="design">design</a></li>
-      <li><a href="#" data-tag="css">css</a></li>
-    </ul>
-    <a href="/posts/2017-09-19-design-color-palette/">
-      <div class="article-illustration">
-        <img src="/posts/2017-09-19-design-color-palette/cover.png" width="300" height="200" alt="Color palette">
+    <a class="row" href="article.html" style="--cat:var(--blue)" data-cat="dev env">
+      <div class="thumb">
+        <div class="cover"></div>
+        <img class="cover-img" src="assets/samples/sample-thumb.png" data-fallback="assets/samples/sample-cover.png" alt="">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4.5v9L12 20l-8-4.5v-9L12 2Z"></path><path d="M12 11v9M4 6.5l8 4.5 8-4.5"></path></svg></div>
       </div>
-      <div>
-        <h2>Design a color palette</h2>
-        <div class="subtitle-bar">
-          <span class="article-date"><img src="/images/icons/calendar-alt-svgrepo-com.svg" alt="">&#160;19 Sep 2017</span>
-          <span class="reading-duration"><img src="/images/icons/hourglass-svgrepo-com.svg" alt="">&#160;3 min</span>
-        </div>
-        <p>Color terminology, meaning, and resources for designing a cohesive color palette.</p>
+      <div class="mid">
+        <h3>A reproducible dev environment with Nix flakes</h3>
+        <div class="m"><span class="cat">Dev Env</span><span>9 min read</span><span class="prov prov-enriched" title="Enriched with AI"><span class="pg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4l1.6 4.6L18 10l-4.4 1.4L12 16l-1.6-4.6L6 10l4.4-1.4z"></path></svg></span>AI-enriched</span></div>
       </div>
+      <span class="date">Jun 4, 2026</span>
     </a>
-  </article>
 
-  <article data-tags="unix ssh user guide">
-    <ul class="tags">
-      <li><a href="#" data-tag="ssh">ssh</a></li>
-      <li><a href="#" data-tag="guide">guide</a></li>
-    </ul>
-    <a href="/posts/2017-08-12-add-user-ssh/">
-      <div class="article-illustration">
-        <img src="/posts/2017-08-12-add-user-ssh/cover.png" width="300" height="200" alt="SSH icon">
+    <a class="row" href="article.html" style="--cat:var(--green)" data-cat="raspberry pi">
+      <div class="thumb">
+        <div class="cover"></div>
+        <img class="cover-img" src="assets/samples/sample-cover.png" alt="" style="--focus:78% 40%">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="12" height="12" rx="1.5"></rect><rect x="9.5" y="9.5" width="5" height="5"></rect><path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2"></path></svg></div>
       </div>
-      <div>
-        <h2>Create users &amp; configure SSH on Debian</h2>
-        <div class="subtitle-bar">
-          <span class="article-date"><img src="/images/icons/calendar-alt-svgrepo-com.svg" alt="">&#160;12 Aug 2017</span>
-          <span class="reading-duration"><img src="/images/icons/hourglass-svgrepo-com.svg" alt="">&#160;3 min</span>
-        </div>
-        <p>Quick guide to create new users on Debian and configure SSH keys for remote access.</p>
+      <div class="mid">
+        <h3>Self-hosting a homelab on a Raspberry Pi 4 cluster</h3>
+        <div class="m"><span class="cat">Raspberry Pi</span><span>12 min read</span><span class="prov prov-none" title="Generated without AI"><span class="pg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19l1.2-4L16 5.2a1.8 1.8 0 0 1 2.6 2.6L8.8 17.6 5 19z"></path><path d="M14.5 6.8l2.7 2.7"></path></svg></span>without AI</span></div>
       </div>
+      <span class="date">May 28, 2026</span>
     </a>
-  </article>
 
-  <article data-tags="python data-science jupyter guide">
-    <ul class="tags">
-      <li><a href="#" data-tag="python">python</a></li>
-      <li><a href="#" data-tag="guide">guide</a></li>
-    </ul>
-    <a href="/posts/2017-10-06-jupyter-suite/">
-      <div class="article-illustration">
-        <img src="/posts/2017-10-06-jupyter-suite/cover.png" width="300" height="200" alt="Jupyter logo">
+    <a class="row" href="article.html" style="--cat:var(--red)" data-cat="css / sass">
+      <div class="thumb">
+        <div class="cover"></div>
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4c-2 .2-2.2 3-2.2 4.4 0 1.2-1 1.6-1.8 1.6.8 0 1.8.4 1.8 1.6 0 1.4.2 4.2 2.2 4.4M15 4c2 .2 2.2 3 2.2 4.4 0 1.2 1 1.6 1.8 1.6-.8 0-1.8.4-1.8 1.6 0 1.4-.2 4.2-2.2 4.4"></path></svg></div>
       </div>
-      <div>
-        <h2>Jupyter suite</h2>
-        <div class="subtitle-bar">
-          <span class="article-date"><img src="/images/icons/calendar-alt-svgrepo-com.svg" alt="">&#160;6 Oct 2017</span>
-          <span class="reading-duration"><img src="/images/icons/hourglass-svgrepo-com.svg" alt="">&#160;2 min</span>
-        </div>
-        <p>Jupyter notebook and JupyterLab installation notes.</p>
+      <div class="mid">
+        <h3>Container queries finally killed my media-query soup</h3>
+        <div class="m"><span class="cat">CSS / Sass</span><span>6 min read</span><span class="prov prov-full" title="Generated with AI"><span class="pg"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1.6l2.3 6.4L20.6 10l-6.3 2L12 18.4 9.7 12 3.4 10l6.3-2z"></path></svg></span>with AI</span></div>
       </div>
+      <span class="date">May 19, 2026</span>
     </a>
-  </article>
 
-  <article data-tags="python guide">
-    <ul class="tags">
-      <li><a href="#" data-tag="python">python</a></li>
-      <li><a href="#" data-tag="guide">guide</a></li>
-    </ul>
-    <a href="/posts/2017-10-06-python-setup/">
-      <div class="article-illustration">
-        <img src="/posts/2017-10-06-python-setup/cover.png" width="300" height="200" alt="Python logo">
+    <a class="row" href="article.html" style="--cat:var(--blue)" data-cat="kubernetes">
+      <div class="thumb">
+        <div class="cover"></div>
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5l8 3.8v8.4l-8 3.8-8-3.8V6.3l8-3.8Z"></path><circle cx="12" cy="12" r="2.4"></circle><path d="M12 4.6v3M12 16.4v3M5.5 8.2l2.6 1.4M15.9 14.4l2.6 1.4M18.5 8.2l-2.6 1.4M8.1 14.4l-2.6 1.4"></path></svg></div>
       </div>
-      <div>
-        <h2>Python setup</h2>
-        <div class="subtitle-bar">
-          <span class="article-date"><img src="/images/icons/calendar-alt-svgrepo-com.svg" alt="">&#160;6 Oct 2017</span>
-          <span class="reading-duration"><img src="/images/icons/hourglass-svgrepo-com.svg" alt="">&#160;2 min</span>
-        </div>
-        <p>Quick guide to install Python and pip on Debian.</p>
+      <div class="mid">
+        <h3>k3s on bare metal: lean Kubernetes for the homelab</h3>
+        <div class="m"><span class="cat">Kubernetes</span><span>14 min read</span><span class="prov prov-enriched" title="Enriched with AI"><span class="pg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4l1.6 4.6L18 10l-4.4 1.4L12 16l-1.6-4.6L6 10l4.4-1.4z"></path></svg></span>AI-enriched</span></div>
       </div>
+      <span class="date">May 9, 2026</span>
     </a>
-  </article>
 
-  <article data-tags="dev-env linux tmux zsh nvim guide">
-    <ul class="tags">
-      <li><a href="#" data-tag="dev-env">dev env</a></li>
-      <li><a href="#" data-tag="linux">linux</a></li>
-      <li><a href="#" data-tag="tmux">tmux</a></li>
-      <li><a href="#" data-tag="zsh">zsh</a></li>
-      <li><a href="#" data-tag="nvim">nvim</a></li>
-      <li><a href="#" data-tag="guide">guide</a></li>
-    </ul>
-    <a href="/posts/2020-04-26-dev-setup/">
-      <div class="article-illustration">
-        <img src="/posts/2020-04-26-dev-setup/cover.jpg" width="300" height="200" alt="Software developer working on desktop">
+    <a class="row" href="article.html" style="--cat:var(--red)" data-cat="css / sass">
+      <div class="thumb">
+        <div class="cover"></div>
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4c-2 .2-2.2 3-2.2 4.4 0 1.2-1 1.6-1.8 1.6.8 0 1.8.4 1.8 1.6 0 1.4.2 4.2 2.2 4.4M15 4c2 .2 2.2 3 2.2 4.4 0 1.2 1 1.6 1.8 1.6-.8 0-1.8.4-1.8 1.6 0 1.4-.2 4.2-2.2 4.4"></path></svg></div>
       </div>
-      <div>
-        <h2>Dev setup guide</h2>
-        <div class="subtitle-bar">
-          <span class="article-date"><img src="/images/icons/calendar-alt-svgrepo-com.svg" alt="">&#160;26 Apr 2020</span>
-          <span class="reading-duration"><img src="/images/icons/hourglass-svgrepo-com.svg" alt="">&#160;15 min</span>
-        </div>
-        <p>Terminal tools, editors, and environment configuration — tmux, zsh, nvim and a complete Linux dev environment from scratch.</p>
+      <div class="mid">
+        <h3>Structuring Sass for scale: a layered architecture</h3>
+        <div class="m"><span class="cat">CSS / Sass</span><span>9 min read</span><span class="prov prov-none" title="Generated without AI"><span class="pg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19l1.2-4L16 5.2a1.8 1.8 0 0 1 2.6 2.6L8.8 17.6 5 19z"></path><path d="M14.5 6.8l2.7 2.7"></path></svg></span>without AI</span></div>
       </div>
+      <span class="date">Apr 30, 2026</span>
     </a>
-  </article>
 
-  <article data-tags="functional-programming scala notes">
-    <ul class="tags">
-      <li><a href="#" data-tag="functional-programming">functional programming</a></li>
-      <li><a href="#" data-tag="scala">scala</a></li>
-      <li><a href="#" data-tag="notes">notes</a></li>
-    </ul>
-    <a href="/posts/2020-01-02-functional-programming-scala/">
-      <div class="article-illustration">
-        <img src="/posts/2020-01-02-functional-programming-scala/cover.png" width="300" height="200" alt="Functional programming in Scala">
+    <a class="row" href="article.html" style="--cat:var(--amber)" data-cat="javascript">
+      <div class="thumb">
+        <div class="cover"></div>
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 7l-4 5 4 5M15 7l4 5-4 5"></path></svg></div>
       </div>
-      <div>
-        <h2>Functional programming in Scala</h2>
-        <div class="subtitle-bar">
-          <span class="article-date"><img src="/images/icons/calendar-alt-svgrepo-com.svg" alt="">&#160;2 Jan 2020</span>
-          <span class="reading-duration"><img src="/images/icons/hourglass-svgrepo-com.svg" alt="">&#160;5 min</span>
-        </div>
-        <p>Functional programming in Scala — reading notes.</p>
+      <div class="mid">
+        <h3>Five JavaScript features I reach for daily</h3>
+        <div class="m"><span class="cat">JavaScript</span><span>7 min read</span><span class="prov prov-full" title="Generated with AI"><span class="pg"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1.6l2.3 6.4L20.6 10l-6.3 2L12 18.4 9.7 12 3.4 10l6.3-2z"></path></svg></span>with AI</span></div>
       </div>
+      <span class="date">Apr 22, 2026</span>
     </a>
-  </article>
 
-  <article data-tags="raspberry-pi setup guide">
-    <ul class="tags">
-      <li><a href="#" data-tag="raspberry-pi">raspberry-pi</a></li>
-      <li><a href="#" data-tag="setup">setup</a></li>
-      <li><a href="#" data-tag="guide">guide</a></li>
-    </ul>
-    <a href="/posts/2019-09-24-rpi4-setup/">
-      <div class="article-illustration">
-        <img src="/posts/2019-09-24-rpi4-setup/cover.png" width="300" height="200" alt="Raspberry Pi logo">
+    <a class="row" href="article.html" style="--cat:var(--blue)" data-cat="linux">
+      <div class="thumb">
+        <div class="cover"></div>
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="M7 9l3 3-3 3M13 15h4"></path></svg></div>
       </div>
-      <div>
-        <h2>Raspberry Pi 4 setup guide</h2>
-        <div class="subtitle-bar">
-          <span class="article-date"><img src="/images/icons/calendar-alt-svgrepo-com.svg" alt="">&#160;24 Sep 2019</span>
-          <span class="reading-duration"><img src="/images/icons/hourglass-svgrepo-com.svg" alt="">&#160;10 min</span>
-        </div>
-        <p>Raspberry Pi 4 setup guide — installation and first configuration.</p>
+      <div class="mid">
+        <h3>A calm, fast terminal: tmux + Neovim, ricing done right</h3>
+        <div class="m"><span class="cat">Linux</span><span>10 min read</span><span class="prov prov-none" title="Generated without AI"><span class="pg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19l1.2-4L16 5.2a1.8 1.8 0 0 1 2.6 2.6L8.8 17.6 5 19z"></path><path d="M14.5 6.8l2.7 2.7"></path></svg></span>without AI</span></div>
       </div>
+      <span class="date">Apr 14, 2026</span>
     </a>
-  </article>
 
-  <article data-tags="vscode ide guide">
-    <ul class="tags">
-      <li><a href="#" data-tag="vscode">vscode</a></li>
-      <li><a href="#" data-tag="ide">ide</a></li>
-      <li><a href="#" data-tag="guide">guide</a></li>
-    </ul>
-    <a href="/posts/2019-01-29-visual-studio-code/">
-      <div class="article-illustration">
-        <img src="/posts/2019-01-29-visual-studio-code/cover.png" width="300" height="200" alt="Visual Studio Code logo">
-      </div>
-      <div>
-        <h2>Visual Studio Code setup guide</h2>
-        <div class="subtitle-bar">
-          <span class="article-date"><img src="/images/icons/calendar-alt-svgrepo-com.svg" alt="">&#160;29 Jan 2019</span>
-          <span class="reading-duration"><img src="/images/icons/hourglass-svgrepo-com.svg" alt="">&#160;8 min</span>
-        </div>
-        <p>Visual Studio Code setup and configuration guide.</p>
-      </div>
-    </a>
-  </article>
+  </div>
 
-  <article data-tags="sass css scss design ui ux">
-    <ul class="tags">
-      <li><a href="#" data-tag="sass">sass</a></li>
-      <li><a href="#" data-tag="css">css</a></li>
-      <li><a href="#" data-tag="scss">scss</a></li>
-      <li><a href="#" data-tag="design">design</a></li>
-      <li><a href="#" data-tag="ui">ui</a></li>
-      <li><a href="#" data-tag="ux">ux</a></li>
-    </ul>
-    <a href="/posts/2018-07-12-sass-best-practices/">
-      <div class="article-illustration">
-        <img src="/posts/2018-07-12-sass-best-practices/cover.png" width="300" height="200" alt="Sass logo">
-      </div>
-      <div>
-        <h2>Sass best practices</h2>
-        <div class="subtitle-bar">
-          <span class="article-date"><img src="/images/icons/calendar-alt-svgrepo-com.svg" alt="">&#160;12 Jul 2018</span>
-          <span class="reading-duration"><img src="/images/icons/hourglass-svgrepo-com.svg" alt="">&#160;8 min</span>
-        </div>
-        <p>Reference &amp; summary of Sass best practices.</p>
-      </div>
-    </a>
-  </article>
-
-  <article data-tags="javascript es6 es7 es8 guide">
-    <ul class="tags">
-      <li><a href="#" data-tag="javascript">javascript</a></li>
-      <li><a href="#" data-tag="es6">es6</a></li>
-      <li><a href="#" data-tag="es7">es7</a></li>
-      <li><a href="#" data-tag="es8">es8</a></li>
-      <li><a href="#" data-tag="guide">guide</a></li>
-    </ul>
-    <a href="/posts/2018-01-08-javascript-core/">
-      <div class="article-illustration">
-        <img src="/posts/2018-01-08-javascript-core/cover.png" width="300" height="200" alt="js logo">
-      </div>
-      <div>
-        <h2>Javascript core features</h2>
-        <div class="subtitle-bar">
-          <span class="article-date"><img src="/images/icons/calendar-alt-svgrepo-com.svg" alt="">&#160;8 Jan 2018</span>
-          <span class="reading-duration"><img src="/images/icons/hourglass-svgrepo-com.svg" alt="">&#160;12 min</span>
-        </div>
-        <p>Reading notes from You don't know JS books.</p>
-      </div>
-    </a>
-  </article>
-
-  <article data-tags="raspberry-pi kubernetes docker cluster">
-    <ul class="tags">
-      <li><a href="#" data-tag="raspberry-pi">raspberry-pi</a></li>
-      <li><a href="#" data-tag="kubernetes">kubernetes</a></li>
-      <li><a href="#" data-tag="docker">docker</a></li>
-      <li><a href="#" data-tag="cluster">cluster</a></li>
-    </ul>
-    <a href="/posts/2018-01-06-rpi-cluster-kubernetes/">
-      <div class="article-illustration">
-        <img src="/posts/2018-01-06-rpi-cluster-kubernetes/cover.png" width="300" height="200" alt="Kubernetes logo">
-      </div>
-      <div>
-        <h2>Raspberry pi cluster with Kubernetes</h2>
-        <div class="subtitle-bar">
-          <span class="article-date"><img src="/images/icons/calendar-alt-svgrepo-com.svg" alt="">&#160;6 Jan 2018</span>
-          <span class="reading-duration"><img src="/images/icons/hourglass-svgrepo-com.svg" alt="">&#160;6 min</span>
-        </div>
-        <p>Raspberry pi cluster setup with Hypriot OS &amp; Kubernetes.</p>
-      </div>
-    </a>
-  </article>
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="foot">
+    <nav class="foot-social" aria-label="External links">
+      <a href="https://github.com/Fred-el-Jolo" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.36 1.09 2.94.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"></path></svg></a>
+      <a href="https://www.linkedin.com/in/fredericguillaume/" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.5c0-1.31-.02-3-1.83-3-1.83 0-2.11 1.43-2.11 2.9V21H9z"></path></svg></a>
+    </nav>
+    <div class="foot-text">
+      <span class="fpunch">Easy to code, hard to master.</span>
+      <span><span class="b">{</span> aesthetecoding.io <span class="b">}</span> · © 2026 · built static, served with care</span>
+    </div>
+  </footer>
 
 </main>
-  <footer class="footer">Copyrights &copy; 2026 aesthetecoding - All Rights Reserved.</footer>
+
+<script src="js/atelier.js"></script>
 </body>
-
 </html>
-

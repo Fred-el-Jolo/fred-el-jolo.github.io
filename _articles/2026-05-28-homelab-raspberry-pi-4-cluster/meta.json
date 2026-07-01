@@ -1,0 +1,16 @@
+{
+  "title": "Self-hosting a homelab on a Raspberry Pi 4 cluster",
+  "slug": "homelab-raspberry-pi-4-cluster",
+  "date": "2026-05-28",
+  "category": "raspberry pi",
+  "tags": ["raspberry pi", "kubernetes", "homelab", "linux", "self-hosting"],
+  "description": "Four boards, a switch, and surprisingly serious uptime — the parts list, the build, and the gotchas.",
+  "readingTime": 12,
+  "aiProvenance": "none",
+  "cover": "cover.png",
+  "coverAlt": "Four Raspberry Pi boards stacked with a small network switch",
+  "coverFocus": "78% 40%",
+  "ecoCoverDescription": "four Raspberry Pi boards stacked with a small network switch",
+  "featured": true,
+  "status": "published"
+}

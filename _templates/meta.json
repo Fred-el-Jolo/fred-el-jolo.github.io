@@ -1,0 +1,16 @@
+{
+  "title": "Article title (h1, used in OG + JSON-LD)",
+  "slug": "url-slug-no-date",
+  "date": "YYYY-MM-DD",
+  "category": "dev env",
+  "tags": ["tag-one", "tag-two"],
+  "description": "One-sentence description for meta + OG + JSON-LD (155 chars max).",
+  "readingTime": 0,
+  "aiProvenance": "none",
+  "cover": "cover.jpg",
+  "coverAlt": "Alt text for the cover image.",
+  "coverFocus": "50% 50%",
+  "ecoCoverDescription": "Plain-text description shown instead of image in eco mode.",
+  "featured": false,
+  "status": "draft"
+}

@@ -10,6 +10,8 @@ lerna-debug.log*
 node_modules
 dist
 dist-ssr
+_dist_tmp
+_dist_old
 *.local
 
 .superpowers/
