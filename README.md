@@ -25,7 +25,7 @@ Build pipeline is TypeScript run by [Bun](https://bun.sh).
 
 ```sh
 git clone https://github.com/Fred-el-Jolo/fred-el-jolo.github.io
-bun build
+bun make
 ```
 
 `dist/` is the built site. Open `dist/index.html` in a browser or run `bun dev` for a local server.
@@ -36,7 +36,7 @@ bun build
 
 | Command | What it does |
 |---|---|
-| `bun build` | Full build → `dist/` with atomic swap (safe if interrupted) |
+| `bun make` | Full build → `dist/` with atomic swap (safe if interrupted) |
 | `bun new` | Scaffold a new article interactively |
 | `bun components` | Print the component catalog to the terminal |
 | `bun dev` | Local dev server on `localhost:3000`, rebuilds on file save |
@@ -58,7 +58,7 @@ Creates `_articles/YYYY-MM-DD-slug/` with prefilled `meta.json`, starter `conten
 2. Drop images into `_articles/{folder}/assets/` — reference them as `assets/file.jpg`
 3. Fill in `_articles/{folder}/meta.json` — title, description, tags, reading time
 4. Set `"status": "published"` when ready
-5. `bun build` → generates `dist/articles/{slug}/index.html` with full SEO
+5. `bun make` → generates `dist/articles/{slug}/index.html` with full SEO
 
 Available components: `bun components` or open `_components/catalog.html` in a browser.
 
@@ -144,7 +144,7 @@ Every article gets canonical, Open Graph, Twitter card, and `application/ld+json
 
 1. Add an entry to `_config/categories.json` with `label`, `color` (CSS var), `filterKey`, and `icon` (SVG path content)
 2. Use the new key as `category` in article `meta.json`
-3. `bun build`
+3. `bun make`
 
 ---
 
@@ -152,5 +152,5 @@ Every article gets canonical, Open Graph, Twitter card, and `application/ld+json
 
 The `dist/` directory is the deployable output. Options:
 
-- **Manual:** run `bun build`, commit `dist/`, push — GitHub Pages serves from `dist/` or the repo root
-- **GitHub Actions:** trigger `bun build` on push to `main`, deploy `dist/` to `gh-pages` branch
+- **Manual:** run `bun make`, commit `dist/`, push — GitHub Pages serves from `dist/` or the repo root
+- **GitHub Actions:** trigger `bun make` on push to `main`, deploy `dist/` to `gh-pages` branch

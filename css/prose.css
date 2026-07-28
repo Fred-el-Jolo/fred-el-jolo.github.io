@@ -182,9 +182,14 @@
 
 /* rough-notation: emphasis baseline + static fallback when JS/lib unavailable or eco */
 .acx .read .col [data-rough]{ font-weight:500; }
-/* highlight types cover the text → force a dark ink so it reads on the bright marker (both themes) */
-.acx .read .col [data-rough].rough-hl{ color:#15110a; }
-.acx .read .col [data-rough].rough-fallback[data-rough="highlight"]{ background:linear-gradient(transparent 58%, color-mix(in srgb, var(--amber) 42%, transparent) 58%); color:#15110a; }
+/* highlight text ink: dark on light (amber fill is bright), normal ink on dark (amber fill is dim at 0.4 opacity) */
+.acx[data-theme="light"] .read .col [data-rough].rough-hl{ color:#15110a; }
+.acx[data-theme="dark"]  .read .col [data-rough].rough-hl{ color:var(--ink); }
+/* dark mode: SVG annotation SVGs land on <body> (.acx) — boost opacity so amber reads against dark bg */
+.acx[data-theme="dark"] .sketch-annotation path{ stroke-opacity:.7; }
+/* CSS fallback (eco mode / JS unavailable / reduced-motion) */
+.acx[data-theme="light"] .read .col [data-rough].rough-fallback[data-rough="highlight"]{ background:linear-gradient(transparent 58%, color-mix(in srgb, var(--amber) 42%, transparent) 58%); color:#15110a; }
+.acx[data-theme="dark"]  .read .col [data-rough].rough-fallback[data-rough="highlight"]{ background:linear-gradient(transparent 38%, color-mix(in srgb, var(--amber) 60%, transparent) 38%); color:var(--ink); }
 .acx .read .col [data-rough].rough-fallback:is([data-rough="underline"],[data-rough="box"],[data-rough="circle"]){ box-shadow:inset 0 -2px 0 var(--amber); }
 .acx .read .col [data-rough].rough-fallback[data-rough="strike-through"]{ text-decoration:line-through; text-decoration-color:var(--red); }
 

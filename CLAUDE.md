@@ -1,14 +1,14 @@
 # CLAUDE.md — aesthetecoding.io
 
 Pure static HTML/CSS/JS blog. **No framework, no templating engine, no SASS compilation.**
-Source lives in `_articles/`. Output is built to `dist/` by the bun build pipeline.
+Source lives in `_articles/`. Output is built to `dist/` by the bun make pipeline.
 
 ---
 
 ## Commands
 
 ```sh
-bun build            # full build → dist/  (safe atomic swap)
+bun make            # full build → dist/  (safe atomic swap)
 bun new              # scaffold a new article interactively
 bun components       # print the component catalog
 bun dev              # local dev server (serves dist/ with file watching)
@@ -137,7 +137,7 @@ If none is featured, the most recent article takes the slot.
 ### 5. Build and verify
 
 ```sh
-bun build
+bun make
 ```
 
 Build writes to `_dist_tmp/`, validates, then atomically swaps: `dist/` → `_dist_old/`,
@@ -341,7 +341,7 @@ Home page gets:
 To add a new category (affects nav, icon, color, and filter):
 1. Add an entry to `_config/categories.json`
 2. Use the new key as `meta.category` in articles
-3. Run `bun build`
+3. Run `bun make`
 
 ---
 

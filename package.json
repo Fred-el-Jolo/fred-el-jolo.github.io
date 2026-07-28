@@ -2,7 +2,7 @@
   "name": "aesthetecoding-io",
   "private": true,
   "scripts": {
-    "build": "bun _scripts/build.ts",
+    "make": "bun _scripts/build.ts",
     "dev": "bun _scripts/dev.ts",
     "new": "bun _scripts/new-article.ts",
     "components": "bun _scripts/list-components.ts"
