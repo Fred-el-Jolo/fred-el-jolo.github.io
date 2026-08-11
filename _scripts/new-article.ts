@@ -51,6 +51,23 @@ const CONTENT_STARTER = `<!-- Article body — only what goes inside <div class=
 <p>Content here.</p>
 `;
 
+const SLIDES_STARTER = `<!-- Deck content — only <section class="slide"> blocks, no wrapper.
+     See _templates/article-deck.html for every slide situation — copy only
+     the ones this deck actually needs, not the whole catalogue. -->
+
+<section class="slide slide--gradient" data-label="Cover">
+  <div class="eyebrow">Kicker</div>
+  <h1 class="title title--hero">Deck Title Goes Here</h1>
+  <div class="footer"><span class="wm"><span class="b">{</span> aesthetecoding.io <span class="b">}</span></span><span data-deck-page></span></div>
+</section>
+
+<section class="slide" data-label="First point">
+  <p class="eyebrow">Eyebrow</p>
+  <h2 class="title">First point</h2>
+  <div class="footer"><span class="wm"><span class="b">{</span> aesthetecoding.io <span class="b">}</span></span><span data-deck-page></span></div>
+</section>
+`;
+
 async function main(): Promise<void> {
   const categories = JSON.parse(await readFile(join(CONFIG_DIR, "categories.json"), "utf-8")) as Record<string, { label: string }>;
   const catKeys = Object.keys(categories);
@@ -69,6 +86,8 @@ async function main(): Promise<void> {
   console.log(`\nCategories: ${catKeys.join(" | ")}`);
   const category = await ask("Category", catKeys[0]);
 
+  const format = await ask("Format — article or deck", "article") as "article" | "deck";
+
   const description = await ask("Description (≤155 chars for SEO)");
   const readingTime = await ask("Estimated reading time (minutes)", "5");
 
@@ -76,12 +95,22 @@ async function main(): Promise<void> {
   const aiProvenance = await ask("AI provenance", "none") as "none" | "enriched" | "full";
 
   const cover = await ask("Cover image filename (leave blank if none)", "");
+  const featuredCover = cover
+    ? await ask("Featured card crop filename — 5:4, optional, leave blank to reuse cover", "")
+    : "";
+  const listCover = cover
+    ? await ask("List thumbnail crop filename — square, optional, leave blank to reuse cover", "")
+    : "";
 
   rl.close();
 
   // validate
   if (!["none", "enriched", "full"].includes(aiProvenance)) {
     console.error("invalid aiProvenance — must be none | enriched | full");
+    process.exit(1);
+  }
+  if (!["article", "deck"].includes(format)) {
+    console.error("invalid format — must be article | deck");
     process.exit(1);
   }
 
@@ -103,16 +132,20 @@ async function main(): Promise<void> {
     readingTime: parseInt(readingTime, 10) || 5,
     aiProvenance,
     ...(cover ? { cover, coverAlt: "", coverFocus: "50% 50%", ecoCoverDescription: "" } : {}),
+    ...(featuredCover ? { featuredCover, featuredCoverFocus: "50% 50%" } : {}),
+    ...(listCover ? { listCover, listCoverFocus: "50% 50%" } : {}),
     featured: false,
     status: "draft",
+    ...(format === "deck" ? { format } : {}),
   };
 
   await mkdir(join(dest, "assets"), { recursive: true });
   await writeFile(join(dest, "meta.json"), JSON.stringify(meta, null, 2));
-  await writeFile(join(dest, "content.html"), CONTENT_STARTER);
+  await writeFile(join(dest, format === "deck" ? "slides.html" : "content.html"), format === "deck" ? SLIDES_STARTER : CONTENT_STARTER);
 
+  const bodyFile = format === "deck" ? "slides.html" : "content.html";
   console.log(`\n✅  created _articles/${folder}/`);
-  console.log(`    edit content → _articles/${folder}/content.html`);
+  console.log(`    edit content → _articles/${folder}/${bodyFile}`);
   console.log(`    drop images  → _articles/${folder}/assets/`);
   console.log(`    publish      → set "status": "published" in meta.json`);
   console.log(`    build        → bun build\n`);

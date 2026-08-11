@@ -1,0 +1,92 @@
+<!-- polish: lead was abstract ("changed shape") — opens on the concrete controls instead -->
+<p class="lead">This blog now has a font-size dial, a real dark mode, and a mode that strips it down to nothing but words. Behind the scenes, articles get outlined and drafted with AI help. One thing about all of it didn't change.</p>
+
+<div class="tldr">
+  <h4>TL;DR</h4>
+  <ul>
+    <li>Three new reading controls: font size, theme, and an eco/performance mode — none of them existed before this rebuild.</li>
+    <li>Articles are now outlined, drafted, and polished with AI assistance.</li>
+    <li><span class="hl">Publishing is still a manual step</span> — one field flipped in a file, by hand, every time.</li>
+  </ul>
+</div>
+
+<nav class="toc" aria-label="On this page">
+  <h4>On this page</h4>
+  <ol>
+    <li><a href="#reading-options">Reading options that weren't there before</a></li>
+    <li><a href="#written-with-ai">Written with AI, published by me</a></li>
+    <li><a href="#whats-next">What's next: slides</a></li>
+  </ol>
+</nav>
+
+<h2 id="reading-options">Reading options that weren't there before</h2>
+<p>The old site had one font size, one color scheme, and no way to lighten the page. This one has three controls, all of them persisted, none of them re-decided every time you show up.</p>
+
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr><th>Control</th><th>Options</th><th>What it actually does</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Font size</td><td>S / M / L</td><td>Scales the whole reading column from one CSS variable — no more zooming the entire page to read one paragraph.</td></tr>
+      <tr><td>Theme</td><td>Light / Dark</td><td>An explicit toggle, not a guess at your OS setting. Pick it once, it stays picked.</td></tr>
+      <tr><td>Eco / performance mode</td><td>On / Off</td><td>Drops cover images, freezes the hand-drawn annotations, cuts the extra JS. Same words, a fraction of the weight.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p><span data-rough="highlight" data-rough-color="amber">Eco mode doesn't hide the article — it hides the weight.</span> Every image gets a plain-text caption instead, so the content survives even with images off. <span data-rough="underline" data-rough-color="green">Whatever you pick sticks for next time — nothing here asks you to choose again.</span></p>
+
+<h2 id="written-with-ai">Written with AI, published by me</h2>
+<p>The part that changed less visibly, but matters more: how an article gets from an idea to this page.</p>
+
+<ol class="steps">
+  <li>
+    <h4>Outline</h4>
+    <p>Sections, angle, and component choices get planned first. I approve the structure before a single sentence of prose exists.</p>
+  </li>
+  <li>
+    <h4>Draft</h4>
+    <p>A full pass gets written from that approved outline — title, metadata, and the article body.</p>
+  </li>
+  <li>
+    <!-- polish: "voice-and-flow pass" was abstract — named what actually gets caught -->
+    <h4>Polish</h4>
+    <p>A pass that rewrites anything that sounds like a generic AI summary instead of a field note, and flags claims that still need checking.</p>
+  </li>
+  <li>
+    <!-- polish: named the actual field and file instead of "a metadata file" -->
+    <h4>Publish</h4>
+    <p>A manual edit — <code>status</code> changes from <code>draft</code> to <code>published</code> in the article's <code>meta.json</code> — then a build command runs. Nothing in the previous three steps can do this on its own.</p>
+  </li>
+</ol>
+
+<p class="pullquote">The AI drafts. I still decide what's true and what gets published — that part didn't change.</p>
+
+<aside class="callout callout--warn">
+  <span class="callout__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 16H3z"></path><path d="M12 10v4M12 17h.01"></path></svg></span>
+  <div class="callout__body">
+    <p class="callout__title">Watch out</p>
+    <p>What this pipeline does not do: publish anything by itself. No step can flip that status field or trigger a build — that's a hand on the keyboard, every single time.</p>
+  </div>
+</aside>
+
+<h2 id="whats-next">What's next: slides</h2>
+<aside class="callout callout--note">
+  <span class="callout__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 8h.01M11 12h1v4h1"></path></svg></span>
+  <div class="callout__body">
+    <p class="callout__title">Note</p>
+    <p>There's a slide-format version of the article template sitting in the project already — keyboard navigation, print-to-PDF export, same look as the rest of the site. It isn't wired into any article yet. Consider this the "watch this space," not the feature announcement.</p>
+  </div>
+</aside>
+
+<div class="divider-orn" role="separator"><span>◇</span></div>
+
+<p>None of this is exotic. The controls are three CSS variables and a bit of localStorage; the pipeline is three AI passes and one human decision that never moves. That last part is the whole point.</p>
+
+<div class="post-tags">
+  <a href="#">meta</a>
+  <a href="#">design system</a>
+  <a href="#">ai workflow</a>
+  <a href="#">publishing</a>
+</div>

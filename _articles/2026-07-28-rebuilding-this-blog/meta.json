@@ -1,0 +1,20 @@
+{
+  "title": "A new design for this blog — and the one thing that didn't change",
+  "slug": "rebuilding-this-blog",
+  "date": "2026-07-28",
+  "category": "dev env",
+  "tags": ["meta", "design system", "ai workflow", "publishing"],
+  "description": "A redesigned aesthetecoding.io: real reading controls, an AI-assisted writing pipeline, and one manual step nothing here skips — publishing.",
+  "readingTime": 6,
+  "aiProvenance": "enriched",
+  "cover": "cover.jpeg",
+  "coverAlt": "A vintage typewriter with a sheet of paper reading \"Chapter One\".",
+  "coverFocus": "50% 65%",
+  "featuredCover": "featuredCover.webp",
+  "featuredCoverFocus": "50% 50%",
+  "listCover": "listCover.png",
+  "listCoverFocus": "50% 50%",
+  "ecoCoverDescription": "a vintage typewriter with a sheet of paper reading \"Chapter One\"",
+  "featured": false,
+  "status": "published"
+}

@@ -79,6 +79,10 @@ Available components: `bun components` or open `_components/catalog.html` in a b
   "cover":               "cover.jpg",
   "coverAlt":            "Image alt text.",
   "coverFocus":          "50% 50%",
+  "featuredCover":       "featured.jpg",
+  "featuredCoverFocus":  "50% 50%",
+  "listCover":           "list.jpg",
+  "listCoverFocus":      "50% 50%",
   "ecoCoverDescription": "Plain-text fallback shown instead of image in eco mode.",
   "featured":            false,
   "status":              "draft"
@@ -88,6 +92,41 @@ Available components: `bun components` or open `_components/catalog.html` in a b
 `category` must match a key in `_config/categories.json`: `linux` · `dev env` · `javascript` · `css / sass` · `raspberry pi` · `kubernetes`
 
 `aiProvenance`: `"none"` (pencil icon) · `"enriched"` (star outline) · `"full"` (filled star)
+
+### Cover images — three tiers, one required
+
+Every article needs one wide **`cover`** (16:9) — it's the required article-hero image and the universal
+fallback everywhere else it's reused. Two more crops are optional, each for a spot where the 16:9 cover
+doesn't read well at that ratio:
+
+| Field | Ratio | Used for | Falls back to |
+|---|---|---|---|
+| `cover` | 16:9 | Article page hero (`.read .heroimg`) | — (required) |
+| `featuredCover` | 5:4 | Home page "À la une" hero card (`.feat .ph`) | `cover` |
+| `listCover` | square | Home page list-row thumbnail (`.row .thumb`) | `cover` |
+
+Omit `featuredCover`/`listCover` entirely to just reuse `cover` at that spot (cropped via CSS
+`object-fit: cover`) — they're pure optional upgrades, never required. If a specific crop file is
+present in `meta.json` but missing from `assets/` (typo, not yet added), `js/atelier.js` catches the
+image's `error` event and swaps to the fallback automatically — the reader never sees a broken image.
+
+Each tier takes its own `*Focus` field — `"<x>% <y>%"`, mapped to CSS `object-position` via the
+`--focus` custom property — so the same source photo can keep its subject in frame across three
+different aspect ratios (e.g. a wide shot of stacked hardware needs a different crop centered as a
+square thumbnail than as a 16:9 hero). Each `*Focus` field defaults to `coverFocus`, then to `50% 50%`,
+if omitted.
+
+---
+
+## Slide-deck articles
+
+Set `"format": "deck"` in `meta.json` and write `_articles/{folder}/slides.html` (a list of
+`<section class="slide">` blocks) instead of `content.html`. It renders full-page via
+`_templates/deck.html` — keyboard/rail navigation and print-to-PDF via `css/deck.css` +
+`js/deck-stage.js` — and still lists on the home page alongside regular articles, with a "slides"
+badge. Every slide situation (cover, terminal, code+flow, quote, full-bleed photo, etc.) is catalogued
+with worked examples in `_templates/article-deck.html` — open it directly in a browser, copy only the
+`<section>`s a given deck actually needs. Full detail: `CLAUDE.md` § Slide-Deck Articles.
 
 ---
 
@@ -99,7 +138,7 @@ Available components: `bun components` or open `_components/catalog.html` in a b
 2. Discover `_articles/*/meta.json` — skip `status: "draft"`
 3. Sort newest → oldest
 4. Copy `css/`, `js/`, `assets/`, `robots.txt` → `_dist_tmp/`
-5. For each article: render `_templates/article.html`, inject canonical + OG + Twitter card + `BlogPosting` JSON-LD, copy `assets/`
+5. For each article: `format: "deck"` → render `_templates/deck.html` from `slides.html`; otherwise render `_templates/article.html` from `content.html`. Inject canonical + OG + Twitter card + `BlogPosting` JSON-LD either way, copy `assets/`
 6. Render `_templates/home.html` with generated featured section, article list, and `WebSite+Blog` JSON-LD
 7. Write `sitemap.xml`
 8. Atomic swap: `_dist_tmp/` → `dist/` (previous `dist/` survives on build failure)
@@ -112,9 +151,10 @@ Available components: `bun components` or open `_components/catalog.html` in a b
 _articles/        article source — one folder per article
   └── YYYY-MM-DD-slug/
       ├── meta.json       article metadata
-      ├── content.html    article body only (goes inside <div class="col">)
+      ├── content.html    article body only, format:"article" (goes inside <div class="col">)
+      ├── slides.html     slide blocks only, format:"deck" (goes inside <deck-stage>)
       └── assets/         article images
-_components/      catalog.html — visual reference for every component
+_components/      catalog.html — visual reference for every prose component
 _config/
   ├── site.json           site-wide config: url, author, social links
   └── categories.json     category definitions: label, color token, icon SVG
@@ -125,9 +165,11 @@ _scripts/
   └── list-components.ts  component catalog printer
 _templates/
   ├── article.html        article page wrapper ({{PLACEHOLDER}} markers)
+  ├── deck.html           slide-deck page wrapper ({{PLACEHOLDER}} markers)
+  ├── article-deck.html   slide catalogue — visual reference, not built
   └── home.html           home page template
-css/                      atelier.css, prose.css (served verbatim)
-js/                       atelier.js, prose.js, vendor/ (served verbatim)
+css/                      atelier.css, prose.css, deck.css (served verbatim)
+js/                       atelier.js, prose.js, deck-stage.js, vendor/ (served verbatim)
 assets/                   global: logo variants, monk illustrations
 dist/                     built output (gitignored — deployed to GitHub Pages)
 ```

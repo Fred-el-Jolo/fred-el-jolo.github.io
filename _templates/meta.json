@@ -10,6 +10,10 @@
   "cover": "cover.jpg",
   "coverAlt": "Alt text for the cover image.",
   "coverFocus": "50% 50%",
+  "featuredCover": "featured.jpg (optional — 5:4 crop for the home À la une card, omit to reuse cover)",
+  "featuredCoverFocus": "50% 50%",
+  "listCover": "list.jpg (optional — square crop for the home list-row thumbnail, omit to reuse cover)",
+  "listCoverFocus": "50% 50%",
   "ecoCoverDescription": "Plain-text description shown instead of image in eco mode.",
   "featured": false,
   "status": "draft"

@@ -44,12 +44,17 @@ interface ArticleMeta {
   description: string;
   readingTime: number;
   aiProvenance: "none" | "enriched" | "full";
-  cover?: string;             // filename in the article's assets/ folder
+  cover?: string;             // filename in the article's assets/ folder — required 16:9 hero, universal fallback
   coverAlt?: string;
   coverFocus?: string;        // e.g. "78% 40%"
+  featuredCover?: string;     // optional 5:4 crop for the home "À la une" card — falls back to cover
+  featuredCoverFocus?: string;
+  listCover?: string;         // optional square crop for the home list-row thumbnail — falls back to cover
+  listCoverFocus?: string;
   ecoCoverDescription?: string;
   featured?: boolean;
   status: "draft" | "published";
+  format?: "article" | "deck"; // "deck" renders via _templates/deck.html from slides.html instead of content.html
   _folder: string;            // source folder name (internal)
 }
 
@@ -116,6 +121,13 @@ function provenanceBadge(prov: "none" | "enriched" | "full"): string {
   return `<span class="prov prov-${prov}" title="${PROV_TITLES[prov]}"><span class="pg">${PROV_ICONS[prov]}</span>${PROV_LABELS[prov]}</span>`;
 }
 
+const SLIDES_ICON = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="14" height="10" rx="1.5"></rect><rect x="7" y="10" width="14" height="10" rx="1.5"></rect></svg>`;
+
+function formatBadge(meta: ArticleMeta): string {
+  if (meta.format !== "deck") return "";
+  return `<span class="fmt-slides" title="Slide-format article">${SLIDES_ICON}slides</span>`;
+}
+
 function categoryIcon(cat: Category): string {
   return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${cat.icon}</svg>`;
 }
@@ -136,8 +148,13 @@ function coverSection(meta: ArticleMeta): string {
 }
 
 function articleRow(meta: ArticleMeta, cat: Category): string {
-  const thumb = meta.cover
-    ? `<img class="cover-img" src="/articles/${meta.slug}/assets/${meta.cover}" alt="">`
+  const src = meta.listCover ?? meta.cover;
+  const focus = meta.listCoverFocus ?? meta.coverFocus ?? "50% 50%";
+  const fallback = meta.listCover && meta.cover
+    ? ` data-fallback="/articles/${meta.slug}/assets/${meta.cover}"`
+    : "";
+  const thumb = src
+    ? `<img class="cover-img" src="/articles/${meta.slug}/assets/${src}" style="--focus:${focus}"${fallback} alt="">`
     : "";
   return `
     <a class="row" href="/articles/${meta.slug}/" style="--cat:var(${cat.color})" data-cat="${meta.category}">
@@ -148,15 +165,20 @@ function articleRow(meta: ArticleMeta, cat: Category): string {
       </div>
       <div class="mid">
         <h3>${meta.title}</h3>
-        <div class="m"><span class="cat">${cat.label}</span><span>${meta.readingTime} min read</span>${provenanceBadge(meta.aiProvenance)}</div>
+        <div class="m"><span class="cat">${cat.label}</span><span>${meta.readingTime} min read</span>${provenanceBadge(meta.aiProvenance)}${formatBadge(meta)}</div>
       </div>
       <span class="date">${formatDate(meta.date)}</span>
     </a>`;
 }
 
 function featuredSection(meta: ArticleMeta, cat: Category): string {
-  const img = meta.cover
-    ? `<img class="cover-img" src="/articles/${meta.slug}/assets/${meta.cover}" data-fallback="/assets/logo-dark-bg.png" alt="${meta.coverAlt ?? ""}">`
+  const src = meta.featuredCover ?? meta.cover;
+  const focus = meta.featuredCoverFocus ?? meta.coverFocus ?? "50% 50%";
+  const fallback = meta.featuredCover && meta.cover
+    ? `/articles/${meta.slug}/assets/${meta.cover}`
+    : "/assets/logo-dark-bg.png";
+  const img = src
+    ? `<img class="cover-img" src="/articles/${meta.slug}/assets/${src}" style="--focus:${focus}" data-fallback="${fallback}" alt="${meta.coverAlt ?? ""}">`
     : "";
   return `
   <section class="feat-wrap"><div class="feat">
@@ -166,7 +188,7 @@ function featuredSection(meta: ArticleMeta, cat: Category): string {
       <p>${meta.description}</p>
       <div class="meta">
         <span class="cat">${cat.label}</span><span>${formatDate(meta.date)}</span><span>·</span><span>${meta.readingTime} min read</span>
-        ${provenanceBadge(meta.aiProvenance)}
+        ${provenanceBadge(meta.aiProvenance)}${formatBadge(meta)}
       </div>
       <a class="cta" href="/articles/${meta.slug}/">Read the build <span class="ar">→</span></a>
     </div>
@@ -325,6 +347,36 @@ async function buildArticlePage(
   }
 }
 
+async function buildDeckPage(
+  meta: ArticleMeta,
+  site: SiteConfig,
+  template: string,
+  destDir: string
+): Promise<void> {
+  const slidesPath = join(ARTICLES_SRC, meta._folder, "slides.html");
+  if (!existsSync(slidesPath)) {
+    console.warn(`  ⚠ missing slides.html for ${meta.slug}, skipping`);
+    return;
+  }
+  const slides = await readFile(slidesPath, "utf-8");
+  const html = render(template, {
+    PAGE_TITLE: `${meta.title} — {aesthetecoding.io}`,
+    META_DESCRIPTION: meta.description,
+    HEAD_SEO: articleHeadSeo(meta, site),
+    DECK_SLIDES: slides,
+  });
+
+  const dir = join(destDir, "articles", meta.slug);
+  await mkdir(dir, { recursive: true });
+  await writeFile(join(dir, "index.html"), html);
+
+  // copy article assets
+  const srcAssets = join(ARTICLES_SRC, meta._folder, "assets");
+  if (existsSync(srcAssets)) {
+    await cp(srcAssets, join(dir, "assets"), { recursive: true });
+  }
+}
+
 async function buildHome(
   articles: ArticleMeta[],
   categories: Record<string, Category>,
@@ -383,6 +435,7 @@ async function main(): Promise<void> {
   const site = await loadJson<SiteConfig>(join(CONFIG_DIR, "site.json"));
   const categories = await loadJson<Record<string, Category>>(join(CONFIG_DIR, "categories.json"));
   const articleTemplate = await readFile(join(TEMPLATES, "article.html"), "utf-8");
+  const deckTemplate = await readFile(join(TEMPLATES, "deck.html"), "utf-8");
   const homeTemplate = await readFile(join(TEMPLATES, "home.html"), "utf-8");
 
   // load articles
@@ -399,8 +452,12 @@ async function main(): Promise<void> {
 
   // build articles
   for (const meta of articles) {
-    const cat = categories[meta.category] ?? { label: meta.category, color: "--blue", filterKey: meta.category, icon: "" };
-    await buildArticlePage(meta, cat, site, articleTemplate, DIST_TMP);
+    if (meta.format === "deck") {
+      await buildDeckPage(meta, site, deckTemplate, DIST_TMP);
+    } else {
+      const cat = categories[meta.category] ?? { label: meta.category, color: "--blue", filterKey: meta.category, icon: "" };
+      await buildArticlePage(meta, cat, site, articleTemplate, DIST_TMP);
+    }
     console.log(`  ✓ /articles/${meta.slug}/`);
   }
 
