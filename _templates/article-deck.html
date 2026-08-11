@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<!--
+  ============================================================================
+  AESTHETECODING — SLIDE-DECK CATALOGUE (browsable reference, not built)
+  ============================================================================
+  Every slide situation the deck system supports, worked with example content.
+  Open directly in a browser from its real location (paths are relative to
+  _templates/, one level under the repo root — same pattern as
+  _components/catalog.html). Not copied into dist/ by the build pipeline.
+
+  Navigate: ←/→/Space, the left rail (hamburger, top-left) jumps directly,
+  Print → Save as PDF exports one page per slide (css/deck.css @media print).
+
+  This file is a CATALOGUE to copy FROM, not a full deck to copy WHOLESALE —
+  a real article uses only the slide situations it actually needs (see
+  _templates/deck.html for the production template + {{DECK_SLIDES}} contract,
+  and the BlogSlides skill for how a deck gets drafted end to end).
+
+  Each slide is a <section class="slide" data-label="…"> inside <deck-stage>.
+  Copy a whole section to reuse one. Editable text is marked with ✏️.
+  All colours/type/spacing live in css/deck.css's :root token block.
+  ============================================================================
+-->
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>
+  (function () {
+    try {
+      var t = localStorage.getItem('acx-theme');
+      if (t) document.documentElement.setAttribute('data-theme', t);
+    } catch (x) {}
+  })();
+  </script>
+  <title>{aesthetecoding.io} — slide-deck catalogue</title>
+  <link rel="stylesheet" href="../css/deck.css">
+</head>
+
+<body>
+<deck-stage>
+
+  <!-- ======================================================================
+       SLIDE 1 · COVER (gradient)
+       ====================================================================== -->
+  <section
+    class="slide slide--gradient"
+    data-label="Cover"
+    data-speaker-notes="Your opening line goes here. One or two sentences of intent.">
+
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+      <div class="wm" style="font-size:28px;"><span class="b">{</span> aesthetecoding.io <span class="b">}</span></div>
+      <div style="font-family:var(--font-mono); font-size:24px; font-weight:500; letter-spacing:0.14em; text-transform:uppercase; color:var(--on-dark-2);">
+        <!-- ✏️ context / date -->Field notes · Month Year
+      </div>
+    </div>
+
+    <div style="margin-top:auto;">
+      <div class="eyebrow" style="color:var(--on-dark-2); margin-bottom:30px;"><!-- ✏️ kicker -->Section / Kicker</div>
+      <h1 class="title title--hero"><!-- ✏️ deck title -->Your Article Title Goes Here</h1>
+      <p style="margin:36px 0 0; font-family:var(--font-serif); font-style:italic; font-weight:400; font-size:40px; line-height:1.3; color:rgba(241,236,227,0.92);">
+        <!-- ✏️ one-line tagline -->A short italic tagline that frames the story.
+      </p>
+    </div>
+
+    <div style="margin-top:auto; display:flex; align-items:center; gap:18px; padding-top:56px;">
+      <div style="width:46px; height:1px; background:rgba(241,236,227,0.4);"></div>
+      <div style="font-family:var(--font-mono); font-size:24px; font-weight:500;"><!-- ✏️ name -->aesthetecoding</div>
+      <div style="font-family:var(--font-mono); font-size:24px; color:var(--on-dark-3);"><!-- ✏️ role/team -->field notes</div>
+      <div style="margin-left:auto; font-family:var(--font-mono); font-size:24px; color:var(--on-dark-3);"><span data-deck-page></span></div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       SLIDE 2 · SECTION DIVIDER (new — minimal, transition between parts)
+       ====================================================================== -->
+  <section
+    class="slide slide--dark slide--divider"
+    data-label="Section Divider"
+    data-speaker-notes="Use between major parts of a deck — a breath, not more content.">
+
+    <p class="eyebrow"><!-- ✏️ -->Part Two</p>
+    <h2 class="title title--hero" style="max-width:none;"><!-- ✏️ -->The Next Part's Title</h2>
+    <p class="subhead" style="max-width:32ch; margin:24px auto 0;"><!-- ✏️ -->One line framing what this part covers, optional.</p>
+  </section>
+
+  <!-- ======================================================================
+       SLIDE 3 · TWO-COLUMN CARDS
+       ====================================================================== -->
+  <section
+    class="slide"
+    data-label="Two Columns"
+    data-speaker-notes="Talk through each card. The on-screen text is the headline; the detail lives here in the notes.">
+
+    <p class="eyebrow"><!-- ✏️ -->Eyebrow</p>
+    <h2 class="title"><!-- ✏️ -->Two-Column Card Layout</h2>
+    <p class="subhead"><!-- ✏️ -->One supporting line under the title.</p>
+
+    <div class="row fill mt-lg">
+
+      <div class="card fill">
+        <div style="display:flex; align-items:center; gap:16px; margin-bottom:24px;">
+          <span class="badge">1</span>
+          <span style="font-family:var(--font-serif); font-size:33px; font-weight:600; color:var(--brand-indigo); line-height:1.1;">First column heading</span>
+        </div>
+        <div>
+          <div style="display:flex; justify-content:space-between; padding:15px 0; border-bottom:1px solid var(--border-1);">
+            <span style="font-size:28px; font-weight:600; color:var(--ink-800);">Item</span>
+            <span class="mono" style="font-size:24px; color:var(--ink-500);">value</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; padding:15px 0; border-bottom:1px solid var(--border-1);">
+            <span style="font-size:28px; font-weight:600; color:var(--ink-800);">Item</span>
+            <span class="mono" style="font-size:24px; color:var(--ink-500);">value</span>
+          </div>
+        </div>
+        <div style="margin-top:auto; padding-top:22px;">
+          <div class="callout"><!-- ✏️ -->A highlighted takeaway. Use <span class="accent strong">accent</span> for the key word.</div>
+        </div>
+      </div>
+
+      <div class="card fill">
+        <div style="display:flex; align-items:center; gap:16px; margin-bottom:24px;">
+          <span class="badge">2</span>
+          <span style="font-family:var(--font-serif); font-size:33px; font-weight:600; color:var(--brand-indigo); line-height:1.1;">Second column heading</span>
+        </div>
+        <p style="margin:0 0 20px; font-size:25px; line-height:1.42; color:var(--ink-600);">A sentence of framing for this column.</p>
+        <p class="eyebrow" style="color:var(--ink-500); font-size:24px;">Sub-label</p>
+        <ul class="list" style="gap:18px;">
+          <li><span class="list__dot"></span><span>Bullet point one</span></li>
+          <li><span class="list__dot"></span><span><span class="accent strong">Emphasised</span> bullet point two</span></li>
+          <li><span class="list__dot" style="background:var(--ink-300);"></span><span class="muted" style="color:var(--ink-600);">A softer, secondary point</span></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer"><span class="wm"><span class="b">{</span> aesthetecoding.io <span class="b">}</span></span><span data-deck-page></span></div>
+  </section>
+
+  <!-- ======================================================================
+       SLIDE 4 · CODE PANEL + FLOW
+       ====================================================================== -->
+  <section
+    class="slide"
+    data-label="Code + Flow"
+    data-speaker-notes="Walk the tree on the left, then the steps on the right.">
+
+    <p class="eyebrow">Eyebrow</p>
+    <h2 class="title">Code Panel &amp; Numbered Flow</h2>
+    <p class="subhead">Pair a structure on the left with a process on the right.</p>
+
+    <div class="row fill" style="margin-top:28px; gap:56px;">
+
+      <div class="tree" style="flex:0 0 50%;"><span class="c-key">project/root/</span>
+├── folder-a/        <span class="c-note">← comment</span>
+├── folder-b/        <span class="c-note">← comment</span>
+└── <span class="c-new">highlighted/</span>     <span class="c-note">← the new bit</span>
+    ├── file-one
+    └── file-two</div>
+
+      <div class="fill" style="display:flex; flex-direction:column;">
+        <p class="eyebrow" style="color:var(--ink-500); font-size:24px; margin-bottom:22px;">Process</p>
+        <div class="flow fill">
+          <div class="flow__row"><span class="flow__num">1</span><span class="label">First step</span></div>
+          <div class="flow__line"></div>
+          <div class="flow__row"><span class="flow__num">2</span><span class="label">Second step</span></div>
+          <div class="flow__line"></div>
+          <div class="flow__row"><span class="flow__num">3</span><span class="label">Third step <span class="mono" style="font-size:24px;">detail</span></span></div>
+          <div class="flow__line" style="background:var(--accent); opacity:0.5;"></div>
+          <div class="flow__row"><span class="flow__num is-final">4</span><span class="label is-final">Final outcome</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:28px; display:flex; gap:40px; flex-wrap:wrap;">
+      <div style="display:flex; align-items:center; gap:12px; font-size:24px; color:var(--ink-600);"><span class="list__dot" style="margin:0;"></span>Supporting point</div>
+      <div style="display:flex; align-items:center; gap:12px; font-size:24px; color:var(--ink-600);"><span class="list__dot" style="margin:0;"></span>Supporting point</div>
+      <div style="display:flex; align-items:center; gap:12px; font-size:24px; color:var(--ink-600);"><span class="list__dot" style="margin:0;"></span>Supporting point</div>
+    </div>
+
+    <div class="footer"><span class="wm"><span class="b">{</span> aesthetecoding.io <span class="b">}</span></span><span data-deck-page></span></div>
+  </section>
+
+  <!-- ======================================================================
+       SLIDE 5 · TERMINAL (new — deck-native port of prose.css .terminal)
+       ====================================================================== -->
+  <section
+    class="slide slide--dark"
+    data-label="Terminal"
+    data-speaker-notes="Read the command, pause, read the output. Don't paraphrase what's already on screen.">
+
+    <p class="eyebrow">Eyebrow</p>
+    <h2 class="title">A Shell Session</h2>
+    <p class="subhead">Use this for the same input/output moments the blog's <span class="mono">.terminal</span> component covers.</p>
+
+    <div class="fill mt-lg" style="display:flex; align-items:center;">
+      <div class="terminal" style="width:100%;">
+        <div class="terminal__bar"><i></i><i></i><i></i><span><!-- ✏️ -->node-01 — bash</span></div>
+        <pre><span class="cmd"><!-- ✏️ -->command --here</span><span class="out"><!-- ✏️ -->output line one</span><span class="cmd">next command</span><span class="out">its output</span></pre>
+      </div>
+    </div>
+
+    <div class="footer"><span class="wm"><span class="b">{</span> aesthetecoding.io <span class="b">}</span></span><span data-deck-page></span></div>
+  </section>
+
+  <!-- ======================================================================
+       SLIDE 6 · COMPARISON TABLE + SIDE CARD
+       ====================================================================== -->
+  <section
+    class="slide"
+    data-label="Table + Side"
+    data-speaker-notes="Read the two rows that matter most; the rest is reference.">
+
+    <p class="eyebrow">Eyebrow</p>
+    <h2 class="title">Comparison Table &amp; Side Card</h2>
+    <p class="subhead">A one-line claim the table backs up.</p>
+
+    <div class="row fill" style="margin-top:40px; gap:48px;">
+
+      <table class="table" style="flex:1; align-self:flex-start;">
+        <thead>
+          <tr>
+            <th style="width:30%;"></th>
+            <th>Option A</th>
+            <th class="is-accent">Option B</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="col-label">Criterion</td>
+            <td class="muted" style="color:var(--ink-500);">Weaker</td>
+            <td class="col-win" style="font-weight:700; color:var(--ink-900);">Stronger&nbsp;&nbsp;<span class="pill pill--solid" style="font-size:20px; padding:4px 13px; vertical-align:middle;">Main</span></td>
+          </tr>
+          <tr>
+            <td class="col-label">Criterion</td>
+            <td class="muted" style="color:var(--ink-500);">Weaker</td>
+            <td class="col-win">Stronger</td>
+          </tr>
+          <tr>
+            <td class="col-label">Criterion</td>
+            <td class="muted" style="color:var(--ink-500);">Weaker</td>
+            <td class="col-win">Stronger</td>
+          </tr>
+          <tr>
+            <td class="col-label" style="border-bottom:none; padding-bottom:0; font-weight:700;">Result</td>
+            <td style="border-bottom:none; padding-bottom:0; font-weight:600; color:var(--ink-600);">Downside</td>
+            <td class="col-win accent" style="border-bottom:none; font-weight:700;">Upside</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div style="flex:0 0 31%; background:var(--brand-indigo); border-radius:var(--radius-lg); padding:40px 38px; color:#fff; display:flex; flex-direction:column;">
+        <p class="eyebrow" style="color:var(--brand-pink); margin-bottom:16px;">Side note title</p>
+        <p style="margin:0 0 22px; font-size:25px; line-height:1.42; color:rgba(241,236,227,0.8);">A short lead sentence:</p>
+        <ul class="list list--on-dark" style="gap:20px;">
+          <li><span class="list__dot" style="background:var(--brand-pink);"></span><span>Point one</span></li>
+          <li><span class="list__dot" style="background:var(--brand-pink);"></span><span>Point two</span></li>
+          <li><span class="list__dot" style="background:var(--brand-pink);"></span><span>Point three</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer"><span class="wm"><span class="b">{</span> aesthetecoding.io <span class="b">}</span></span><span data-deck-page></span></div>
+  </section>
+
+  <!-- ======================================================================
+       SLIDE 7 · CARDS WITH "OR" DIVIDER
+       ====================================================================== -->
+  <section
+    class="slide"
+    data-label="Cards + OR"
+    data-speaker-notes="One foundation, then two paths the audience can choose between.">
+
+    <p class="eyebrow">Eyebrow</p>
+    <h2 class="title">Phase Cards With an OR Divider</h2>
+    <p class="subhead">One starting point, then two parallel options.</p>
+
+    <div class="row fill gap-sm mt-lg" style="margin-top:40px;">
+
+      <div class="card card--accent-top fill" style="padding:34px 32px;">
+        <span class="pill pill--solid" style="margin-bottom:20px;">Start here</span>
+        <div style="font-family:var(--font-serif); font-size:34px; font-weight:600; color:var(--brand-indigo);">Foundation</div>
+        <div class="muted" style="font-size:24px; margin-bottom:22px;">Sub-label</div>
+        <ul class="list" style="gap:15px; font-size:25px;">
+          <li><span class="list__dot"></span><span>What it includes</span></li>
+          <li><span class="list__dot"></span><span>What it includes</span></li>
+          <li><span class="list__dot" style="background:var(--ink-300);"></span><span class="muted" style="color:var(--ink-400);">What it does NOT include</span></li>
+        </ul>
+      </div>
+
+      <div class="card card--indigo-top fill" style="padding:34px 32px;">
+        <span class="pill pill--soft" style="margin-bottom:20px;">Option A</span>
+        <div style="font-family:var(--font-serif); font-size:34px; font-weight:600; color:var(--brand-indigo);">Choice One</div>
+        <div class="muted" style="font-size:24px; margin-bottom:22px;">Sub-label</div>
+        <ul class="list" style="gap:15px; font-size:25px;">
+          <li><span class="list__dot" style="background:var(--brand-indigo);"></span><span>Reason to pick this</span></li>
+          <li><span class="list__dot" style="background:var(--brand-indigo);"></span><span>Reason to pick this</span></li>
+        </ul>
+      </div>
+
+      <div class="or"><div class="or__line"></div><div class="or__chip">or</div><div class="or__line"></div></div>
+
+      <div class="card card--indigo-top fill" style="padding:34px 32px;">
+        <span class="pill pill--soft" style="margin-bottom:20px;">Option B</span>
+        <div style="font-family:var(--font-serif); font-size:34px; font-weight:600; color:var(--brand-indigo);">Choice Two</div>
+        <div class="muted" style="font-size:24px; margin-bottom:22px;">Two steps</div>
+        <div style="display:flex; flex-direction:column; gap:14px;">
+          <div style="display:flex; gap:14px; align-items:flex-start;">
+            <span style="flex:none; width:34px; height:34px; border-radius:50%; background:var(--surface-violet); color:var(--accent-deep); font-family:var(--font-mono); font-size:24px; font-weight:500; display:flex; align-items:center; justify-content:center;">1</span>
+            <span style="font-size:25px; line-height:1.34; color:var(--ink-700);">First step description</span>
+          </div>
+          <div style="display:flex; gap:14px; align-items:flex-start;">
+            <span style="flex:none; width:34px; height:34px; border-radius:50%; background:var(--surface-violet); color:var(--accent-deep); font-family:var(--font-mono); font-size:24px; font-weight:500; display:flex; align-items:center; justify-content:center;">2</span>
+            <span style="font-size:25px; line-height:1.34; color:var(--ink-700);">Second step description</span>
+          </div>
+        </div>
+        <div style="margin-top:auto; padding-top:18px; font-size:24px; line-height:1.36; color:var(--ink-500); border-top:1px solid var(--border-1);">A small footnote.</div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <span style="font-family:var(--font-sans); font-size:24px; color:var(--ink-600);"><span class="strong" style="color:var(--brand-indigo);">Unchanged:</span> things that stay the same · listed here</span>
+      <span data-deck-page></span>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       SLIDE 8 · FULL-BLEED PHOTO (new — for visual/build posts)
+       ====================================================================== -->
+  <section
+    class="slide slide--photo"
+    data-label="Photo"
+    data-speaker-notes="Let the image carry the moment — the caption is a label, not a paragraph.">
+
+    <!-- ✏️ replace src + set --focus like the site's own cover images -->
+    <img class="deck-photo-img" style="--focus:50% 50%;" src="../_articles/2026-05-28-homelab-raspberry-pi-4-cluster/assets/cover.png" alt="Four Raspberry Pi boards stacked with a small network switch">
+    <div class="deck-photo-cap">
+      <p class="eyebrow"><!-- ✏️ -->Eyebrow</p>
+      <h2 class="title"><!-- ✏️ -->What the finished build looks like</h2>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       SLIDE 9 · FULL-SLIDE QUOTE (new — distinct from the inline .banner strip)
+       ====================================================================== -->
+  <section
+    class="slide slide--gradient"
+    data-label="Quote"
+    data-speaker-notes="Let this sit. Don't talk over it — read it, then pause.">
+
+    <div class="deck-quote">
+      <div class="deck-quote__mark">"</div>
+      <p class="deck-quote__text"><!-- ✏️ -->The single sentence you want the room to remember.</p>
+      <p class="deck-quote__cite"><!-- ✏️ -->who said it, or where it's from</p>
+    </div>
+
+    <div class="footer" style="border-top-color:var(--border-on-dark);"><span class="wm"><span class="b">{</span> aesthetecoding.io <span class="b">}</span></span><span data-deck-page></span></div>
+  </section>
+
+  <!-- ======================================================================
+       SLIDE 10 · CLOSING "ASK" (dark)
+       ====================================================================== -->
+  <section
+    class="slide slide--dark"
+    data-label="The Ask"
+    data-speaker-notes="State exactly what you want and what you are NOT asking for. End on the outcome line.">
+
+    <p class="eyebrow">The Takeaway</p>
+    <h2 class="title">Your Closing Slide</h2>
+    <p class="subhead">The one idea you want to leave in the room.</p>
+
+    <div class="row mt-lg" style="gap:36px;">
+
+      <div class="card card--ghost is-primary fill" style="padding:36px 38px;">
+        <p class="eyebrow" style="color:var(--brand-pink); font-size:24px;">What holds</p>
+        <ul class="list list--check" style="gap:20px; font-size:28px;">
+          <li>
+            <svg class="ic" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#efa23c" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="margin-top:4px;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>The first point that carries</span>
+          </li>
+          <li>
+            <svg class="ic" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#efa23c" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="margin-top:4px;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>The second point that carries</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card card--ghost fill" style="padding:36px 38px;">
+        <p class="eyebrow" style="color:var(--on-dark-3); font-size:24px;">What doesn't</p>
+        <ul class="list list--cross" style="gap:18px;">
+          <li><svg class="ic" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="rgba(241,236,227,0.4)" stroke-width="2.2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg><span>A myth worth retiring</span></li>
+          <li><svg class="ic" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="rgba(241,236,227,0.4)" stroke-width="2.2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg><span>A myth worth retiring</span></li>
+          <li><svg class="ic" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="rgba(241,236,227,0.4)" stroke-width="2.2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg><span>A myth worth retiring</span></li>
+          <li><svg class="ic" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="rgba(241,236,227,0.4)" stroke-width="2.2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg><span>A myth worth retiring</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="banner" style="margin-top:40px;">
+      <div class="banner__tag">Outcome</div>
+      <div class="banner__text">The single line that captures what the reader walks away with — <span class="strong">with the key phrase in bold</span>.</div>
+    </div>
+
+    <div class="footer"><span class="wm"><span class="b">{</span> aesthetecoding.io <span class="b">}</span></span><span data-deck-page></span></div>
+  </section>
+
+</deck-stage>
+
+<script src="../js/deck-stage.js"></script>
+</body>
+</html>

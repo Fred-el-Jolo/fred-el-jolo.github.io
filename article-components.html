@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Self-hosting a homelab on a Raspberry Pi 4 cluster — {aesthetecoding.io}</title>
+<meta name="description" content="Four boards, a switch, and surprisingly serious uptime — the parts list, the build, and the gotchas.">
+<!-- fonts are self-hosted via @font-face in css/atelier.css — no third-party requests -->
+<link rel="stylesheet" href="css/atelier.css">
+<link rel="stylesheet" href="css/prose.css">
+</head>
+<body class="acx" data-theme="dark" data-eco="off" data-font="m">
+<script>
+/* anti-flash: apply saved preferences before paint */
+(function () {
+  try {
+    var b = document.currentScript.parentElement, s = localStorage;
+    var t = s.getItem('acx-theme'); if (t) b.setAttribute('data-theme', t);
+    var f = s.getItem('acx-font');  if (f) b.setAttribute('data-font', f);
+    var e = s.getItem('acx-eco');   if (e) b.setAttribute('data-eco', e);
+  } catch (x) {}
+})();
+</script>
+
+<!-- ===================== READING-VIEW HEADER ===================== -->
+<header class="rbar"><div class="wrap"><div class="rbar-in">
+  <a class="brand" href="index.html">
+    <img class="for-dark" src="assets/logo-dark-bg.png" alt="" width="42">
+    <img class="for-light" src="assets/logo-light-bg.png" alt="" width="42">
+    <span class="wm"><span class="b">{</span> aesthetecoding.io <span class="b">}</span></span>
+  </a>
+  <span class="sp"></span>
+  <div class="mast-tools">
+    <div class="seg theme" role="group" aria-label="Colour theme">
+      <button data-v="light" aria-label="Light theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg></button>
+      <button data-v="dark" aria-label="Dark theme"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 1 0 9.8 9.8Z"></path></svg></button>
+    </div>
+    <div class="seg font" role="group" aria-label="Text size">
+      <button data-v="s" aria-label="Small text">A</button>
+      <button data-v="m" aria-label="Medium text">A</button>
+      <button data-v="l" aria-label="Large text">A</button>
+    </div>
+    <button class="leaf" aria-label="Eco / performance mode" title="Eco / performance mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20c0-8 6-14 16-15 0 10-6 16-16 15Z"></path><path d="M4 20c3-7 7-10 12-12"></path></svg></button>
+  </div>
+</div></div></header>
+
+<!-- ===================== ARTICLE ===================== -->
+<article class="read">
+  <div class="rhead">
+    <a class="back" href="index.html">← all writing</a>
+    <p class="kick"><span style="width:8px;height:8px;border-radius:50%;background:var(--green);display:inline-block"></span> Raspberry Pi</p>
+    <h1>Self-hosting a homelab on a Raspberry Pi 4 cluster</h1>
+    <div class="byl"><span>By <b>aesthetecoding</b></span><span>May 28, 2026</span><span>·</span><span>12 min read</span></div>
+    <span class="prov prov-none" title="Generated without AI"><span class="pg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19l1.2-4L16 5.2a1.8 1.8 0 0 1 2.6 2.6L8.8 17.6 5 19z"></path><path d="M14.5 6.8l2.7 2.7"></path></svg></span>without AI</span>
+  </div>
+
+  <div class="heroimg"><div class="ph" style="--focus:78% 40%"><div class="cover"><span class="lbl">cover · 2100×900</span></div><img class="cover-img" src="assets/samples/sample-cover.png" alt="Homelab build cover"></div></div>
+  <div class="eco-cap"><div class="b2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20c0-8 6-14 16-15 0 10-6 16-16 15Z"></path><path d="M4 20c3-7 7-10 12-12"></path></svg><span>image omitted in eco mode — "four Raspberry Pi boards stacked with a small network switch"</span></div></div>
+
+  <div class="col">
+
+    <!-- LEAD -->
+    <p class="lead">Four boards, a cheap switch, and a weekend of patience buy you a surprisingly serious always-on machine. This is the exact build of the cluster humming under my desk — the parts, the OS, the orchestration, and the gotchas nobody warns you about.</p>
+
+    <!-- ON THIS PAGE -->
+    <nav class="toc" aria-label="On this page">
+      <h4>On this page</h4>
+      <ol>
+        <li><a href="#parts">The parts list</a></li>
+        <li><a href="#flashing">Flashing the boards</a></li>
+        <li><a href="#cluster">Forming the cluster</a></li>
+        <li><a href="#workloads">What I actually run</a></li>
+        <li><a href="#verdict">Was it worth it?</a></li>
+      </ol>
+    </nav>
+
+    <!-- TL;DR -->
+    <div class="tldr">
+      <h4>TL;DR</h4>
+      <ul>
+        <li>4× Raspberry Pi 4 (8GB) running <span class="hl">k3s</span> — a featherweight Kubernetes.</li>
+        <li>Boots from SSD over USB, not SD cards. This is the single biggest reliability win.</li>
+        <li>Total spend ~€420; idle draw under 20W for the whole rack.</li>
+        <li>Uptime since the last reboot: <strong>148 days</strong>. It just sits there and works.</li>
+      </ul>
+    </div>
+
+    <p>For years I rented a VPS for the handful of small services I self-host. It worked, but it never felt like <em>mine</em> — and the monthly bill quietly crept up. The Pi cluster started as a curiosity and ended up replacing the VPS entirely. <span data-rough="highlight" data-rough-color="amber">It has been more reliable than I had any right to expect.</span></p>
+
+    <!-- CALLOUT: note -->
+    <aside class="callout callout--note">
+      <span class="callout__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 8h.01M11 12h1v4h1"></path></svg></span>
+      <div class="callout__body">
+        <p class="callout__title">Note</p>
+        <p>This assumes some comfort with the Linux command line. If <code>ssh</code> and <code>systemctl</code> are familiar, you are ready for everything below.</p>
+      </div>
+    </aside>
+
+    <!-- SECTION 1 -->
+    <h2 id="parts">The parts list</h2>
+    <p>Resist the urge to cheap out on power and storage — they are where flaky clusters are born. Here is exactly what I bought, and what each piece is for.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Component</th><th>Choice</th><th>Qty</th><th>Why</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Board</td><td>Raspberry Pi 4 (8GB)</td><td>4</td><td>Headroom for memory-hungry pods</td></tr>
+          <tr><td>Storage</td><td>Kingston A400 SSD + USB3 adapter</td><td>4</td><td>SD cards die; SSDs don't</td></tr>
+          <tr><td>Power</td><td>USB-C PD hub, 100W</td><td>1</td><td>One cable, no wall-wart nest</td></tr>
+          <tr><td>Network</td><td>8-port gigabit switch</td><td>1</td><td>Wired only — Wi-Fi is for laptops</td></tr>
+          <tr><td>Case</td><td>Stackable acrylic + fans</td><td>1</td><td>Airflow under sustained load</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- FIGURE: right-aligned, text wraps -->
+    <figure class="fig fig--right" style="--w:300px">
+      <div class="ph ph-stripe"><span class="lbl">photo · the rack</span></div>
+      <figcaption>The finished stack — boards bottom, switch and SSDs above, one power cable in.</figcaption>
+    </figure>
+
+    <p>The acrylic case matters more than it looks. Under a real Kubernetes workload the boards throttle without active cooling, and a throttled node is a node that drops out of the cluster at the worst moment. Two 40mm fans kept every board below 60°C even during a full rebuild.</p>
+    <p>Cabling is the part that turns a pile of boards into something you are happy to look at every day. Short, identical Ethernet runs and a single power feed do most of the visual work. Label both ends of every cable — <span data-rough="underline" data-rough-color="green">future-you will be grateful</span>.</p>
+
+    <!-- SECTION 2 -->
+    <h2 id="flashing">Flashing the boards</h2>
+    <p>Skip the SD card entirely. Booting from SSD over USB 3 is faster, and — far more importantly — it survives. SD cards wear out under the constant small writes that container logs produce.</p>
+
+    <h3>Write the image</h3>
+    <p>Use the official imager to write Raspberry Pi OS Lite (64-bit) to each SSD. Enable SSH and set the hostname in the imager's advanced options so the boards come up headless and uniquely named.</p>
+
+    <!-- TERMINAL block -->
+    <div class="terminal">
+      <div class="terminal__bar"><i></i><i></i><i></i><span>node-01 — bash</span></div>
+      <pre><span class="cmd">rpi-imager --cli os.img /dev/sda</span><span class="out">Writing... 100%</span><span class="cmd">ssh pi@node-01.local</span><span class="out">Linux node-01 6.6.20-v8+ aarch64</span></pre>
+    </div>
+
+    <!-- CALLOUT: tip -->
+    <aside class="callout callout--tip">
+      <span class="callout__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.5.4.8 1 .9 1.6h5.2c.1-.6.4-1.2.9-1.6A6 6 0 0 0 12 3Z"></path></svg></span>
+      <div class="callout__body">
+        <p class="callout__title">Tip</p>
+        <p>Give each node a memorable hostname (<code>node-01</code>…<code>node-04</code>) and a static DHCP lease on your router. Naming things well is half of operating them.</p>
+      </div>
+    </aside>
+
+    <h3>First boot, every node</h3>
+    <p>Update, then enable cgroup memory — k3s needs it and the Pi disables it by default. Append the flags to the boot command line and reboot.</p>
+
+    <!-- CODE BLOCK with lang label + copy -->
+    <figure class="codeblock" data-lang="bash">
+      <div class="codeblock__bar"><span class="codeblock__lang">bash</span><button class="codeblock__copy" type="button">Copy</button></div>
+      <pre><code><span class="c"># enable cgroups for k3s (one line, in /boot/cmdline.txt)</span>
+cgroup_memory=1 cgroup_enable=memory
+
+<span class="c"># then, on every node</span>
+sudo apt update &amp;&amp; sudo apt full-upgrade -y
+sudo reboot</code></pre>
+    </figure>
+
+    <!-- SECTION 3 -->
+    <h2 id="cluster">Forming the cluster</h2>
+    <p>This is the moment four separate computers become one. <span data-rough="box" data-rough-color="blue">k3s</span> makes it almost anticlimactic: one command on the first node, one on each of the others.</p>
+
+    <ol class="steps">
+      <li>
+        <h4>Install the server node</h4>
+        <p>Run the k3s installer on <code>node-01</code>. It comes up as a single-node cluster in seconds.</p>
+      </li>
+      <li>
+        <h4>Grab the join token</h4>
+        <p>Read <code>/var/lib/rancher/k3s/server/node-token</code> — the agents need it to authenticate.</p>
+      </li>
+      <li>
+        <h4>Join the workers</h4>
+        <p>Run the agent installer on the other three boards, pointing at the server's URL and token.</p>
+      </li>
+      <li>
+        <h4>Verify</h4>
+        <p>Four nodes, all <code>Ready</code>. You now have a Kubernetes cluster on your desk.</p>
+      </li>
+    </ol>
+
+    <div class="terminal">
+      <div class="terminal__bar"><i></i><i></i><i></i><span>node-01 — k3s</span></div>
+      <pre><span class="cmd">kubectl get nodes</span><span class="out">node-01   Ready   control-plane   148d   v1.29.4+k3s1</span><span class="out">node-02   Ready   &lt;none&gt;          148d   v1.29.4+k3s1</span><span class="out">node-03   Ready   &lt;none&gt;          148d   v1.29.4+k3s1</span><span class="out">node-04   Ready   &lt;none&gt;          148d   v1.29.4+k3s1</span></pre>
+    </div>
+
+    <!-- CALLOUT: warning -->
+    <aside class="callout callout--warn">
+      <span class="callout__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 16H3z"></path><path d="M12 10v4M12 17h.01"></path></svg></span>
+      <div class="callout__body">
+        <p class="callout__title">Watch out</p>
+        <p>Do <strong>not</strong> run the control plane and your storage on the same node without backups. If <code>node-01</code> dies, you want its state on a volume you can re-mount, not a memory you can't recover.</p>
+      </div>
+    </aside>
+
+    <!-- PULL QUOTE -->
+    <p class="pullquote">The goal was never raw power. It was a machine that stops being a variable.</p>
+
+    <!-- SECTION 4 -->
+    <h2 id="workloads">What I actually run</h2>
+    <p>A homelab is only as good as the things it hosts. Mine earns its desk space with a small, boring, reliable set of services — boring being the highest compliment you can pay infrastructure.</p>
+
+    <div class="grid-2">
+      <div>
+        <h4>The keepers</h4>
+        <p>A bookmark archive, a feed reader, a personal Git remote, and this site's analytics. All stateless or backed by a single small database.</p>
+      </div>
+      <div>
+        <h4>The experiments</h4>
+        <p>A rotating cast of things I'm trying out — currently a self-hosted image CDN and a tiny status page. The cluster makes spinning these up cheap.</p>
+      </div>
+    </div>
+
+    <p>Deploying anything new is a single manifest and a <code>kubectl apply</code>. Press <kbd>↑</kbd> then <kbd>Enter</kbd> and the muscle memory does the rest. The whole point is that adding a service costs minutes, not an afternoon.</p>
+
+    <!-- DEFINITION LIST -->
+    <h3>A quick glossary</h3>
+    <dl>
+      <dt>k3s</dt><dd>A certified, lightweight Kubernetes distribution that fits comfortably on a Pi — all of the API, almost none of the bloat.</dd>
+      <dt>node</dt><dd>A single machine in the cluster. Here, one Raspberry Pi.</dd>
+      <dt>manifest</dt><dd>A YAML file describing the desired state of something you want running.</dd>
+    </dl>
+
+    <!-- SECTION 5 -->
+    <h2 id="verdict">Was it worth it?</h2>
+    <p>The honest answer: yes, but not for the reason I expected. The savings versus a VPS are real but slow. The real payoff is that the machine is <span class="hl hl--green">legible</span> — I understand every layer of it, and when something breaks I can actually fix it.</p>
+
+    <div class="proscons">
+      <div class="pros">
+        <h4>What I'd repeat</h4>
+        <ul>
+          <li>SSD boot — non-negotiable</li>
+          <li>Wired networking throughout</li>
+          <li>One power feed, labelled cables</li>
+          <li>k3s over full Kubernetes</li>
+        </ul>
+      </div>
+      <div class="cons">
+        <h4>What I'd skip</h4>
+        <ul>
+          <li>The RGB fans (noise, no benefit)</li>
+          <li>Overprovisioning to 4 nodes at once</li>
+          <li>Chasing 100% uptime obsessively</li>
+        </ul>
+      </div>
+    </div>
+
+    <blockquote>
+      If you have been on the fence about a homelab, the Pi 4 is the gentlest possible on-ramp. Start with two boards; you will know within a weekend whether the bug has bitten.
+      <cite>my note to a friend who asked</cite>
+    </blockquote>
+
+    <div class="divider-orn" role="separator"><span>◇</span></div>
+
+    <p>That's the whole build. It is not exotic, and that is the point — boring infrastructure is good infrastructure.<a href="#fn1" class="fn-ref">1</a> If you build one, label your cables and write down what you did; the future maintainer is always you.<a href="#fn2" class="fn-ref">2</a></p>
+
+    <!-- FURTHER READING -->
+    <h3>Further reading</h3>
+    <div class="readmore">
+      <a class="readmore-card" href="article.html"><span class="k">Dev Env</span><h4>A reproducible dev environment with Nix flakes</h4></a>
+      <a class="readmore-card" href="#"><span class="k">Kubernetes</span><h4>k3s on bare metal: lean Kubernetes for the homelab</h4></a>
+    </div>
+
+    <!-- FOOTNOTES -->
+    <section class="footnotes">
+      <h4>Notes</h4>
+      <ol>
+        <li id="fn1">"Boring technology" is a deliberate engineering value — choose tools whose failure modes you already understand.</li>
+        <li id="fn2">Every cable in my rack has a printed label at both ends. It took twenty minutes and has saved hours.</li>
+      </ol>
+    </section>
+
+    <!-- TAGS -->
+    <div class="post-tags">
+      <a href="#">raspberry pi</a>
+      <a href="#">kubernetes</a>
+      <a href="#">homelab</a>
+      <a href="#">linux</a>
+      <a href="#">self-hosting</a>
+    </div>
+
+  </div>
+
+  <!-- end-of-article colophon (arrangement B) -->
+  <div class="colo"><div class="colo-card"><div class="colo-lock">
+    <p class="big">Read with intention.</p>
+    <p class="sub">aesthete + coding</p>
+    <img class="wm-monk for-dark" src="assets/monk-cream.png" alt="" width="104">
+    <img class="wm-monk for-light" src="assets/monk-ink.png" alt="" width="104">
+  </div></div></div>
+</article>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="foot wrap">
+  <nav class="foot-social" aria-label="External links">
+    <a href="https://github.com/Fred-el-Jolo" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.36 1.09 2.94.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"></path></svg></a>
+    <a href="https://www.linkedin.com/in/fredericguillaume/" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.5c0-1.31-.02-3-1.83-3-1.83 0-2.11 1.43-2.11 2.9V21H9z"></path></svg></a>
+  </nav>
+  <div class="foot-text">
+    <span class="fpunch">Easy to code, hard to master.</span>
+    <span><span class="b">{</span> aesthetecoding.io <span class="b">}</span> · © 2026 · built static, served with care</span>
+  </div>
+</footer>
+
+<script src="js/atelier.js"></script>
+<script src="js/vendor/sketch-annotate.js"></script>
+<script src="js/prose.js"></script>
+</body>
+</html>

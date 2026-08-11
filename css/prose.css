@@ -1,0 +1,351 @@
+/* ============================================================================
+   aesthetecoding.io — PROSE / ARTICLE COMPONENT LIBRARY
+   Extends atelier.css. Scoped to the reading column (.acx .read .col) so it
+   only affects article content. Reuses every token from atelier.css:
+   --news/--serif/--sans/--mono, --amber/--red/--green/--blue, theme palette,
+   --radius*, --fs-scale. Fully dark/light + eco aware.
+
+   Load AFTER atelier.css:
+     <link rel="stylesheet" href="css/atelier.css">
+     <link rel="stylesheet" href="css/prose.css">
+   ========================================================================== */
+
+/* ---------------------------------------------------------------------------
+   COLUMN GRID — content / wide / full breakout lanes
+   Top-level children sit in the 680px "content" lane by default; add
+   .prose-wide or .prose-full to break out wider, staying centred & responsive.
+   --------------------------------------------------------------------------- */
+.acx .read .col{
+  max-width:var(--maxw);
+  width:100%;
+  margin:0 auto;
+  padding:6px 0 0;
+  display:grid;
+  grid-template-columns:
+    [full-start] minmax(var(--pad),1fr)
+    [wide-start] minmax(0,100px)
+    [content-start] min(var(--readw), 100% - (var(--pad) * 2)) [content-end]
+    minmax(0,100px) [wide-end]
+    minmax(var(--pad),1fr) [full-end];
+}
+.acx .read .col > *{ grid-column: content; }
+.acx .read .col > .prose-wide{ grid-column: wide; }
+.acx .read .col > .prose-full{ grid-column: full; }
+
+/* ---------------------------------------------------------------------------
+   STRUCTURE — lead, headings w/ anchors, lists, definition list, dividers
+   --------------------------------------------------------------------------- */
+.acx .read .col .lead{
+  font-family:var(--serif);
+  font-size:calc(22px * var(--fs-scale));
+  line-height:1.6;
+  color:var(--dim);
+  margin:8px 0 26px;
+}
+.acx .read .col .lead::first-letter{ all:unset; }   /* no drop-cap on a lead */
+
+.acx .read .col h2,
+.acx .read .col h3,
+.acx .read .col h4{ position:relative; scroll-margin-top:90px; }
+.acx .read .col h3{ font-family:var(--news); font-weight:600; font-size:calc(21px * var(--fs-scale)); letter-spacing:-.01em; color:var(--ink); margin:32px 0 4px; }
+.acx .read .col h4{ font-family:var(--sans); font-weight:600; font-size:calc(16px * var(--fs-scale)); letter-spacing:.02em; text-transform:uppercase; color:var(--faint); margin:26px 0 4px; }
+/* hover anchor link */
+.acx .read .col :is(h2,h3) .anchor{
+  position:absolute; left:-26px; top:0; width:22px;
+  font-family:var(--mono); color:var(--amber-text);
+  opacity:0; text-decoration:none; transition:opacity .15s;
+}
+.acx .read .col :is(h2,h3):hover .anchor{ opacity:.7; }
+.acx .read .col :is(h2,h3) .anchor:hover{ opacity:1; }
+
+/* bullet list — amber diamond markers */
+.acx .read .col ul:not([class]){ list-style:none; padding:0; margin:22px 0; }
+.acx .read .col ul:not([class]) > li{
+  position:relative; padding-left:28px; margin:10px 0;
+  font-family:var(--serif); font-size:calc(18px * var(--fs-scale)); line-height:1.7; color:var(--ink);
+}
+.acx .read .col ul:not([class]) > li::before{
+  content:""; position:absolute; left:6px; top:.62em;
+  width:7px; height:7px; background:var(--amber); border-radius:2px; transform:rotate(45deg);
+}
+/* numbered list — amber counters */
+.acx .read .col ol:not([class]){ list-style:none; padding:0; margin:22px 0; counter-reset:li; }
+.acx .read .col ol:not([class]) > li{
+  position:relative; padding-left:38px; margin:12px 0;
+  font-family:var(--serif); font-size:calc(18px * var(--fs-scale)); line-height:1.7; color:var(--ink);
+  counter-increment:li;
+}
+.acx .read .col ol:not([class]) > li::before{
+  content:counter(li); position:absolute; left:0; top:.05em;
+  font-family:var(--mono); font-size:.78em; font-weight:500; color:var(--amber-text);
+  width:24px; height:24px; display:flex; align-items:center; justify-content:center;
+  border:1px solid var(--line); border-radius:50%;
+}
+.acx .read .col li > ul:not([class]), .acx .read .col li > ol:not([class]){ margin:6px 0; }
+
+/* definition list */
+.acx .read .col dl{ margin:24px 0; display:grid; grid-template-columns:auto 1fr; gap:6px 20px; }
+.acx .read .col dl dt{ font-family:var(--mono); font-size:calc(13px * var(--fs-scale)); color:var(--amber-text); padding-top:3px; white-space:nowrap; }
+.acx .read .col dl dd{ font-family:var(--serif); font-size:calc(17px * var(--fs-scale)); line-height:1.6; color:var(--ink); margin:0; }
+
+/* dividers */
+.acx .read .col hr{ border:0; height:1px; background:var(--line); margin:40px 0; }
+.acx .read .col .divider-orn{ border:0; display:flex; align-items:center; justify-content:center; gap:14px; margin:46px 0; color:var(--faint); }
+.acx .read .col .divider-orn::before, .acx .read .col .divider-orn::after{ content:""; height:1px; width:70px; background:var(--line); }
+.acx .read .col .divider-orn span{ font-family:var(--mono); transform:rotate(45deg); color:var(--amber); }
+
+/* ---------------------------------------------------------------------------
+   CODE — inline, code block (lang label + copy), terminal, <kbd>
+   --------------------------------------------------------------------------- */
+.acx .read .col :not(pre) > code{
+  font-family:var(--mono); font-size:.86em;
+  background:color-mix(in srgb, var(--ink) 10%, var(--bg2));
+  border:1px solid color-mix(in srgb, var(--ink) 16%, var(--line));
+  border-radius:6px; padding:.08em .4em; color:var(--amber-text);
+  white-space:nowrap;
+}
+
+.acx .read .col .codeblock{ margin:26px 0; border:1px solid var(--line); border-radius:var(--radius-md); overflow:hidden; background:var(--panel); }
+.acx .read .col .codeblock__bar{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:8px 12px 8px 16px; border-bottom:1px solid var(--line); background:var(--bg2);
+}
+.acx .read .col .codeblock__lang{ font-family:var(--mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--faint); }
+.acx .read .col .codeblock__copy{
+  font-family:var(--mono); font-size:11px; color:var(--faint);
+  background:transparent; border:1px solid var(--line); border-radius:6px;
+  padding:3px 9px; cursor:pointer; transition:color .15s, border-color .15s;
+}
+.acx .read .col .codeblock__copy:hover{ color:var(--ink); border-color:var(--amber); }
+.acx .read .col .codeblock__copy.copied{ color:var(--green); border-color:var(--green); }
+.acx .read .col .codeblock pre{ margin:0; border:0; border-radius:0; background:transparent; }
+
+/* terminal — distinct from code: prompt-driven */
+.acx .read .col .terminal{ margin:26px 0; border:1px solid var(--line); border-radius:var(--radius-md); overflow:hidden; background:#0c0a07; }
+.acx[data-theme="light"] .read .col .terminal{ background:#1c1610; }
+.acx .read .col .terminal__bar{ display:flex; align-items:center; gap:7px; padding:9px 14px; border-bottom:1px solid #2a2118; }
+.acx .read .col .terminal__bar i{ width:11px; height:11px; border-radius:50%; display:block; }
+.acx .read .col .terminal__bar i:nth-child(1){ background:#e0654f; }
+.acx .read .col .terminal__bar i:nth-child(2){ background:#e0b24f; }
+.acx .read .col .terminal__bar i:nth-child(3){ background:#5fb874; }
+.acx .read .col .terminal__bar span{ font-family:var(--mono); font-size:10px; letter-spacing:.1em; color:#6b6152; margin-left:6px; }
+.acx .read .col .terminal pre{ margin:0; border:0; border-radius:0; background:transparent; color:#e7dcc8; padding:16px 18px; font-size:13px; line-height:1.8; }
+.acx .read .col .terminal pre .cmd{ color:#e7dcc8; display:block; }
+.acx .read .col .terminal pre .cmd::before{ content:"$ "; color:var(--green); }
+.acx .read .col .terminal pre .out{ color:#8c8270; display:block; }
+
+.acx .read .col kbd, .acx .read .col .kbd{
+  font-family:var(--mono); font-size:.8em; line-height:1;
+  background:var(--bg2); color:var(--ink);
+  border:1px solid var(--line); border-bottom-width:2px;
+  border-radius:5px; padding:.2em .5em; white-space:nowrap;
+}
+
+/* ---------------------------------------------------------------------------
+   QUOTES — blockquote (with cite), pull quote (breakout)
+   --------------------------------------------------------------------------- */
+.acx .read .col blockquote cite{ display:block; margin-top:10px; font-family:var(--mono); font-style:normal; font-size:12px; color:var(--faint); }
+.acx .read .col blockquote cite::before{ content:"— "; }
+
+.acx .read .col .pullquote{
+  margin:36px 0; padding:0; border:0;
+  font-family:var(--news); font-weight:500; font-style:normal;
+  font-size:calc(30px * var(--fs-scale)); line-height:1.2; letter-spacing:-.015em;
+  color:var(--ink); text-wrap:balance; text-align:center;
+}
+.acx .read .col .pullquote::before{ content:"“"; display:block; font-size:2.4em; line-height:.4; color:var(--amber); margin-bottom:.1em; }
+
+/* ---------------------------------------------------------------------------
+   HIGHLIGHTS — CSS markers (always work), chips/badges, rough-notation
+   --------------------------------------------------------------------------- */
+/* marker highlight — <mark> defaults to amber; .hl--x for colours */
+.acx .read .col mark, .acx .read .col .hl{
+  background:linear-gradient(transparent 58%, color-mix(in srgb, var(--amber) 42%, transparent) 58%);
+  color:inherit; padding:0 .08em; border-radius:1px;
+}
+.acx .read .col .hl--green{ background:linear-gradient(transparent 58%, color-mix(in srgb, var(--green) 42%, transparent) 58%); }
+.acx .read .col .hl--blue{ background:linear-gradient(transparent 58%, color-mix(in srgb, var(--blue) 42%, transparent) 58%); }
+.acx .read .col .hl--red{ background:linear-gradient(transparent 58%, color-mix(in srgb, var(--red) 42%, transparent) 58%); }
+
+/* chips / badges — inline pills */
+.acx .read .col .badge{
+  display:inline-flex; align-items:center; gap:5px;
+  font-family:var(--mono); font-size:.72em; letter-spacing:.04em; text-transform:uppercase;
+  border:1px solid var(--line); border-radius:var(--radius-pill);
+  padding:.15em .6em; color:var(--dim); vertical-align:middle; white-space:nowrap;
+}
+.acx .read .col .badge::before{ content:""; width:7px; height:7px; border-radius:50%; background:var(--badge,var(--amber)); }
+.acx .read .col .badge--amber{ --badge:var(--amber); }
+.acx .read .col .badge--green{ --badge:var(--green); }
+.acx .read .col .badge--blue{ --badge:var(--blue); }
+.acx .read .col .badge--red{ --badge:var(--red); }
+
+/* rough-notation: emphasis baseline + static fallback when JS/lib unavailable or eco */
+.acx .read .col [data-rough]{ font-weight:500; }
+/* highlight text ink: dark on light (amber fill is bright), normal ink on dark (amber fill is dim at 0.4 opacity) */
+.acx[data-theme="light"] .read .col [data-rough].rough-hl{ color:#15110a; }
+.acx[data-theme="dark"]  .read .col [data-rough].rough-hl{ color:var(--ink); }
+/* dark mode: SVG annotation SVGs land on <body> (.acx) — boost opacity so amber reads against dark bg */
+.acx[data-theme="dark"] .sketch-annotation path{ stroke-opacity:.7; }
+/* CSS fallback (eco mode / JS unavailable / reduced-motion) */
+.acx[data-theme="light"] .read .col [data-rough].rough-fallback[data-rough="highlight"]{ background:linear-gradient(transparent 58%, color-mix(in srgb, var(--amber) 42%, transparent) 58%); color:#15110a; }
+.acx[data-theme="dark"]  .read .col [data-rough].rough-fallback[data-rough="highlight"]{ background:linear-gradient(transparent 38%, color-mix(in srgb, var(--amber) 60%, transparent) 38%); color:var(--ink); }
+.acx .read .col [data-rough].rough-fallback:is([data-rough="underline"],[data-rough="box"],[data-rough="circle"]){ box-shadow:inset 0 -2px 0 var(--amber); }
+.acx .read .col [data-rough].rough-fallback[data-rough="strike-through"]{ text-decoration:line-through; text-decoration-color:var(--red); }
+
+/* ---------------------------------------------------------------------------
+   CALLOUTS — note / tip / warning / info  +  TL;DR
+   --------------------------------------------------------------------------- */
+.acx .read .col .callout{
+  margin:26px 0; padding:18px 20px 18px 18px;
+  border:1px solid var(--line); border-left:3px solid var(--co,var(--amber));
+  border-radius:var(--radius-md); background:var(--bg2);
+  display:grid; grid-template-columns:24px 1fr; gap:14px; align-items:start;
+}
+.acx .read .col .callout__ic{ color:var(--co,var(--amber)); margin-top:1px; }
+.acx .read .col .callout__ic svg{ width:22px; height:22px; }
+.acx .read .col .callout__body{ min-width:0; }
+.acx .read .col .callout__title{ font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--co,var(--amber)); margin:1px 0 6px; }
+.acx .read .col .callout p{ margin:0; font-size:calc(16px * var(--fs-scale)); line-height:1.6; }
+.acx .read .col .callout p:first-of-type::first-letter{ all:unset; }
+.acx .read .col .callout--note{ --co:var(--blue); }
+.acx .read .col .callout--tip{ --co:var(--green); }
+.acx .read .col .callout--warn{ --co:var(--red); }
+.acx .read .col .callout--info{ --co:var(--amber); }
+
+.acx .read .col .tldr{
+  margin:28px 0; padding:22px 24px; border:1px solid var(--line); border-radius:var(--radius);
+  background:radial-gradient(120% 160% at 100% 0%, var(--glow), transparent 60%), var(--panel);
+}
+.acx .read .col .tldr h4{ margin:0 0 10px; color:var(--amber-text); }
+.acx .read .col .tldr ul:not([class]){ margin:0; }
+.acx .read .col .tldr ul:not([class]) > li{ font-size:calc(16px * var(--fs-scale)); }
+
+/* ---------------------------------------------------------------------------
+   STEP-BY-STEP — numbered process cards
+   --------------------------------------------------------------------------- */
+.acx .read .col .steps{ list-style:none; counter-reset:step; padding:0; margin:28px 0; display:flex; flex-direction:column; gap:14px; }
+.acx .read .col .steps > li{
+  counter-increment:step; position:relative;
+  border:1px solid var(--line); border-radius:var(--radius-md); padding:18px 20px 18px 64px; background:var(--panel);
+}
+.acx .read .col .steps > li::before{
+  content:counter(step); position:absolute; left:16px; top:16px;
+  width:34px; height:34px; display:flex; align-items:center; justify-content:center;
+  font-family:var(--news); font-size:18px; font-weight:600; color:var(--amber-text);
+  border:1px solid var(--amber); border-radius:50%;
+}
+.acx .read .col .steps > li h4{ margin:0 0 4px; text-transform:none; font-family:var(--news); font-size:calc(18px * var(--fs-scale)); color:var(--ink); letter-spacing:0; }
+.acx .read .col .steps > li p{ margin:0; font-size:calc(16px * var(--fs-scale)); }
+.acx .read .col .steps > li p:first-of-type::first-letter{ all:unset; }
+
+/* ---------------------------------------------------------------------------
+   LAYOUT — multi-column grids, tables, pros/cons
+   --------------------------------------------------------------------------- */
+.acx .read .col .grid-2, .acx .read .col .grid-3{ display:grid; gap:22px; margin:26px 0; }
+.acx .read .col .grid-2{ grid-template-columns:1fr 1fr; }
+.acx .read .col .grid-3{ grid-template-columns:repeat(3,1fr); }
+.acx .read .col .grid-2 > *, .acx .read .col .grid-3 > *{ margin:0; }
+.acx .read .col .grid-2 p, .acx .read .col .grid-3 p{ font-size:calc(16px * var(--fs-scale)); margin:0 0 12px; }
+.acx .read .col .grid-2 p:first-of-type::first-letter, .acx .read .col .grid-3 p:first-of-type::first-letter{ all:unset; }
+
+/* tables */
+.acx .read .col .table-wrap{ margin:26px 0; overflow-x:auto; border:1px solid var(--line); border-radius:var(--radius-md); }
+.acx .read .col table{ width:100%; border-collapse:collapse; font-family:var(--sans); font-size:calc(15px * var(--fs-scale)); }
+.acx .read .col thead th{
+  text-align:left; font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--faint); padding:12px 16px; border-bottom:1px solid var(--line); background:var(--bg2); white-space:nowrap;
+}
+.acx .read .col tbody td{ padding:12px 16px; border-bottom:1px solid var(--line); color:var(--ink); vertical-align:top; }
+.acx .read .col tbody tr:last-child td{ border-bottom:0; }
+.acx .read .col tbody tr:nth-child(even) td{ background:color-mix(in srgb, var(--bg2) 55%, transparent); }
+.acx .read .col td code{ white-space:nowrap; }
+
+/* pros / cons */
+.acx .read .col .proscons{ display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:26px 0; }
+.acx .read .col .proscons > div{ border:1px solid var(--line); border-radius:var(--radius-md); padding:18px 20px; background:var(--panel); }
+.acx .read .col .proscons h4{ margin:0 0 10px; }
+.acx .read .col .proscons .pros h4{ color:var(--green); }
+.acx .read .col .proscons .cons h4{ color:var(--red); }
+.acx .read .col .proscons ul{ list-style:none; padding:0; margin:0; }
+.acx .read .col .proscons li{ position:relative; padding-left:24px; margin:8px 0; font-family:var(--sans); font-size:calc(15px * var(--fs-scale)); line-height:1.55; color:var(--dim); }
+.acx .read .col .proscons .pros li::before{ content:"+"; position:absolute; left:4px; top:0; background:none; width:auto; height:auto; transform:none; color:var(--green); font-family:var(--mono); }
+.acx .read .col .proscons .cons li::before{ content:"−"; position:absolute; left:4px; top:0; background:none; width:auto; height:auto; transform:none; color:var(--red); font-family:var(--mono); }
+
+/* ---------------------------------------------------------------------------
+   FIGURES / IMAGES — caption, alignment (left/right/center/wide/full), size
+   set width via inline style="--w:340px" on the figure (left/right variants)
+   --------------------------------------------------------------------------- */
+.acx .read .col figure.fig{ margin:28px 0; }
+.acx .read .col figure.fig img,
+.acx .read .col figure.fig .ph{
+  width:100%; display:block; border:1px solid var(--line); border-radius:var(--radius-md); overflow:hidden;
+}
+.acx .read .col figure.fig .ph{ aspect-ratio:16/10; position:relative; }
+.acx .read .col figure.fig figcaption{ font-family:var(--mono); font-size:11px; color:var(--faint); text-align:center; margin-top:8px; line-height:1.5; }
+.acx .read .col figure.fig--left{ float:left; width:var(--w,300px); margin:6px 28px 16px 0; }
+.acx .read .col figure.fig--right{ float:right; width:var(--w,300px); margin:6px 0 16px 28px; }
+.acx .read .col figure.fig--center{ width:var(--w,100%); margin-left:auto; margin-right:auto; }
+.acx .read .col figure.fig figcaption{ text-align:left; }
+.acx .read .col figure.fig--center figcaption{ text-align:center; }
+
+/* image gallery grid */
+.acx .read .col .gallery{ display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; margin:26px 0; }
+.acx .read .col .gallery figure{ margin:0; }
+
+/* striped placeholder (until real images dropped in) */
+.acx .read .col .ph-stripe{ background:repeating-linear-gradient(135deg,var(--cover-a) 0 10px,var(--cover-b) 10px 20px); display:flex; align-items:flex-end; }
+.acx .read .col .ph-stripe .lbl{ font-family:var(--mono); font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--faint); background:color-mix(in srgb,var(--bg) 72%,transparent); border:1px solid var(--line); border-radius:6px; padding:4px 8px; margin:12px; }
+
+/* ---------------------------------------------------------------------------
+   "ON THIS PAGE" CONTENTS  +  FURTHER READING  +  FOOTNOTES  +  TAGS
+   --------------------------------------------------------------------------- */
+.acx .read .col .toc{ margin:8px 0 30px; padding:18px 22px; border:1px solid var(--line); border-radius:var(--radius-md); background:var(--bg2); }
+.acx .read .col .toc h4{ margin:0 0 10px; }
+.acx .read .col .toc ol{ list-style:none; counter-reset:toc; padding:0; margin:0; columns:2; column-gap:28px; }
+.acx .read .col .toc li{ counter-increment:toc; margin:5px 0; break-inside:avoid; }
+.acx .read .col .toc a{ font-family:var(--mono); font-size:13px; color:var(--dim); text-decoration:none; }
+.acx .read .col .toc a::before{ content:counter(toc,decimal-leading-zero); color:var(--amber-text); margin-right:10px; }
+.acx .read .col .toc a:hover{ color:var(--amber-text); }
+
+.acx .read .col .readmore{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:26px 0; }
+.acx .read .col .readmore-card{
+  display:block; border:1px solid var(--line); border-radius:var(--radius-md); padding:18px 20px;
+  background:var(--panel); text-decoration:none; color:inherit; transition:border-color .18s, transform .18s;
+}
+.acx .read .col .readmore-card:hover{ border-color:var(--amber); transform:translateY(-2px); }
+.acx .read .col .readmore-card .k{ font-family:var(--mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--amber-text); }
+.acx .read .col .readmore-card h4{ margin:8px 0 0; font-family:var(--news); text-transform:none; letter-spacing:0; font-size:calc(18px * var(--fs-scale)); color:var(--ink); }
+
+.acx .read .col .footnotes{ margin:34px 0 0; padding-top:18px; border-top:1px solid var(--line); }
+.acx .read .col .footnotes h4{ margin:0 0 8px; }
+.acx .read .col .footnotes ol{ counter-reset:fn; padding:0; margin:0; list-style:none; }
+.acx .read .col .footnotes li{ counter-increment:fn; position:relative; padding-left:28px; margin:8px 0; font-family:var(--sans); font-size:13px; line-height:1.6; color:var(--dim); }
+.acx .read .col .footnotes li::before{ content:counter(fn); position:absolute; left:0; top:0; font-family:var(--mono); font-size:11px; color:var(--amber-text); }
+.acx .read .col a.fn-ref{ font-family:var(--mono); font-size:.7em; color:var(--amber-text); text-decoration:none; vertical-align:super; padding:0 1px; }
+
+.acx .read .col .post-tags{ display:flex; flex-wrap:wrap; gap:8px; margin:30px 0 0; }
+.acx .read .col .post-tags a{
+  font-family:var(--mono); font-size:12px; color:var(--dim); text-decoration:none;
+  border:1px solid var(--line); border-radius:var(--radius-pill); padding:5px 13px;
+}
+.acx .read .col .post-tags a:hover{ border-color:var(--amber); color:var(--ink); }
+
+/* ---------------------------------------------------------------------------
+   ECO MODE — neutralise heavy backgrounds for the low-power view
+   --------------------------------------------------------------------------- */
+.acx[data-eco="on"] .read .col .tldr{ background:var(--panel); }
+.acx[data-eco="on"] .read .col .ph-stripe{ background:var(--bg2); }
+
+/* ---------------------------------------------------------------------------
+   RESPONSIVE
+   --------------------------------------------------------------------------- */
+@container (max-width:720px){
+  .acx .read .col .grid-2, .acx .read .col .grid-3,
+  .acx .read .col .proscons, .acx .read .col .readmore{ grid-template-columns:1fr; }
+  .acx .read .col figure.fig--left, .acx .read .col figure.fig--right{ float:none; width:100%; margin:24px 0; }
+  .acx .read .col .toc ol{ columns:1; }
+  .acx .read .col dl{ grid-template-columns:1fr; gap:2px 0; }
+  .acx .read .col dl dt{ margin-top:10px; }
+  .acx .read .col :is(h2,h3) .anchor{ display:none; }
+}
