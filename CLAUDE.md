@@ -233,14 +233,14 @@ actually needs — the catalogue is a reference to copy from, not a checklist to
 
 ## Writing & Publishing Workflow (DRAFT — publish step not yet decided)
 
-> This section documents the intended end-to-end order when using the `BlogPost` skill to write an
+> This section documents the intended end-to-end order when using the `blog-post` skill to write an
 > article, not just the manual `bun new` CLI flow above. **Steps 1–8 are settled; step 9 (ship) is
 > still open** — see the note at the bottom before treating this as final.
 
-1. **Structure first (optional)** — for anything non-trivial, run the `BlogPost` skill's **Outline**
+1. **Structure first (optional)** — for anything non-trivial, run the `blog-post` skill's **Outline**
    workflow first. It produces a section-by-section plan and stops for approval before any prose exists.
    Skip straight to step 2 for short/simple posts.
-2. **Write** — `BlogPost` skill's **Draft** workflow generates `_articles/{date}-{slug}/meta.json`
+2. **Write** — `blog-post` skill's **Draft** workflow generates `_articles/{date}-{slug}/meta.json`
    (`status: "draft"`) + `content.html` + empty `assets/`. If Outline ran first, Draft continues from
    the approved plan instead of re-asking.
 3. **Review the draft** — read `content.html` yourself. The skill flags technical claims it isn't sure
@@ -248,7 +248,7 @@ actually needs — the catalogue is a reference to copy from, not a checklist to
 4. **Add the cover image** — drop the file into `assets/`, set `cover` / `coverAlt` / `coverFocus` in
    `meta.json` (the only required image field — see § Cover images above). `featuredCover`/`listCover`
    are optional and can be added later.
-5. **Polish (optional)** — `BlogPost` skill's **Polish** workflow for a voice/flow pass, if needed.
+5. **Polish (optional)** — `blog-post` skill's **Polish** workflow for a voice/flow pass, if needed.
 6. **Flip to published** — set `"status": "published"` in `meta.json`.
 7. **Build** — `bun make` → writes to `dist/` (atomic swap, untouched on failure).
 8. **Local check** — `bun dev` → serve `dist/` and eyeball the article + home page before shipping.

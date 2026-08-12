@@ -1,6 +1,6 @@
 ---
-name: BlogSlides
-description: "Co-generates slide-deck articles for aesthetecoding.io — the slide-format sibling of BlogPost. Three workflows: Outline (pick slide situations + order from the catalogue, human approves before writing), Draft (full deck from topic → meta.json + slides.html), Polish (voice/pacing pass on an existing slides.html). Knows the slide catalogue (_templates/article-deck.html), the deck build pipeline (_templates/deck.html, css/deck.css, js/deck-stage.js), and fred's spare field-notes voice adapted for speaker-note fragments. USE WHEN: make a slide deck, deck article, slides about X, presentation post, turn this into slides, outline a deck, draft a deck, polish these slides, slide-format article, aesthetecoding deck. NOT FOR: prose articles (use BlogPost); rewriting CLAUDE.md, build scripts, or the deck system itself (css/deck.css, js/deck-stage.js, _templates/deck.html)."
+name: blog-slides
+description: "Co-generates slide-deck articles for aesthetecoding.io — the slide-format sibling of blog-post. Three workflows: Outline (pick slide situations + order from the catalogue, human approves before writing), Draft (full deck from topic → meta.json + slides.html), Polish (voice/pacing pass on an existing slides.html). Knows the slide catalogue (_templates/article-deck.html), the deck build pipeline (_templates/deck.html, css/deck.css, js/deck-stage.js), and fred's spare field-notes voice adapted for speaker-note fragments. USE WHEN: make a slide deck, deck article, slides about X, presentation post, turn this into slides, outline a deck, draft a deck, polish these slides, slide-format article, aesthetecoding deck. NOT FOR: prose articles (use blog-post); rewriting CLAUDE.md, build scripts, or the deck system itself (css/deck.css, js/deck-stage.js, _templates/deck.html)."
 version: 1.0.0
 disable-model-invocation: true
 ---
@@ -25,7 +25,7 @@ curl -sk -X POST http://localhost:31337/notify \
 
 # BlogSlides Skill
 
-Co-generates slide-deck articles for aesthetecoding.io — the slide-format sibling of `BlogPost`.
+Co-generates slide-deck articles for aesthetecoding.io — the slide-format sibling of `blog-post`.
 Same blog, same voice, different medium: a full-page, keyboard-navigable deck instead of a
 reading-column article.
 
@@ -104,12 +104,12 @@ restates the previous slide's title with "(cont.)".
   creates a value the script immediately overwrites, and it drifts the instant slide count changes
   during drafting.
 - **View every image before setting `--focus` on a `.slide--photo` situation — never guess.** Same
-  lesson `BlogPost` learned this session: a default `50% 50%` can clip the actual subject of a wide
+  lesson `blog-post` learned this session: a default `50% 50%` can clip the actual subject of a wide
   photo when the slide's 16:9 frame crops it. Read the pixels first.
 - **`data-speaker-notes` is stored but not yet surfaced anywhere** — there is no presenter view. Write
   them anyway (they're the voice doctrine for that slide and free future work), but don't promise the
   reader or author a feature that doesn't exist yet.
-- **`meta.json` fields are otherwise identical to a normal `BlogPost` article** — `cover`/
+- **`meta.json` fields are otherwise identical to a normal `blog-post` article** — `cover`/
   `featuredCover`/`listCover` still drive the home-page listing thumbnails and are independent of
   whatever image appears on the deck's own Cover slide. Don't skip them assuming the deck's internal
   cover slide substitutes for the site's listing thumbnail — it doesn't.

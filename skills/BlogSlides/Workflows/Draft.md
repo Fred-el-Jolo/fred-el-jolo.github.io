@@ -109,10 +109,10 @@ to this deck's topic. Rules:
 
 `cover` here is for the home-page listing thumbnail (16:9) — independent of the deck's own internal
 Cover slide, which can reuse the same image or use a different one entirely. Leave it blank for the
-human to fill in later, same as `BlogPost`. `featuredCover`/`listCover` work identically to a normal
+human to fill in later, same as `blog-post`. `featuredCover`/`listCover` work identically to a normal
 article if the human wants dedicated home-page crops.
 
-**`aiProvenance` decision:** same scale as `BlogPost` — `"none"` (AI only structured, all phrasing
+**`aiProvenance` decision:** same scale as `blog-post` — `"none"` (AI only structured, all phrasing
 fred's), `"enriched"` (AI co-wrote, fred edited), `"full"` (AI generated with minimal human phrasing).
 Default for this skill: `"enriched"`.
 

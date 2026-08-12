@@ -1,5 +1,5 @@
 ---
-name: BlogPost
+name: blog-post
 description: "Co-generates articles for aesthetecoding.io. Three workflows: Draft (full article from topic → meta.json + content.html), Outline (structure-first planning, then human approves before writing), Polish (improve an existing content.html for voice, flow, and component use). Knows the design system, the build pipeline format, and fred's editorial voice — spare, precise, field-notes style. USE WHEN: write article, draft post, blog post about X, new article about, post on X, outline article, plan article structure, polish draft, improve this article, edit this post, aesthetecoding, new post. NOT FOR: rewriting CLAUDE.md or build scripts; writing non-blog content."
 effort: medium
 disable-model-invocation: true
