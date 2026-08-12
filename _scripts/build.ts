@@ -411,7 +411,9 @@ async function copyStaticDirs(destDir: string): Promise<void> {
     const src = join(ROOT, dir);
     if (existsSync(src)) await cp(src, join(destDir, dir), { recursive: true });
   }
-  // robots.txt
+  // CNAME (custom domain) + robots.txt
+  const cname = join(ROOT, "CNAME");
+  if (existsSync(cname)) await cp(cname, join(destDir, "CNAME"));
   const robots = join(ROOT, "robots.txt");
   if (existsSync(robots)) await cp(robots, join(destDir, "robots.txt"));
 }

@@ -1,0 +1,40 @@
+name: Deploy to GitHub Pages
+
+# Builds dist/ with `bun make` and uploads it as a Pages artifact.
+# Repo setting required (one-time): Settings → Pages → Source = "GitHub Actions".
+on:
+  push:
+    branches: [master]
+  workflow_dispatch: # manual "redeploy" button in the Actions tab
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write # required by actions/deploy-pages
+
+# A new push cancels any deploy already in flight for this environment.
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+      - run: bun make # package.json has no deps → no install step
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

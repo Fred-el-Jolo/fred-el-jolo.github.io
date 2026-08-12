@@ -192,7 +192,13 @@ Every article gets canonical, Open Graph, Twitter card, and `application/ld+json
 
 ## Deployment
 
-The `dist/` directory is the deployable output. Options:
+Every push to `master` builds and deploys `dist/` automatically via the
+[Deploy to GitHub Pages](.github/workflows/deploy.yml) workflow. It runs `bun make`
+and uploads `dist/` as a Pages artifact (no `gh-pages` branch, no committing
+build output).
 
-- **Manual:** run `bun make`, commit `dist/`, push — GitHub Pages serves from `dist/` or the repo root
-- **GitHub Actions:** trigger `bun make` on push to `main`, deploy `dist/` to `gh-pages` branch
+**One-time setup:** Settings → Pages → Source = "GitHub Actions".
+
+The build copies `CNAME` into `dist/` so the `aesthetecoding.io` custom domain
+stays wired up on every deploy. Manual redeploys are available via the
+*Run workflow* button on the Actions tab.
