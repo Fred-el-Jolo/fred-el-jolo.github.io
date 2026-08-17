@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "make": "bun _scripts/build.ts",
-    "dev": "bun _scripts/dev.ts",
+    "serve": "python3 -m http.server 3000 --directory dist",
     "new": "bun _scripts/new-article.ts",
     "components": "bun _scripts/list-components.ts"
   }

@@ -1,6 +1,6 @@
 # {aesthetecoding.io}
 
-Personal blog — field notes on Linux, dev environments, and the craft of the terminal.
+Personal blog — field notes on AI, code, systems, and the craft of the terminal.
 
 Live at **[aesthetecoding.io](https://aesthetecoding.io)**.
 
@@ -28,7 +28,7 @@ git clone https://github.com/Fred-el-Jolo/fred-el-jolo.github.io
 bun make
 ```
 
-`dist/` is the built site. Open `dist/index.html` in a browser or run `bun dev` for a local server.
+`dist/` is the built site. Open `dist/index.html` in a browser or run `bun serve` for a local server (rebuild with `bun make` after edits).
 
 ---
 
@@ -39,7 +39,7 @@ bun make
 | `bun make` | Full build → `dist/` with atomic swap (safe if interrupted) |
 | `bun new` | Scaffold a new article interactively |
 | `bun components` | Print the component catalog to the terminal |
-| `bun dev` | Local dev server on `localhost:3000`, rebuilds on file save |
+| `bun serve` | Serve `dist/` on `localhost:3000` (`python3 -m http.server`; no watch — rebuild with `bun make`) |
 
 ---
 
@@ -161,7 +161,6 @@ _config/
 _scripts/
   ├── build.ts            build pipeline
   ├── new-article.ts      interactive scaffolder
-  ├── dev.ts              local dev server
   └── list-components.ts  component catalog printer
 _templates/
   ├── article.html        article page wrapper ({{PLACEHOLDER}} markers)

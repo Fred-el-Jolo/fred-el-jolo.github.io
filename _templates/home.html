@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>{aesthetecoding.io} — field notes on Linux, dev environments &amp; the craft of the terminal</title>
-<meta name="description" content="An aesthete's field notes on Linux, dev environments and the craft of the terminal.">
+<title>{aesthetecoding.io} — field notes on AI, code, systems &amp; the craft of the terminal</title>
+<meta name="description" content="An aesthete's field notes on AI, code, systems and the craft of the terminal.">
 <!-- BUILD:HOME_SEO — canonical, OG, JSON-LD WebSite+Blog schema -->
 {{HOME_SEO}}
 <!-- fonts are self-hosted via @font-face in atelier.css — no third-party requests -->
@@ -57,12 +57,14 @@
   {{FEATURED_SECTION}}
 
   <!-- ===================== ALL WRITING ===================== -->
-  <div class="sec"><h2>All writing</h2><span class="ct">{{ARTICLE_COUNT}} posts</span><span class="rule"></span></div>
+  <div class="sec"><h2>All articles</h2><span class="ct">{{ARTICLE_COUNT}} articles</span><span class="rule"></span></div>
 
   <!-- ===================== POST LIST ===================== -->
   <!-- BUILD:ARTICLES_LIST — generated from _articles/*/meta.json, newest first -->
   <div class="list">
+    <!-- BUILD:ARTICLES_LIST — generated from _articles/*/meta.json, newest first -->
     {{ARTICLES_LIST}}
+    <p class="list-empty">Nothing published here yet — new field notes landing soon.</p>
   </div>
 
   <!-- ===================== FOOTER ===================== -->
@@ -73,7 +75,11 @@
     </nav>
     <div class="foot-text">
       <span class="fpunch">Easy to code, hard to master.</span>
-      <span><span class="b">{</span> aesthetecoding.io <span class="b">}</span> · © 2026 · built static, served with care</span>
+      <span class="foot-brand"><span class="b">{</span> aesthetecoding.io <span class="b">}</span></span>
+      <span class="foot-sep" aria-hidden="true">·</span>
+      <span class="foot-cr">© 2026</span>
+      <span class="foot-sep" aria-hidden="true">·</span>
+      <span class="foot-note">built static, served with care</span>
     </div>
   </footer>
 

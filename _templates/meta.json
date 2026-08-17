@@ -2,7 +2,7 @@
   "title": "Article title (h1, used in OG + JSON-LD)",
   "slug": "url-slug-no-date",
   "date": "YYYY-MM-DD",
-  "category": "dev env",
+  "category": "dev",
   "tags": ["tag-one", "tag-two"],
   "description": "One-sentence description for meta + OG + JSON-LD (155 chars max).",
   "readingTime": 0,

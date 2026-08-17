@@ -92,20 +92,30 @@
       const topRight = document.createElement('div');
       topRight.className = 'deck-topright';
 
-      const themeToggle = document.createElement('button');
-      themeToggle.type = 'button';
-      themeToggle.className = 'deck-theme-toggle';
-      themeToggle.setAttribute('aria-label', 'Toggle light / dark theme');
-      themeToggle.innerHTML =
-        '<svg class="ic-sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>' +
-        '<svg class="ic-moon" width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 1 0 9.8 9.8Z"></path></svg>';
-      themeToggle.addEventListener('click', () => this._toggleTheme());
-      topRight.appendChild(themeToggle);
+      // theme: same two-button light/dark segmented switch as the site header —
+      // shares the acx-theme localStorage key; active state is CSS-driven
+      const themeSeg = document.createElement('div');
+      themeSeg.className = 'deck-theme-seg';
+      themeSeg.setAttribute('role', 'group');
+      themeSeg.setAttribute('aria-label', 'Colour theme');
+      [
+        ['light', 'Light theme', '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>'],
+        ['dark', 'Dark theme', '<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 1 0 9.8 9.8Z"></path></svg>'],
+      ].forEach(([value, label, icon]) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.dataset.v = value;
+        btn.setAttribute('aria-label', label);
+        btn.innerHTML = icon;
+        btn.addEventListener('click', () => this._setTheme(value));
+        themeSeg.appendChild(btn);
+      });
+      topRight.appendChild(themeSeg);
 
       const back = document.createElement('a');
       back.className = 'deck-back';
       back.href = this.getAttribute('data-back-href') || '/';
-      back.textContent = '← back to site';
+      back.textContent = '← all articles';
       topRight.appendChild(back);
 
       this.appendChild(topRight);
@@ -175,11 +185,9 @@
 
     _closeRail() { this.rail.classList.remove('is-open'); }
 
-    _toggleTheme() {
-      const root = document.documentElement;
-      const next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-      root.setAttribute('data-theme', next);
-      try { localStorage.setItem('acx-theme', next); } catch (e) {}
+    _setTheme(value) {
+      document.documentElement.setAttribute('data-theme', value);
+      try { localStorage.setItem('acx-theme', value); } catch (e) {}
     }
 
     _onHashChange() {

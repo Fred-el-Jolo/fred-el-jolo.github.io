@@ -49,9 +49,9 @@
 <!-- ===================== ARTICLE ===================== -->
 <article class="read">
   <div class="rhead">
-    <a class="back" href="/">← all writing</a>
+    <a class="back" href="/">← all articles</a>
     <!-- BUILD:KICK — category dot + label -->
-    <p class="kick"><span style="width:8px;height:8px;border-radius:50%;background:var({{KICK_COLOR}});display:inline-block"></span> {{KICK_LABEL}}</p>
+    <p class="kick"><span class="cat-chip" style="--cat:var({{KICK_COLOR}})">{{KICK_LABEL}}</span></p>
     <h1>{{ARTICLE_TITLE}}</h1>
     <div class="byl">
       <span>By <b>aesthetecoding</b></span>
@@ -88,7 +88,11 @@
   </nav>
   <div class="foot-text">
     <span class="fpunch">Easy to code, hard to master.</span>
-    <span><span class="b">{</span> aesthetecoding.io <span class="b">}</span> · © 2026 · built static, served with care</span>
+    <span class="foot-brand"><span class="b">{</span> aesthetecoding.io <span class="b">}</span></span>
+    <span class="foot-sep" aria-hidden="true">·</span>
+    <span class="foot-cr">© 2026</span>
+    <span class="foot-sep" aria-hidden="true">·</span>
+    <span class="foot-note">built static, served with care</span>
   </div>
 </footer>
 

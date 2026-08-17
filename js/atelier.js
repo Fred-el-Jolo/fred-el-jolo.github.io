@@ -103,12 +103,23 @@
 
   /* ---- tag filter -------------------------------------------------------- */
   var rows = [].slice.call(root.querySelectorAll(".list .row"));
+  var feat = root.querySelector(".feat-wrap");           // featured card filters too
+  var entries = rows.slice();
+  if (feat) entries.push(feat);
+  var countChip = root.querySelector(".sec .ct");         // "N articles" reflects the filter
+  var emptyMsg = root.querySelector(".list-empty");       // shown when nothing matches
+
   function applyFilter(tag) {
     tag = (tag || "all").toLowerCase();
-    rows.forEach(function (row) {
-      var cats = (row.dataset.cat || "").toLowerCase();
-      row.style.display = (tag === "all" || cats.split(",").indexOf(tag) !== -1) ? "" : "none";
+    var n = 0;
+    entries.forEach(function (el) {
+      var cats = (el.dataset.cat || "").toLowerCase();
+      var show = tag === "all" || cats.split(",").indexOf(tag) !== -1;
+      el.style.display = show ? "" : "none";
+      if (show) n++;
     });
+    if (countChip) countChip.textContent = n + (n === 1 ? " article" : " articles");
+    if (emptyMsg) emptyMsg.classList.toggle("on", n === 0);
   }
 
   // chip-style filter bar (if present)

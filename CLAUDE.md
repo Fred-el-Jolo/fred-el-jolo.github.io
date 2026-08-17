@@ -11,8 +11,11 @@ Source lives in `_articles/`. Output is built to `dist/` by the bun make pipelin
 bun make            # full build → dist/  (safe atomic swap)
 bun new              # scaffold a new article interactively
 bun components       # print the component catalog
-bun dev              # local dev server (serves dist/ with file watching)
+bun serve            # serve dist/ on localhost:3000 (python http.server)
 ```
+
+> `bun serve` has no file watching — after editing sources, rebuild with `bun make`
+> and refresh the browser.
 
 ---
 
@@ -134,7 +137,7 @@ Edit `_articles/{folder}/meta.json`. Required fields:
 reading-column layout — see § Slide-Deck Articles below.
 
 **`category`** — must match a key in `_config/categories.json`:
-- `"linux"` | `"dev env"` | `"javascript"` | `"css / sass"` | `"raspberry pi"` | `"kubernetes"`
+- `"ai"` | `"dev"` | `"os"` | `"life"`
 
 **`aiProvenance`**:
 - `"none"` → "without AI" (pencil icon)
@@ -251,7 +254,8 @@ actually needs — the catalogue is a reference to copy from, not a checklist to
 5. **Polish (optional)** — `blog-post` skill's **Polish** workflow for a voice/flow pass, if needed.
 6. **Flip to published** — set `"status": "published"` in `meta.json`.
 7. **Build** — `bun make` → writes to `dist/` (atomic swap, untouched on failure).
-8. **Local check** — `bun dev` → serve `dist/` and eyeball the article + home page before shipping.
+8. **Local check** — `bun serve` → serve `dist/` and eyeball the article + home page before shipping
+   (rebuild with `bun make` first; the python server has no watch mode).
 9. **Ship — UNRESOLVED.** `dist/` is currently gitignored and there is no committed deploy pipeline.
    The Deployment section of `README.md` lists two undecided options (manual commit of `dist/` vs. a
    GitHub Actions → `gh-pages` pipeline). Don't treat "push to deploy" as a settled step until one of
@@ -376,7 +380,8 @@ State is carried by data attributes on `<body>`:
 | `.for-dark` / `.for-light` | `<img>` | Theme-conditional image |
 | `.read` | `<article>` | Article container |
 | `.rhead` | div | Article masthead: back link, kick, h1, byline |
-| `.kick` | `<p>` | Category dot + label above h1 |
+| `.kick` | `<p>` | Category chip host above h1 |
+| `.cat-chip` | `<span>` | Tinted category pill driven by `--cat` — article kick, home list rows, featured meta |
 | `.byl` | div | Byline: author, date, read time |
 | `.prov` | `<span>` | AI provenance badge |
 | `.prov-none` | modifier | Pencil icon — "without AI" |
@@ -390,14 +395,15 @@ State is carried by data attributes on `<body>`:
 | `.colo` | div | End-of-article colophon |
 | `.foot` | `<footer>` | Page footer |
 | `.list` | div | Article row list (home page) |
+| `.list-empty` | `<p>` | "Nothing here yet" empty state, shown by the topic filter when no article matches |
 | `.row` | `<a>` | Single article row; `--cat` CSS var sets accent; `data-cat` drives filter |
 | `.thumb` | div | Article thumbnail in row |
 | `.ico` | div | Category icon overlay on thumbnail |
 | `.mid` | div | Title + meta in row |
-| `.feat` | div | Featured article block |
+| `.feat` | `<a>` | Featured article block — whole card is the link |
 | `.feat-wrap` | `<section>` | Featured block outer wrapper |
 | `.eyebrow` | `<p>` | "À la une" label above featured title |
-| `.cta` | `<a>` | Featured article CTA button |
+| `.cta` | `<span>` | Featured article CTA label (card itself is the link) |
 | `.sec` | div | Section header: title + count + rule |
 | `.ct` | `<span>` | Article count chip in section header |
 | `.mast-topics` | `<nav>` | Category filter nav (home page) |

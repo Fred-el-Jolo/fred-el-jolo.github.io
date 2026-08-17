@@ -137,7 +137,7 @@ Output:
   _articles/{folder}/assets/    (empty — drop images here)
 
 Next steps:
-  1. Open the deck locally (bun make && bun dev) and click through it
+  1. Open the deck locally (bun make && bun serve) and click through it
   2. Add the cover image to assets/, fill cover/coverAlt/coverFocus (required, 16:9)
      — view the image before setting alt text or focus, don't guess
      — this is for the home-page listing thumbnail, separate from the deck's own Cover slide

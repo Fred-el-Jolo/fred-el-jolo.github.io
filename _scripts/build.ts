@@ -165,7 +165,7 @@ function articleRow(meta: ArticleMeta, cat: Category): string {
       </div>
       <div class="mid">
         <h3>${meta.title}</h3>
-        <div class="m"><span class="cat">${cat.label}</span><span>${meta.readingTime} min read</span>${provenanceBadge(meta.aiProvenance)}${formatBadge(meta)}</div>
+        <div class="m"><span class="cat-chip">${cat.label}</span><span>${meta.readingTime} min read</span>${provenanceBadge(meta.aiProvenance)}${formatBadge(meta)}</div>
       </div>
       <span class="date">${formatDate(meta.date)}</span>
     </a>`;
@@ -181,23 +181,23 @@ function featuredSection(meta: ArticleMeta, cat: Category): string {
     ? `<img class="cover-img" src="/articles/${meta.slug}/assets/${src}" style="--focus:${focus}" data-fallback="${fallback}" alt="${meta.coverAlt ?? ""}">`
     : "";
   return `
-  <section class="feat-wrap"><div class="feat">
+  <section class="feat-wrap" data-cat="${meta.category}"><a class="feat" href="/articles/${meta.slug}/" style="--cat:var(${cat.color})">
     <div>
       <p class="eyebrow">À la une</p>
       <h2>${meta.title}</h2>
       <p>${meta.description}</p>
       <div class="meta">
-        <span class="cat">${cat.label}</span><span>${formatDate(meta.date)}</span><span>·</span><span>${meta.readingTime} min read</span>
+        <span class="cat-chip">${cat.label}</span><span>${formatDate(meta.date)}</span><span>·</span><span>${meta.readingTime} min read</span>
         ${provenanceBadge(meta.aiProvenance)}${formatBadge(meta)}
       </div>
-      <a class="cta" href="/articles/${meta.slug}/">Read the build <span class="ar">→</span></a>
+      <span class="cta">Read the build <span class="ar">→</span></span>
     </div>
-    <div style="--cat:var(${cat.color})"><div class="ph">
+    <div><div class="ph">
       <div class="cover"></div>
       ${img}
       <div class="ico">${categoryIcon(cat)}<span class="gl">${cat.label}</span></div>
     </div></div>
-  </div></section>`;
+  </a></section>`;
 }
 
 function topicsNav(categories: Record<string, Category>): string {

@@ -91,12 +91,10 @@ From `_config/categories.json`:
 
 | Category key | Label | Color |
 |---|---|---|
-| `linux` | Linux | `--blue` |
-| `dev env` | Dev Env | `--blue` |
-| `javascript` | JavaScript | `--amber` |
-| `css / sass` | CSS / Sass | `--red` |
-| `raspberry pi` | Raspberry Pi | `--green` |
-| `kubernetes` | Kubernetes | `--blue` |
+| `ai` | AI | `--amber` |
+| `dev` | Dev | `--blue` |
+| `os` | OS | `--green` |
+| `life` | Life | `--red` |
 
 ---
 
