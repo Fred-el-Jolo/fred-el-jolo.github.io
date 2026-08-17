@@ -32,6 +32,16 @@
 {{DECK_SLIDES}}
 </deck-stage>
 
+<!-- no-JS fallback: deck-stage never defines without JavaScript, and the
+     stylesheet hides its slides — unhide them stacked as a readable page -->
+<noscript>
+  <style>
+    deck-stage:not(:defined){ visibility:visible; position:static; overflow:visible; background:var(--paper); }
+    deck-stage:not(:defined) > section.slide{ position:static; display:flex; visibility:visible; opacity:1; height:auto; }
+    deck-stage:not(:defined) .slide--photo{ position:relative; }
+  </style>
+</noscript>
+
 <script src="/js/deck-stage.js"></script>
 </body>
 </html>

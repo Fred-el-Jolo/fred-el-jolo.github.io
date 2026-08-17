@@ -208,6 +208,85 @@ function topicsNav(categories: Record<string, Category>): string {
   }).join("\n      ");
 }
 
+// ─── shared page partials ────────────────────────────────────────────────────
+// Blocks repeated across templates live here once and are injected as
+// {{PLACEHOLDER}}s, exactly like the SEO head. Single source of truth.
+
+/** anti-flash boot — MUST stay inline in <body>; an external file would flash */
+const ANTI_FLASH = `<script>
+/* anti-flash: apply saved preferences before paint */
+(function () {
+  try {
+    var b = document.currentScript.parentElement, s = localStorage;
+    var t = s.getItem('acx-theme'); if (t) b.setAttribute('data-theme', t);
+    var f = s.getItem('acx-font');  if (f) b.setAttribute('data-font', f);
+    var e = s.getItem('acx-eco');   if (e) b.setAttribute('data-eco', e);
+  } catch (x) {}
+})();
+</script>`;
+
+const SUN_ICON = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>`;
+const MOON_ICON = `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 1 0 9.8 9.8Z"></path></svg>`;
+const LEAF_ICON = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20c0-8 6-14 16-15 0 10-6 16-16 15Z"></path><path d="M4 20c3-7 7-10 12-12"></path></svg>`;
+
+/** header tools — theme + font-size segmented toggles and the eco leaf */
+function mastTools(): string {
+  return `<div class="mast-tools">
+    <div class="seg theme" role="group" aria-label="Colour theme">
+      <button data-v="light" aria-label="Light theme">${SUN_ICON}</button>
+      <button data-v="dark" aria-label="Dark theme">${MOON_ICON}</button>
+    </div>
+    <div class="seg font" role="group" aria-label="Text size">
+      <button data-v="s" aria-label="Small text">A</button>
+      <button data-v="m" aria-label="Medium text">A</button>
+      <button data-v="l" aria-label="Large text">A</button>
+    </div>
+    <button class="leaf" aria-label="Eco / performance mode" title="Eco / performance mode">${LEAF_ICON}</button>
+  </div>`;
+}
+
+const SOCIAL_ICONS: Record<string, { label: string; svg: string }> = {
+  github: {
+    label: "GitHub",
+    svg: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.36 1.09 2.94.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"></path></svg>`,
+  },
+  linkedin: {
+    label: "LinkedIn",
+    svg: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.5c0-1.31-.02-3-1.83-3-1.83 0-2.11 1.43-2.11 2.9V21H9z"></path></svg>`,
+  },
+};
+
+/** footer innards (social nav + text line) — every value comes from site.json */
+function siteFooter(site: SiteConfig): string {
+  const socials = (["github", "linkedin"] as const)
+    .map(key => SOCIAL_ICONS[key] && site[key]
+      ? `      <a href="${site[key]}" aria-label="${SOCIAL_ICONS[key].label}">${SOCIAL_ICONS[key].svg}</a>`
+      : "")
+    .filter(Boolean)
+    .join("\n");
+  return `<nav class="foot-social" aria-label="External links">
+${socials}
+  </nav>
+  <div class="foot-text">
+    <span class="fpunch">${site.footerPunch}</span>
+    <span class="foot-brand"><span class="b">{</span> ${site.titleRaw} <span class="b">}</span></span>
+    <span class="foot-sep" aria-hidden="true">·</span>
+    <span class="foot-cr">© ${site.copyright}</span>
+    <span class="foot-sep" aria-hidden="true">·</span>
+    <span class="foot-note">built static, served with care</span>
+  </div>`;
+}
+
+/** page <title> suffix comes from site config, not a hardcoded string */
+function pageTitle(meta: ArticleMeta, site: SiteConfig): string {
+  return `${meta.title} — ${site.title}`;
+}
+
+/** category used when an article's meta.category is missing from the config */
+function fallbackCategory(key: string): Category {
+  return { label: key, color: "--blue", filterKey: key, icon: "" };
+}
+
 // ─── SEO generators ──────────────────────────────────────────────────────────
 
 function articleJsonLd(meta: ArticleMeta, site: SiteConfig): string {
@@ -323,9 +402,13 @@ async function buildArticlePage(
   }
   const body = await readFile(contentPath, "utf-8");
   const html = render(template, {
-    PAGE_TITLE: `${meta.title} — {aesthetecoding.io}`,
+    PAGE_TITLE: pageTitle(meta, site),
     META_DESCRIPTION: meta.description,
     HEAD_SEO: articleHeadSeo(meta, site),
+    ANTI_FLASH: ANTI_FLASH,
+    MAST_TOOLS: mastTools(),
+    FOOTER: siteFooter(site),
+    BYLINE_AUTHOR: `By <b>${site.author}</b>`,
     KICK_COLOR: cat.color,
     KICK_LABEL: cat.label,
     ARTICLE_TITLE: meta.title,
@@ -336,15 +419,7 @@ async function buildArticlePage(
     ARTICLE_BODY: body,
   });
 
-  const dir = join(destDir, "articles", meta.slug);
-  await mkdir(dir, { recursive: true });
-  await writeFile(join(dir, "index.html"), html);
-
-  // copy article assets
-  const srcAssets = join(ARTICLES_SRC, meta._folder, "assets");
-  if (existsSync(srcAssets)) {
-    await cp(srcAssets, join(dir, "assets"), { recursive: true });
-  }
+  await writeArticlePage(destDir, meta, html);
 }
 
 async function buildDeckPage(
@@ -360,17 +435,21 @@ async function buildDeckPage(
   }
   const slides = await readFile(slidesPath, "utf-8");
   const html = render(template, {
-    PAGE_TITLE: `${meta.title} — {aesthetecoding.io}`,
+    PAGE_TITLE: pageTitle(meta, site),
     META_DESCRIPTION: meta.description,
     HEAD_SEO: articleHeadSeo(meta, site),
     DECK_SLIDES: slides,
   });
 
+  await writeArticlePage(destDir, meta, html);
+}
+
+/** write an article/deck page + copy its assets — shared by both builders */
+async function writeArticlePage(destDir: string, meta: ArticleMeta, html: string): Promise<void> {
   const dir = join(destDir, "articles", meta.slug);
   await mkdir(dir, { recursive: true });
   await writeFile(join(dir, "index.html"), html);
 
-  // copy article assets
   const srcAssets = join(ARTICLES_SRC, meta._folder, "assets");
   if (existsSync(srcAssets)) {
     await cp(srcAssets, join(dir, "assets"), { recursive: true });
@@ -389,11 +468,14 @@ async function buildHome(
 
   const rows = articles
     .filter(a => !featured || a.slug !== featured.slug)
-    .map(a => articleRow(a, categories[a.category] ?? { label: a.category, color: "--blue", filterKey: a.category, icon: "" }))
+    .map(a => articleRow(a, categories[a.category] ?? fallbackCategory(a.category)))
     .join("\n");
 
   const html = render(template, {
     HOME_SEO: homeHeadSeo(site),
+    ANTI_FLASH: ANTI_FLASH,
+    MAST_TOOLS: mastTools(),
+    FOOTER: siteFooter(site),
     TOPICS_NAV: topicsNav(categories),
     FEATURED_SECTION: featured ? featuredSection(featured, featCat) : "",
     ARTICLE_COUNT: String(articles.length),
@@ -457,7 +539,7 @@ async function main(): Promise<void> {
     if (meta.format === "deck") {
       await buildDeckPage(meta, site, deckTemplate, DIST_TMP);
     } else {
-      const cat = categories[meta.category] ?? { label: meta.category, color: "--blue", filterKey: meta.category, icon: "" };
+      const cat = categories[meta.category] ?? fallbackCategory(meta.category);
       await buildArticlePage(meta, cat, site, articleTemplate, DIST_TMP);
     }
     console.log(`  ✓ /articles/${meta.slug}/`);

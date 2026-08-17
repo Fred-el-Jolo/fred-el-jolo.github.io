@@ -53,6 +53,7 @@ bun serve            # serve dist/ on localhost:3000 (python http.server)
 │   ├── atelier.css          # design system — tokens, layout, components (scoped to .acx)
 │   ├── prose.css            # reading column components — loaded on article pages only
 │   ├── deck.css              # self-contained slide-deck stylesheet (own token set, not .acx-scoped)
+│   ├── shared.css            # shared layer: @font-face + generic .terminal — imported by atelier.css and deck.css
 │   └── fonts/                # self-hosted: Newsreader, Public Sans, IBM Plex Mono (shared by both systems)
 │
 ├── js/
@@ -67,8 +68,7 @@ bun serve            # serve dist/ on localhost:3000 (python http.server)
 ├── dist/                    # BUILT OUTPUT — deployed to GitHub Pages (.gitignored locally)
 │
 ├── robots.txt               # static
-├── package.json             # bun scripts
-└── article-components.html  # legacy design prototype (see _components/catalog.html)
+└── package.json             # bun scripts
 ```
 
 ---
@@ -212,7 +212,8 @@ actually needs — the catalogue is a reference to copy from, not a checklist to
 - **Self-contained token set** — `css/deck.css` deliberately does NOT share `atelier.css`'s `.acx`
   tokens/theme system (no dark/light toggle, no font-scale, no eco mode); it's its own dark-paper
   palette (`--dark`, `--paper`, `--accent`, `--brand-indigo`, etc.), sized for 1920×1080 slides. It
-  shares only the self-hosted font files.
+  shares only `css/shared.css` (the `@font-face` block + the generic `.terminal` component, which
+  each system sizes through its local `--term-*` variables).
 - **`<deck-stage>`** (`js/deck-stage.js`) — a custom element that turns the `<section class="slide">`
   children into a navigable deck. Slides are authored at a fixed design size (1920×1080 by default,
   `width`/`height` attributes to override) and the whole canvas is scaled uniformly with
@@ -295,9 +296,13 @@ actually needs — the catalogue is a reference to copy from, not a checklist to
 
 | Placeholder | Source |
 |---|---|
-| `{{PAGE_TITLE}}` | `meta.title + " — {aesthetecoding.io}"` |
+| `{{PAGE_TITLE}}` | `meta.title + " — " + site.title` |
 | `{{META_DESCRIPTION}}` | `meta.description` |
 | `{{HEAD_SEO}}` | canonical + OG + Twitter card + JSON-LD |
+| `{{ANTI_FLASH}}` | inline boot snippet (shared partial from `build.ts`) |
+| `{{MAST_TOOLS}}` | theme / font / eco toggles (shared partial from `build.ts`) |
+| `{{FOOTER}}` | footer social + text, generated from `_config/site.json` |
+| `{{BYLINE_AUTHOR}}` | `"By <b>…</b>"` from `site.author` |
 | `{{KICK_COLOR}}` | `categories[meta.category].color` (e.g. `--blue`) |
 | `{{KICK_LABEL}}` | `categories[meta.category].label` |
 | `{{ARTICLE_TITLE}}` | `meta.title` |
@@ -311,7 +316,7 @@ actually needs — the catalogue is a reference to copy from, not a checklist to
 
 | Placeholder | Source |
 |---|---|
-| `{{PAGE_TITLE}}` | `meta.title + " — {aesthetecoding.io}"` |
+| `{{PAGE_TITLE}}` | `meta.title + " — " + site.title` |
 | `{{META_DESCRIPTION}}` | `meta.description` |
 | `{{HEAD_SEO}}` | canonical + OG + Twitter card + JSON-LD — same generator as `article.html` |
 | `{{DECK_SLIDES}}` | full content of `_articles/{folder}/slides.html` |
@@ -321,6 +326,9 @@ actually needs — the catalogue is a reference to copy from, not a checklist to
 | Placeholder | Source |
 |---|---|
 | `{{HOME_SEO}}` | canonical + OG + JSON-LD |
+| `{{ANTI_FLASH}}` | inline boot snippet (shared partial from `build.ts`) |
+| `{{MAST_TOOLS}}` | theme / font / eco toggles (shared partial from `build.ts`) |
+| `{{FOOTER}}` | footer social + text, generated from `_config/site.json` |
 | `{{TOPICS_NAV}}` | generated from `_config/categories.json` |
 | `{{FEATURED_SECTION}}` | full featured article HTML block |
 | `{{ARTICLE_COUNT}}` | total published articles |
@@ -498,6 +506,9 @@ To add a new category (affects nav, icon, color, and filter):
 ## Invariants
 
 - **No Jekyll, no Liquid, no SASS compilation.** CSS is written and served as-is.
+- **Fonts + the `.terminal` component live in `css/shared.css`.** `atelier.css` and `deck.css`
+  `@import` it — never redeclare `@font-face` or the terminal palette in the other sheets; size the
+  terminal per context by overriding its local `--term-*` variables.
 - **No npm/npx.** Use `bun`/`bunx` only.
 - **Root-relative paths in templates.** `/css/atelier.css`, `/js/atelier.js`, `/assets/logo.png` — not `../../`.
 - **Article assets are relative.** Inside content.html: `assets/cover.jpg` (no leading slash) — they're in the same served folder.
