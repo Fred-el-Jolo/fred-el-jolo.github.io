@@ -191,8 +191,6 @@
 .acx .feat p{ color:var(--dim); font-size:var(--fs-xl); margin:0 0 22px; max-width:44ch; }
 .acx .feat .meta{ font-family:var(--mono); font-size:var(--fs-m); color:var(--faint); display:flex; gap:13px; align-items:center; flex-wrap:wrap; }
 .acx .feat .meta>*{ white-space:nowrap; }
-.acx .feat .meta .cat{ color:var(--ink); display:inline-flex; align-items:center; gap:7px; }
-.acx .feat .meta .cat::before{ content:""; width:8px; height:8px; border-radius:50%; background:var(--cat,var(--blue)); }
 .acx .feat .cta{ display:inline-flex; align-items:center; gap:8px; margin-top:24px; font-family:var(--mono); font-size:var(--fs-l); color:var(--ink); border-bottom:1px solid var(--amber); padding-bottom:4px; white-space:nowrap; }
 .acx .feat .cta .ar{ color:var(--amber-text); }
 .acx .feat .ph{ aspect-ratio:5/4; border-radius:var(--radius); overflow:hidden; border:1px solid var(--line); position:relative; }
@@ -247,22 +245,35 @@
 .acx[data-eco="on"] .feat .ico svg{ width:28px; height:28px; }
 
 /* ===========================================================================
-   POST-GENERATION PROVENANCE BADGE
+   POST-GENERATION PROVENANCE BADGE + FORMAT BADGE
+   Both get the same tinted-chip treatment as .cat-chip, driven by --prov:
+   prov-none = green · prov-enriched = amber · prov-full = blue · slides = blue
    =========================================================================== */
-.acx .prov{ display:inline-flex; align-items:center; gap:6px; font-family:var(--mono); font-size:var(--fs-xs); letter-spacing:.07em; text-transform:uppercase; color:var(--faint); border:1px solid var(--line); border-radius:var(--radius-pill); padding:3px 9px; white-space:nowrap; }
-.acx .prov .pg{ display:inline-flex; color:var(--prov,var(--faint)); }
+.acx .prov, .acx .fmt-slides{
+  display:inline-flex; align-items:center; gap:6px; font-family:var(--mono); font-size:var(--fs-xs); font-weight:500; letter-spacing:.07em; text-transform:uppercase;
+  border-radius:var(--radius-pill); padding:4px 10px; white-space:nowrap;
+}
+.acx .prov .pg{ display:inline-flex; color:inherit; }
 .acx .prov .pg svg{ width:12px; height:12px; }
 .acx .prov-full .pg svg{ width:15px; height:15px; margin:-1px -1px -2px; }
-.acx .prov-none{ --prov:var(--green); }
-.acx .prov-enriched{ --prov:var(--amber-text); }
-.acx .prov-full{ --prov:var(--blue); }
-.acx .m .prov{ border:0; padding:0; gap:5px; }     /* inline variant in list rows */
-.acx .read .prov{ margin-top:16px; }
-
-/* format indicator — shown when an entry is a slide-deck (meta.json "format": "deck") */
-.acx .fmt-slides{ display:inline-flex; align-items:center; gap:5px; font-family:var(--mono); font-size:var(--fs-xs); letter-spacing:.07em; text-transform:uppercase; color:var(--blue); border:1px solid var(--line); border-radius:var(--radius-pill); padding:3px 9px; white-space:nowrap; }
 .acx .fmt-slides svg{ width:12px; height:12px; }
-.acx .m .fmt-slides{ border:0; padding:0; gap:5px; }
+.acx .prov-none{ --prov:var(--green); }
+.acx .prov-enriched{ --prov:var(--amber); }
+.acx .prov-full, .acx .fmt-slides{ --prov:var(--blue); }
+/* tinted per theme — same recipes as .cat-chip */
+.acx[data-theme="dark"] .prov,
+.acx[data-theme="dark"] .fmt-slides{
+  color:color-mix(in srgb, var(--prov) 82%, #fff);
+  background:color-mix(in srgb, var(--prov) 16%, transparent);
+  border:1px solid color-mix(in srgb, var(--prov) 40%, transparent);
+}
+.acx[data-theme="light"] .prov,
+.acx[data-theme="light"] .fmt-slides{
+  color:color-mix(in srgb, var(--prov) 45%, var(--ink));
+  background:color-mix(in srgb, var(--prov) 13%, var(--panel));
+  border:1px solid color-mix(in srgb, var(--prov) 32%, var(--panel));
+}
+.acx .read .prov{ margin-top:16px; }
 
 /* ===========================================================================
    FOOTER  (index)  — social links live here
@@ -308,7 +319,7 @@
 }
 /* light: pastel tint on the panel, accent darkened toward ink for contrast */
 .acx[data-theme="light"] .cat-chip{
-  color:color-mix(in srgb, var(--cat,#e23b2e) 58%, var(--ink));
+  color:color-mix(in srgb, var(--cat,#e23b2e) 45%, var(--ink));
   background:color-mix(in srgb, var(--cat,#e23b2e) 13%, var(--panel));
   border:1px solid color-mix(in srgb, var(--cat,#e23b2e) 32%, var(--panel));
 }
