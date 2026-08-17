@@ -1,9 +1,12 @@
 /* ============================================================================
    aesthetecoding.io — PROSE / ARTICLE COMPONENT LIBRARY
    Extends atelier.css. Scoped to the reading column (.acx .read .col) so it
-   only affects article content. Reuses every token from atelier.css:
-   --news/--serif/--sans/--mono, --amber/--red/--green/--blue, theme palette,
-   --radius*, --fs-scale. Fully dark/light + eco aware.
+   only affects article content. Owns ALL reading-column typography — base
+   paragraph/heading/code/quote styles below, components after. Reuses every
+   token from atelier.css: --news/--serif/--sans/--mono, --amber/--red/--green/
+   --blue, theme palette, --radius*, --fs-scale. The .terminal component lives
+   in shared.css; only its reading-column sizing overrides are here.
+   Fully dark/light + eco aware.
 
    Load AFTER atelier.css:
      <link rel="stylesheet" href="css/atelier.css">
@@ -31,6 +34,23 @@
 .acx .read .col > *{ grid-column: content; }
 .acx .read .col > .prose-wide{ grid-column: wide; }
 .acx .read .col > .prose-full{ grid-column: full; }
+
+/* ---------------------------------------------------------------------------
+   BASE TYPOGRAPHY — paragraph, h2, pre, blockquote (this sheet owns the column)
+   --------------------------------------------------------------------------- */
+.acx .read .col p{ font-family:var(--serif); font-size:calc(19px * var(--fs-scale)); line-height:1.74; margin:24px 0; color:var(--ink); }
+/* drop cap on the article's opening paragraph only — direct children, so it
+   never leaks into cards, callouts or grid columns */
+.acx .read .col > p:first-of-type::first-letter{ font-size:3em; float:left; line-height:.86; padding:6px 12px 0 0; color:var(--amber-text); font-weight:600; font-family:var(--news); }
+
+.acx .read .col h2{ font-family:var(--news); font-weight:600; font-size:calc(27px * var(--fs-scale)); letter-spacing:-.01em; margin:40px 0 4px; }
+
+.acx .read .col pre{ font-family:var(--mono); font-size:var(--fs-m); line-height:1.7; background:var(--panel); border:1px solid var(--line); border-radius:var(--radius-md); padding:18px 20px; overflow-x:auto; margin:26px 0; color:var(--dim); }
+.acx .read .col pre .c{ color:var(--faint); }
+.acx .read .col pre .k{ color:var(--amber-text); }
+.acx .read .col pre .s{ color:var(--green); }
+
+.acx .read .col blockquote{ margin:30px 0; padding-left:22px; border-left:3px solid var(--amber); font-family:var(--news); font-style:italic; font-size:calc(21px * var(--fs-scale)); color:var(--dim); }
 
 /* ---------------------------------------------------------------------------
    STRUCTURE — lead, headings w/ anchors, lists, definition list, dividers
@@ -120,19 +140,10 @@
 .acx .read .col .codeblock__copy.copied{ color:var(--green); border-color:var(--green); }
 .acx .read .col .codeblock pre{ margin:0; border:0; border-radius:0; background:transparent; }
 
-/* terminal — distinct from code: prompt-driven */
-.acx .read .col .terminal{ margin:26px 0; border:1px solid var(--line); border-radius:var(--radius-md); overflow:hidden; background:#0c0a07; }
-.acx[data-theme="light"] .read .col .terminal{ background:#1c1610; }
-.acx .read .col .terminal__bar{ display:flex; align-items:center; gap:7px; padding:9px 14px; border-bottom:1px solid #2a2118; }
-.acx .read .col .terminal__bar i{ width:11px; height:11px; border-radius:50%; display:block; }
-.acx .read .col .terminal__bar i:nth-child(1){ background:#e0654f; }
-.acx .read .col .terminal__bar i:nth-child(2){ background:#e0b24f; }
-.acx .read .col .terminal__bar i:nth-child(3){ background:#5fb874; }
-.acx .read .col .terminal__bar span{ font-family:var(--mono); font-size:var(--fs-xs); letter-spacing:.1em; color:#6b6152; margin-left:6px; }
-.acx .read .col .terminal pre{ margin:0; border:0; border-radius:0; background:transparent; color:#e7dcc8; padding:16px 18px; font-size:var(--fs-m); line-height:1.8; }
-.acx .read .col .terminal pre .cmd{ color:#e7dcc8; display:block; }
-.acx .read .col .terminal pre .cmd::before{ content:"$ "; color:var(--green); }
-.acx .read .col .terminal pre .out{ color:#8c8270; display:block; }
+/* terminal — the component (chrome + palette) lives once in shared.css;
+   this configures it for the reading column and re-tints it in light theme */
+.acx .read .col .terminal{ --term-mono:var(--mono); --term-fs:var(--fs-m); --term-lh:1.8; --term-radius:var(--radius-md); --term-label-fs:var(--fs-xs); margin:26px 0; }
+.acx[data-theme="light"] .read .col .terminal{ --term-bg:#1c1610; }
 
 .acx .read .col kbd, .acx .read .col .kbd{
   font-family:var(--mono); font-size:.8em; line-height:1;
@@ -207,7 +218,6 @@
 .acx .read .col .callout__body{ min-width:0; }
 .acx .read .col .callout__title{ font-family:var(--mono); font-size:var(--fs-s); letter-spacing:.14em; text-transform:uppercase; color:var(--co,var(--amber)); margin:1px 0 6px; }
 .acx .read .col .callout p{ margin:0; font-size:calc(16px * var(--fs-scale)); line-height:1.6; }
-.acx .read .col .callout p:first-of-type::first-letter{ all:unset; }
 .acx .read .col .callout--note{ --co:var(--blue); }
 .acx .read .col .callout--tip{ --co:var(--green); }
 .acx .read .col .callout--warn{ --co:var(--red); }
@@ -237,7 +247,6 @@
 }
 .acx .read .col .steps > li h4{ margin:0 0 4px; text-transform:none; font-family:var(--news); font-size:calc(18px * var(--fs-scale)); color:var(--ink); letter-spacing:0; }
 .acx .read .col .steps > li p{ margin:0; font-size:calc(16px * var(--fs-scale)); }
-.acx .read .col .steps > li p:first-of-type::first-letter{ all:unset; }
 
 /* ---------------------------------------------------------------------------
    LAYOUT — multi-column grids, tables, pros/cons
@@ -247,7 +256,6 @@
 .acx .read .col .grid-3{ grid-template-columns:repeat(3,1fr); }
 .acx .read .col .grid-2 > *, .acx .read .col .grid-3 > *{ margin:0; }
 .acx .read .col .grid-2 p, .acx .read .col .grid-3 p{ font-size:calc(16px * var(--fs-scale)); margin:0 0 12px; }
-.acx .read .col .grid-2 p:first-of-type::first-letter, .acx .read .col .grid-3 p:first-of-type::first-letter{ all:unset; }
 
 /* tables */
 .acx .read .col .table-wrap{ margin:26px 0; overflow-x:auto; border:1px solid var(--line); border-radius:var(--radius-md); }
@@ -293,9 +301,8 @@
 .acx .read .col .gallery{ display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; margin:26px 0; }
 .acx .read .col .gallery figure{ margin:0; }
 
-/* striped placeholder (until real images dropped in) */
-.acx .read .col .ph-stripe{ background:repeating-linear-gradient(135deg,var(--cover-a) 0 10px,var(--cover-b) 10px 20px); display:flex; align-items:flex-end; }
-.acx .read .col .ph-stripe .lbl{ font-family:var(--mono); font-size:var(--fs-xs); letter-spacing:.1em; text-transform:uppercase; color:var(--faint); background:color-mix(in srgb,var(--bg) 72%,transparent); border:1px solid var(--line); border-radius:6px; padding:4px 8px; margin:12px; }
+/* striped placeholder — the recipe (gradient + .lbl chip) is shared with the
+   home cards in atelier.css (.cover); only the eco flattening is local */
 
 /* ---------------------------------------------------------------------------
    "ON THIS PAGE" CONTENTS  +  FURTHER READING  +  FOOTNOTES  +  TAGS

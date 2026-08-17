@@ -2,17 +2,12 @@
    aesthetecoding.io — SLIDE-DECK STYLESHEET ("Atelier Synthesis" deck system)
    Self-contained token/component set for the slide-format article. Deliberately
    independent from atelier.css/prose.css (different scale, different reading
-   mode) but shares the same self-hosted font files.
+   mode) but shares the self-hosted fonts + generic .terminal via shared.css.
    Catalogue of every slide situation: _templates/article-deck.html
    Consumed by: _templates/deck.html (production template, root-relative paths)
    ============================================================================== */
 
-/* ---- SELF-HOSTED FONTS (same files as the rest of the site) --------------- */
-@font-face{ font-family:"Newsreader"; font-style:normal; font-weight:200 800; font-optical-sizing:auto; font-display:swap; src:url("fonts/Newsreader.woff2") format("woff2"); }
-@font-face{ font-family:"Newsreader"; font-style:italic; font-weight:200 800; font-optical-sizing:auto; font-display:swap; src:url("fonts/Newsreader-Italic.woff2") format("woff2"); }
-@font-face{ font-family:"Public Sans"; font-style:normal; font-weight:100 900; font-display:swap; src:url("fonts/PublicSans.ttf") format("truetype"); }
-@font-face{ font-family:"IBM Plex Mono"; font-style:normal; font-weight:400; font-display:swap; src:url("fonts/IBMPlexMono-Regular.woff2") format("woff2"); }
-@font-face{ font-family:"IBM Plex Mono"; font-style:normal; font-weight:500; font-display:swap; src:url("fonts/IBMPlexMono-Medium.woff2") format("woff2"); }
+@import url("shared.css");
 
 /* ---- 1. THEME TOKENS -------------------------------------------------------
    Two groups: FIXED brand/chip constants (same in both themes — accent chips,
@@ -30,6 +25,7 @@
   --brand-pink:    var(--accent);
   --brand-indigo:  #1b150c;
   --brand-violet:  #5b4a34;
+  --on-accent:     #141009;   /* ink on amber fills (active toggle states) */
 
   --brand-gradient:
     radial-gradient(120% 150% at 14% 8%, rgba(239,162,60,0.30), transparent 55%),
@@ -38,9 +34,18 @@
 
   --dark:     #141009;
   --ink-0:    #fffdf8;
+  --on-dark-1: rgba(241,236,227,0.9);
   --on-dark-2: rgba(241,236,227,0.74);
   --on-dark-3: rgba(241,236,227,0.52);
+  --on-dark-4: rgba(241,236,227,0.4);   /* hairlines / dim glyphs on dark */
   --border-on-dark: rgba(241,236,227,0.14);
+
+  /* nav chrome — fixed dark overlays regardless of reader theme */
+  --chrome:       rgba(20,16,9,0.7);   /* toggle, theme seg, back link        */
+  --chrome-rail:  rgba(20,16,9,0.92); /* nav rail                            */
+  --chrome-soft:  rgba(20,16,9,0.55); /* prev/next arrows                    */
+  --rail-hover:   rgba(241,236,227,0.06);
+  --rail-active:  rgba(239,162,60,0.14);
 
   --font-serif: "Newsreader", Georgia, "Times New Roman", serif;
   --font-sans:  "Public Sans", system-ui, -apple-system, sans-serif;
@@ -132,7 +137,7 @@ deck-stage section.slide.is-active { visibility: visible; opacity: 1; }
 deck-stage .deck-rail {
   position: fixed; left: 0; top: 0; bottom: 0; z-index: 20;
   width: 240px; padding: 20px 14px; overflow-y: auto;
-  background: rgba(20,16,9,0.92); border-right: 1px solid var(--border-on-dark);
+  background: var(--chrome-rail); border-right: 1px solid var(--border-on-dark);
   display: flex; flex-direction: column; gap: 4px;
   transform: translateX(-100%); transition: transform 0.22s var(--ease);
 }
@@ -142,14 +147,14 @@ deck-stage .deck-rail button {
   font-family: var(--font-mono); font-size: 13px; color: var(--on-dark-2);
   display: flex; align-items: center; gap: 10px;
 }
-deck-stage .deck-rail button:hover { background: rgba(241,236,227,0.06); color: #fff; }
-deck-stage .deck-rail button.is-current { background: rgba(239,162,60,0.14); color: var(--accent); }
+deck-stage .deck-rail button:hover { background: var(--rail-hover); color: #fff; }
+deck-stage .deck-rail button.is-current { background: var(--rail-active); color: var(--accent); }
 deck-stage .deck-rail button .n { flex: none; opacity: 0.55; }
 
 deck-stage .deck-toggle-rail {
   all: unset; cursor: pointer; position: fixed; top: 18px; left: 18px; z-index: 21;
   width: 38px; height: 38px; border-radius: var(--radius-md);
-  background: rgba(20,16,9,0.7); border: 1px solid var(--border-on-dark);
+  background: var(--chrome); border: 1px solid var(--border-on-dark);
   display: flex; align-items: center; justify-content: center; color: var(--on-dark-2);
 }
 deck-stage .deck-toggle-rail:hover { color: #fff; }
@@ -163,7 +168,7 @@ deck-stage .deck-topright {
    (same two-button layout, same amber active state, same acx-theme key). */
 deck-stage .deck-theme-seg {
   display: inline-flex; gap: 2px; padding: 3px;
-  background: rgba(20,16,9,0.7); border: 1px solid var(--border-on-dark); border-radius: 9px;
+  background: var(--chrome); border: 1px solid var(--border-on-dark); border-radius: 9px;
 }
 deck-stage .deck-theme-seg button {
   all: unset; cursor: pointer; box-sizing: border-box;
@@ -172,12 +177,12 @@ deck-stage .deck-theme-seg button {
 }
 deck-stage .deck-theme-seg button:hover { color: #fff; }
 :root[data-theme="dark"] deck-stage .deck-theme-seg [data-v="dark"],
-:root[data-theme="light"] deck-stage .deck-theme-seg [data-v="light"] { background: var(--accent); color: #141009; }
+:root[data-theme="light"] deck-stage .deck-theme-seg [data-v="light"] { background: var(--accent); color: var(--on-accent); }
 
 deck-stage .deck-back {
   all: unset; cursor: pointer;
   font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.06em;
-  color: var(--on-dark-3); background: rgba(20,16,9,0.7); border: 1px solid var(--border-on-dark);
+  color: var(--on-dark-3); background: var(--chrome); border: 1px solid var(--border-on-dark);
   padding: 9px 14px; border-radius: var(--radius-pill); text-decoration: none;
 }
 deck-stage .deck-back:hover { color: #fff; }
@@ -185,7 +190,7 @@ deck-stage .deck-back:hover { color: #fff; }
 deck-stage .deck-arrow {
   all: unset; cursor: pointer; position: fixed; top: 50%; transform: translateY(-50%); z-index: 21;
   width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
-  background: rgba(20,16,9,0.55); border: 1px solid var(--border-on-dark); color: var(--on-dark-2);
+  background: var(--chrome-soft); border: 1px solid var(--border-on-dark); color: var(--on-dark-2);
 }
 deck-stage .deck-arrow:hover { color: #fff; }
 deck-stage .deck-arrow--prev { left: 18px; }
@@ -240,7 +245,8 @@ deck-stage .deck-arrow[disabled] { opacity: 0.25; pointer-events: none; }
   font-size: 24px; color: var(--ink-400);
   border-top: 1px solid var(--border-1);
 }
-.slide--dark .footer { color: var(--on-dark-3); border-top-color: var(--border-on-dark); }
+.slide--dark .footer, .slide--gradient .footer { color: var(--on-dark-3); border-top-color: var(--border-on-dark); }
+.footer__note { font-family: var(--font-sans); font-size: 24px; color: var(--ink-600); }
 
 /* ---- 7. CARDS ----------------------------------------------------------------- */
 .card {
@@ -261,6 +267,7 @@ deck-stage .deck-arrow[disabled] { opacity: 0.25; pointer-events: none; }
 }
 .pill--solid { background: var(--accent-deep); color: #fff; }
 .pill--soft  { background: var(--surface-violet); color: var(--accent-text); }
+.pill--sm    { font-size: 20px; padding: 4px 13px; vertical-align: middle; }
 
 .badge {
   flex: none; width: 48px; height: 48px; border-radius: var(--radius-md);
@@ -272,13 +279,17 @@ deck-stage .deck-arrow[disabled] { opacity: 0.25; pointer-events: none; }
 .list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 16px; }
 .list li { display: flex; gap: 13px; align-items: flex-start; font-size: 26px; line-height: 1.4; color: var(--ink-700); }
 .list__dot { flex: none; width: 7px; height: 7px; border-radius: 50%; background: var(--accent-deep); margin-top: 11px; }
-.slide--dark .list li { color: rgba(241,236,227,0.9); }
-.list--on-dark li { color: rgba(241,236,227,0.9); }
+.slide--dark .list li { color: var(--on-dark-1); }
+.list--on-dark li { color: var(--on-dark-1); }
 
 .list--check li, .list--cross li { align-items: center; gap: 16px; font-size: 27px; }
 .list--check li { color: #fff; align-items: flex-start; line-height: 1.4; }
 .list--cross li { color: var(--on-dark-2); }
 .ic { flex: none; }
+/* icon glyphs inside check/cross lists — size + colour live here, SVGs use
+   stroke="currentColor" so copied markup carries no styling */
+.list--check .ic { width: 30px; height: 30px; color: var(--accent); margin-top: 4px; }
+.list--cross .ic { width: 26px; height: 26px; color: var(--on-dark-4); }
 
 /* ---- 10. TABLE ------------------------------------------------------------------ */
 .table { width: 100%; border-collapse: collapse; }
@@ -292,6 +303,7 @@ deck-stage .deck-arrow[disabled] { opacity: 0.25; pointer-events: none; }
 .table td:first-child { padding-left: 0; }
 .table td.col-label { font-weight: 600; color: var(--heading-ink); font-family: var(--font-sans); }
 .table td.col-win   { background: var(--surface-violet); color: var(--ink-900); }
+.table tr.is-result td { border-bottom: none; padding-bottom: 0; }
 
 /* ---- 11. CALLOUT ------------------------------------------------------------------ */
 .callout {
@@ -310,37 +322,24 @@ deck-stage .deck-arrow[disabled] { opacity: 0.25; pointer-events: none; }
 .tree .c-new  { color: var(--accent); font-weight: 500; }
 .tree .c-note { color: rgba(241,236,227,0.42); }
 
-/* ---- 13. TERMINAL PANEL (shell session — deck-native port of prose.css .terminal) - */
+/* ---- 13. TERMINAL (context config — component lives in shared.css) -------------- */
 .terminal {
-  background: #0c0a07; border-radius: var(--radius-lg); overflow: hidden;
-  border: 1px solid var(--border-on-dark);
+  --term-mono: var(--font-mono);
+  --term-fs: 24px;
+  --term-radius: var(--radius-lg);
+  --term-bar-pad: 16px 22px;
+  --term-pad: 30px 34px;
+  --term-dot: 13px;
+  --term-label-fs: 20px;
+  --term-prompt: var(--accent);
+  --term-border: var(--border-on-dark);
 }
-.terminal__bar {
-  display: flex; align-items: center; gap: 9px; padding: 16px 22px;
-  border-bottom: 1px solid rgba(241,236,227,0.1);
-}
-.terminal__bar i { width: 13px; height: 13px; border-radius: 50%; display: block; }
-.terminal__bar i:nth-child(1) { background: #e0654f; }
-.terminal__bar i:nth-child(2) { background: #e0b24f; }
-.terminal__bar i:nth-child(3) { background: #5fb874; }
-.terminal__bar span { font-family: var(--font-mono); font-size: 20px; color: #6b6152; margin-left: 8px; }
-.terminal pre {
-  margin: 0; padding: 30px 34px; font-family: var(--font-mono); font-size: 24px;
-  line-height: 1.75; color: #e7dcc8;
-}
-.terminal .cmd { color: #e7dcc8; display: block; }
-.terminal .cmd::before { content: "$ "; color: var(--accent); }
-.terminal .out { color: #8c8270; display: block; }
 
 /* ---- 14. NUMBERED FLOW ------------------------------------------------------------- */
 .flow { display: flex; flex-direction: column; }
 .flow__row { display: flex; align-items: center; gap: 20px; }
-.flow__num {
-  flex: none; width: 44px; height: 44px; border-radius: 50%;
-  background: var(--brand-indigo); color: #fff; font-size: 24px; font-weight: 600;
-  display: flex; align-items: center; justify-content: center; font-family: var(--font-mono);
-}
-.flow__num.is-final { background: var(--amber-fill); color: #1b150c; }
+/* .num is the generic numbered dot (see §19b); .flow__num is kept as the
+   flow-specific name already used by published decks */
 .flow__row .label { font-size: 28px; color: var(--ink-800); }
 .flow__row .label.is-final { font-weight: 700; color: var(--accent-deep); }
 .flow__line { width: 2px; height: 16px; background: var(--border-2); margin-left: 21px; }
@@ -357,7 +356,7 @@ deck-stage .deck-arrow[disabled] { opacity: 0.25; pointer-events: none; }
 /* ---- 16. GRADIENT BANNER ------------------------------------------------------------- */
 .banner {
   background: var(--amber-fill); border-radius: var(--radius-lg); padding: 38px 44px;
-  display: flex; align-items: center; gap: 28px; color: #1b150c;
+  display: flex; align-items: center; gap: 28px; color: var(--brand-indigo);
 }
 .banner__tag {
   flex: none; font-family: var(--font-mono); font-size: 24px; font-weight: 500;
@@ -400,8 +399,70 @@ deck-stage .deck-arrow[disabled] { opacity: 0.25; pointer-events: none; }
 .accent { color: var(--accent-text); }
 .slide--dark .accent, .slide--gradient .accent { color: var(--accent); }
 .strong { font-weight: 700; }
-.muted  { color: var(--ink-400); }
+.muted  { color: var(--muted-ink, var(--ink-400)); }
 .mono   { font-family: var(--font-mono); }
+
+/* ---- 19b. MICRO-COMPONENTS ---------------------------------------------------------
+   Named pieces for the recurring slide patterns that used to be inline styles
+   in the catalogue (_templates/article-deck.html). Copy markup, not styles.
+   ------------------------------------------------------------------------------------ */
+
+/* layout helpers */
+.col   { display: flex; flex-direction: column; }
+.stack { display: flex; flex-direction: column; gap: var(--stack-gap, 14px); }
+.head-row { display: flex; justify-content: space-between; align-items: center; }
+
+/* cover slide pieces */
+.ctx { font-family: var(--font-mono); font-size: 24px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--on-dark-2); }
+.tagline { margin: 36px 0 0; font-family: var(--font-serif); font-style: italic; font-weight: 400; font-size: 40px; line-height: 1.3; color: var(--on-dark-1); }
+.byline { margin-top: auto; display: flex; align-items: center; gap: 18px; padding-top: 56px; font-family: var(--font-mono); font-size: 24px; font-weight: 500; }
+.byline__rule { width: 46px; height: 1px; background: var(--on-dark-4); }
+.byline__role { color: var(--on-dark-3); font-weight: 400; }
+.byline__page { margin-left: auto; color: var(--on-dark-3); font-weight: 400; }
+
+/* card innards */
+.card__head { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
+.card__title { font-family: var(--font-serif); font-size: 33px; font-weight: 600; color: var(--brand-indigo); line-height: 1.1; }
+.card__sub { font-size: 24px; color: var(--ink-400); margin-bottom: 22px; }
+.card__lead { margin: 0 0 20px; font-size: 25px; line-height: 1.42; color: var(--lead-ink, var(--ink-600)); }
+.card__note { margin-top: auto; padding-top: 18px; font-size: 24px; line-height: 1.36; color: var(--ink-500); border-top: 1px solid var(--border-1); }
+.card > .pill { margin-bottom: 20px; }
+
+/* item/value rows (spec sheets, KPI strips) */
+.spec-row { display: flex; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid var(--border-1); }
+.spec-row__k { font-size: 28px; font-weight: 600; color: var(--ink-800); }
+.spec-row__v { font-family: var(--font-mono); font-size: 24px; color: var(--ink-500); }
+
+/* numbered dot — generic; sized/coloured through local vars.
+   .flow__num (published-deck name) is an alias with the default look. */
+.num, .flow__num {
+  flex: none; width: var(--num-size, 44px); height: var(--num-size, 44px); border-radius: 50%;
+  background: var(--num-bg, var(--brand-indigo)); color: var(--num-ink, #fff);
+  font-family: var(--font-mono); font-size: var(--num-fs, 24px); font-weight: var(--num-weight, 600);
+  display: flex; align-items: center; justify-content: center;
+}
+.num--final, .flow__num.is-final { background: var(--amber-fill); color: var(--brand-indigo); }
+
+/* inline dot+label point (supporting facts under a visual) */
+.point { display: flex; align-items: center; gap: 12px; font-size: 24px; color: var(--ink-600); }
+.point .list__dot { margin: 0; }
+.points { display: flex; gap: 40px; flex-wrap: wrap; }
+
+/* numbered mini-step (compact vertical list inside a card) */
+.step { display: flex; gap: 14px; align-items: flex-start; }
+.step__text { font-size: 25px; line-height: 1.34; color: var(--ink-700); }
+
+/* solid side panel (e.g. the indigo note card next to a table) */
+.panel {
+  background: var(--panel-bg, var(--brand-indigo)); color: var(--panel-ink, #fff);
+  border-radius: var(--radius-lg); padding: var(--panel-pad, 40px 38px);
+  display: flex; flex-direction: column;
+  --lead-ink: rgba(241,236,227,0.8);   /* .card__lead reads on-dark inside */
+}
+.panel .list__dot { background: var(--brand-pink); }
+
+/* size/colour variants */
+.eyebrow--sm { font-size: 24px; }
 
 /* ---- 20. PRINT — one slide per page, no nav chrome ------------------------------------ */
 @media print {

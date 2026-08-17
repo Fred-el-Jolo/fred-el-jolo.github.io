@@ -16,5 +16,6 @@
   "listCoverFocus": "50% 50%",
   "ecoCoverDescription": "Plain-text description shown instead of image in eco mode.",
   "featured": false,
-  "status": "draft"
+  "status": "draft",
+  "format": "article | deck — omit for a normal article; \"deck\" renders slides.html via _templates/deck.html"
 }

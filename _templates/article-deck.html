@@ -18,7 +18,11 @@
 
   Each slide is a <section class="slide" data-label="…"> inside <deck-stage>.
   Copy a whole section to reuse one. Editable text is marked with ✏️.
-  All colours/type/spacing live in css/deck.css's :root token block.
+  All styling lives in css/deck.css — as components (§4–19b) driven by local
+  CSS variables (--num-*, --panel-*, --lead-ink, --eyebrow-ink, --muted-ink…),
+  initialised from the :root tokens. Avoid inline styles: they don't survive
+  a re-theme and can't be reused. The few that remain are one-off layout
+  nudges (flex basis, gaps, margins).
   ============================================================================
 -->
 <html lang="en" data-theme="dark">
@@ -48,31 +52,27 @@
     data-label="Cover"
     data-speaker-notes="Your opening line goes here. One or two sentences of intent.">
 
-    <div style="display:flex; justify-content:space-between; align-items:center;">
+    <div class="head-row">
       <div class="wm" style="font-size:28px;"><span class="b">{</span> aesthetecoding.io <span class="b">}</span></div>
-      <div style="font-family:var(--font-mono); font-size:24px; font-weight:500; letter-spacing:0.14em; text-transform:uppercase; color:var(--on-dark-2);">
-        <!-- ✏️ context / date -->Field notes · Month Year
-      </div>
+      <div class="ctx"><!-- ✏️ context / date -->Field notes · Month Year</div>
     </div>
 
     <div style="margin-top:auto;">
-      <div class="eyebrow" style="color:var(--on-dark-2); margin-bottom:30px;"><!-- ✏️ kicker -->Section / Kicker</div>
+      <div class="eyebrow" style="--eyebrow-ink:var(--on-dark-2); margin-bottom:30px;"><!-- ✏️ kicker -->Section / Kicker</div>
       <h1 class="title title--hero"><!-- ✏️ deck title -->Your Article Title Goes Here</h1>
-      <p style="margin:36px 0 0; font-family:var(--font-serif); font-style:italic; font-weight:400; font-size:40px; line-height:1.3; color:rgba(241,236,227,0.92);">
-        <!-- ✏️ one-line tagline -->A short italic tagline that frames the story.
-      </p>
+      <p class="tagline"><!-- ✏️ one-line tagline -->A short italic tagline that frames the story.</p>
     </div>
 
-    <div style="margin-top:auto; display:flex; align-items:center; gap:18px; padding-top:56px;">
-      <div style="width:46px; height:1px; background:rgba(241,236,227,0.4);"></div>
-      <div style="font-family:var(--font-mono); font-size:24px; font-weight:500;"><!-- ✏️ name -->aesthetecoding</div>
-      <div style="font-family:var(--font-mono); font-size:24px; color:var(--on-dark-3);"><!-- ✏️ role/team -->field notes</div>
-      <div style="margin-left:auto; font-family:var(--font-mono); font-size:24px; color:var(--on-dark-3);"><span data-deck-page></span></div>
+    <div class="byline">
+      <div class="byline__rule"></div>
+      <div><!-- ✏️ name -->aesthetecoding</div>
+      <div class="byline__role"><!-- ✏️ role/team -->field notes</div>
+      <div class="byline__page"><span data-deck-page></span></div>
     </div>
   </section>
 
   <!-- ======================================================================
-       SLIDE 2 · SECTION DIVIDER (new — minimal, transition between parts)
+       SLIDE 2 · SECTION DIVIDER (minimal, transition between parts)
        ====================================================================== -->
   <section
     class="slide slide--dark slide--divider"
@@ -99,19 +99,13 @@
     <div class="row fill mt-lg">
 
       <div class="card fill">
-        <div style="display:flex; align-items:center; gap:16px; margin-bottom:24px;">
+        <div class="card__head">
           <span class="badge">1</span>
-          <span style="font-family:var(--font-serif); font-size:33px; font-weight:600; color:var(--brand-indigo); line-height:1.1;">First column heading</span>
+          <span class="card__title"><!-- ✏️ -->First column heading</span>
         </div>
         <div>
-          <div style="display:flex; justify-content:space-between; padding:15px 0; border-bottom:1px solid var(--border-1);">
-            <span style="font-size:28px; font-weight:600; color:var(--ink-800);">Item</span>
-            <span class="mono" style="font-size:24px; color:var(--ink-500);">value</span>
-          </div>
-          <div style="display:flex; justify-content:space-between; padding:15px 0; border-bottom:1px solid var(--border-1);">
-            <span style="font-size:28px; font-weight:600; color:var(--ink-800);">Item</span>
-            <span class="mono" style="font-size:24px; color:var(--ink-500);">value</span>
-          </div>
+          <div class="spec-row"><span class="spec-row__k">Item</span><span class="spec-row__v">value</span></div>
+          <div class="spec-row"><span class="spec-row__k">Item</span><span class="spec-row__v">value</span></div>
         </div>
         <div style="margin-top:auto; padding-top:22px;">
           <div class="callout"><!-- ✏️ -->A highlighted takeaway. Use <span class="accent strong">accent</span> for the key word.</div>
@@ -119,16 +113,16 @@
       </div>
 
       <div class="card fill">
-        <div style="display:flex; align-items:center; gap:16px; margin-bottom:24px;">
+        <div class="card__head">
           <span class="badge">2</span>
-          <span style="font-family:var(--font-serif); font-size:33px; font-weight:600; color:var(--brand-indigo); line-height:1.1;">Second column heading</span>
+          <span class="card__title"><!-- ✏️ -->Second column heading</span>
         </div>
-        <p style="margin:0 0 20px; font-size:25px; line-height:1.42; color:var(--ink-600);">A sentence of framing for this column.</p>
-        <p class="eyebrow" style="color:var(--ink-500); font-size:24px;">Sub-label</p>
+        <p class="card__lead"><!-- ✏️ -->A sentence of framing for this column.</p>
+        <p class="eyebrow eyebrow--sm" style="--eyebrow-ink:var(--ink-500);"><!-- ✏️ -->Sub-label</p>
         <ul class="list" style="gap:18px;">
-          <li><span class="list__dot"></span><span>Bullet point one</span></li>
-          <li><span class="list__dot"></span><span><span class="accent strong">Emphasised</span> bullet point two</span></li>
-          <li><span class="list__dot" style="background:var(--ink-300);"></span><span class="muted" style="color:var(--ink-600);">A softer, secondary point</span></li>
+          <li><span class="list__dot"></span><span><!-- ✏️ -->Bullet point one</span></li>
+          <li><span class="list__dot"></span><span><span class="accent strong"><!-- ✏️ -->Emphasised</span> bullet point two</span></li>
+          <li><span class="list__dot" style="background:var(--ink-300);"></span><span class="muted" style="--muted-ink:var(--ink-600);"><!-- ✏️ -->A softer, secondary point</span></li>
         </ul>
       </div>
 
@@ -158,8 +152,8 @@
     ├── file-one
     └── file-two</div>
 
-      <div class="fill" style="display:flex; flex-direction:column;">
-        <p class="eyebrow" style="color:var(--ink-500); font-size:24px; margin-bottom:22px;">Process</p>
+      <div class="fill col">
+        <p class="eyebrow eyebrow--sm" style="--eyebrow-ink:var(--ink-500); margin-bottom:22px;">Process</p>
         <div class="flow fill">
           <div class="flow__row"><span class="flow__num">1</span><span class="label">First step</span></div>
           <div class="flow__line"></div>
@@ -172,17 +166,17 @@
       </div>
     </div>
 
-    <div style="margin-top:28px; display:flex; gap:40px; flex-wrap:wrap;">
-      <div style="display:flex; align-items:center; gap:12px; font-size:24px; color:var(--ink-600);"><span class="list__dot" style="margin:0;"></span>Supporting point</div>
-      <div style="display:flex; align-items:center; gap:12px; font-size:24px; color:var(--ink-600);"><span class="list__dot" style="margin:0;"></span>Supporting point</div>
-      <div style="display:flex; align-items:center; gap:12px; font-size:24px; color:var(--ink-600);"><span class="list__dot" style="margin:0;"></span>Supporting point</div>
+    <div class="points" style="margin-top:28px;">
+      <div class="point"><span class="list__dot"></span><span><!-- ✏️ -->Supporting point</span></div>
+      <div class="point"><span class="list__dot"></span><span><!-- ✏️ -->Supporting point</span></div>
+      <div class="point"><span class="list__dot"></span><span><!-- ✏️ -->Supporting point</span></div>
     </div>
 
     <div class="footer"><span class="wm"><span class="b">{</span> aesthetecoding.io <span class="b">}</span></span><span data-deck-page></span></div>
   </section>
 
   <!-- ======================================================================
-       SLIDE 5 · TERMINAL (new — deck-native port of prose.css .terminal)
+       SLIDE 5 · TERMINAL (shared component, deck-sized via css/deck.css §13)
        ====================================================================== -->
   <section
     class="slide slide--dark"
@@ -204,7 +198,7 @@
   </section>
 
   <!-- ======================================================================
-       SLIDE 6 · COMPARISON TABLE + SIDE CARD
+       SLIDE 6 · COMPARISON TABLE + SIDE PANEL
        ====================================================================== -->
   <section
     class="slide"
@@ -212,7 +206,7 @@
     data-speaker-notes="Read the two rows that matter most; the rest is reference.">
 
     <p class="eyebrow">Eyebrow</p>
-    <h2 class="title">Comparison Table &amp; Side Card</h2>
+    <h2 class="title">Comparison Table &amp; Side Panel</h2>
     <p class="subhead">A one-line claim the table backs up.</p>
 
     <div class="row fill" style="margin-top:40px; gap:48px;">
@@ -228,34 +222,34 @@
         <tbody>
           <tr>
             <td class="col-label">Criterion</td>
-            <td class="muted" style="color:var(--ink-500);">Weaker</td>
-            <td class="col-win" style="font-weight:700; color:var(--ink-900);">Stronger&nbsp;&nbsp;<span class="pill pill--solid" style="font-size:20px; padding:4px 13px; vertical-align:middle;">Main</span></td>
+            <td class="muted" style="--muted-ink:var(--ink-500);">Weaker</td>
+            <td class="col-win" style="font-weight:700; color:var(--ink-900);">Stronger&nbsp;&nbsp;<span class="pill pill--solid pill--sm">Main</span></td>
           </tr>
           <tr>
             <td class="col-label">Criterion</td>
-            <td class="muted" style="color:var(--ink-500);">Weaker</td>
+            <td class="muted" style="--muted-ink:var(--ink-500);">Weaker</td>
             <td class="col-win">Stronger</td>
           </tr>
           <tr>
             <td class="col-label">Criterion</td>
-            <td class="muted" style="color:var(--ink-500);">Weaker</td>
+            <td class="muted" style="--muted-ink:var(--ink-500);">Weaker</td>
             <td class="col-win">Stronger</td>
           </tr>
-          <tr>
-            <td class="col-label" style="border-bottom:none; padding-bottom:0; font-weight:700;">Result</td>
-            <td style="border-bottom:none; padding-bottom:0; font-weight:600; color:var(--ink-600);">Downside</td>
-            <td class="col-win accent" style="border-bottom:none; font-weight:700;">Upside</td>
+          <tr class="is-result">
+            <td class="col-label" style="font-weight:700;">Result</td>
+            <td style="font-weight:600; color:var(--ink-600);">Downside</td>
+            <td class="col-win accent" style="font-weight:700;">Upside</td>
           </tr>
         </tbody>
       </table>
 
-      <div style="flex:0 0 31%; background:var(--brand-indigo); border-radius:var(--radius-lg); padding:40px 38px; color:#fff; display:flex; flex-direction:column;">
-        <p class="eyebrow" style="color:var(--brand-pink); margin-bottom:16px;">Side note title</p>
-        <p style="margin:0 0 22px; font-size:25px; line-height:1.42; color:rgba(241,236,227,0.8);">A short lead sentence:</p>
+      <div class="panel" style="flex:0 0 31%;">
+        <p class="eyebrow" style="--eyebrow-ink:var(--brand-pink); margin-bottom:16px;"><!-- ✏️ -->Side note title</p>
+        <p class="card__lead"><!-- ✏️ -->A short lead sentence:</p>
         <ul class="list list--on-dark" style="gap:20px;">
-          <li><span class="list__dot" style="background:var(--brand-pink);"></span><span>Point one</span></li>
-          <li><span class="list__dot" style="background:var(--brand-pink);"></span><span>Point two</span></li>
-          <li><span class="list__dot" style="background:var(--brand-pink);"></span><span>Point three</span></li>
+          <li><span class="list__dot"></span><span><!-- ✏️ -->Point one</span></li>
+          <li><span class="list__dot"></span><span><!-- ✏️ -->Point two</span></li>
+          <li><span class="list__dot"></span><span><!-- ✏️ -->Point three</span></li>
         </ul>
       </div>
     </div>
@@ -275,57 +269,57 @@
     <h2 class="title">Phase Cards With an OR Divider</h2>
     <p class="subhead">One starting point, then two parallel options.</p>
 
-    <div class="row fill gap-sm mt-lg" style="margin-top:40px;">
+    <div class="row fill gap-sm" style="margin-top:40px;">
 
       <div class="card card--accent-top fill" style="padding:34px 32px;">
-        <span class="pill pill--solid" style="margin-bottom:20px;">Start here</span>
-        <div style="font-family:var(--font-serif); font-size:34px; font-weight:600; color:var(--brand-indigo);">Foundation</div>
-        <div class="muted" style="font-size:24px; margin-bottom:22px;">Sub-label</div>
-        <ul class="list" style="gap:15px; font-size:25px;">
-          <li><span class="list__dot"></span><span>What it includes</span></li>
-          <li><span class="list__dot"></span><span>What it includes</span></li>
-          <li><span class="list__dot" style="background:var(--ink-300);"></span><span class="muted" style="color:var(--ink-400);">What it does NOT include</span></li>
+        <span class="pill pill--solid"><!-- ✏️ -->Start here</span>
+        <div class="card__title"><!-- ✏️ -->Foundation</div>
+        <div class="card__sub"><!-- ✏️ -->Sub-label</div>
+        <ul class="list" style="gap:15px;">
+          <li><span class="list__dot"></span><span><!-- ✏️ -->What it includes</span></li>
+          <li><span class="list__dot"></span><span><!-- ✏️ -->What it includes</span></li>
+          <li><span class="list__dot" style="background:var(--ink-300);"></span><span class="muted" style="--muted-ink:var(--ink-400);"><!-- ✏️ -->What it does NOT include</span></li>
         </ul>
       </div>
 
       <div class="card card--indigo-top fill" style="padding:34px 32px;">
-        <span class="pill pill--soft" style="margin-bottom:20px;">Option A</span>
-        <div style="font-family:var(--font-serif); font-size:34px; font-weight:600; color:var(--brand-indigo);">Choice One</div>
-        <div class="muted" style="font-size:24px; margin-bottom:22px;">Sub-label</div>
-        <ul class="list" style="gap:15px; font-size:25px;">
-          <li><span class="list__dot" style="background:var(--brand-indigo);"></span><span>Reason to pick this</span></li>
-          <li><span class="list__dot" style="background:var(--brand-indigo);"></span><span>Reason to pick this</span></li>
+        <span class="pill pill--soft"><!-- ✏️ -->Option A</span>
+        <div class="card__title"><!-- ✏️ -->Choice One</div>
+        <div class="card__sub"><!-- ✏️ -->Sub-label</div>
+        <ul class="list" style="gap:15px;">
+          <li><span class="list__dot" style="background:var(--brand-indigo);"></span><span><!-- ✏️ -->Reason to pick this</span></li>
+          <li><span class="list__dot" style="background:var(--brand-indigo);"></span><span><!-- ✏️ -->Reason to pick this</span></li>
         </ul>
       </div>
 
       <div class="or"><div class="or__line"></div><div class="or__chip">or</div><div class="or__line"></div></div>
 
       <div class="card card--indigo-top fill" style="padding:34px 32px;">
-        <span class="pill pill--soft" style="margin-bottom:20px;">Option B</span>
-        <div style="font-family:var(--font-serif); font-size:34px; font-weight:600; color:var(--brand-indigo);">Choice Two</div>
-        <div class="muted" style="font-size:24px; margin-bottom:22px;">Two steps</div>
-        <div style="display:flex; flex-direction:column; gap:14px;">
-          <div style="display:flex; gap:14px; align-items:flex-start;">
-            <span style="flex:none; width:34px; height:34px; border-radius:50%; background:var(--surface-violet); color:var(--accent-deep); font-family:var(--font-mono); font-size:24px; font-weight:500; display:flex; align-items:center; justify-content:center;">1</span>
-            <span style="font-size:25px; line-height:1.34; color:var(--ink-700);">First step description</span>
+        <span class="pill pill--soft"><!-- ✏️ -->Option B</span>
+        <div class="card__title"><!-- ✏️ -->Choice Two</div>
+        <div class="card__sub"><!-- ✏️ -->Two steps</div>
+        <div class="stack">
+          <div class="step">
+            <span class="num" style="--num-size:34px; --num-bg:var(--surface-violet); --num-ink:var(--accent-deep); --num-weight:500;">1</span>
+            <span class="step__text"><!-- ✏️ -->First step description</span>
           </div>
-          <div style="display:flex; gap:14px; align-items:flex-start;">
-            <span style="flex:none; width:34px; height:34px; border-radius:50%; background:var(--surface-violet); color:var(--accent-deep); font-family:var(--font-mono); font-size:24px; font-weight:500; display:flex; align-items:center; justify-content:center;">2</span>
-            <span style="font-size:25px; line-height:1.34; color:var(--ink-700);">Second step description</span>
+          <div class="step">
+            <span class="num" style="--num-size:34px; --num-bg:var(--surface-violet); --num-ink:var(--accent-deep); --num-weight:500;">2</span>
+            <span class="step__text"><!-- ✏️ -->Second step description</span>
           </div>
         </div>
-        <div style="margin-top:auto; padding-top:18px; font-size:24px; line-height:1.36; color:var(--ink-500); border-top:1px solid var(--border-1);">A small footnote.</div>
+        <div class="card__note"><!-- ✏️ -->A small footnote.</div>
       </div>
     </div>
 
     <div class="footer">
-      <span style="font-family:var(--font-sans); font-size:24px; color:var(--ink-600);"><span class="strong" style="color:var(--brand-indigo);">Unchanged:</span> things that stay the same · listed here</span>
+      <span class="footer__note"><span class="strong" style="color:var(--brand-indigo);"><!-- ✏️ -->Unchanged:</span> things that stay the same · listed here</span>
       <span data-deck-page></span>
     </div>
   </section>
 
   <!-- ======================================================================
-       SLIDE 8 · FULL-BLEED PHOTO (new — for visual/build posts)
+       SLIDE 8 · FULL-BLEED PHOTO (for visual/build posts)
        ====================================================================== -->
   <section
     class="slide slide--photo"
@@ -333,7 +327,7 @@
     data-speaker-notes="Let the image carry the moment — the caption is a label, not a paragraph.">
 
     <!-- ✏️ replace src + set --focus like the site's own cover images -->
-    <img class="deck-photo-img" style="--focus:50% 50%;" src="../_articles/2026-05-28-homelab-raspberry-pi-4-cluster/assets/cover.png" alt="Four Raspberry Pi boards stacked with a small network switch">
+    <img class="deck-photo-img" style="--focus:50% 65%;" src="../_articles/2026-07-28-rebuilding-this-blog-slides/assets/cover.jpeg" alt="A vintage typewriter with a sheet of paper reading Chapter One">
     <div class="deck-photo-cap">
       <p class="eyebrow"><!-- ✏️ -->Eyebrow</p>
       <h2 class="title"><!-- ✏️ -->What the finished build looks like</h2>
@@ -341,7 +335,7 @@
   </section>
 
   <!-- ======================================================================
-       SLIDE 9 · FULL-SLIDE QUOTE (new — distinct from the inline .banner strip)
+       SLIDE 9 · FULL-SLIDE QUOTE (distinct from the inline .banner strip)
        ====================================================================== -->
   <section
     class="slide slide--gradient"
@@ -354,7 +348,7 @@
       <p class="deck-quote__cite"><!-- ✏️ -->who said it, or where it's from</p>
     </div>
 
-    <div class="footer" style="border-top-color:var(--border-on-dark);"><span class="wm"><span class="b">{</span> aesthetecoding.io <span class="b">}</span></span><span data-deck-page></span></div>
+    <div class="footer"><span class="wm"><span class="b">{</span> aesthetecoding.io <span class="b">}</span></span><span data-deck-page></span></div>
   </section>
 
   <!-- ======================================================================
@@ -372,33 +366,33 @@
     <div class="row mt-lg" style="gap:36px;">
 
       <div class="card card--ghost is-primary fill" style="padding:36px 38px;">
-        <p class="eyebrow" style="color:var(--brand-pink); font-size:24px;">What holds</p>
+        <p class="eyebrow eyebrow--sm" style="--eyebrow-ink:var(--brand-pink);"><!-- ✏️ -->What holds</p>
         <ul class="list list--check" style="gap:20px; font-size:28px;">
           <li>
-            <svg class="ic" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#efa23c" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="margin-top:4px;"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            <span>The first point that carries</span>
+            <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span><!-- ✏️ -->The first point that carries</span>
           </li>
           <li>
-            <svg class="ic" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#efa23c" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="margin-top:4px;"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            <span>The second point that carries</span>
+            <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span><!-- ✏️ -->The second point that carries</span>
           </li>
         </ul>
       </div>
 
       <div class="card card--ghost fill" style="padding:36px 38px;">
-        <p class="eyebrow" style="color:var(--on-dark-3); font-size:24px;">What doesn't</p>
+        <p class="eyebrow eyebrow--sm" style="--eyebrow-ink:var(--on-dark-3);"><!-- ✏️ -->What doesn't</p>
         <ul class="list list--cross" style="gap:18px;">
-          <li><svg class="ic" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="rgba(241,236,227,0.4)" stroke-width="2.2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg><span>A myth worth retiring</span></li>
-          <li><svg class="ic" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="rgba(241,236,227,0.4)" stroke-width="2.2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg><span>A myth worth retiring</span></li>
-          <li><svg class="ic" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="rgba(241,236,227,0.4)" stroke-width="2.2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg><span>A myth worth retiring</span></li>
-          <li><svg class="ic" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="rgba(241,236,227,0.4)" stroke-width="2.2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg><span>A myth worth retiring</span></li>
+          <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg><span><!-- ✏️ -->A myth worth retiring</span></li>
+          <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg><span><!-- ✏️ -->A myth worth retiring</span></li>
+          <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg><span><!-- ✏️ -->A myth worth retiring</span></li>
+          <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg><span><!-- ✏️ -->A myth worth retiring</span></li>
         </ul>
       </div>
     </div>
 
     <div class="banner" style="margin-top:40px;">
       <div class="banner__tag">Outcome</div>
-      <div class="banner__text">The single line that captures what the reader walks away with — <span class="strong">with the key phrase in bold</span>.</div>
+      <div class="banner__text"><!-- ✏️ -->The single line that captures what the reader walks away with — <span class="strong">with the key phrase in bold</span>.</div>
     </div>
 
     <div class="footer"><span class="wm"><span class="b">{</span> aesthetecoding.io <span class="b">}</span></span><span data-deck-page></span></div>

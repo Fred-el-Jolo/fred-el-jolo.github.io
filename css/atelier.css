@@ -3,37 +3,11 @@
    Faithful extraction of the approved design study (C+). One stylesheet.
    Theming + state live on <body class="acx" data-theme data-eco data-font>.
    Every rule is scoped to .acx so the design is self-contained.
+   Fonts + the generic .terminal component live in shared.css (imported below)
+   so the deck system can share them.
    ========================================================================== */
 
-/* ---------------------------------------------------------------------------
-   SELF-HOSTED FONTS  (no third-party requests)
-   Newsreader & Public Sans are variable; IBM Plex Mono is static 400/500.
-   --------------------------------------------------------------------------- */
-@font-face{
-  font-family:"Newsreader"; font-style:normal; font-weight:200 800;
-  font-optical-sizing:auto; font-display:swap;
-  src:url("fonts/Newsreader.woff2") format("woff2");
-}
-@font-face{
-  font-family:"Newsreader"; font-style:italic; font-weight:200 800;
-  font-optical-sizing:auto; font-display:swap;
-  src:url("fonts/Newsreader-Italic.woff2") format("woff2");
-}
-@font-face{
-  font-family:"Public Sans"; font-style:normal; font-weight:100 900;
-  font-display:swap;
-  src:url("fonts/PublicSans.ttf") format("truetype");
-}
-@font-face{
-  font-family:"IBM Plex Mono"; font-style:normal; font-weight:400;
-  font-display:swap;
-  src:url("fonts/IBMPlexMono-Regular.woff2") format("woff2");
-}
-@font-face{
-  font-family:"IBM Plex Mono"; font-style:normal; font-weight:500;
-  font-display:swap;
-  src:url("fonts/IBMPlexMono-Medium.woff2") format("woff2");
-}
+@import url("shared.css");
 
 /* ---------------------------------------------------------------------------
    TOKENS  — change these to retheme globally
@@ -47,6 +21,7 @@
 
   /* brand accents (shared across themes) */
   --amber:#efa23c; --red:#e23b2e; --green:#37a14f; --blue:#1f9be0;
+  --on-accent:#141009;   /* ink on amber fills (active toggle states)      */
 
   /* structure */
   --maxw:1060px;       /* content width            */
@@ -124,9 +99,13 @@
     var(--bg);
 }
 .acx[data-eco="on"] .mast{ background:var(--bg); }
+/* header tools (theme / font / eco) — neutral by default; the masthead pins
+   its copy to the top of the header, the reading bar keeps it in the flow */
 .acx .mast-tools{
-  position:absolute; top:18px; right:0; left:0; padding:0 var(--pad);
   display:flex; align-items:center; gap:10px; justify-content:flex-end;
+}
+.acx .mast .mast-tools{
+  position:absolute; top:18px; right:0; left:0; padding:0 var(--pad);
 }
 
 /* segmented toggles (theme + font) */
@@ -140,7 +119,7 @@
 .acx[data-theme="light"] .seg.theme [data-v="light"],
 .acx[data-font="s"] .seg.font [data-v="s"],
 .acx[data-font="m"] .seg.font [data-v="m"],
-.acx[data-font="l"] .seg.font [data-v="l"]{ background:var(--amber); color:#14100a; }
+.acx[data-font="l"] .seg.font [data-v="l"]{ background:var(--amber); color:var(--on-accent); }
 
 /* eco leaf toggle */
 .acx .leaf{ width:32px; height:32px; border-radius:var(--radius-sm); border:1px solid var(--line); background:var(--panel); color:var(--faint); cursor:pointer; display:inline-flex; align-items:center; justify-content:center; }
@@ -151,10 +130,11 @@
 .acx .mast-in{ display:flex; flex-direction:column; align-items:center; text-align:center; padding:58px 0 38px; }
 .acx .monk{ width:84px; height:auto; display:block; filter:drop-shadow(0 14px 26px rgba(0,0,0,.4)); }
 .acx[data-eco="on"] .monk{ filter:none; }
-/* theme-swapped logo (no JS needed) */
-.acx .monk.for-light{ display:none; }
-.acx[data-theme="light"] .monk.for-dark{ display:none; }
-.acx[data-theme="light"] .monk.for-light{ display:block; }
+
+/* theme-swapped images — generic, no JS needed (any <img> pair works) */
+.acx .for-light{ display:none; }
+.acx[data-theme="light"] .for-dark{ display:none; }
+.acx[data-theme="light"] .for-light{ display:block; }
 
 .acx .wordmark{
   font-family:var(--mono); font-weight:500; font-size:clamp(22px,4.4cqi,34px);
@@ -191,8 +171,6 @@
 .acx .feat p{ color:var(--dim); font-size:var(--fs-xl); margin:0 0 22px; max-width:44ch; }
 .acx .feat .meta{ font-family:var(--mono); font-size:var(--fs-m); color:var(--faint); display:flex; gap:13px; align-items:center; flex-wrap:wrap; }
 .acx .feat .meta>*{ white-space:nowrap; }
-.acx .feat .meta .cat{ color:var(--ink); display:inline-flex; align-items:center; gap:7px; }
-.acx .feat .meta .cat::before{ content:""; width:8px; height:8px; border-radius:50%; background:var(--cat,var(--blue)); }
 .acx .feat .cta{ display:inline-flex; align-items:center; gap:8px; margin-top:24px; font-family:var(--mono); font-size:var(--fs-l); color:var(--ink); border-bottom:1px solid var(--amber); padding-bottom:4px; white-space:nowrap; }
 .acx .feat .cta .ar{ color:var(--amber-text); }
 .acx .feat .ph{ aspect-ratio:5/4; border-radius:var(--radius); overflow:hidden; border:1px solid var(--line); position:relative; }
@@ -216,7 +194,7 @@
 .acx .list-empty{ display:none; font-family:var(--mono); font-size:var(--fs-m); color:var(--faint); text-align:center; padding:34px 0 26px; margin:0; }
 .acx .list-empty.on{ display:block; }
 .acx .row{ display:grid; grid-template-columns:72px 1fr auto; gap:22px; align-items:center; padding:18px 0; border-bottom:1px solid var(--line); text-decoration:none; color:inherit; }
-.acx .row .thumb{ width:72px; height:72px; border-radius:11px; overflow:hidden; border:1px solid var(--line); position:relative; }
+.acx .row .thumb{ width:72px; height:72px; border-radius:var(--radius-md); overflow:hidden; border:1px solid var(--line); position:relative; }
 .acx .row .mid{ min-width:0; }
 .acx .row h3{ font-family:var(--news); font-weight:500; font-size:calc(20px*var(--fs-scale)); line-height:1.2; letter-spacing:-.012em; margin:0 0 7px; text-wrap:pretty; transition:color .18s ease; }
 .acx .row:hover h3{ color:var(--amber-text); }
@@ -227,12 +205,18 @@
 .acx .row .date{ font-family:var(--mono); font-size:var(--fs-m); color:var(--faint); white-space:nowrap; }
 
 /* cover placeholders + eco icon tiles */
-.acx .cover{ position:absolute; inset:0; background:repeating-linear-gradient(135deg,var(--cover-a) 0 10px,var(--cover-b) 10px 20px); display:flex; align-items:flex-end; }
+/* striped cover placeholder — one recipe for the home cards (.cover, layered
+   inside .thumb/.ph) and the reading column (.ph-stripe, a standalone block) */
+.acx .cover, .acx .ph-stripe{
+  background:repeating-linear-gradient(135deg,var(--cover-a) 0 10px,var(--cover-b) 10px 20px);
+  display:flex; align-items:flex-end;
+}
+.acx .cover{ position:absolute; inset:0; }
 /* real cover image — layers over the striped placeholder, cropped by object-fit.
    per-card focal point via --focus (e.g. style="--focus:78% 40%") keeps the subject in frame. */
 .acx .cover-img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:var(--focus,50% 50%); display:block; }
 .acx[data-eco="on"] .cover-img{ display:none; }
-.acx .cover .lbl{ font-family:var(--mono); font-size:var(--fs-xs); letter-spacing:.1em; text-transform:uppercase; color:var(--faint); background:color-mix(in srgb,var(--bg) 72%,transparent); border:1px solid var(--line); border-radius:6px; padding:4px 8px; margin:12px; }
+.acx .cover .lbl, .acx .ph-stripe .lbl{ font-family:var(--mono); font-size:var(--fs-xs); letter-spacing:.1em; text-transform:uppercase; color:var(--faint); background:color-mix(in srgb,var(--bg) 72%,transparent); border:1px solid var(--line); border-radius:6px; padding:4px 8px; margin:12px; }
 .acx .ico{ position:absolute; inset:0; display:none; align-items:center; justify-content:center; flex-direction:column; gap:9px; background:var(--bg2); color:var(--cat,var(--amber)); }
 .acx .ico svg{ width:30px; height:30px; }
 .acx .ico .gl{ font-family:var(--mono); font-size:var(--fs-2xs); letter-spacing:.12em; text-transform:uppercase; color:var(--dim); }
@@ -242,27 +226,46 @@
 .acx[data-eco="on"] .ico{ display:flex; }
 /* eco: shrink the featured tile to a compact thumb */
 .acx[data-eco="on"] .feat{ grid-template-columns:1fr 140px; align-items:center; }
-.acx[data-eco="on"] .feat .ph{ aspect-ratio:1; border-radius:14px; }
+.acx[data-eco="on"] .feat .ph{ aspect-ratio:1; border-radius:var(--radius-md); }
 .acx[data-eco="on"] .feat .ico{ gap:7px; }
 .acx[data-eco="on"] .feat .ico svg{ width:28px; height:28px; }
 
 /* ===========================================================================
-   POST-GENERATION PROVENANCE BADGE
+   TINTED PILLS — one recipe for category chips, provenance & format badges
+   Each variant sets --tint; the theme recipe below does the rest.
+   --tint comes from --cat (set inline per card by the build) or the
+   provenance constants: none = green · enriched = amber · full/slides = blue
    =========================================================================== */
-.acx .prov{ display:inline-flex; align-items:center; gap:6px; font-family:var(--mono); font-size:var(--fs-xs); letter-spacing:.07em; text-transform:uppercase; color:var(--faint); border:1px solid var(--line); border-radius:var(--radius-pill); padding:3px 9px; white-space:nowrap; }
-.acx .prov .pg{ display:inline-flex; color:var(--prov,var(--faint)); }
+.acx .cat-chip, .acx .prov, .acx .fmt-slides{
+  display:inline-flex; align-items:center; gap:7px;
+  font-family:var(--mono); font-size:var(--fs-xs); font-weight:500;
+  letter-spacing:.08em; text-transform:uppercase;
+  border-radius:var(--radius-pill); padding:4px 12px; white-space:nowrap;
+}
+.acx .cat-chip{ --tint:var(--cat,var(--amber)); }
+.acx .cat-chip::before{ content:""; width:7px; height:7px; border-radius:50%; background:var(--tint); }
+
+.acx .prov .pg{ display:inline-flex; color:inherit; }
 .acx .prov .pg svg{ width:12px; height:12px; }
 .acx .prov-full .pg svg{ width:15px; height:15px; margin:-1px -1px -2px; }
-.acx .prov-none{ --prov:var(--green); }
-.acx .prov-enriched{ --prov:var(--amber-text); }
-.acx .prov-full{ --prov:var(--blue); }
-.acx .m .prov{ border:0; padding:0; gap:5px; }     /* inline variant in list rows */
-.acx .read .prov{ margin-top:16px; }
-
-/* format indicator — shown when an entry is a slide-deck (meta.json "format": "deck") */
-.acx .fmt-slides{ display:inline-flex; align-items:center; gap:5px; font-family:var(--mono); font-size:var(--fs-xs); letter-spacing:.07em; text-transform:uppercase; color:var(--blue); border:1px solid var(--line); border-radius:var(--radius-pill); padding:3px 9px; white-space:nowrap; }
 .acx .fmt-slides svg{ width:12px; height:12px; }
-.acx .m .fmt-slides{ border:0; padding:0; gap:5px; }
+.acx .prov-none{ --tint:var(--green); }
+.acx .prov-enriched{ --tint:var(--amber); }
+.acx .prov-full, .acx .fmt-slides{ --tint:var(--blue); }
+
+/* dark: luminous tint over the paper, slightly lifted accent text (keeps red readable) */
+.acx[data-theme="dark"] :is(.cat-chip,.prov,.fmt-slides){
+  color:color-mix(in srgb, var(--tint) 82%, #fff);
+  background:color-mix(in srgb, var(--tint) 16%, transparent);
+  border:1px solid color-mix(in srgb, var(--tint) 40%, transparent);
+}
+/* light: pastel tint on the panel, accent darkened toward ink for contrast */
+.acx[data-theme="light"] :is(.cat-chip,.prov,.fmt-slides){
+  color:color-mix(in srgb, var(--tint) 45%, var(--ink));
+  background:color-mix(in srgb, var(--tint) 13%, var(--panel));
+  border:1px solid color-mix(in srgb, var(--tint) 32%, var(--panel));
+}
+.acx .read .prov{ margin-top:16px; }
 
 /* ===========================================================================
    FOOTER  (index)  — social links live here
@@ -284,54 +287,27 @@
 .acx .rbar-in{ display:flex; align-items:center; gap:14px; padding:18px 0; }
 .acx .rbar .brand{ display:flex; align-items:center; gap:12px; text-decoration:none; color:var(--ink); }
 .acx .rbar .brand img{ width:42px; height:auto; }
-.acx .rbar .brand img.for-light{ display:none; }
-.acx[data-theme="light"] .rbar .brand img.for-dark{ display:none; }
-.acx[data-theme="light"] .rbar .brand img.for-light{ display:block; }
 .acx .rbar .brand .wm{ font-family:var(--mono); font-size:var(--fs-xl); font-weight:500; white-space:nowrap; letter-spacing:-.01em; }
 .acx .rbar .brand .wm .b{ color:var(--amber-text); }
 .acx .rbar .sp{ flex:1; }
-/* reading-bar toggles: static (not absolute like the masthead's) */
-.acx .rbar .mast-tools{ position:static; padding:0; justify-content:flex-end; }
 
 .acx .read .rhead{ max-width:var(--readw); margin:0 auto; padding:42px var(--pad) 0; }
 .acx .read .back{ font-family:var(--mono); font-size:var(--fs-m); color:var(--faint); text-decoration:none; }
 .acx .read .back:hover{ color:var(--amber-text); }
 .acx .read .kick{ margin:26px 0 14px; display:flex; align-items:center; }
-/* category chip — full tinted pill in the category accent (--cat), tuned per theme */
-.acx .cat-chip{ display:inline-flex; align-items:center; gap:7px; font-family:var(--mono); font-size:var(--fs-xs); font-weight:500; letter-spacing:.08em; text-transform:uppercase; border-radius:var(--radius-pill); padding:4px 12px; white-space:nowrap; }
-.acx .cat-chip::before{ content:""; width:7px; height:7px; border-radius:50%; background:var(--cat,var(--amber)); }
-/* dark: luminous tint over the paper, slightly lifted accent text (keeps red readable) */
-.acx[data-theme="dark"] .cat-chip{
-  color:color-mix(in srgb, var(--cat,#efa23c) 82%, #fff);
-  background:color-mix(in srgb, var(--cat,#efa23c) 16%, transparent);
-  border:1px solid color-mix(in srgb, var(--cat,#efa23c) 40%, transparent);
-}
-/* light: pastel tint on the panel, accent darkened toward ink for contrast */
-.acx[data-theme="light"] .cat-chip{
-  color:color-mix(in srgb, var(--cat,#e23b2e) 58%, var(--ink));
-  background:color-mix(in srgb, var(--cat,#e23b2e) 13%, var(--panel));
-  border:1px solid color-mix(in srgb, var(--cat,#e23b2e) 32%, var(--panel));
-}
+
 .acx .read h1{ font-family:var(--news); font-weight:500; font-size:clamp(calc(30px*var(--fs-scale)),5cqi,calc(46px*var(--fs-scale))); line-height:1.05; letter-spacing:-.02em; margin:0; text-wrap:balance; }
 .acx .read .byl{ font-family:var(--mono); font-size:var(--fs-m); color:var(--faint); margin:18px 0 0; display:flex; gap:13px; flex-wrap:wrap; }
 .acx .read .byl > *{ white-space:nowrap; }
 .acx .read .byl b{ color:var(--ink); font-weight:500; }
 .acx .read .heroimg{ max-width:920px; margin:32px auto 24px; padding:0 var(--pad); }
-.acx .read .heroimg .ph{ aspect-ratio:16/9; border-radius:14px; border:1px solid var(--line); position:relative; overflow:hidden; }
+.acx .read .heroimg .ph{ aspect-ratio:16/9; border-radius:var(--radius-md); border:1px solid var(--line); position:relative; overflow:hidden; }
 .acx .read .eco-cap{ display:none; max-width:var(--readw); margin:32px auto 0; padding:0 var(--pad); }
 .acx .read .eco-cap .b2{ display:flex; align-items:center; gap:14px; border:1px dashed var(--line); border-radius:var(--radius-md); padding:16px 18px; color:var(--faint); font-family:var(--mono); font-size:var(--fs-m); }
 .acx .read .eco-cap svg{ width:22px; height:22px; color:var(--green); flex:0 0 auto; }
 .acx[data-eco="on"] .read .heroimg{ display:none; }
 .acx[data-eco="on"] .read .eco-cap{ display:block; }
-.acx .read .col{ max-width:var(--readw); margin:0 auto; padding:6px var(--pad) 0; }
-.acx .read .col p{ font-family:var(--serif); font-size:calc(19px*var(--fs-scale)); line-height:1.74; margin:24px 0; color:var(--ink); }
-.acx .read .col p:first-of-type::first-letter{ font-size:3em; float:left; line-height:.86; padding:6px 12px 0 0; color:var(--amber-text); font-weight:600; font-family:var(--news); }
-.acx .read .col h2{ font-family:var(--news); font-weight:600; font-size:calc(27px*var(--fs-scale)); letter-spacing:-.01em; margin:40px 0 4px; }
-.acx .read .col pre{ font-family:var(--mono); font-size:var(--fs-m); line-height:1.7; background:var(--panel); border:1px solid var(--line); border-radius:var(--radius-md); padding:18px 20px; overflow-x:auto; margin:26px 0; color:var(--dim); }
-.acx .read .col pre .c{ color:var(--faint); }
-.acx .read .col pre .k{ color:var(--amber-text); }
-.acx .read .col pre .s{ color:var(--green); }
-.acx .read .col blockquote{ margin:30px 0; padding-left:22px; border-left:3px solid var(--amber); font-family:var(--news); font-style:italic; font-size:calc(21px*var(--fs-scale)); color:var(--dim); }
+/* base .read .col typography lives in prose.css (the reading-column sheet) */
 
 /* ===========================================================================
    END-OF-ARTICLE COLOPHON  (arrangement B — inverted pyramid)
@@ -342,21 +318,20 @@
 .acx .colo .big{ font-family:var(--news); font-style:italic; font-size:var(--fs-3xl); line-height:1.12; color:var(--ink); margin:0; text-wrap:balance; }
 .acx .colo .sub{ font-family:var(--mono); font-size:var(--fs-s); letter-spacing:.16em; text-transform:uppercase; color:var(--amber-text); margin:0; }
 .acx .colo .wm-monk{ width:104px; height:auto; margin-top:-14px; pointer-events:none; }
-.acx .colo .wm-monk.for-light{ display:none; }
-.acx[data-theme="light"] .colo .wm-monk.for-dark{ display:none; }
-.acx[data-theme="light"] .colo .wm-monk.for-light{ display:block; }
 
 /* ===========================================================================
    RESPONSIVE
    =========================================================================== */
 @container (max-width:720px){
   .acx{ --pad:20px; }
-  .acx .mast-tools{ position:static; padding:14px 20px 0; justify-content:center; flex-wrap:wrap; }
+  /* toggles go centered + wrap on mobile — masthead and reading bar share this */
+  .acx :is(.mast,.rbar) .mast-tools{ justify-content:center; flex-wrap:wrap; gap:8px; }
+  .acx .mast .mast-tools{ position:static; padding:14px 20px 0; }
+  .acx .rbar .mast-tools{ order:-1; width:100%; }   /* above the logo row */
   .acx .mast-in{ padding:24px 0 30px; }
   .acx .monk{ width:72px; }
   /* compact toggles — the 40px touch size made the switch groups wrap onto
      two rows on the article page; smaller keeps them on one line */
-  .acx .mast-tools{ gap:8px; }
   .acx .seg{ padding:2px; gap:2px; }
   .acx .seg button{ width:32px; height:30px; }
   .acx .seg button svg{ width:15px; height:15px; }
@@ -372,10 +347,8 @@
   .acx .row{ grid-template-columns:56px 1fr; }
   .acx .row .thumb{ width:56px; height:56px; }
   .acx .row .date{ display:none; }
-  .acx .rbar-in{ padding:14px 0; }
-  .acx .rbar-in{ flex-wrap:wrap; gap:10px 12px; }
+  .acx .rbar-in{ padding:14px 0; flex-wrap:wrap; gap:10px 12px; }
   .acx .rbar .sp{ display:none; }
-  .acx .rbar .mast-tools{ width:100%; justify-content:flex-start; padding:0; }
   .acx .foot{ justify-content:center; text-align:center; }
   .acx .foot .foot-text{ flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:6px; }
   .acx .foot .foot-sep{ display:none; }

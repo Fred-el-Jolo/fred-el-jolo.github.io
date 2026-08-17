@@ -1,0 +1,99 @@
+/* ============================================================================
+   aesthetecoding.io — SHARED LAYER
+   The one stylesheet both design systems import (atelier.css for the site,
+   deck.css for slide decks). Holds what they genuinely share:
+
+   1. the self-hosted @font-face declarations — single source of truth,
+   2. the generic .terminal component (macOS bar + shell palette), configured
+      per context through its local --term-* variables (see prose.css and
+      deck.css for each context's overrides).
+
+   Import at the very top of the consuming stylesheet:
+     @import url("shared.css");
+   ========================================================================== */
+
+/* ---------------------------------------------------------------------------
+   SELF-HOSTED FONTS  (no third-party requests)
+   Newsreader & Public Sans are variable; IBM Plex Mono is static 400/500.
+   --------------------------------------------------------------------------- */
+@font-face{
+  font-family:"Newsreader"; font-style:normal; font-weight:200 800;
+  font-optical-sizing:auto; font-display:swap;
+  src:url("fonts/Newsreader.woff2") format("woff2");
+}
+@font-face{
+  font-family:"Newsreader"; font-style:italic; font-weight:200 800;
+  font-optical-sizing:auto; font-display:swap;
+  src:url("fonts/Newsreader-Italic.woff2") format("woff2");
+}
+@font-face{
+  font-family:"Public Sans"; font-style:normal; font-weight:100 900;
+  font-display:swap;
+  src:url("fonts/PublicSans.ttf") format("truetype");
+}
+@font-face{
+  font-family:"IBM Plex Mono"; font-style:normal; font-weight:400;
+  font-display:swap;
+  src:url("fonts/IBMPlexMono-Regular.woff2") format("woff2");
+}
+@font-face{
+  font-family:"IBM Plex Mono"; font-style:normal; font-weight:500;
+  font-display:swap;
+  src:url("fonts/IBMPlexMono-Medium.woff2") format("woff2");
+}
+
+/* ---------------------------------------------------------------------------
+   TERMINAL — shell session block (macOS chrome + fixed dark palette)
+   Deliberately always-dark regardless of reader theme, like a real terminal.
+   Structure + palette live here once; each context sizes it by overriding the
+   local variables below (defaults serve the reading column).
+   --------------------------------------------------------------------------- */
+.terminal{
+  /* palette — fixed constants, shared by every context */
+  --term-bg:#0c0a07;
+  --term-bar-border:#2a2118;
+  --term-ink:#e7dcc8;
+  --term-out:#8c8270;
+  --term-meta:#6b6152;
+  --term-dot-1:#e0654f;
+  --term-dot-2:#e0b24f;
+  --term-dot-3:#5fb874;
+  --term-prompt:#37a14f;
+
+  /* sizing — per-context knobs */
+  --term-mono:ui-monospace, "SF Mono", Menlo, monospace;
+  --term-fs:14px;
+  --term-lh:1.75;
+  --term-pad:16px 18px;
+  --term-bar-pad:9px 14px;
+  --term-dot:11px;
+  --term-label-fs:11px;
+  --term-radius:12px;
+  --term-border:transparent;
+
+  background:var(--term-bg);
+  border:1px solid var(--term-border);
+  border-radius:var(--term-radius);
+  overflow:hidden;
+}
+.terminal__bar{
+  display:flex; align-items:center; gap:7px;
+  padding:var(--term-bar-pad);
+  border-bottom:1px solid var(--term-bar-border);
+}
+.terminal__bar i{ width:var(--term-dot); height:var(--term-dot); border-radius:50%; display:block; }
+.terminal__bar i:nth-child(1){ background:var(--term-dot-1); }
+.terminal__bar i:nth-child(2){ background:var(--term-dot-2); }
+.terminal__bar i:nth-child(3){ background:var(--term-dot-3); }
+.terminal__bar span{
+  font-family:var(--term-mono); font-size:var(--term-label-fs);
+  letter-spacing:.1em; color:var(--term-meta); margin-left:6px;
+}
+.terminal pre{
+  margin:0; padding:var(--term-pad);
+  font-family:var(--term-mono); font-size:var(--term-fs); line-height:var(--term-lh);
+  color:var(--term-ink);
+}
+.terminal pre .cmd{ color:var(--term-ink); display:block; }
+.terminal pre .cmd::before{ content:"$ "; color:var(--term-prompt); }
+.terminal pre .out{ color:var(--term-out); display:block; }
