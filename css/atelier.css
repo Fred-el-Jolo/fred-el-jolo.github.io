@@ -89,16 +89,17 @@
 .acx .wrap{ max-width:var(--maxw); margin:0 auto; padding:0 var(--pad); }
 
 /* ===========================================================================
-   MASTHEAD  (the only header on the index)
+   HEADER BAND — home masthead + article reading bar share one glow recipe
    =========================================================================== */
-.acx .mast{
-  position:relative; overflow:hidden; border-bottom:1px solid var(--line);
+.acx :is(.mast,.rbar){
+  position:relative; border-bottom:1px solid var(--line);
   background:
     radial-gradient(135% 175% at 50% -30%, var(--glow), transparent 62%),
     radial-gradient(90% 60% at 50% 0%, color-mix(in srgb, var(--amber) 8%, transparent), transparent 70%),
     var(--bg);
 }
-.acx[data-eco="on"] .mast{ background:var(--bg); }
+.acx .mast{ overflow:hidden; }
+.acx[data-eco="on"] :is(.mast,.rbar){ background:var(--bg); }
 /* header tools (theme / font / eco) — neutral by default; the masthead pins
    its copy to the top of the header, the reading bar keeps it in the flow */
 .acx .mast-tools{
@@ -282,8 +283,8 @@
 /* ===========================================================================
    READING VIEW  (article page)
    =========================================================================== */
-.acx .rbar{ position:relative; border-bottom:1px solid var(--line); background:radial-gradient(120% 320% at 16% -120%, var(--glow), transparent 50%), var(--bg); }
-.acx[data-eco="on"] .rbar{ background:var(--bg); }
+/* .rbar band (position, border, glow background) is shared with the masthead —
+   see the header-band rule in the HEADER section above */
 .acx .rbar-in{ display:flex; align-items:center; gap:14px; padding:18px 0; }
 .acx .rbar .brand{ display:flex; align-items:center; gap:12px; text-decoration:none; color:var(--ink); }
 .acx .rbar .brand img{ width:42px; height:auto; }
